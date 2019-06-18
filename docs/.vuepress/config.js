@@ -115,30 +115,16 @@ module.exports = {
             title: "Content",
             collapsable: false,
             children: [
+              "/introduction/",
               "/cloudlinux_installation/",
+              "/for_cloudlinux_partners/",
               "/limits/",
               "/command-line_tools/",
               "/lve_manager/",
-              "/reseller_limits/",
-              "/lve-stats_2/",
-              "/cagefs/",
-              "/mysql_governor/",
-              "/php_selector/",
-              "/python_and_ruby_selector/",
-              "/node_js_selector/",
-              "/inodes_limits/",
-              "/kernel_settings/",
-              "/apache_mod_lsapi/",
-              "/cloudlinux-fchange/",
-              "/mod_proctitle/",
+              "/cloudlinux_os_components/",
+              "/kernel_related/",
               "/additional_packages/",
-              "/integration_guide/",
-              "/partner_portal/",
-              "/cloudlinux_network/",
-              "/cloudlinux_whmcs_plugin/",
-              "/deprecated/",
-              "/hardware_compatibility/",
-              "/cloudlinux_life-cycle/"
+              "/deprecated/"
             ]
           }
         ]
@@ -178,30 +164,16 @@ module.exports = {
             title: "Содержание",
             collapsable: false,
             children: [
+              "/ru/introduction/",
               "/ru/cloudlinux_installation/",
+              "/ru/for_cloudlinux_partners/",
               "/ru/limits/",
               "/ru/command-line_tools/",
               "/ru/lve_manager/",
-              "/ru/reseller_limits/",
-              "/ru/lve-stats_2/",
-              "/ru/cagefs/",
-              "/ru/mysql_governor/",
-              "/ru/php_selector/",
-              "/ru/python_and_ruby_selector/",
-              "/ru/node_js_selector/",
-              "/ru/inodes_limits/",
-              "/ru/kernel_settings/",
-              "/ru/apache_mod_lsapi/",
-              "/ru/cloudlinux-fchange/",
-              "/ru/mod_proctitle/",
+              "/ru/cloudlinux_os_components/",
+              "/ru/kernel_related/",
               "/ru/additional_packages/",
-              "/ru/integration_guide/",
-              "/ru/partner_portal/",
-              "/ru/cloudlinux_network/",
-              "/ru/cloudlinux_whmcs_plugin/",
-              "/ru/deprecated/",
-              "/ru/hardware_compatibility/",
-              "/ru/cloudlinux_life-cycle/"
+              "/ru/deprecated/"
             ]
           }
         ]
