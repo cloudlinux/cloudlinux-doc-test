@@ -1,9 +1,11 @@
 ﻿# Deprecated
 
-
 * [Git for cPanel](/deprecated/#git-for-cpanel)
 * [LVE-Stats 0.x](/deprecated/#lve-stats-0-x)
 * [OptimumCache](/deprecated/#optimumcache)
+* [Virtuozzo and OpenVZ](/deprecated/#virtuozzo-and-openvz)
+* [TPE Extension](/deprecated/#tpe-extension)
+* [CPU Limits](/deprecated/#cpu-limits)
 
 ## Git for cPanel
 
@@ -644,7 +646,7 @@ OptimumCache must be provided with list of directories to expect duplicate files
 * <span class="notranslate">`# occtl --recursive --mark-dir /home2`</span> (for cPanel)
 * <span class="notranslate">`# occtl --recursive --mark-dir /var/www`</span> (for Plesk)
 
-OptimumCache is going to index these directories. Thus system load during this period (from hours to days) might be as twice as high. See 'Marking directories' [ [http://docs.cloudlinux.com/index.html?marking_directories.html](http://docs.cloudlinux.com/index.html?marking_directories.html) ].
+OptimumCache is going to index these directories. Thus system load during this period (from hours to days) might be as twice as high. See [Marking directories](/deprecated/#marking-directories).
 
 **Allocating Disk Space for OptimumCache:**
 
@@ -1523,4 +1525,164 @@ Rather rare problem, try to forcibly update `optimumcache_s` with ploop status.
 # occtl --remount-cached-points
 ```
 </div>
+
+## Virtuozzo and OpenVZ
+
+
+:::warning Note
+We’ll be ending support for Virtuozzo and OpenVZ on **August 1st, 2019**.
+:::
+
+:::tip Note
+* Virtuozzo 6 and OpenVZ 6 are supported.
+* Virtuozzo 7 and OpenVZ 7 are not supported.
+:::
+
+:::tip Note
+Kernel 2.6.32-042stab088.4 or later required
+:::
+
+CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only the following functionality works:
+* CageFS
+* PHP Selector
+* max entry processes
+* mod_lsapi
+* MySQL Governor
+
+No other limits work so far.
+
+### Installation
+
+VZ Node (needs to be done once for the server):
+
+:::tip Note
+Make sure all containers are stopped prior to doing this operation. Or reboot the server after the install.
+:::
+
+:::tip Note
+Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed. If no - install them with <span class="notranslate">`yum`</span>:
+:::
+
+<div class="notranslate">
+
+```
+yum install vzkernel-headers vzkernel-devel
+
+$ wget -P /etc/yum.repos.d/ http://repo.cloudlinux.com/vzlve/vzlve.repo
+$ yum install lve-kernel-module
+```
+</div>
+
+This will setup LVE module for VZ kernel, as well as DKMS to update that module each time VZ kernel is updated.
+
+After this is done, you can add LVE support for any container on a node, at any time.
+
+To make CloudLinux work inside VZ container, VZ node has to be enabled. This should be done for any container where LVE support needs to be added:
+
+<div class="notranslate">
+
+```
+$ vzctl set CT_ID --devnodes lve:rw --save
+```
+</div>
+
+To disable LVE support for Container:
+
+<div class="notranslate">
+
+```
+$ vzctl set CT_ID --devnodes lve:none --save
+```
+</div>
+
+Inside container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers)
+
+CloudLinux license is required for each VZ container.
+
+
+:::tip Note
+Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors. On a host node:
+
+1. add `fs.ve-mount-nr = 15000` to `/etc/sysctl.conf`;
+
+2. apply it with `sysctl -p` command.
+
+In very rare cases the value should be increased higher, up to 50000.
+:::
+
+## TPE Extension
+
+:::tip Note
+TPE Extension will removed in the next version of CloudLinux 5.x kernel
+:::
+
+<span class="notranslate"> CloudLinux 5.x (kernel 2.6.18) has limited support for trusted path execution extension. </span>
+<span class="notranslate"> CloudLinux 6.x (kernel 2.6.32) and  <span class="notranslate"> CloudLinux 5.x with hybrid kernel don't have  <span class="notranslate"> TPE extension </span> </span> </span>
+
+**TPE (Trusted Path Execution)**
+
+The kernel supports <span class="notranslate"> TPE </span> feature out of the box. You can configure it using following files:
+<div class="notranslate">
+
+```
+·        /proc/sys/kernel/grsecurity/grsec_lock
+·        /proc/sys/kernel/grsecurity/tpe
+·        /proc/sys/kernel/grsecurity/tpe_gid
+·        /proc/sys/kernel/grsecurity/tpe_restrict_all
+```
+</div>
+
+To enable <span class="notranslate"> TPE </span> feature in a standard way just add following to the end of your <span class="notranslate"> /etc/sysctl.conf </span>
+<div class="notranslate">
+
+```
+#GRsecurity 
+kernel.grsecurity.tpe = 1 
+kernel.grsecurity.tpe_restrict_all = 1 
+kernel.grsecurity.grsec_lock = 1  
+```
+</div>
+
+And do:
+<div class="notranslate">
+
+```
+# sysctl -p
+```
+</div>  
+
+::: tip Note
+Once you set grsec_lock to 1, you will not be able to change TPE options without reboot.
+:::
+
+ This <span class="notranslate"> Trusted Path Execution </span> feature was adopted from <span class="notranslate"> grsecurity</span>.
+
+## CPU Limits
+
+:::tip Note
+Deprecated
+
+This limit is no longer used, and <span class="notranslate"> [SPEED](/limits/#speed-limits) </span> is used instead
+:::
+
+### CPU limits before lve-utils 1.4
+
+<span class="notranslate"> CPU </span> Limits are set by <span class="notranslate"> CPU </span> and <span class="notranslate"> NCPU </span> parameters. <span class="notranslate"> CPU </span> specifies the % of total <span class="notranslate"> CPU </span> of the server available to LVE. <span class="notranslate"> NCPU </span> specifies the number of cores available to LVE. The smallest of the two is used to define how much <span class="notranslate"> CPU </span> power will be accessible to the customer.
+
+| |  |  | |
+|-|--|--|-|
+|Cores Per Server | <span class="notranslate"> CPU </span> Limit | <span class="notranslate"> NCPU </span> Limit | Real limit|
+|1 | 25% | 1 | 25% of 1 core|
+|2 | 25% | 1 | 50% of 1 core|
+|2 | 25% | 2 | 50% of 1 core|
+|4 | 25% | 1 | 100% of 1 core (full core)|
+|4 | 25% | 2 | 1 core|
+|4 | 50% | 1 | 1 core|
+|4 | 50% | 2 | 2 cores|
+|8 | 25% | 1 | 1 core|
+|8 | 25% | 2 | 2 cores|
+|8 | 50% | 2 | 2 cores|
+|8 | 50% | 3 | 3 cores|
+
+When user hits <span class="notranslate"> CPU </span> limit, processes within that limit are slowed down. For example, if you set your <span class="notranslate"> CPU </span> limit to 10%, and processes inside LVE want to use more then 10% they will be throttled (put to sleep) to make sure they don't use more then 10%. In reality, processes don't get <span class="notranslate"> CPU </span> time above the limit, and it happens much more often then 1 second interval, but the end result is that processes are slowed down so that their usage is never above the <span class="notranslate"> CPU </span> limit set.
 
