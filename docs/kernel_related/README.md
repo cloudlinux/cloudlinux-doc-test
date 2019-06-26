@@ -1,260 +1,1010 @@
 ﻿# Kernel-related
 
+## Hybrid Kernels
 
-[Overview](/cloudlinux_whmcs_plugin/#overview)  
-[Installation & Configuration](/cloudlinux_whmcs_plugin/#installation-configuration)  
-[Installation and Update](/installation_and_update.html#installationupdate/)  
-[Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product)  
-[Configuration of Add-on](/cloudlinux_whmcs_plugin/#configuration-of-add-on)  
-[Management](/cloudlinux_whmcs_plugin/#management)  
-[Link Via Add-on. Optional License](/cloudlinux_whmcs_plugin/#link-via-add-on-optional-license)  
-[Link Products Directly](/cloudlinux_whmcs_plugin/#link-products-directly)  
-[Link Via Configurable Options](/cloudlinux_whmcs_plugin/#link-via-configurable-options)  
-[Link Add-ons Directly](/cloudlinux_whmcs_plugin/#link-add-ons-directly) (for WHMCS 7.2.x and later)  
-[Order](/cloudlinux_whmcs_plugin/#order)  
-[Admin Area](/cloudlinux_whmcs_plugin/#admin-area)  
-[Client Area](/cloudlinux_whmcs_plugin/#client-area)  
-[Licenses List](/cloudlinux_whmcs_plugin/#licenses-list)  
-[Addon Licenses List](/cloudlinux_whmcs_plugin/#add-on-licenses-list) (for WHMCS 7.2.x and later)  
-[Common Problems](/cloudlinux_whmcs_plugin/#common-problems)
+<span class="notranslate"> **CloudLinux 6 Hybrid kernel** </span>
 
+<span class="notranslate"> CloudLinux </span> 6 Hybrid Kernel is <span class="notranslate"> CloudLinux </span> 7 (3.10.0) kernel compiled for CloudLinux 6 OS. New 3.10 kernel features a set of performance and scalability improvements related to  <span class="notranslate"> IO </span> , networking and memory management, available in  <span class="notranslate"> CloudLinux 7 OS </span> . It also features improved  <span class="notranslate"> CPU </span>  scheduler for better overall system throughput and latency.
 
-## Overview
+Please find information on the main features of 3.10 kernel branch on the links:
 
+[https://kernelnewbies.org/Linux_3.10#head-e740f930dfd021616cc42e8abf21c79d0b07e217](https://kernelnewbies.org/Linux_3.10#head-e740f930dfd021616cc42e8abf21c79d0b07e217)
 
-CloudLinux Licenses for WHMCS allows you to automatically provision CloudLinux, Imunify360, and KernelCare licenses along with selected products. You can provision them for free or as a paid add-on to your product. Owing to CloudLinux Licenses add-on, all module commands on your main product are automatically reproduced on the license product.
+[https://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.10.1](https://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.10.1)
 
-**Admin Area Functionality**
-Create License
-Terminate License
-Suspend/Unsuspend License
-Change License IP Address
-View License Details
+<span class="notranslate"> **CloudLinux 7 Hybrid kernel** </span>
 
-**Client Area Functionality**
-View License Details
-Change License IP Address
+<span class="notranslate"> CloudLinux </span> 7 Hybrid Kernel is essentially EL8-based (4.18) kernel compiled for CloudLinux OS 7.
 
-**Add-on Functionality**
-Manage Relations Between Add-on And License Product
-Manage Relations Between Server And License Product
-Automatically Add License Product To Order When Relation Is Triggered
-View Existing Licenses
-Dependencies Between Module Actions - Every Action: Create, Terminate, Suspend Or Unsuspend Called On The Server Product Will Result With The Same Action Performed On The Licensed Products
-Flexible Filtering Of Existing Licenses
+You can find more information on 4.18 kernel branch using this link:
 
-**Additionally**
-Multi-Language Support – Only Provisioning Module
-Supports CloudLinux, KernelCare, and Imunify360 Licenses
-Supports WHMCS V6 and Later
+[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel)
+
+How to migrate from the normal to hybrid channel (**CL6h**): 
+
+::: tip Note
+The system must be registered in CLN.
+:::
 
 
-## Installation & Configuration
+1. Update <span class="notranslate"> rhn-client-tools </span> from production
 
+2. Run <span class="notranslate"> normal-to-hybrid </span> script.
 
-In this section we will show you how to set up our products.
+3. Reboot after script execution is completed.
 
-[Installation and Update](/cloudlinux_whmcs_plugin/#installation-and-update)<br>
-[Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product)<br>
-[Configuration of Add-on](/cloudlinux_whmcs_plugin/#configuration-of-add-on)
-
-
-### Installation and Update
-
-
-Download CloudLinux Licenses For WHMCS:<br>
-**Production** : [http://repo.cloudlinux.com/plugins/whmcs-cl-plugin-latest.zip](http://repo.cloudlinux.com/plugins/whmcs-cl-plugin-latest.zip)<br>
-**Beta** : [http://repo.cloudlinux.com/plugins/whmcs-cl-plugin-beta.zip](http://repo.cloudlinux.com/plugins/whmcs-cl-plugin-beta.zip)<br>
-Upload archive to your WHMCS root folder and extract it. Files should automatically jump into their places.<br>
-Run the following script:
 <div class="notranslate">
 
 ```
-php <whmcs_root>/clDeploy.php --migrate
+yum update rhn-client-tools
+normal-to-hybrid
+reboot
 ```
 </div>
 
-### Configuration of Product
+How to migrate from the normal to hybrid channel (**CL7h**): 
 
+::: tip Note
+The system must be registered in CLN.
+:::
 
-1. Log into your WHMCS admin area and go to the <span class="notranslate"> _Setup → Products/Services → Products/Services_ </span> . Click <span class="notranslate">   _Create a New Group_ </span> .
-2. Fill <span class="notranslate"> _Product Group Name_ </span> (product group will be visible under that name in your WHMCS system) and click <span class="notranslate"> _Save Changes_ </span> .
-3. Click <span class="notranslate"> _Create a New Product_ </span> . Choose <span class="notranslate"> _Other_ </span> from <span class="notranslate"> _Product Type_ </span> drop-down menu and previously created product group from <span class="notranslate"> _Product Group_ </span> drop-down menu.
-4. Fill <span class="notranslate"> _Product Name_ </span> and click <span class="notranslate"> _Continue_ </span> .
-5. Set up this product as hidden by ticking <span class="notranslate"> _Hidden_ </span> checkbox at <span class="notranslate"> _Details_ </span> tab. Do not set up pricing for this product. Pricing will be done in another way.
-6. Go to the <span class="notranslate"> _Module Settings_ </span> tab and select <span class="notranslate"> **_CloudLinux Licenses_** </span> from <span class="notranslate"> _Module Name_ </span> drop-down.
-7. Fill <span class="notranslate"> _Username_ </span> and <span class="notranslate"> _Password_ </span> with your CloudLinux API access details and select **_CloudLinux_** from <span class="notranslate"> _License Type_ </span> drop-down.
-8. Click <span class="notranslate"> _Save Changes_ </span> to confirm.
 
-### Configuration of Add-on
+1. Update <span class="notranslate"> rhn-client-tools rhn-check rhn-setup </span> from testing repository
 
+2. Run <span class="notranslate"> normal-to-hybrid </span> script.
 
-1. Go to <span class="notranslate"> _Setup → Add-on Modules_ </span> , find <span class="notranslate"> _CloudLinux Licenses Add-on_ </span> and click <span class="notranslate"> _Activate_ </span> next to it.
-2. The next step is permitting access to this module. Click <span class="notranslate"> _Configure_ </span> , select admin role and confirm by clicking <span class="notranslate"> _Save Changes_ </span> .
+3. Reboot after script execution is completed.
 
-![](/images/provisioningmoduleconfiguration_zoom90.png)  
-_Fig 1: CloudLinux License For WHMCS provisioning module configuration._
+<div class="notranslate">
 
-![](/images/fig2cloudlinuxlicenseforwhmcsaddonmodulemainpage_zoom70.png)  
-_Fig 2: CloudLinux License For WHMCS add-on module main page._
+```
+yum update rhn-client-tools rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+normal-to-hybrid
+reboot
+```
+</div>
 
+How to migrate from hybrid to the normal channel (for both CL6h and CL7h):
 
-## Management
+::: tip Note
+The system should be registered in CLN.
+:::
 
 
-In this section you can find two ways of linking license product with your server product as well as other possibilities of the module.
+1. Run <span class="notranslate"> hybrid-to-normal </span> script.
 
-[Link Via Add-on. Optional License](/cloudlinux_whmcs_plugin/#link-via-add-on-optional-license)  
-[Link Products Directly](/cloudlinux_whmcs_plugin/#link-products-directly)  
-[Link Via Configurable Options](/cloudlinux_whmcs_plugin/#link-via-configurable-options)  
-[Link Add-ons Directly](/cloudlinux_whmcs_plugin/#link-add-ons-directly) (for WHMCS 7.2.x and later)  
-[Order](/cloudlinux_whmcs_plugin/#order)  
-[Admin Area](/cloudlinux_whmcs_plugin/#admin-area)  
-[Client Area](/cloudlinux_whmcs_plugin/#client-area)  
-[Licenses List](/cloudlinux_whmcs_plugin/#licenses-list)  
-[Add-on Licenses List](/cloudlinux_whmcs_plugin/#add-on-licenses-list) (for WHMCS 7.2.x and later)
+2. Reboot after script execution is completed.
 
+<div class="notranslate">
 
-### Link Via Add-on. Optional License
+```
+hybrid-to-normal
+reboot
+```
+</div>
 
+**Known limitations and issues of CloudLinux 6 Hybrid kernel** :
 
-In order to allow your client to decide whether he wants to order server with or without a license, we will use Product Add-on. In this way, when the client orders an add-on, the relation will be triggered and the license product will be ordered along with module.
+1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux </span> 6 does not allow to remove the package of currently running kernel. Proper removal procedure will be implemented, but for now, we should warn users _not to boot Hybrid kernel if they have migrated to normal channel_ .
 
-The following steps must be performed to prepare such connection:
+2. Kernel module signature isn't checking for now, as 3.10 kernel is using x509 certificates to generate keys and CL6 cannot detect signatures created in such way. The solution will be implemented.
 
-1. Go to <span class="notranslate"> _Setup → Products/Services → Products Add-ons_ </span> and click <span class="notranslate"> _Add New Add-on_ </span> .
-2. Fill add-on name, set up billing cycle and price.
-3. Then tick <span class="notranslate"> _Show_ </span> on <span class="notranslate"> _Order_ </span> checkbox, assign add-on to the product and click <span class="notranslate"> _Save Changes_ </span> .
+**Known limitations and issues of CloudLinux 7 Hybrid kernel**
 
-![](/images/configurationofproductaddon0_zoom70.png)
+Features that are absent in the current kernel build:
 
-![](/images/configurationofproductaddon1_zoom70.png)
+1. CPU boost
+2. CRIU support for mod_lsapi PRO
+3. Per LVE traffic accounting
 
-![](/images/configurationofproductaddon2_zoom70.png)  
-_Fig 3: Configuration of product add-on, which will trigger license product adding._
+Limitations of the current kernel build:
 
+1. Standard OOM killer is used
+2. The _/etc/sysctl.conf_ parameter <span class="notranslate"> `proc_can_see_other_uid` </span> is supported but its behavior is more restrictive than [documented](/kernel_settings/#virtualized-proc-filesystem). This will be improved in the next beta release.
+3. Symlink Owner Match Protection is disabled by default. To enable it, use `sysctl` utility:
 
-4. Go to <span class="notranslate"> _Add-ons → CloudLinux Licenses Add-on → Add-on Relations_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
-5. Select previously created product add-on and license product as shown below  and click <span class="notranslate"> _Add Relation_ </span> .
+<div class="notranslate">
 
-![](/images/fig4creatingrelationbetweenproductaddonandprovisioningmodule_zoom70.png)  
-_Fig 4: Creating relations between product add-on and provisioning module._
+```
+sysctl -w fs.enforce_symlinksifowner=1
+```
+</div>
 
-### Link Products Directly
+Find more details on [symlink owner match protection](/kernel_settings/#securelinks)
 
+## SecureLinks
 
-If you want to offer server along with the license, perform the following steps.
+CloudLinux provides comprehensive protection against symbolic link attacks popular in shared hosting environment.
 
-**_Note._** _Please do not set up pricing for license provisioning product. In exchange, you can increase a price for server provisioning product._
+The protection requires setting multiple kernel options to be enabled.
 
-1. Prepare license provisioning product as described in the [Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product) section of this documentation.
-2. Go to <span class="notranslate"> _Add-ons → CloudLinux Licenses Add-on → Products Relations_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
-3. Select server provisioning product from the <span class="notranslate"> _Main Product_ </span> drop-down list and license provisioning product from <span class="notranslate"> _Linked Product With License_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
+### Symlink Owner Match Protection
 
-![](/images/fig5creatingrelationdirectlybetweenserverandlicenseprovisioningmodules_zoom70.png)  
-_Fig 5: Creating relations directly between server and license provisioning modules_ .
 
-### Link Via Configurable Options
+**_fs.enforce_symlinksifowner_**
 
+To protect against symlink attack where attacker tricks Apache web server to read some other user PHP config files, or other sensitive file, enable:
+<div class="notranslate">
 
-In order to allow your client to decide whether he wants to order server with or without license we can use <span class="notranslate"> _Configurable Options_ ( [https://docs.whmcs.com/Addons_and_Configurable_Options)](https://docs.whmcs.com/Addons_and_Configurable_Options)).</span>
+```
+fs.enforce_symlinksifowner=1
+```
+</div>
 
-Below we will show you what steps to proceed to prepare such connection:
+Setting this option will deny any process running under gid _fs.symlinkown_gid_ to follow the symlink if owner of the link doesn’t match the owner of the target file.
 
-* Configure _CloudLinuxLicenses_ product as described here
-* Go to _Setup → Products/Services → Configurable Options_ and click _Create a New Group_ .
-* Fill group name and add _New Configurable Option_ , set up billing cycle, price and option type. Then save changes.
-* Go to _Add-ons → CloudLinux Licenses Add-on → Configurable Options Relations_ and click _Add Relation_.
-* Choose appropriate configurable option and license product which it is assigned to and click _Add Relation_.
+Defaults:
+<div class="notranslate">
 
-**_Note. The plugin doesn’t support “quantity” type of Configurable Options._**
+```
+fs.enforce_symlinksifowner = 1
+fs.symlinkown_gid = 48
+```
+</div>
 
-![](/images/fig6creatingrelationsdirectlybetweenserverandlicenseprovisioningmodules_zoom70.png)  
-_Fig 6: Creating relations directly between server and license provisioning modules._
+| | |
+|-|-|
+|<span class="notranslate"> _fs.enforce_symlinksifowner = 0_ </span> | do not check <span class="notranslate"> symlink </span> ownership|
+|<span class="notranslate"> _fs.enforce_symlinksifowner = 1_ </span> | deny if <span class="notranslate"> symlink </span> ownership doesn’t match target, and process <span class="notranslate"> gid </span> matches <span class="notranslate"> _symlinkown_gid _ </span>|
 
+When <span class="notranslate"> _fs.enforce_symlinksifowner_ </span> set to 1, processes with <span class="notranslate"> GID </span> 48 will not be able to follow <span class="notranslate"> symlinks </span> if they are owned by <span class="notranslate"> user1 </span> , but point to file owned <span class="notranslate"> user2 </span> .
 
-### Link Add-ons Directly
+Please, note that <span class="notranslate"> _fs.enforce_symlinksifowner = 2_ </span> is deprecated and can cause issues for the system operation.
+<span class="notranslate"> </span>
 
+**_fs.symlinkown_gid_**
 
-_[for WHMCS 7.2.x and later]_
+On standard <span class="notranslate"> RPM Apache </span> installation, <span class="notranslate"> Apache </span> is usually running under <span class="notranslate"> GID </span> 48.
+On <span class="notranslate"> cPanel </span> servers, <span class="notranslate"> Apache </span> is running under user nobody, <span class="notranslate"> GID </span> 99.
 
-WHMCS 7.2 introduces the ability to associate <span class="notranslate"> Product Add-ons </span> with <span class="notranslate"> Provisioning Modules </span> .
+To change <span class="notranslate"> GID </span> of processes that cannot follow <span class="notranslate"> symlink </span> , edit the file <span class="notranslate"> _/etc/sysctl.conf_ </span> , add the line:
+<div class="notranslate">
 
-In order to allow your client to decide whether he wants to order server with or without license we will use product add-on. Below we will show you what steps to proceed to prepare such connection.
+```
+fs.symlinkown_gid = XX
+```
+</div>
+And execute:
+<div class="notranslate">
 
-1. Go to <span class="notranslate"> _Setup → Products/Services → Products Add-ons_ </span> and click <span class="notranslate"> _Add New Addon_ </span> .
-2. Fill add-on name, set up billing cycle and price. Then tick <span class="notranslate"> _Show_ </span> on <span class="notranslate"> _Order_ </span> checkbox, assign an add-on to the product.
-3. Go to <span class="notranslate"> _Module Settings_ </span> tab and select <span class="notranslate"> _CloudLinuxLicenses_ </span> from <span class="notranslate"> _Module Name_ </span> drop-down.
-4. Fill <span class="notranslate"> _Username_ </span> and <span class="notranslate"> _Password_ </span> with your CloudLinux API access (API secret key) details and select CloudLinux from <span class="notranslate"> _LicenseType_ </span> drop-down.
-5. Click <span class="notranslate"> _Save Changes_ </span> to confirm.
-![](/images/configurationofproductaddon_zoom70.png)  
-_Fig 7: Configuration of product add-on with_ <span class="notranslate"> _Provisioning Modules_. </span>
+```
+$ sysctl -p
+```
+</div>
 
+To disable <span class="notranslate"> symlink </span> owner match protection feature, set <span class="notranslate"> _fs.enforce_symlinksifowner = 0_ </span> in <span class="notranslate"> _/etc/sysctl.conf_ </span> , and execute
 
+<div class="notranslate">
 
-### Order
+```
+$ sysctl -p
+```
+</div>  
 
+::: danger
+/proc/sys/fs/global_root_enable [CloudLinux 7 kernel only] [applicable for kernels 3.10.0-427.36.1.lve1.4.42+]
+:::
 
-The only difference between two ways of setting up relation is the ability to order server without CloudLinux license.
+<span class="notranslate"> _proc/sys/fs/global_root_enable_ </span> flag enables following the <span class="notranslate"> symlink </span> with root ownership. If <span class="notranslate"> _global_root_enable=0_ </span> , then <span class="notranslate"> Symlink Owner Match Protection </span> does not verify the <span class="notranslate"> symlink </span> owned by <span class="notranslate"> root.  </span>
 
-![](/images/orderingserverwithlicenseaddon_zoom70.png)  
-_Fig 8: Ordering server with license add-on._
+For example, in the path <span class="notranslate"> _/proc/self/fd_ ,  _self_ </span> is a <span class="notranslate"> symlink </span> , which leads to a process directory.  The <span class="notranslate"> symlink </span> owner is <span class="notranslate"> root </span> . When <span class="notranslate"> _global_root_enable=0_ , Symlink Owner Match Protection </span> excludes this element from the verification. When <span class="notranslate"> _global_root_enable=1_ </span> , the verification will be performed, which could block the access to _fd_ and cause violation of web site performance.
 
-![](/images/orderingserverlinkeddirectly_zoom70.png)  
-_Fig 9: Ordering server linked directly with license product._
+It is recommended to set _/proc/sys/fs/global_root_enable=0_ by default. If needed, set _/proc/sys/fs/global_root_enable=1_ to increase the level of protection. 
 
-### Admin Area
+::: tip Note
+Starting from lve-utils 3.0-21.2, fs.symlinkown_gid parameter values for httpd service user and fs.proc_super_gid for nagios service user is written to /etc/sysctl.d/90-cloudlinux.conf.
+:::
 
 
-From the admin area it is possible to command such action as create, terminate, suspend/unsuspend and change IP address. Nonetheless, these actions can be ordered only on the server provisioning module and will be automatically reproduced for the license provisioning product.
+### Link Traversal Protection 
 
-Only change IP address feature has to be ordered manually.
 
-You can also view the details of created license.
+<span class="notranslate"> [CageFS](/cagefs/) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
 
-![](/images/cloudlinuxlicensesforwhmcsadminarea_zoom70.png)  
-_Fig 10: CloudLinux Licenses For WHMCS Admin Area._
+Yet, <span class="notranslate"> CageFS </span> does not work in each and every situation. For example, on <span class="notranslate"> cPanel </span> servers, it is not enabled in <span class="notranslate"> WebDAV </span> server, <span class="notranslate"> cPanel </span> file manager and webmail, as well as some FTP servers don’t include proper change rooting.
 
-### Client Area
+This allows an attacker to create symlink or hardlink to a sensitive file like <span class="notranslate"> _/etc/passwd_ </span> and then use <span class="notranslate"> WebDAV </span> , filemanager, or webmail to read the content of that file.
 
+Starting with CL6 _kernel 2.6.32-604.16.2.lve1.3.45_ , you can prevent such attacks by preventing user from creating symlinks and hardlinks to files that they don’t own.
 
-The clients are also able to view their servers license details. And as well as you, they are able to change IP address of their licenses.
+This is done by set following kernel options to 1:
+<div class="notranslate">
 
-![](/images/cloudlinuxlicensesforwhmcsclientarea_zoom70.png)  
-_Fig 11: CloudLinux Licenses For WHMCS Client Area._
+```
+fs.protected_symlinks_create = 1
+fs.protected_hardlinks_create = 1
+```
+</div>  
 
-To change IP address click <span class="notranslate"> _Change_ </span> as shown on the screen above. Then specify IP address and click <span class="notranslate"> _Save_ </span> .
+::: danger
+We do not recommend to use protected_symlinks option for cPanel users as it might break some of the cPanel functionality.
+:::   
 
-![](/images/changinglicenseipaddress_zoom80.png)  
-_Fig 12: Changing License IP Address_ .
+::: tip Note
+Link Traversal Protection is disabled by default for the new CloudLinux OS installations/convertations.
+:::
 
-### Licenses List
+<div class="notranslate"> 
 
+```
+fs.protected_symlinks_create = 0
+fs.protected_hardlinks_create = 0
+```
+</div>
+Then setup:
+<div class="notranslate">
 
-You can view the list of all licenses owned by your client at our addon → <span class="notranslate"> _Licenses List_ </span>.  
-You can filter the list of licenses by client name, server provisioning products, license provisioning products and license IP address.
+```
+fs.protected_symlinks_allow_gid = id_of_group_linksafe
+fs.protected_hardlinks_allow_gid = id_of_group_linksafe
+```
+</div>
+This is for example needed by PHP Selector to work (new versions of Alt-PHP can already correctly configure those settings).
 
- ![](/images/fig13licenseslist_zoom70.png)  
-_Fig 13: Licenses list._
+To manually adjust the settings, edit: _/etc/sysctl.d/cloudlinux-linksafe.conf_
+and execute:
+<div class="notranslate">
+ 
+```
+sysctl -p /etc/sysctl.d/cloudlinux-linksafe.conf
+```
+</div>
+ or:
+<div class="notranslate"> 
 
-### Add-on Licenses List
+```
+sysctl --system
+```
+</div>
+ 
+:::tip Note
+Starting from lvemanager 4.0-25.5, if there is no /etc/sysctl.d/cloudlinux-linksafe.conf config file, selectorctl for PHP with --setup-without-cagefs and --revert-to-cagefs keys writes fs.protected_symlinks_create and fs.protected_hardlinks_create parameters to /etc/sysctl.d/90-cloudlinux.conf.
+:::
 
+## FileChange API
 
-_[for WHMCS 7.2.x and later]_
+### General
 
-You can view a list of all product add-on with <span class="notranslate"> _Provisioning Modules_ </span> licenses owned by your client at our add-on → <span class="notranslate"> _Licenses List_ </span> .
+**General description**
 
-![](/images/fig14addonlicenseslist_zoom70.png)  
-_Fig 14: Add-on Licenses List._
 
+One of the main problems on a shared hosting system for file backup operations is to figure out which files have changed. Using <span class="notranslate"> INOTIFY </span> on a 1T drive with a large number of small files and directories guarantees slow startup times, and a lot of context switching between kernel and userspace - generating additional load. On the other hand scanning disk for newly modified files is very <span class="notranslate"> IO </span> intensive, and can kill the performance of the fastest disks.
 
-## Common Problems
+**CloudLinux approach**
 
+<span class="notranslate"> CloudLinux File Change API </span> is a kernel level technology with the user space interface that buffers lists of modified files in the kernel and then off-loads that list to user space daemon.
 
-After activating the server provisioning product, license provisioning product bounded to it is still pending.  
-**Reason** : License IP address may be already taken.  
-**Solution** : Change server IP address. 
+After that - any software (with enough permissions) can get a list of files that has been modified for the last 24 hours.
+
+The software is very simple to use and produces the  list of modified files. As such we expect file backup software, including integrated cPanel backup system to integrate with this <span class="notranslate"> API </span> soon.
+
+### Usage and Integration
+
+
+**Userland utilities**
+
+<span class="notranslate">/usr/bin/cloudlinux-backup-helper </span> is a utility for getting the list of changed files.
+
+It is supposed to be run by a super user only.
+
+Command line parameters:
+<div class="notranslate">
+
+```
+-t | --timestamp retrieve file names for files modified after specified timestamp
+-u | --uid       retrieve file names for particular UID only
+```
+</div>
+If no UID specified, are retrieved for all users. If no timestamp specified, all database events are shown.
+
+**Output Format**
+<div class="notranslate">
+
+```
+protocol version (1 right now), timestamp (in seconds) - up to which time data was collected
+UID:absolute path to file changed
+UID:absolute path to file changed
+…
+```
+</div>   
 
 :::tip Note
-Currently, only key-based licenses are available for Imunify360. Support of IP-based licenses will be added soon.
+The timestamp in output is needed so you can clearly identify from which timestamp to get list of changed files next.
 :::
+
+**_Examples:_**
+<div class="notranslate">
+
+```
+[root@localhost ~]# cloudlinux-backup-helper -t 1495533489 -u <UID>
+1,1495533925
+1001:/home/user2/public_html/output.txt
+1001:/home/user2/public_html/info.php
+[root@localhost ~]# cloudlinux-backup-helper -t 1495533489
+1,1495533925
+1000:/home/user1/.bashrc
+1001:/home/user2/public_html/output.txt
+1001:/home/user2/public_html/info.php
+1003:/home/user3/logs/data.log
+```
+</div>
+**Getting changed files by end user**
+
+<span class="notranslate">/usr/bin/cloudlinux-backup-helper-uid</span>  is a SUID wrapper for the  <span class="notranslate"> cloudlinux-backup-helper </span>  utility that enables an end user to get the list of files changed. It accepts timestamp argument only and retrieves data of the user who is running it only.
+
+**_Examples:_**
+<div class="notranslate">
+
+```
+[user@localhost ~]$ cloudlinux-backup-helper-uid               
+1,1495530576
+1000:/home/user/.bash_history 
+
+[user@localhost ~]$ cloudlinux-backup-helper-uid -t 1495547922
+1,1495548343
+1000:/home/user/file1.txt
+1000:/home/user/file2.txt
+```
+</div>
+This command is available within CageFS.
+
+### Installation and Configuration
+
+
+<span class="notranslate"> **cloudlinux-fchange-0.1-5** </span>
+
+**Requirements**
+
+<span class="notranslate"> CloudLinux OS </span> 6 (requires Hybrid kernel) or 7
+Kernel Version: 3.10.0-427.36.1.lve1.4.47
+
+**Installation and Configuration**
+
+To install <span class="notranslate"> cloudlinux-fchange </span> system run:
+
+_CloudLinux 7:_
+<div class="notranslate">
+
+```
+yum install cloudlinux-fchange --enablerepo=cloudlinux-updates-testing
+```
+</div>
+
+_CloudLinux 6 Hybrid:_
+
+<div class="notranslate">
+
+```
+yum install cloudlinux-fchange --enablerepo=cloudlinux-hybrid-testing
+```
+</div>
+Configuration file can be found in <span class="notranslate">/etc/sysconfig/cloudlinux-fchange </span>
+
+Database containing list of modified files is located at <span class="notranslate">/var/lve/cloudlinux-fchange.db </span> by default.
+
+**Starting and Stopping**
+
+After successful installation the event collecting daemon starts automatically, providing all <span class="notranslate"> kernel-exposed </span> data are in place.
+
+To start daemon:
+<span class="notranslate">_CloudLinux 7:_ </span>
+
+<div class="notranslate">
+
+```
+systemctl start cloudlinux-file-change-collector
+```
+</div>
+
+_CloudLinux 6 Hybrid:_
+
+<div class="notranslate">
+
+```
+service cloudlinux-file-change-collector start
+```
+</div>
+To stop daemon:
+<span class="notranslate"> </span>
+_CloudLinux 7:_
+
+<div class="notranslate">
+
+```
+systemctl stop cloudlinux-file-change-collector
+```
+</div>
+
+_CloudLinux 6 Hybrid:_
+
+<div class="notranslate">
+
+```
+service cloudlinux-file-change-collector stop
+```
+</div>
+
+
+To uninstall <span class="notranslate"> cloudlinux-fchange </span> run:
+<div class="notranslate">
+
+```
+yum remove cloudlinux-fchange
+```
+</div>
+
+### Configuration Details
+
+
+Configuration resides in <span class="notranslate">/etc/sysconfig/cloudlinux-fchange</span>. The following is the default configuration (see comments):
+<div class="notranslate">
+
+```
+# sqlite database file path. If commented out a default value is used
+#database_path=/var/lve/cloudlinux-fchange.db
+
+# If uncommented paths starting with 'include' one are processed only
+# Pay attention this parameter is a regular string, not a regex
+# To include more than one item just specify several lines to include:
+# include=/one
+# include=/two
+
+# If uncommented exclude paths which contain 'exclude'
+# Pay attention this parameter is a regular string, not a regex
+# To exclude more than one item just specify several lines to exclude:
+# exclude=var
+# exclude=tmp
+
+# Daemon polling interval in seconds
+polling_interval=5 
+
+# Time to keep entries in days. Does not clean if commented out or zero
+time_to_keep=1
+
+# User read-only mode minimal UID
+# If file change collector stopped, all users with UID >= user_ro_mode_min_uid
+# are restricted to write to their home directory. This prevents to miss
+# a file change event.
+# Value of -1 (default) allows to disable the feature
+user_ro_mode_min_uid=-1
+
+# Minimal UID of events to be processed.
+# Events of users with UID less then specified are not handled.
+# By default 500 (non-system users for redhat-based systems)
+#minimal_event_uid=500
+ 
+# SQLite shared lock prevents setting more restrictive locks. That is a
+# process cannot write to a database table when a concurrent process reads
+# from the table. As saving data to database is considered far more important
+# than getting them (data could be reread a second later after all), database
+# writer could try to terminate concurrent reading processes. Just set
+# terminate rivals to 'yes' to turn this ability on.
+# terminate_rivals=no 
+
+# Events to be handled. Currently the following types of events are processed:
+# 1. file creation
+# 2. file deletion
+# 3. directory creation
+# 4. directory deletion
+# 5. file content/metadata modification
+# 6. file/directory attributes/ownership modification
+# 7. hardlink creation
+# 8. symlink creation
+# 9. file/directory moving/renaming
+# By default all events are processed. Keep in mind that events for a filepath
+# are cached, i.e if a file was deleted and then a file with the same absolute
+# name is created, only the deletion event is triggerred. Changing file
+# modification timestamp with command 'touch' will trigger modification event
+# as if a file content is modified.
+# Currently supported options are:
+# file_created, file_modified, file_deleted, dir_created, dir_deleted,
+# owner_changed, attrib_changed, moved, hardlink_created, symlink_created, all
+# Options that don't have 'file' or 'dir' prefix, applied to both files and
+# directories. To set more than one options, separate them with commas,
+# e.g. event_types=file_created,file_deleted,file_modified. Unknown options are
+# ignored.
+#
+# event_types=all
+```
+</div>
+
+:::tip Note
+Please keep in mind, that current implementation implies that one process is writing to a database and another is reading from it. As reading sets shared lock to a database table, the writing process cannot write to the table until the lock is released. That’s why passing a timestamp to cloudlinux-backup-helpermatters: this way the number of records to be returned is substantially decreased, lowering the processing time and filtering out old records. Likewise, pay attention to narrowing the scope of events being recorded. Chances are that changing attributes, ownership, directory creation/deletion, symlink events are not relevant and there’s no need to keep them.
+:::
+
+### Low-level access
+
+:::tip Note
+Using this options is dangerous, and might cause problems with <span class="notranslate">CloudLinux File Change API.</span>
+:::
+
+The kernel exposes the functionality to folder.
+
+1. <span class="notranslate"> **enable** </span> - enable/disable the functionality. Write 1 to this file to enable, 0 to disable. If disabled, no events are coming to events file.
+
+2. <span class="notranslate"> **events** </span> - the modified files log itself. Events in the format <span class="notranslate"> <EVENT_ID>:<EVENT_TYPE_ID>:<USER_ID>:<FILE_PATH> </span> are constantly appending to the end of the file if datacycle enabled. File events are never duplicated: if we have file modification event, we would not get file deletion event if the file has been later deleted. This events buffer has limited capacity, therefore from time to time, the events log requires flushing.
+
+3. <span class="notranslate"> **flush** </span> - a file for clearing events log. For flushing, the last <span class="notranslate"> event_id </span> from the events file is written to this file. Right after this, events log is truncated to that <span class="notranslate"> event_id </span> .
+
+4. <span class="notranslate"> **user_ro_mode** </span> - forbidding users with UIDs equal or bigger that set in this file writing to their home directories. At the boot, the file has -1. When it’s written positive value, say 500, the system starts effectively preventing users from modifying their home dirs (on write attempt a user gets <span class="notranslate"> ‘read-only filesystem’ </span> error). This feature is designed to prevent users from updating their home dirs when events are not handled.
+
+5. <span class="notranslate"> **entries_in_buffer** </span> - just counter of log entries of events file.
+
+6. <span class="notranslate"> **min_event_uid** </span> - this file has minimal UID of events to be handled. Events from users with smaller UID are not handled. By default 500 (non-system users in redhat-based systems).
+
+## tuned-profiles-cloudlinux
+
+The <span class="notranslate"> **_tuned-profiles-cloudlinux_** </span> package brings a range of kernel under-the-hood tunings to address high LA, iowait issues what were detected earlier on particular users deploys. The package also encloses OOM adjustments to prioritize the elimination of overrun PHP, <span class="notranslate"> lsphp, Phusion Passenger </span> workers processes over other processes (e.g. ssh, a cron job).
+
+There are three profiles provided by CloudLinux:
+<div class="notranslate">
+
+```
+# tuned-adm list | grep cloudlinux
+- cloudlinux-default          - Default CloudLinux tuned profile
+- cloudlinux-dummy            - Empty CloudLinux tuned profile
+- cloudlinux-vz               - Empty CloudLinux tuned profile
+```
+</div>
+
+
+<span class="notranslate"> cloudlinux-dummy</span> and  <span class="notranslate"> cloudlinux-vz</span> are used for internal needs or when  <span class="notranslate"> Virtuozzo/OpenVZ </span>  detected and actually do nothing.  
+
+<span class="notranslate"> cloudlinux-default </span> is one to be used, it actually does the following:
+
+1. Switches CPU power consumption mode to the maximum. CPU operates at maximum performance at the maximum clock rate:
+
+<div class="notranslate">
+
+```
+governor=performance
+energy_perf_bias=performance
+```
+</div>
+
+::: tip Note
+If standard software CPU governors are used.
+:::
+
+
+
+ 2. Applies the following kernel options:  
+<span class="notranslate"> 
+vm.force_scan_thresh=100 </span> - Improves kernel memory clean-up in case of big number of running LVE.
+
+UBC parameters set the limits for the containers:
+
+<span class="notranslate">  ubc.dirty_ratio=100 </span> - Defines maximum RAM percentage for dirty memory pages.
+<span class="notranslate"> dirty_background_ratio=75</span> - Defines RAM percentage when to allow writing dirty pages on the disk.
+
+3. _[CloudLinux 7 only]_ Detects used disk types and changes elevator to <span class="notranslate"> 'deadline' </span> for HDD and to <span class="notranslate"> 'noop' </span> for SSD in <span class="notranslate"> /sys/block/[blockname]/queue/scheduler </span> . 
+
+::: tip Note
+<span class="notranslate">The script uses /sys/block/[blockname]/queue/rotational flag, some RAID controllers can not set it properly. For example, SSD used for RAID but rotational is set to 1 by RAID driver. As a workaround add the following to /etc/rc.d/rc.local to make it applied on boot:</span>
+:::
+
+<div class="notranslate">
+
+```
+echo "noop" > /sys/block/[blockname]/queue/scheduler  
+echo "0" > /sys/block/[blockname]/queue/rotational
+```
+</div>
+
+
+Where <span class="notranslate"> _[blockname]_ </span> is used device name, like <span class="notranslate"> _sda/sdb_ </span> .
+
+And make it executable:
+<div class="notranslate">
+
+```
+chmod +x /etc/rc.d/rc.local
+```
+</div>
+
+4. _[CloudLinux 7 only]_ The profile sets <span class="notranslate"> I/O </span> scheduler. For the normal discs the <span class="notranslate"> Deadline Scheduler </span> is set to improve <span class="notranslate"> IO </span> performance and decrease <span class="notranslate"> IO </span> latency, for SSD - noop.
+When configuring scheduler <span class="notranslate"> I/O </span> queue is changed and set to the value 1024 which improves overall <span class="notranslate"> I/O </span> subsystem performance by caching <span class="notranslate"> IO </span> requests in memory.
+
+5. Disables transparent <span class="notranslate"> HugePage </span> .
+
+6. Provides adjustment group file for OOM-Killer to kill overrun php, lsphp and <span class="notranslate"> Phusion Passenger </span> workers first.
+
+To install:
+
+<div class="notranslate">
+
+```
+yum install tuned-profiles-cloudlinux
+```
+</div>
+
+To start using a profile:
+
+<div class="notranslate">
+
+```
+tuned-adm profile cloudlinux-default
+```
+</div>
+
+To stop using a profile:
+
+<div class="notranslate">
+
+```
+tuned-adm off
+```
+</div>
+
+## Kernel Config Variables
+
+Starting from **lvemanager 4.0-25.5** , **lve-utils 3.0-21.2** , and **cagefs-6.1-26** , CloudLinux OS utilities can read/write kernel config variables from a custom config /etc/sysctl.d/90-cloudlinux.conf (earlier, the parameters were read/written only from sysctl.conf ).
+
+CloudLinux OS utilities get parameter by using _sysctl_ system utility. So for now, even if a config variable is not set in the _sysctl.conf_ and in the _/etc/sysctl.d_ config files, this variable will be read by _sysctl_ utility directly from _/proc/sys_ .
+
+If some kernel variable was set in _/etc/sysctl.d/90-cloudlinux.conf_ do
+<div class="notranslate">
+
+```
+sysctl --system
+```
+</div>
+to apply the parameters before reading and after writing.
+
+Starting from **cagefs-6.1-27**,  fs.proc_can_see_other_uid will be migrated (one time) from /etc/sysctl.conf into /etc/sysctl.d/90-cloudlinux.conf . If this variable is not set in either file, it will default to 0.
+It is strongly advised against setting this variable in 90-cloudlinux.conf . Define it in /etc/sysctl.conf or in some other config file with an index number greater than 90-cloudlinux.conf , e.g. /etc/sysctl.d/95-custom.conf .
+
+Starting from **lve-utils-3.0-23.7**  fs.proc_super_gid and fs.symlinkown_gid will be migrated (one time) from /etc/sysctl.conf into /etc/sysctl.d/90-cloudlinux.conf .
+
+For **lve-utils** versions from 3.0-21.2 to 3.0-23.7 the migration was performed the same way, but during every package install/update.
+Variables setting guidelines are the same as for CageFS (see above).
+
+## Virtualized /proc filesystem
+
+You can prevent user from seeing processes of other users (via ps/top command) as well as special files in /proc file system by setting fs.proc_can_see_other_uid sysctl.
+
+To do that, edit /etc/sysctl.conf
+<div class="notranslate">
+
+```
+fs.proc_can_see_other_uid=0
+fs.proc_super_gid=600
+```
+</div>
+And do:
+<div class="notranslate">
+
+```
+# sysctl -p
+```
+</div>
+fs.proc_can_see_other_uid=0
+
+If fs.proc_can_see_other_uid is set to 0, users will not be able to see special files. If it is set to 1 - user will see other processes IDs in /proc filesystem.
+
+fs.proc_super_gid=XX
+
+The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/limits/#cldetect) can configure few most commonly used monitoring software automatically.
+
+Virtualized /proc filesystem will only display following files (as well as directories for PIDs for the user) to unprivileged users:
+<div class="notranslate">
+
+```
+/proc/cpuinfo
+/proc/version
+/proc/stat
+/proc/uptime
+/proc/loadavg
+/proc/filesystems
+/proc/stat
+/proc/cmdline
+/proc/meminfo
+/proc/mounts
+/proc/tcp
+/proc/tcp6
+/proc/udp
+/proc/udp6
+/proc/assocs
+/proc/raw
+/proc/raw6
+/proc/unix
+/proc/dev
+```
+</div>   
+
+:::tip Note
+Starting from lve-utils 3.0-21.2, fs.proc_super_gid parameter in da_add_admin utility is written to /etc/sysctl.d/90-cloudlinux.conf.
+:::
+
+### Remounting procfs with "hidepid" option
+
+In **lve-utils-2.1-3.2** and later _/proc_ can be remounted with `hidepid=2` option to enable additional protection for procfs. This remount is performed in lve_namespaces service.
+This option is in sync with _fs.proc_can_see_other_uid_ kernel parameter described above.
+When _/etc/sysctl.conf_ does not contain _fs.proc_can_see_other_uid_ setting, the protection is off (procfs is remounted with _hidepid=0_ option). In this case _fs.proc_super_gid_ setting is ignored. Users are able to see full _/proc_ including processes of other users on a server. This is a default behavior.
+
+If _/etc/sysctl.conf_ contains _"fs.proc_can_see_other_uid=1"_ setting, then /proc will be remounted with _"hidepid=0"_ option (disable _“hidepid”_ protection for all users).
+If _/etc/sysctl.conf_ contains _"fs.proc_can_see_other_uid=0"_ setting, then /proc will be remounted with _"hidepid=2"_ option (enable _“hidepid”_ protection for all users).
+If _/etc/sysctl.conf_ contains _"fs.proc_can_see_other_uid=0"_ and _"fs.proc_super_gid=$GID"_ settings, then _/proc_ will be remounted with _"hidepid=2, gid=$GID"_ options (enable _“hidepid”_ for all users except users in group with gid $GID).
+
+To apply /etc/sysctl.conf changes, you should execute
+<div class="notranslate">
+
+```
+service lve_namespaces restart
+```
+</div>
+ Or
+<div class="notranslate">
+ 
+```
+/usr/share/cloudlinux/remount_proc.py
+```
+</div>
+
+So, admin can prevent users from seeing processes of other users via _"fs.proc_can_see_other_uid"_ and _"fs.proc_super_gid"_ settings in _/etc/sysctl.conf_ , like earlier.
+
+Also, you can override this by specifying desired options for _/proc_ in _/etc/fstab_ .
+
+To disable hidepid, add to _/etc/fstab_ the following:
+<div class="notranslate">
+
+```
+proc /proc proc defaults,hidepid=0,gid=0 0 0
+```
+</div>
+Or you can specify desired hidepid and gid values explicitly:
+<div class="notranslate">
+
+```
+proc /proc proc defaults,hidepid=2,gid=clsupergid 0 0
+```
+</div>
+ You should execute
+<div class="notranslate">
+ 
+```
+mount -o remount /proc
+```
+</div>
+
+to apply _/etc/fstab_ changes.  
+Nevertheless, we recommend to manage procfs mount options via _/etc/sysctl.conf_ as described above for backward compatibility. 
+
+::: tip Note
+There is a known issue on CloudLinux 6 systems. User cannot see full /proc inside CageFS even when this user is in “super” group, that should see full /proc. This issue does not affect users with CageFS disabled. CloudLinux 7 is not affected.
+:::
+
+::: tip Note
+Starting from lve-utils 3.0-21.2, lve_namespaces service can read parameters from the /etc/sysctl.d/90-cloudlinux.conf.
+:::
+
+::: tip Note
+Even if fs.proc_can_see_other_uid and fs.proc_super_gid parameters are not set in config files but specified in /proc/sys, then when restarting lve_namespaces service the parameters from /proc/sys will be used. So, /proc will be remounted according to these parameters.
+:::
+
+## ptrace Block
+
+Starting with kernel 3.10.0-427.18.s2.lve1.4.21 ( <span class="notranslate"> CloudLinux </span> 7) and 2.6.32-673.26.1.lve1.4.17 ( <span class="notranslate"> CloudLinux </span> 6) we re-implemented <span class="notranslate"> ptrace block </span> to protect against <span class="notranslate"> ptrace </span> family of vulnerabilities. It prevents end user from using any <span class="notranslate"> ptrace </span> related functionality, including such commands as <span class="notranslate"> strace, lsof </span> or <span class="notranslate"> gdb </span> .
+
+By default, <span class="notranslate"> CloudLinux </span> doesn't prevent <span class="notranslate"> ptrace </span> functionality.
+
+Defaults:
+<div class="notranslate">
+
+```
+kernel.user_ptrace = 1
+kernel.user_ptrace_self = 1
+```
+</div>
+
+The option <span class="notranslate"> kernel.user_ptrace </span> disables <span class="notranslate"> PTRACE_ATTACH </span> functionality, option <span class="notranslate"> kernel.user_ptrace_self </span> disables <span class="notranslate"> PTRACE_TRACEME </span> .
+
+To disable all <span class="notranslate"> ptrace </span> functionality change both <span class="notranslate"> sysctl </span> options to 0, add this section to <span class="notranslate"> /etc/sysctl.conf </span> :
+<div class="notranslate">
+
+```
+## CL. Disable ptrace for users
+kernel.user_ptrace = 0
+kernel.user_ptrace_self = 0
+##
+```
+</div>
+
+Apply changes with:
+<div class="notranslate">
+
+```
+$ sysctl -p
+```
+</div>
+
+Different software could need different access to <span class="notranslate"> ptrace </span> , you may need to change only one option to 0 to make them working. In this case, there will be only partial <span class="notranslate"> ptrace </span> protection. 
+
+::: danger
+ptrace protection is known to break PSA service for Plesk 11
+:::
+
+## Xen XVDA
+
+2.6.32 kernels have different mode of naming <span class="notranslate"> Xen XVDA </span> drives.
+
+By adding <span class="notranslate">xen_blkfront.sda_is_xvda=0</span> to kernel boot line in <span class="notranslate">grub.conf</span> you will make sure no naming translation is done, and the drives will be identified as <span class="notranslate">xvde</span>.
+
+By default, this option is set to 1 in the kernel, and drives are detected as <span class="notranslate">xvda</span>.
+This is needed only for CloudLinux 6 and <span class="notranslate">Hybrid</span> kernels.
+
+## IO Limits latency
+
+**[lve1.2.29+]**
+
+When customer reaches <span class="notranslate"> IO Limit, the processes that are waiting for  <span class="notranslate"> IO will be placed to sleep to make sure they don't go over the limit. That could make some processes sleep for a very long time. </span> </span>
+By defining <span class="notranslate"> IO latency, you can make sure that no process sleeps due to  <span class="notranslate"> IO limit for more then X milliseconds. By doing so, you will also let customers to burst through the limits, and use up more than they were limited too in some instances. </span> </span>
+
+This option is <span class="notranslate"> OFF by default. </span>
+
+_For CloudLinux 6 and CloudLinux 7 (since Hybrid kernel lve1.4.x.el5h):_
+
+To enable <span class="notranslate"> IO </span> Limits latency and set it to 10 seconds:
+<div class="notranslate">
+
+```
+# echo 10000 > /sys/module/kmodlve/parameters/latency
+```
+</div>
+To disable latency:
+<div class="notranslate">
+
+```
+# echo 2000000000 > /sys/module/kmodlve/parameters/latency
+```
+</div>
+
+It is possible to set, for example, 1000 as a permanent value. To do so, create a file <span class="notranslate">/etc/modprobe.d/kmodlve.conf </span> with the following content:  
+<span class="notranslate">`options kmodlve latency=1000` </span>
+
+
+_For <span class="notranslate"> CloudLinux </span> 5 (OBSOLETE):_
+
+To enable <span class="notranslate"> IO </span> Limits latency and set it to 10 seconds:
+<div class="notranslate">
+
+```
+# echo 10000 > /sys/module/iolimits/**parameters/latency
+```
+</div>
+To disable latency:
+<div class="notranslate">
+
+```
+# echo 2000000000 > /sys/module/iolimits/**parameters/latency
+```
+</div>
+
+
+## Reading LVE usage
+
+CloudLinux kernel provides real time usage data in file.
+
+All the statistics can be read from that file in real time. Depending on your kernel version you will get either Version 6 of the file, or version 4 of the file.
+You can detect the version by reading the first line of the file. It should look like:
+ 
+6:LVE... for version 6  
+4:LVE... for version 4
+
+First line presents headers for the data.
+Second line shows default limits for the server, with all other values being 0.
+The rest of the lines present limits & usage data on per <span class="notranslate"> LVE </span> bases.
+
+Version 6 (CL6 & hybrid kernels):
+<div class="notranslate">
+
+```
+6:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP        lMEMPHY        lCPUW        lNPROC        MEMPHY        fMEMPHY        NPROC        fNPROC
+0        0        25        1024        0        0        0        262144        20        1        0        0        262144        100        0        0        0        00
+300        0        25        1024        1862407        0        0        262144        20        1        0        0        262144        100        0        31        000
+```
+</div>
+Version 4 (CL 5 kernel):
+<div class="notranslate">
+
+```
+4:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP
+0        0        25        25        0        0        0        262144        20        1        0        0
+300        0        25        25        15103019        0        0        262144        20        1        0        0
+```
+</div>
+
+| |  |  | |
+|-|--|--|-|
+|**Label** | **Description** | **Value** | **Supported versions**|
+|<span class="notranslate"> LVE </span> | <span class="notranslate"> LVE ID </span> | number | |
+|<span class="notranslate"> EP </span> | Number of <span class="notranslate"> entry processes </span> | number | |
+|<span class="notranslate"> lCPU </span> | <span class="notranslate"> CPU </span> Limit | % relative to total <span class="notranslate"> CPU power </span> | |
+|<span class="notranslate"> lIO </span> | <span class="notranslate"> IO </span> limits for CL6 or <span class="notranslate"> IO </span> priority for CL5 | KB/s for v6, from 1 to 100 for v4 | |
+|<span class="notranslate"> CPU </span> | <span class="notranslate"> CPU </span> usage since reboot | in nanoseconds for v6, hertz for v4 | |
+|<span class="notranslate"> MEM </span> | Virtual memory usage | number of 4k pages | |
+|<span class="notranslate"> IO </span> | <span class="notranslate"> IO </span> usage | KB/s for v6, 0 for v4 | |
+|<span class="notranslate"> lMEM </span> | Virtual memory limit | number of 4k pages | |
+|<span class="notranslate"> lEP </span> | <span class="notranslate"> Entry Processes </span> limit | number | |
+|<span class="notranslate"> nCPU </span> | Number of cores limit | number of cores | |
+|<span class="notranslate"> fMEM </span> | <span class="notranslate"> Virtual memory </span> faults | number of faults | |
+|<span class="notranslate"> fEP </span> | <span class="notranslate"> Entry Processes </span> faults | number of faults | v6+|
+|<span class="notranslate"> lMEMPHY </span> | Physical memory limit | number | v6+|
+|<span class="notranslate"> lCPUW </span> | <span class="notranslate"> CPU </span> weight (not used) | from 1 to 100 | v6+|
+|<span class="notranslate"> lNPROC </span> | <span class="notranslate"> Number of processes </span> limit | number | v6+|
+|<span class="notranslate"> MEMPHY </span> | Physical memory usage | number of 4k pages | v6+|
+|<span class="notranslate"> fMEMPHY </span> | Physical memory faults | number of faults | v6+|
+|<span class="notranslate"> NPROC </span> | <span class="notranslate"> Number of processes </span> | number | v6+|
+|<span class="notranslate"> fNPROC </span> | <span class="notranslate"> Number of processes </span> faults | number of faults | v6+|
+|<span class="notranslate"> IOPS </span> | <span class="notranslate"> IO </span> operations since reboot | number | v8+|
+
+## flashcache
+
+:::tip Note
+Available only for x86_64, <span class="notranslate">CloudLinux</span> 6 and Hybrid servers
+:::
+
+<span class="notranslate"> Flashcache </span> is a module originally written and released by <span class="notranslate">  Facebook (Mohan Srinivasan, Paul Saab </span> and <span class="notranslate"> Vadim Tkachenko </span> ) in April of 2010. It is a kernel module that allows Writethrough caching of a drive on another drive. This is most often used for caching a rotational drive on a smaller solid-state drive for performance reasons. This gives you the speed of an <span class="notranslate"> SSD </span> and the size of a standard rotational drive for recently cached files. <span class="notranslate"> Facebook </span> originally wrote the module to speed up database <span class="notranslate"> I/O </span> , but it is easily extended to any <span class="notranslate"> I/O </span> .
+
+To install on <span class="notranslate"> CloudLinux </span> 6 & Hybrid servers:
+<div class="notranslate">
+
+```
+$ yum install flashcache
+```
+</div>
+
+More info on <span class="notranslate"> flashcache </span> : [https://github.com/facebook/flashcache/](https://github.com/facebook/flashcache/)
+
+<span class="notranslate"> ArchLinux </span> has a good page explaining how to use <span class="notranslate"> flashcache </span> :
+[https://wiki.archlinux.org/index.php/Flashcache](https://wiki.archlinux.org/index.php/Flashcache)
+
+## OOM Killer for LVE Processes
+
+When <span class="notranslate"> LVE </span> reaches its memory limit, the processes inside that <span class="notranslate"> LVE </span> are killed by <span class="notranslate"> OOM Killer </span> and appropriate message is written to <span class="notranslate"> /var/log/messages </span> . When any <span class="notranslate"> LVE </span> hits huge number of memory limits in short period of time, then <span class="notranslate"> OOM Killer </span> could cause system overload. Starting from kernel 2.6.32-673.26.1.lve1.4.15 ( <span class="notranslate"> CloudLinux </span> 6) and from kernel 3.10.0-427.18.2.lve1.4.14 ( <span class="notranslate"> CloudLinux </span> 7) heavy <span class="notranslate"> OOM Killer </span> could be disabled. If so - lightweight <span class="notranslate"> SIGKILL </span> will be used instead.
+
+By default <span class="notranslate"> OOM Killer </span> is enabled, to disable it please run:
+
+_For <span class="notranslate"> CloudLinux </span> 6_:
+<div class="notranslate">
+
+```
+# echo 1 > /proc/sys/ubc/ubc_oom_disable
+```
+</div>
+
+Also, add the following to <span class="notranslate">_/etc/sysctl.conf_</span> file to apply the same during boot:
+<div class="notranslate">
+
+```
+ubc.ubc_oom_disable=1
+```
+</div>
+
+_For <span class="notranslate">CloudLinux</span> 7:_
+<div class="notranslate">
+
+```
+# echo 1 > /proc/sys/kernel/memcg_oom_disable
+```
+</div>
+
+Also, add the following to <span class="notranslate"> _/etc/sysctl.conf_ </span> file to apply the same during boot:
+<div class="notranslate">
+
+```
+kernel.memcg_oom_disable=1
+```
+</div>
+
+## File System Quotas
+
+In <span class="notranslate">**Ext4**</span> file system, the process with enabled capability <span class="notranslate">CAP_SYS_RESOURCE</span> is not checked on the quota exceeding by default. It allows userland utilities <span class="notranslate">_selectorctl_</span> and <span class="notranslate">_cagefs_</span> to operate without fails even if a user exceeds a quota.
+
+To disable quota checking in <span class="notranslate">**XFS**</span> file system set <span class="notranslate">_cap_res_quota_disable_</span> option to 1 using the following command:
+<div class="notranslate">
+
+```
+# echo 1 > /proc/sys/fs/xfs/cap_res_quota_disable
+```
+</div>
