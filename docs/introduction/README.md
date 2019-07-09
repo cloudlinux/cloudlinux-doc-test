@@ -57,7 +57,7 @@ CloudLinux OS is designed for shared hosting providers. It isolates each custome
     [See more](/cloudlinux_os_components/#reseller-limits).
 * **LVE-Stats 2**
 
-    
+    LVE-Stats 2 collects LVE usage statistics (CPU, memory, disk space usage) and allows to query the data.
 
     [See more](/cloudlinux_os_components/#lve-stats-2).
 
