@@ -47,63 +47,15 @@ It will install CloudLinux kernel, [Apache module](/limits/#hostinglimits), [PAM
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
-#### Advanced options for cldeploy
+See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
 
-<span class="notranslate">`sh cldeploy --help`</span>
-
-Usage:
-
-| | |
-|--|--|
-|<span class="notranslate">`-h, --help`</span>|Print this message|
-|<span class="notranslate">`-k, --key &lt;key&gt;`</span>|Update your system to CloudLinux with activation key|
-|<span class="notranslate">`-i, --byip`</span>|Update your system to CloudLinux and register by IP|
-|<span class="notranslate">`-c, --uninstall`</span>|Convert CloudLinux back to CentOS|
-|<span class="notranslate">`--serverurl`</span>|Use non-default registration server (default is `https://xmlrpc.cln.cloudlinux.com/XMLRPC`)|
-|<span class="notranslate">`--components-only`</span>|Install control panel components only|
-|<span class="notranslate">`--conversion-only`</span>|Do not install control panel components after converting|
-|<span class="notranslate">`--hostinglimits`</span>|Install mod_hostinglimits rpm|
-|<span class="notranslate">`--skip-kmod-check`</span>|Skip check for unsupported kmods|
-|<span class="notranslate">`--skip-version-check`</span>|Do not check for script updates|
-|<span class="notranslate">`--skip-registration`</span>|Don't register on CLN if already have access to CL repository|
-
-The script will install the following to the server:
-
-1. Register server with CLN.
-2. Install CloudLinux kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
-3. It will attempt to detect control panel and do the following actions:
-*  _For cPanel & DirectAdmin_:
-   * recompile Apache to install mod_hostinglimits;
-   * install LVE Manager.
-
-* _For Plesk, ISPManager & InterWorx_:
-  * update httpd and install mod_hostinglimits;
-  * install LVE Manager.
-
-* To disable installation of LVE Manager and mod_hostinglimits, please use <span class="notranslate">`--conversion-only`</span> option.
-
-* To disable installation of kernel & CLN registration, please use <span class="notranslate">`--components-only`</span> option.
-
-* To install **mod_hostinglimits** only, use <span class="notranslate">`--hostinglimits`</span> option.
-
-Examples:
-
-<div class="notranslate">
-
-```
-$ cldeploy --key xx-xxxxxx           # convert RHEL/CentOS to CL by using activation key, install control panel components
-$ cldeploy --byip --conversion-only  # convert RHEL/CentOS to CL by ip, don't install control panel components
-$ cldeploy --components-only         # install control panel components on already converted system
-$ cldeploy --hostinglimits           # update httpd and install mod_hostinglimits 
-```
-</div>
 
 #### Explanation of changes
 
 CloudLinux uses the fact that it is very close to CentOS and RHEL to convert systems in place, requiring just one reboot. Our conversion script does the following actions:
 
-* Backup of original repository settings into <span class="notranslate">_/etc/cl-convert-saved_</span>.
-* Backup of RHEL system id into <span class="notranslate">_/etc/cl-convert-saved_</span> (RHEL systems only).
+* Backup of original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
+* Backup of RHEL system id into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
 * Installs CL repository settings & imports CL RPM key.
 * Replaces redhat/centos-release, redhat-release-notes, redhat-logos with CL version.
 * Removes cpuspeed RPM (as it conflicts with CPU limits).
@@ -112,7 +64,7 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
 * Detects OVH servers and fixes mkinitrd issues.
 * Detects Linode servers and fixes grub issues.
 * Checks if LES is installed.
-* Checks that <span class="notranslate">_/etc/fstab_</span> has correct <span class="notranslate">_/dev/root_</span>
+* Checks that <span class="notranslate">`/etc/fstab`</span> has correct <span class="notranslate">`/dev/root`</span>
 * Checks for efi.
 * Installs CL kernel, lve-utils, liblve, lve-stats RPMs.
 * Installs LVE Manager for cPanel, Plesk, DirectAdmin, ISPManager & InterWorx

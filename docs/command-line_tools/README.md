@@ -1,5 +1,8 @@
-# Command-line Tools
+# Command-line Tools (CLI)
 
+Below, are the commands (CLI) you can use to manage CloudLinux OS components.
+
+* [cldeploy] (/command-line_tools/#cldeploy)
 * [lvectl](/command-line_tools/#lvectl)
 * [lveps](/command-line_tools/#lveps)
 * [lvetop](/command-line_tools/#lvetop)
@@ -31,6 +34,58 @@
       * [Notifier](/lve-stats_2/#notifier)
   * [/var/lve/info file](/lve-stats_2/#file-info-and-format-for-var-lve-info-file)
   * [Troubleshooting](/lve-stats_2/#troubleshooting)
+
+
+## cldeploy
+
+<span class="notranslate">`sh cldeploy --help`</span>
+
+Usage:
+
+| | |
+|--|--|
+|<span class="notranslate">`-h, --help`</span>|Print this message|
+|<span class="notranslate">`-k, --key &lt;key&gt;`</span>|Update your system to CloudLinux with activation key|
+|<span class="notranslate">`-i, --byip`</span>|Update your system to CloudLinux and register by IP|
+|<span class="notranslate">`-c, --uninstall`</span>|Convert CloudLinux back to CentOS|
+|<span class="notranslate">`--serverurl`</span>|Use non-default registration server (default is `https://xmlrpc.cln.cloudlinux.com/XMLRPC`)|
+|<span class="notranslate">`--components-only`</span>|Install control panel components only|
+|<span class="notranslate">`--conversion-only`</span>|Do not install control panel components after converting|
+|<span class="notranslate">`--hostinglimits`</span>|Install mod_hostinglimits rpm|
+|<span class="notranslate">`--skip-kmod-check`</span>|Skip check for unsupported kmods|
+|<span class="notranslate">`--skip-version-check`</span>|Do not check for script updates|
+|<span class="notranslate">`--skip-registration`</span>|Don't register on CLN if already have access to CL repository|
+
+The script will install the following to the server:
+
+1. Register server with CLN.
+2. Install CloudLinux kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
+3. It will attempt to detect control panel and do the following actions:
+*  _For cPanel & DirectAdmin_:
+   * recompile Apache to install mod_hostinglimits;
+   * install LVE Manager.
+
+* _For Plesk, ISPManager & InterWorx_:
+  * update httpd and install mod_hostinglimits;
+  * install LVE Manager.
+
+* To disable installation of LVE Manager and mod_hostinglimits, please use <span class="notranslate">`--conversion-only`</span> option.
+
+* To disable installation of kernel & CLN registration, please use <span class="notranslate">`--components-only`</span> option.
+
+* To install **mod_hostinglimits** only, use <span class="notranslate">`--hostinglimits`</span> option.
+
+Examples:
+
+<div class="notranslate">
+
+```
+$ cldeploy --key xx-xxxxxx           # convert RHEL/CentOS to CL by using activation key, install control panel components
+$ cldeploy --byip --conversion-only  # convert RHEL/CentOS to CL by ip, don't install control panel components
+$ cldeploy --components-only         # install control panel components on already converted system
+$ cldeploy --hostinglimits           # update httpd and install mod_hostinglimits 
+```
+</div>
 
 ## lvectl
 

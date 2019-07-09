@@ -51,7 +51,7 @@ module.exports = {
     docsDir: "docs",
     
     translationSource: 'docs.cloudlinux.com',
-    defaultURL: "/cloudlinux_installation/",
+    defaultURL: "/introduction/",
     redirectionMapping: urls,
     sidebarDepth: 2,
     logo: "/logo.svg",

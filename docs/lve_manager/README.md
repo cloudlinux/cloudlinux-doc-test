@@ -1,7 +1,7 @@
 
 <div class="notranslate">
 
-# LVE Manager
+# User Interface (LVE Manager)
 
 </div>
 
