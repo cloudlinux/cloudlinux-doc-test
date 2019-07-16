@@ -1,6 +1,13 @@
 const urls = require("./urls-mapping.js");
 const sidebarUrls = require("./sidebar-urls");
-const _slugify = require('vuepress/lib/markdown/slugify');
+const _slugify = require('@vuepress/shared-utils/lib/slugify');
+
+const slugifyLinks = (s) => {
+  if (sidebarUrls[s]) {
+    return sidebarUrls[s];
+  }
+  return _slugify(s);
+};
 
 module.exports = {
   configureWebpack: {
@@ -33,35 +40,33 @@ module.exports = {
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
-      description: "CloudLinux Documentation"
+      description: "CloudLinux Documentation",
     },
     "/ru/": {
       lang: "ru",
       title: "Документация",
-      description: "Документация CloudLinux"
+      description: "Документация CloudLinux",
     }
   },
   theme: "cloudlinux",
   markdown: {
-    slugify: (s) => {
-      if (sidebarUrls[s]) {
-        return sidebarUrls[s];
-      }
-      return _slugify(s);
+    slugify: slugifyLinks,
+    toc: {
+      slugify: slugifyLinks,
     }
-},
+  },
 
   themeConfig: {
-    repo: "cloudlinux/cloudlinux-doc",
+    repo: "ybaturin/cloudlinux-doc",
     editLinks: true,
     docsBranch: "dev",
     docsDir: "docs",
-    
     translationSource: 'docs.cloudlinux.com',
-    defaultURL: "/cloudlinux_installation/",
+    defaultURL: "/home/",
     redirectionMapping: urls,
     sidebarDepth: 2,
     logo: "/logo.svg",
+    logoShort: "/logo-short.svg",
     try_free: "https://cloudlinux.com/trial",
 
     social: [
@@ -76,6 +81,133 @@ module.exports = {
     cloudlinuxSite: "https://cloudlinux.com",
     locales: {
       "/": {
+        layouts: {
+          product: {
+            siteTitle: "Cloudlinux OS"
+          },
+          documentation: {
+            siteTitle: "Documentation",
+            sidebar: [
+              {
+                title: "Content",
+                collapsable: false,
+                children: [
+                  "/cloudlinux_installation/",
+                  "/limits/",
+                  "/command-line_tools/",
+                  "/lve_manager/",
+                  "/reseller_limits/",
+                  "/lve-stats_2/",
+                  "/cagefs/",
+                  "/mysql_governor/",
+                  "/php_selector/",
+                  "/python_selector/",
+                  "/ruby_selector/",
+                  "/node_js_selector/",
+                  "/inodes_limits/",
+                  "/kernel_settings/",
+                  "/apache_mod_lsapi/",
+                  "/cloudlinux-fchange/",
+                  "/mod_proctitle/",
+                  "/additional_packages/",
+                  "/integration_guide/",
+                  "/partner_portal/",
+                  "/cloudlinux_network/",
+                  "/cloudlinux_whmcs_plugin/",
+                  "/deprecated/",
+                  "/hardware_compatibility/",
+                  "/cloudlinux_life-cycle/"
+                ]
+              }
+            ],
+          },
+          knowledgeBase: {
+            siteTitle: "Knowledge base",
+            sidebar: [{
+              title: "Content",
+              collapsable: false,
+              children: [
+                "/kb/test1/",
+                "/kb/test2/",
+              ],
+            }],
+          },
+          gettingStarted: {
+            siteTitle: "Getting started",
+            sidebar: [{
+              title: "Content",
+              collapsable: false,
+              children: [],
+            }],
+          },
+          videoTutorials: {
+            siteTitle: "Video tutorials",
+            sidebar: [{
+              title: "Content",
+              collapsable: false,
+              children: [],
+            }],
+          }
+        },
+        navBar: {
+          submitRequest: "Submit request",
+          products: "Products",
+
+          productsMenu: {
+            product: 'Product',
+            resources: 'Resources',
+            list: [
+              {
+                default: true,
+                name: "CloudLinux OS",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "/blog" },
+                ]
+              },
+              {
+                name: "KernelCare",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.kernelcare.com/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.kernelcare.com/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.kernelcare.com/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.kernelcare.com/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.kernelcare.com/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.kernelcare.com/blog" },
+                ]
+              },
+              {
+                name: "Imunify360",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunify360.com/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunify360.com/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunify360.com/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunify360.com/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunify360.com/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunify360.com/blog" },
+                ]
+              },
+              {
+                name: "ImunifyAV/AV+",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunifyav.com/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunifyav.com/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunifyav.com/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunifyav.com/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunifyav.com/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunifyav.com/blog" },
+                ]
+              },
+            ]
+          }
+        },
+        productPage: {
+          title: "CloudLinux OS support resources",
+        },
         stayInTouch: "Stay in touch",
         bottomLinks: [
           {
@@ -116,42 +248,73 @@ module.exports = {
           indexName: "cloudlinuxos",
           appId: "0TCNL6CGX8"
         },
-
-        sidebar: [
-          {
-            title: "Content",
-            collapsable: false,
-            children: [
-              "/cloudlinux_installation/",
-              "/limits/",
-              "/command-line_tools/",
-              "/lve_manager/",
-              "/reseller_limits/",
-              "/lve-stats_2/",
-              "/cagefs/",
-              "/mysql_governor/",
-              "/php_selector/",
-              "/python_selector/",
-              "/ruby_selector/",
-              "/node_js_selector/",
-              "/inodes_limits/",
-              "/kernel_settings/",
-              "/apache_mod_lsapi/",
-              "/cloudlinux-fchange/",
-              "/mod_proctitle/",
-              "/additional_packages/",
-              "/integration_guide/",
-              "/partner_portal/",
-              "/cloudlinux_network/",
-              "/cloudlinux_whmcs_plugin/",
-              "/deprecated/",
-              "/hardware_compatibility/",
-              "/cloudlinux_life-cycle/"
-            ]
-          }
-        ]
       },
       "/ru/": {
+        layouts: {
+          product: {
+            siteTitle: "Cloudlinux OS"
+          },
+          documentation: {
+            siteTitle: "Документация",
+            sidebar: [
+              {
+                title: "Содержание",
+                collapsable: false,
+                children: [
+                  "/ru/cloudlinux_installation/",
+                  "/ru/limits/",
+                  "/ru/command-line_tools/",
+                  "/ru/lve_manager/",
+                  "/ru/reseller_limits/",
+                  "/ru/lve-stats_2/",
+                  "/ru/cagefs/",
+                  "/ru/mysql_governor/",
+                  "/ru/php_selector/",
+                  "/ru/python_selector/",
+                  "/ru/ruby_selector/",
+                  "/ru/node_js_selector/",
+                  "/ru/inodes_limits/",
+                  "/ru/kernel_settings/",
+                  "/ru/apache_mod_lsapi/",
+                  "/ru/cloudlinux-fchange/",
+                  "/ru/mod_proctitle/",
+                  "/ru/additional_packages/",
+                  "/ru/integration_guide/",
+                  "/ru/partner_portal/",
+                  "/ru/cloudlinux_network/",
+                  "/ru/cloudlinux_whmcs_plugin/",
+                  "/ru/deprecated/",
+                  "/ru/hardware_compatibility/",
+                  "/ru/cloudlinux_life-cycle/"
+                ]
+              }
+            ]
+          },
+          knowledgeBase: {
+            siteTitle: "База знаний",
+            sidebar: [{
+              title: "Content",
+              collapsable: false,
+              children: [],
+            }],
+          },
+          gettingStarted: {
+            siteTitle: "Начало работы",
+            sidebar: [{
+              title: "Content",
+              collapsable: false,
+              children: [],
+            }],
+          },
+          videoTutorials: {
+            siteTitle: "Обучающие ролики",
+            sidebar: [{
+              title: "Content",
+              collapsable: false,
+              children: [],
+            }],
+          }
+        },
         title: "Язык",
         selectText: "Рус",
         label: "Русский",
@@ -169,6 +332,64 @@ module.exports = {
           indexName: "cloudlinuxos-ru",
           appId: "0TCNL6CGX8"
         },
+        navBar: {
+          submitRequest: "Отправить запрос",
+          products: "Продукты",
+          productsMenu: {
+            product: 'Product',
+            resources: 'Resources',
+            list: [
+              {
+                default: true,
+                name: "CloudLinux OS",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "/blog" },
+                ]
+              },
+              {
+                name: "KernelCare",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.kernelcare.com/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.kernelcare.com/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.kernelcare.com/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.kernelcare.com/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.kernelcare.com/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.kernelcare.com/blog" },
+                ]
+              },
+              {
+                name: "Imunify360",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunify360.com/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunify360.com/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunify360.com/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunify360.com/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunify360.com/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunify360.com/blog" },
+                ]
+              },
+              {
+                name: "ImunifyAV/AV+",
+                resources: [
+                  { name: "Getting started", icon: "/svg/gs-blue-icon.svg", url: "https://docs.imunifyav.com/getting-started" },
+                  { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunifyav.com/cloudlinux_installation" },
+                  { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunifyav.com/kb" },
+                  { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunifyav.com/vt" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunifyav.com/forum" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunifyav.com/blog" },
+                ]
+              },
+            ]
+          }
+        },
+        productPage: {
+          title: "CloudLinux OS support resources",
+        },
         stayInTouch: "Будем на связи",
         bottomLinks: [
             {
@@ -185,39 +406,6 @@ module.exports = {
             },
             { text: "Блог", url: "https://www.cloudlinux.com/blog" }
         ],
-        sidebar: [
-          {
-            title: "Содержание",
-            collapsable: false,
-            children: [
-              "/ru/cloudlinux_installation/",
-              "/ru/limits/",
-              "/ru/command-line_tools/",
-              "/ru/lve_manager/",
-              "/ru/reseller_limits/",
-              "/ru/lve-stats_2/",
-              "/ru/cagefs/",
-              "/ru/mysql_governor/",
-              "/ru/php_selector/",
-              "/ru/python_selector/",
-              "/ru/ruby_selector/",
-              "/ru/node_js_selector/",
-              "/ru/inodes_limits/",
-              "/ru/kernel_settings/",
-              "/ru/apache_mod_lsapi/",
-              "/ru/cloudlinux-fchange/",
-              "/ru/mod_proctitle/",
-              "/ru/additional_packages/",
-              "/ru/integration_guide/",
-              "/ru/partner_portal/",
-              "/ru/cloudlinux_network/",
-              "/ru/cloudlinux_whmcs_plugin/",
-              "/ru/deprecated/",
-              "/ru/hardware_compatibility/",
-              "/ru/cloudlinux_life-cycle/"
-            ]
-          }
-        ]
       }
     }
   }

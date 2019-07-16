@@ -1,6 +1,5 @@
 # CageFS
 
-
 CageFS is a virtualized file system and a set of tools to contain each user in its own 'cage'. Each customer will have its own fully functional CageFS, with all the system files, tools, etc.
 
 The benefits of CageFS are:
