@@ -9,7 +9,7 @@
     "vue-server-renderer": "~2.5.16",
     "vue-template-compiler": "~2.5.16",
     "vuepress": "^1.0.2",
-    "vuepress-theme-cloudlinux": "https://github.com/ybaturin/cloudlinux-doc-theme.git#HELP-33-product-page",
+    "vuepress-theme-cloudlinux": "https://github.com/ybaturin/cloudlinux-doc-theme.git",
     "vuex": "^3.1.1"
   },
   "resolutions": {
