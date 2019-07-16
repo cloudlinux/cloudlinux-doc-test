@@ -48,7 +48,7 @@ module.exports = {
       description: "Документация CloudLinux",
     }
   },
-  // theme: "cloudlinux",
+  theme: "cloudlinux",
   markdown: {
     slugify: slugifyLinks,
     toc: {
@@ -57,7 +57,7 @@ module.exports = {
   },
 
   themeConfig: {
-    repo: "cloudlinux/cloudlinux-doc",
+    repo: "ybaturin/cloudlinux-doc",
     editLinks: true,
     docsBranch: "dev",
     docsDir: "docs",
