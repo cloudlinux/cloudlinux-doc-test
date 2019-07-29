@@ -117,13 +117,13 @@ module.exports = {
             children: [
               "/introduction/",
               "/cloudlinux_installation/",
-              "/for_cloudlinux_partners/",
               "/limits/",
               "/command-line_tools/",
               "/lve_manager/",
               "/cloudlinux_os_components/",
               "/kernel_related/",
               "/additional_packages/",
+              "/for_cloudlinux_partners/",
               "/deprecated/"
             ]
           }
@@ -166,13 +166,13 @@ module.exports = {
             children: [
               "/ru/introduction/",
               "/ru/cloudlinux_installation/",
-              "/ru/for_cloudlinux_partners/",
               "/ru/limits/",
               "/ru/command-line_tools/",
               "/ru/lve_manager/",
               "/ru/cloudlinux_os_components/",
               "/ru/kernel_related/",
               "/ru/additional_packages/",
+              "/ru/for_cloudlinux_partners/",
               "/ru/deprecated/"
             ]
           }

@@ -1,4 +1,4 @@
-# Additional Packages
+# Additional packages
 
 
 CloudLinux will package additional software needed by hosters for your convenience.

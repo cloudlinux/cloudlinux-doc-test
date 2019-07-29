@@ -168,7 +168,7 @@ $ /usr/sbin/clnreg_ks --force
 * [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
 * [Xen](/cloudlinux_installation/#xen-images)
 
-#### Xen Images
+#### Xen images
 
 
 To start using Xen image:
@@ -357,7 +357,7 @@ Include /hsphere/local/config/httpd2/fcgi.conf
 *No changes needed to `httpd.conf.tmpl.custom` or `usermodule.phpmode` as this version provides its own mod_fcgid.
 :::
 
-#### Older Versions of H-Sphere
+#### Older versions of H-Sphere
 
 1. Compile mod_fcgid module:
    

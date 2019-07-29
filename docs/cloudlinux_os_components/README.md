@@ -1,13 +1,13 @@
-#  CloudLinux OS Components
+#  CloudLinux OS components
 
-## Reseller Limits
+## Reseller limits
 ### General information and requirements
 
 <span class="notranslate">Reseller limits</span> is a feature that allows hosters to set limits for the resources each reseller can operate with. Hoster also provides controls to the reseller on what resources each reseller’s end user will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
 
 When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
 
-#### Types of Users
+#### Types of users
 
 Starting from the **version 3.0-18**, <span class="notranslate">LVE Manager</span> operates with four types of users and their resource usage limits.
 
@@ -18,7 +18,7 @@ The types of users are as follows:
 * <span class="notranslate">**Reseller’s End User**</span> is a type of user that purchases hosting from a reseller and uses it for his own purposes.
 * <span class="notranslate">**Reseller’s End User (no Reseller limit)**</span> is a type of user that purchases hosting from a reseller and uses it for his own purposes but does not have limits set by a reseller. These limits are set by the hoster.
 
-#### Types of Limits
+#### Types of limits
 
 See the comparison Table with types of limits.
 
@@ -107,7 +107,7 @@ Use the detailed instruction below:
     ```
     </div>
 
-#### How to Enable and Disable Reseller Limits
+#### How to enable and disable reseller limits
 
 To start using a new feature <span class="notranslate">**Reseller limits**</span> you would have to enable reseller limits for a particular reseller first.
 
@@ -147,414 +147,7 @@ To disable Reseller limits, please do the following:
 If you disable Reseller limits everything will work the same as before. All the end user limits set by the reseller will be saved. But all custom default reseller limits will be disabled.
 :::
 
-### User Interface
-
-#### Hoster Interface
-
-Hoster interface allows to monitor and manage limits for hosters’ end users, resellers and resellers’ end users, and also manage packages and monitor statistics.
-
-Hoster credentials allow to control limits for hosters’ end users and resellers. To control reseller end user limits Hoster has to log in as Reseller.
-
-Log in as Hoster to get access to the following functionality.
-
-* <span class="notranslate">[Current Usage](/reseller_limits/#current-usage)</span> tab allows to monitor users and resellers resource usage at the moment.
-* <span class="notranslate">[Users](/reseller_limits/#users)</span> tab with the list of all users and resellers allows viewing and managing all the users and resellers limits.
-* <span class="notranslate">[Statistics](/reseller_limits/#statistics)</span> tab displays the statistics of resource usage for particular timeframe or particular user.
-* <span class="notranslate">[Options](/reseller_limits/#options)</span> tab allows to set LVE faults email notifications for hoster, users, and resellers.
-* <span class="notranslate">[Packages](/reseller_limits/#packages)</span> tab allows to manage resellers packages limits;
-* <span class="notranslate">[Selector](/reseller_limits/#selector)</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
-
-<div class="notranslate">
-
-#### Current Usage
-
-</div>
-
-Choose <span class="notranslate">Current Usage</span> tab to monitor users, resellers and resellers’ end users resource usage at the moment displayed in the table.
-
-<span class="notranslate">Current Usage</span> table provides information on usage of the following:
-* <span class="notranslate"> SPEED (All</span> and MySQL)
-* <span class="notranslate"> memory (MEM)</span>
-* data throughput (<span class="notranslate">IO) (All</span> and MySQL)
-* read/write operations per second (<span class="notranslate">IOPS</span>)
-* number of processes (<span class="notranslate">PNO</span>)
-* entry processes (<span class="notranslate">EP</span>)
-
-Resource usage values are being refreshed every 10 seconds by default which is set in <span class="notranslate">_Auto-refresh_</span> field. You can set <span class="notranslate">_Auto-refresh time_</span> by choosing a value from the drop-down.
-
-You can refresh the table manually by clicking <span class="notranslate">_Refresh now_</span> or you can freeze the values by clicking <span class="notranslate">_pause_</span>. Usage values will not change until the next manual refresh. To unfreeze click <span class="notranslate">_unpause_</span>. The countdown will continue.
-
-Tick <span class="notranslate">_Hide MySQL usage_</span> to hide the information on MySQL usage.
-
-The list of users can be filtered by <span class="notranslate">_Username_</span> and <span class="notranslate">_Domain_</span>.
-
-Hoster can **view** all types of users:
-* <span class="notranslate">End users</span>
-* <span class="notranslate">Resellers</span>
-* <span class="notranslate">Reseller’s end users</span>
-* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>.
-
-But hoster can only **manage**:
-* <span class="notranslate">End users</span>
-* <span class="notranslate">Resellers</span>
-* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>
-
-To manage Reseller’s end users hoster should login as a reseller.
-
-In the drop-down <span class="notranslate">_Show top_</span> you can choose the number of user to be displayed on the page.
-
-![](/images/currentusagetabhoster_zoom60.png)
-
-<div class="notranslate">
-
-#### Users
-
-</div>
-
-Choose <span class="notranslate">_Users_</span> tab to view the list of all users and manage their limits.
-
-To filter the list by user type click <span class="notranslate">_Manage_</span> and in the drop-down choose:
-
-* <span class="notranslate">End users</span> - to manage hosts end users only.
-* <span class="notranslate">Resellers</span> - to manage resellers only.
-* <span class="notranslate">Reseller’s end users</span> - to manage resellers’ end users only.
-* <span class="notranslate">Reseller’s end users (no Reseller limits)</span> - to manage resellers’ end users that do not have limits specified by reseller (these limits are specified by the hoster).
-
-To filter the list by <span class="notranslate">_Username_, _Domain_, _LveID_</span> click <span class="notranslate">_Filter by_</span> and choose the value in the drop-down.
-
-:::tip Note
-A hoster can view the list of resellers’ end users and their limits, but can not manage resellers’ end users limits (if those are set by reseller).
-:::
-
-A hoster can view the limits of all types of users and manage the limits for hosters’ end users and resellers’ end users (only those with Reseller Limits disabled).
-* Tick <span class="notranslate">_Show users with CageFS enabled_</span> to show users with CageFS file system enabled.
-* Tick <span class="notranslate">_Show only ignored users_</span> to show users with ignored <span class="notranslate">MySQL Governor</span>.
-
-![](/images/userstabhoster_zoom70.png)
-
-<div class="notrnslate">
-
-#### Actions
-
-</div>
-
-Click pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
-
-* Enable/disable <span class="notranslate">CageFS</span>
-* <span class="notranslate">**Reset**</span> - to reset limits to default values
-* Apply <span class="notranslate">**Do not limit**</span> to set the limits to unlimited;
-* Setting the limits values:
-  * <span class="notranslate"> SPEED </span>
-  * <span class="notranslate"> SPEED MYSQL </span>
-  * <span class="notranslate"> VMEM </span>
-  * <span class="notranslate"> PMEM </span> 
-  * <span class="notranslate"> IO </span>
-  * <span class="notranslate"> MySQL IO </span>
-  * <span class="notranslate"> IOPS </span>
-  * <span class="notranslate"> EP </span>
-  * <span class="notranslate"> NPROC </span>
-  * <span class="notranslate"> INODES </span> (hard and soft) (for <span class="notranslate">end users</span> and <span class="notranslate">resellers’ end users (with no Reseller Limits)</span>, if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings).
-
-Click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the pop-up.
-
-![](/images/actionshoster.png)
-
-Click on <span class="notranslate">_History_</span> symbol to view the history of a particular user resource usage. Choose time frame to view the history for a particular time period.
-
-![](/images/historyhoster.jpg)
-
-<div class="notranslate">
-
-#### Statistics
-
-</div>
-
-Choose <span class="notranslate">_Statistics_</span> tab to view end users, resellers and resellers’ end users limits usage statistics.
-
-The following parameters can be displayed in the statistics table:
-
-* <span class="notranslate"> SPEED </span> usage per user;
-* <span class="notranslate"> IO </span> usage per user;
-* <span class="notranslate"> EP </span> usage per user;
-* <span class="notranslate"> VMEM </span> usage per user;
-* <span class="notranslate"> PMEM </span> usage per user;
-* <span class="notranslate"> NPROC </span> usage per user;
-* <span class="notranslate"> IOPS </span> usage per user;
-* <span class="notranslate"> MySQL </span> usage per user.
-
-Click <span class="notranslate">_Show_</span> and select columns from the drop-down to set which parameters should be displayed in the table.
-
-Statistics table can be filtered by:
-
-* <span class="notranslate"> Timeframe </span> - to view the statistics for a particular period;
-* <span class="notranslate"> Limit </span> - to view a particular limit type usage only;
-* <span class="notranslate"> Top LVEs </span> - to view top used limits only;
-* <span class="notranslate"> LVE approaching limit </span> - to view the limits that are approaching maximum provided value;
-* <span class="notranslate"> Fault LVE </span> - the limits that have reached the maximum value.
-
-Click <span class="notranslate">_Manage_</span> to choose type of users to be displayed - <span class="notranslate">End users, Resellers, Resellers’ end users</span> or <span class="notranslate">Resellers’ end users (no Reseller limit)</span> by ticking checkbox in the drop-down.
-
-![](/images/statisticstabhoster_zoom70.png)
-
-Click chart symbol in the <span class="notranslate">_View_</span> column to view the detailed resource usage history for a particular account. Use timeframe drop-down to view the history for a particular period of time.
-
-![](/images/history_charts_zoom70.png)
-
-<div class="notranslate">
-
-#### Options
-
-</div>
-
-A hoster can set email notifications for panel administrator, reseller customer, and resellers’ customers in cases of limits faults. Choose <span class="notranslate">_Options_</span> tab to manage LVE Faults email notifications.
-
-In <span class="notranslate">_LVE Faults Email Notifications_</span> section tick the required checkboxes to set a type of notification.
-
-* <span class="notranslate"> _Notify Panel Administrator_ </span> - notify hoster when his end users have exceeded minimum number of faults set for particular limits.
-* <span class="notranslate"> _Notify Reseller_ </span> - notify reseller when his end users have exceeded minimum number of faults set for particular limits.
-* <span class="notranslate"> _Notify Customers_ </span> - notify hosters’ end users when they have exceeded limits.
-* <span class="notranslate"> _Notify Reseller's customers_ </span> - notify resellers’ end users when they have exceeded limits.
-
-![](/images/optionstabemailnotifhoster.png)
-
-In <span class="notranslate">_Faults to include_</span> section tick the checkboxes to include required limits to the notifications.
-Set the frequency of email notifications sending in <span class="notranslate">_Notify …. every.. days/hours/minutes/seconds_</span> section.
-
-![](/images/optionshosterfaultstoinclude.png)
-
-In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter the number of faults required for the notification to be sent for <span class="notranslate">_Panel Admin & Reseller_</span> and <span class="notranslate">_User_</span>.
-
-![](/images/optionstabhosterminimumftn.png)
-
-* In <span class="notranslate">_Inodes limits_</span> section you can reset inode limits to default values and tick <span class="notranslate">_Show end-user inode usage_</span>.
-* In <span class="notranslate">_User interface settings_</span> section tick the required checkboxes to apply user interface settings.
-* In <span class="notranslate">_MySQL Governor settings_</span> section you can customize <span class="notranslate"> MySQL Governor</span>.
-
-![](/images/optionstabhosterinodes.png)
-
-<div class="notranslate">
-
-#### Packages
-
-</div>
-
-<span class="notranslate">_Packages_</span> tab allows to set the limits for as many users as you need by editing packages of the limits. Each account belonging to a particular package adheres to those limits.
-
-Choose <span class="notranslate">_Packages_</span> tab to view and modify:
-
-* limits for user packages (created by hoster);
-* limits for reseller packages (created by hoster);
-* limits for resellers’ end users packages if reseller limits are not set for that reseller (hoster access allows identifying a particular reseller’s end user belonging to a particular reseller (created by reseller)).
-  
-![](/images/packageshostertab_zoom70.png)
-
-To modify package limits click on a pencil symbol in <span class="notranslate">_Actions_</span> column in a particular package row. The following limits for this package are available for setting:
-
-* <span class="notranslate"> SPEED</span> in percent (%);
-* <span class="notranslate"> Virtual memory (VMEM)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> I/O limits (IO)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> IOPS</span> limits;
-* <span class="notranslate"> Concurrent connections (EP)</span>;
-* <span class="notranslate"> Number of processes (NPROC)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> INODES (hard and soft)</span> (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings.)
-
-When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
-
-<div class="notranslate">
-
-#### Selector
-
-</div>
-
-<span class="notranslate">_Selector_</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
-
-* In <span class="notranslate">_Selector is_</span> choose <span class="notranslate">_Enabled_</span> or <span class="notranslate">_Disabled_</span> from the drop-down to enable or disable <span class="notranslate">PHP Selector</span>.
-
-* In <span class="notranslate">_Default PHP version_</span> choose PHP version or <span class="notranslate">_Native_</span> from the drop-down to apply.
-
-* In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
-
-Choose default modules from the list for a particular version of PHP or for <span class="notranslate">native</span>.
-
-![](/images/selector01_zoom70.png)
-
-![](/images/selector02_zoom70.png)
-
-
-### Reseller Interface
-
-Reseller interface is designed to manage limits for resellers’ end users, to monitor statistics and the history of resource usage and to modify reseller’s end user packages limits.
-
-Log in under a particular reseller credentials to have access to the following functionality:
-
-* <span class="notranslate">[Current Usage](/reseller_limits/#current-usage-tab)</span> tab - allows to monitor resellers’ end users resource usage at the moment;
-* <span class="notranslate"> [Historical Usage](/reseller_limits/#historical-usage-tab)</span> tab - allows to control resellers’ end users resource usage history;
-* <span class="notranslate"> [Users](/reseller_limits/#users-tab)</span> tab with the list of all resellers’ end users allows to view and manage all the reseller’s end user limits;
-* <span class="notranslate"> [Statistics](/reseller_limits/#statistics-tab)</span> tab displays the statistics of resource usage for particular timeframe or particular reseller's end user;
-* <span class="notranslate"> [Options](/reseller_limits/#options-tab)</span> tab allows to set LVE Faults email notifications.
-* <span class="notranslate"> [Packages](/reseller_limits/#packages-tab)</span> tab allows to manage reseller’s end user packages limits.
-
-Please note that reseller can manage all his end users via Reseller Interface. Reseller cannot manage <span class="notranslate"> INODE </span> or <span class="notranslate"> MYSQL </span> limits, neither his own nor for his users.
-
-<div class="notranslate">
-
-#### Current Usage tab
-
-</div>
-
-Current usage table provides the information on the usage of the following:
-* <span class="notranslate"> SPEED (All)</span>
-* <span class="notranslate">memory (MEM)</span>
-* data throughput <span class="notranslate">(IO)(All)</span>
-* read/write operations per second (<span class="notranslate">IOPS</span>)
-* <span class="notranslate">number of processes (PNO)</span>
-* <span class="notranslate">entry processes (EP)</span>
-
-Resource usage data is being refreshed every 10 seconds which is set by default in <span class="notranslate">_Auto-refresh_</span> field. You can set <span class="notranslate">_Auto-refresh time_</span> by choosing the value from the drop-down.
-
-You can refresh the table manually by clicking <span class="notranslate">_Refresh now_</span> or you can freeze the values by clicking <span class="notranslate">_pause_</span> button.
-
-Usage values will not change until the next manual refresh. To unfreeze click on <span class="notranslate">_unpause_</span> button. The countdown will continue.
-
-Reseller cannot manage <span class="notranslate">INODE</span> or MYSQL limits. Neither his own, nor for his users.
-
-The bottom line star in the table displays the total reseller resource usage. It means, that all the usage of resellers’ end users and of his own is displayed as a summary for each parameter.
-
-
-![](/images/currentusagetabresellerr_zoom70.png)
-
-<div class="notranslate">
-
-#### Historical Usage tab
-
-</div>
-
-Choose <span class="notranslate">_Historical Usage_</span> tab to view reseller and resellers’ end users resource usage history and faults. The list of users can be filtered by <span class="notranslate">_Timeframe_</span>.
-
-When reseller’s end user reaches the limits set by hoster for the reseller, this will be displayed on the chart. 
-
-:::tip Note
-In this case reseller’s end user would not necessarily reaches his limits set by the reseller. These faults are not displayed on the chart.
-:::
-
-On the <span class="notranslate">_Historical Usage_</span> page the reseller is also able to see the list of <span class="notranslate">_Top 5 Reseller’s end users_</span> (based on resource usage, for the same period as charts/overall usage). Click <span class="notranslate">_History_</span> in the <span class="notranslate">_Actions_</span> column to view resource usage statistics for particular user.
-
-Click <span class="notranslate">_LVE Statistics_</span> on the top of the <span class="notranslate">Top 5</span> list to go to the <span class="notranslate">_Statistics_</span> page to view or manage the rest of users.
-
-![](/images/historicalusageresellertab_zoom70.png)
-
-<div class="notranslate">
-
-#### Users tab
-
-</div>
-
-Choose <span class="notranslate">_Users_</span> tab to view and manage the list of all resellers’ end users and resource usage limits provided for them. The following limits are available for the resellers’ end users:
-
-* <span class="notranslate">SPEED</span>
-* <span class="notranslate">PMEM</span>
-* <span class="notranslate">IO</span>
-* <span class="notranslate">IOPS</span>
-* <span class="notranslate">EP</span>
-* <span class="notranslate">NPROC</span>
-
-You can filter the list by <span class="notranslate">_Username_, _Domain_, _LVE ID_.</span>
-
-Tick <span class="notranslate">_Show only ignored users_</span> to display only users with <span class="notranslate">MySQL Governor</span> disabled.
-
-![](/images/userstabreseller_zoom70.png)
-
-<div class="notranslate">
-
-#### Actions column
-
-</div>
-
-Click on a pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
-
-* Click <span class="notranslate">Reset</span> to reset limits to default values.
-* Click <span class="notranslate">Apply</span> for <span class="notranslate">Do not limit</span> to set unlimited resources to a user.
-* Set values for <span class="notranslate"> PEED, PMEM, IO, IOPS, EP</span>, and NPROC and click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the window.
-
-![](/images/userstabpopup_zoom70.png)
-
-<div class="notranslate">
-
-#### Statistics tab
-
-</div>
-
-Choose <span class="notranslate">_Statistics_</span> tab to view resource usage limits statistics.
-
-<span class="notranslate">_Statistics_</span> table can be filtered by <span class="notranslate">_Timeframe_, _Limit_, _Top LVEs_, _LVE approaching limit_, _Fault LVE_</span>.
-
-The following parameters are displayed:
-
-* <span class="notranslate"> SPEED</span> per user;
-* <span class="notranslate"> PMEM</span> usage per user;
-* <span class="notranslate"> IO</span> usage per user;
-* <span class="notranslate"> EP</span> usage per user;
-* <span class="notranslate"> NPROC</span> usage per user;
-* <span class="notranslate"> IOPS</span> usage per user.
-
-![](/images/statisticstabreseller_zoom70.png)
-
-
-Use <span class="notranslate">_Charts_</span> in the <span class="notranslate">_View_</span> column to view detailed resource usage charts for a particular period of time.
-
-For example, 7 days period chart.
-
-![](/images/sevendayschartresellers_zoom70.png)
-
-<div class="notranslate">
-
-
-#### Options tab
-
-</div>
-
-Choose <span class="notranslate">_Options_</span> tab to set user email notifications for resellers’ end users.
-
-In <span class="notranslate">_LVE Faults email notifications_</span> section tick appropriate checkboxes to set the required type of notification.
-
-![](/images/optionsresellernotify_zoom70.png)
-
-* <span class="notranslate">_Notify me on users faults_</span> - notify reseller when his users have exceeded limits.
-* <span class="notranslate">_Notify Customers_</span> - notify resellers’ end users when they have exceeded limits.
-* <span class="notranslate">_Notify me when I hit my limits_</span> - notify reseller when overall resource usage limits are reached.
-
-In <span class="notranslate">_Faults to include_</span> section tick checkboxes to include particular limits to email notifications.
-
-![](/images/options02_zoom70.png)
-
-In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter the number of faults required for the notification to be sent for reseller and customer. You can also set the reseller notification frequency.
-
-Set the frequency of sending the reseller email notifications in <span class="notranslate">_Notify Reseller Every ... days/hours/minutes/seconds_</span> section.
-
-![](/images/options03_zoom70.png)
-
-Click <span class="notranslate">_Save Changes_</span> to apply changes.
-
-<div class="notranslate">
-
-#### Packages tab
-
-</div>
-
-Choose <span class="notranslate">_Packages_</span> tab to view and modify limits for reseller’s packages.
-
-![](/images/packagesreseller_zoom70.png)
-
-Click pencil icon in a package row to set the following limits for a package:
-
-* <span class="notranslate">SPEED</span> limit;
-* <span class="notranslate">Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate">I/O</span> limits;
-* <span class="notranslate">IOPS</span> limits;
-* <span class="notranslate">Concurrent connections (EP)</span> limits.
-
-When limits are set click <span class="notranslate">_Save_</span> to apply changes.
+See also [Reseller Limits UI](/lve_manager/#reseller-limits-ui).
 
 ## LVE-Stats 2
 ### General information and requirements
@@ -1271,792 +864,6 @@ Your Friendly Web Hosting Support Team
 ```
 </div>
 
-### Command-line tools
-
-| | |
-|-|-|
-|<span class="notranslate"> `/usr/sbin/lveinfo` </span> |utility to display historical information about LVE usage.|
-|<span class="notranslate"> `/usr/sbin/lvechart` </span> |creates a chart representing LVE usage for user.|
-|<span class="notranslate"> `/usr/sbin/dbgovchart` </span> |creates a chart representing MySQL usage for user.|
-|<span class="notranslate"> `/usr/sbin/lve-read-snapshot` </span> |displays information from system state (snapshots) for user.|
-|<span class="notranslate"> `/usr/sbin/lve-create-db` </span> |creates/recreates database for <span class="notranslate">lve-stats</span>.|
-|<span class="notranslate"> `/usr/sbin/cloudlinux-top` </span> |utility provides information about current MySQL and LVE usage of a running system in JSON format.|
-|<span class="notranslate"> `/usr/sbin/cloudlinux-statistics` </span> |utility provides historical information about resource usage.|
-
-<div class="notranslate">
-
-#### lveinfo
-
-</div>
-
-:::tip Note
-<span class="notranslate">lve-stats-2.2-2</span>
-:::
-
-**Usage**
-
-<div class="notranslate">
-
-```
-lveinfo [-h] [-v] [--dbgov DBGOV] [-f YYYY-MM-DD[HH:MM]]
-
-              [-t YYYY-MM-DD[HH:MM]] [--period PERIOD] [-u USER | --id ID]
-
-              [-d] [-o ALIAS] [-b ALIAS [ALIAS ...]] [-p 0..100]
-
-              [--by-fault ALIAS [ALIAS ...]] [-r FAULTS]
-
-              [--style {user,admin}] [-l LIMIT] [-c [PATH] | -j]
-
-              [--server_id SERVER_ID] [--servers-info]
-
-              [--show-all | --show-columns COLUMN_NAME [COLUMN_NAME ...]]
-
-              [--time-unit TIME_UNIT] [-m {v1,v2}]
-
-              [--blank-value [BLANK_VALUE]]
-```
-</div>
-
-<span class="notranslate">`lveinfo`</span> is an utility to display historical information about LVE usage.
-
-**Optional arguments**
-
-* <span class="notranslate"> `-h, --help` </span> – show this help message and exit
-* <span class="notranslate"> `-v, --version` </span> – show program's version number and exit
-* <span class="notranslate"> `--dbgov DBGOV` </span> – show <span class="notranslate"> MySql Governor</span> statistic
-* <span class="notranslate"> `-u USER, --user USER` </span> – use username instead of <span class="notranslate"> LVE id</span>, and show only record for that user
-* <span class="notranslate"> `--id ID` </span> – will display record only for that <span class="notranslate"> LVE id</span>
-* <span class="notranslate"> `-d, --display-username` </span> – try to convert <span class="notranslate"> LVE id</span> into username when possible
-* <span class="notranslate"> `-o ALIAS, --order-by ALIAS` </span> – orders results by one of the following:
-  | | | |
-  |-|-|-|
-  |<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|DESCRIPTION|
-  |<span class="notranslate">`cpu_avg`</span>|<span class="notranslate">`aCPU`</span>|average CPU usage|
-  |<span class="notranslate">`cpu_max`</span>|<span class="notranslate">`mCPU`</span>|max CPU usage|
-  |<span class="notranslate">`total_cpu_faults`</span>|<span class="notranslate">`CPUf`</span>|total number of max CPU usage faults|
-  |<span class="notranslate">`vmem_avg`</span>|<span class="notranslate">`aVMem`</span>|average virtual memory usage||<span class="notranslate">`vmem_max`</span>|<span class="notranslate">`mVMem`</span>|average virtual memory usage||<span class="notranslate">`total_vmem_faults`</span>|<span class="notranslate">`VMemF`</span>|total number of out of virtual memory faults|
-  |<span class="notranslate">`mep_avg`</span>|<span class="notranslate">`aEP`</span>|average number of entry processes (concurrent connections)|
-  |<span class="notranslate">`mep_max`</span>|<span class="notranslate">`mEP`</span>|max number of entry processes (concurrent connections)|
-  |<span class="notranslate">`total_ep_faults`</span>|<span class="notranslate">`EPf`</span>|total number of max entry processes faults|
-  |<span class="notranslate">`pmem_avg`</span>|<span class="notranslate">`aPMem`</span>|average physical memory usage (LVE version >= 6)|
-  |<span class="notranslate">`pmem_max`</span>|<span class="notranslate">`mPMem`</span>|max physical memory usage (LVE version >= 6)|
-  |<span class="notranslate">`nproc_avg`</span>|<span class="notranslate">`aNproc`</span>|average number of processes (LVE version >= 6)|
-  |<span class="notranslate">`nproc_max`</span>|<span class="notranslate">`mNproc`</span>|max number of processes (LVE version >= 6)|
-  |<span class="notranslate">`io_avg`</span>|<span class="notranslate">`aIO`</span>|average io usage (LVE version >= 6)|
-  |<span class="notranslate">`io_max`</span>|<span class="notranslate">`mIO`</span>|max io usage (LVE version >= 6)|
-  |<span class="notranslate">`total_pmem_faults`</span>|<span class="notranslate">`PMemF`</span>|total number of out of physical memory faults (LVE version >= 6)|
-  |<span class="notranslate">`total_nproc_faults`</span>|<span class="notranslate">`NprocF`</span>|total number of max processes faults (LVE version >= 6)|
-  |<span class="notranslate">`total_io_faults`</span>|<span class="notranslate">`IOf`</span>|total number of max io faults (LVE version >= 6)|
-  |<span class="notranslate">`iops_avg`</span>|<span class="notranslate">`aIOPS`</span>|average io operations (LVE version >= 8)|
-  |<span class="notranslate">`iops_max`</span>|<span class="notranslate">`mIOPS`</span>|max io operations (LVE version >= 8)|
-  |<span class="notranslate">`total_iops_faults`</span>|<span class="notranslate">`IOPSf`</span>|total number of max io operations faults (LVE version >= 8)|
-  |<span class="notranslate">`any_faults`</span>|<span class="notranslate">`anyF`</span>|total number of faults of all types|
-* <span class="notranslate"> `-b ALIAS [ALIAS ...]` `--by-usage ALIAS [ALIAS ...]`</span> – show LVEs with usage (averaged) within 90 percent of the limit available values:
-
-  | | | | |
-  |-|-|-|-|
-  |<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|DESCRIPTION|
-  |<span class="notranslate">`cpu_avg`</span>|<span class="notranslate">`cpu`</span>|<span class="notranslate">`aCPU`</span>|average CPU usage|
-  |<span class="notranslate">`cpu_max`</span>|<span class="notranslate">`cpu_max`</span>|<span class="notranslate">`mCPU`</span>|max CPU usage|
-  |<span class="notranslate">`vmem_avg`</span>|<span class="notranslate">`vmem`</span>|<span class="notranslate">`aVMem`</span>|average virtual memory usage|
-  |<span class="notranslate">`vmem_max`</span>|<span class="notranslate">`vmem_max`</span>|<span class="notranslate">`mVMem`</span>|max virtual memory usage|
-  |<span class="notranslate">`mep_avg`</span>|<span class="notranslate">`mep`</span>|<span class="notranslate">`aEP`</span>|average number of entry processes (concurrent connections)|
-  |<span class="notranslate">`mep_max`</span>|<span class="notranslate">`mep_max`</span>|<span class="notranslate">`mEP`</span>|max number of entry processes (concurrent connections)|
-  |<span class="notranslate">`pmem_avg`</span>|<span class="notranslate">`pmem`</span>|<span class="notranslate">`aPMem`</span>|average physical memory usage (LVE version >= 6)|
-  |<span class="notranslate">`pmem_max`</span>|<span class="notranslate">`pmem_max`</span>|<span class="notranslate">`mPMem`</span>|max physical memory usage (LVE version >= 6)|
-  |<span class="notranslate">`nproc_avg`</span>|<span class="notranslate">`nproc`</span>|<span class="notranslate">`aNproc`</span>|average number of processes (LVE version >= 6)|
-  |<span class="notranslate">`nproc_max`</span>|<span class="notranslate">`nproc_max`</span>|<span class="notranslate">`mNproc`</span>|max number of processes (LVE version >= 6)|
-  |<span class="notranslate">`io_avg`</span>|<span class="notranslate">`io`</span>|<span class="notranslate">`aIO`</span>|average io usage (LVE version >= 6)|
-  |<span class="notranslate">`io_max`</span>|<span class="notranslate">`io_max`</span>|<span class="notranslate">`mIO`</span>|max io usage (LVE version >= 6)|
-  |<span class="notranslate">`iops_avg`</span>|<span class="notranslate">`iops`</span>|<span class="notranslate">`aIOPS`</span>|average io operations (LVE version >= 8)|
-  |<span class="notranslate">`iops_max`</span>|<span class="notranslate">`iops_max`</span>|<span class="notranslate">`mIOPS`</span>|max io operations (LVE version >= 8)|
-
-* <span class="notranslate">`-p 0..100`, `--percentage 0..100`</span> – defines percentage for <span class="notranslate">`--by-usage`</span> option; default `90`
-* <span class="notranslate"> `--style {user,admin}` </span> – deprecated, not used.
-* <span class="notranslate"> `-l LIMIT`, `--limit LIMIT` </span> – max number of results to display, `10` by default, if `0` no limit
-* <span class="notranslate"> `-c [PATH]`, `--csv [PATH]` </span> – save statistics in CSV format; `-` by default (output to screen)
-* <span class="notranslate"> `-j`, `--json` </span> – display output in JSON format
-* <span class="notranslate"> `--server_id SERVER_ID` </span> – used with central database for multiple servers, default <span class="notranslate">`localhost`</span>
-* <span class="notranslate"> `--servers-info` </span> – show servers LVE versions
-* <span class="notranslate"> `--show-all` </span> – full output (show all limits); brief output is default; equivalent <span class="notranslate">`--show-columns all`</span>
-* <span class="notranslate"> `-show-columns COLUMN_NAME [COLUMN_NAME ...]` </span> – show only the listed columns; <span class="notranslate">`all`</span> for all supported columns
-  
-  | | |
-  |-|-|
-  |<span class="notranslate">COLUMN_NAME</span> |DESCRIPTION|
-  |<span class="notranslate"> `From ` </span> |Show start period statistics|
-  |<span class="notranslate"> `To  ` </span> |Show end period statistics|
-  |<span class="notranslate"> `ID ` </span> |LVE Id or username|
-  |<span class="notranslate"> `aCPU` </span> |Average <span class="notranslate"> CPU</span> usage|
-  |<span class="notranslate"> `uCPU` </span> |The percentage of user-allocated resource <span class="notranslate">CPU</span>|
-  |<span class="notranslate"> `mCPU` </span> |deprecated|
-  |<span class="notranslate"> `lCPU` </span> |<span class="notranslate">CPU</span> limit|
-  |<span class="notranslate">`CPUf`</span> |Out Of <span class="notranslate">CPU</span> usage Faults|
-  |<span class="notranslate">`aEP`</span> | Average Entry Processes|
-  |<span class="notranslate">`uEP` </span> |The percentage of user-allocated resource Entry processes|
-  |<span class="notranslate">`mEP` </span> |deprecated|
-  |<span class="notranslate">`lEP` </span> |maxEntryProc limit|
-  |<span class="notranslate">`aVMem` </span> |Average Virtual Memory Usage|
-  |<span class="notranslate">`uVMem ` </span> |The percentage of user-allocated resource Virtual Memory|
-  |<span class="notranslate">`mVMem` </span> |deprecated|
-  |<span class="notranslate">`lVMem` </span> |Virtual Memory Limit|
-  |<span class="notranslate">`VMemF` </span> |Out Of Memory Faults|
-  |<span class="notranslate">`EPf` </span> |Entry processes faults|
-  |<span class="notranslate">`aPMem` </span> |Average Physical Memory Usage (LVE version >= 6)|
-  |<span class="notranslate">`uPMem` </span> |The percentage of user-allocated resource Physical Memory (LVE version >= 6)|
-  |<span class="notranslate">`mPMem` </span> |deprecated (LVE version >= 6)|
-  |<span class="notranslate">`lPMem` </span> |Physical Memory Limit (LVE version >= 6)|
-  |<span class="notranslate">`aNproc` </span> |Average Number of processes (LVE version >= 6)|
-  |<span class="notranslate">`uNproc` </span> |The percentage of user-allocated resource Number of processes (LVE version >= 6)|
-  |<span class="notranslate">`mNproc` </span> |deprecated (LVE version >= 6)|
-  |<span class="notranslate">`lNproc` </span> |Limit of Number of processes (LVE version >= 6)|
-  |<span class="notranslate">`PMemF` </span> |Out Of Physical Memory Faults (LVE version >= 6)|
-  |<span class="notranslate">`NprocF` </span> |Number of processes faults (LVE version >= 6)|
-  |<span class="notranslate">`aIO` </span> |Average <span class="notranslate">I/O</span> (LVE version >= 6)|
-  |<span class="notranslate">`uIO` </span> |The percentage of user-allocated resource <span class="notranslate">I/O</span> (LVE version >= 6)|
-  |<span class="notranslate">`mIO` </span> |deprecated (LVE version >= 6)|
-  |<span class="notranslate">`lIO` </span> |<span class="notranslate">I/O</span> Limit (LVE version >= 6)|
-  |<span class="notranslate">`IOf` </span> |Out Of <span class="notranslate">I/O</span> usage Faults (LVE version >= 6)|
-  |<span class="notranslate">`aIOPS` </span> |Average <span class="notranslate">I/O</span> Operations (LVE version >= 8)|
-  |<span class="notranslate">`mIOPS` </span> |deprecated (LVE version >= 8)|
-  |<span class="notranslate">`uIOPS` </span> |The percentage of user-allocated resource <span class="notranslate">I/O</span> Operations (LVE version >= 8)|
-  |<span class="notranslate">`lIOPS` </span> |<span class="notranslate">I/O</span> Operations Limit (LVE version >= 8) </span>|
-  |<span class="notranslate">`IOPSf` </span> |Out Of <span class="notranslate">I/O</span> Operations Faults (LVE version >= 8)|
-
-* <span class="notranslate"> `--time-unit TIME_UNIT` </span> – time step for grouping statistic in minutes; 1 min., by default; can use <span class="notranslate">`m\|h\|d`</span> suffixes; for example: `1h or 1h30m or 1d12h`
-* <span class="notranslate"> `-m {v1,v2}`, `--compat {v1,v2}` </span> – `v1` - return old output mode; `v2` - new mode; default `v1`; you can change default in config
-* <span class="notranslate"> `--blank-value [BLANK_VALUE]` </span> – Use to fill unsupported limits; default `-`
-* <span class="notranslate"> `-f YYYY-MM-DD[ HH:MM]`,  `--from YYYY-MM-DD[ HH:MM]`</span> – run report from date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present last 10 minutes are assumed
-* <span class="notranslate"> `-t YYYY-MM-DD[ HH:MM]`,  `--to YYYY-MM-DD[ HH:MM]`</span> – run report up to date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, reports results up to now
-* <span class="notranslate"> `--period PERIOD` </span> – time period; specify minutes with <span class="notranslate"> `m`, `h`</span> - hours, days with <span class="notranslate"> `d`</span>, and values: <span class="notranslate"> `today`, `yesterday`; `5m`</span> - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as <span class="notranslate"> `today`</span>
-* <span class="notranslate"> `--by-fault ALIAS [ALIAS ...]` </span> – show LVEs which failed on max processes limit or memory limit
-  
-  | | | | |
-  |-|-|-|-|
-  |<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|DESCRIPTION|
-  |<span class="notranslate">`mcpu`</span>|<span class="notranslate">`cpu`</span>|<span class="notranslate">`CPUf`</span>|total number of max CPU usage faults|
-  |<span class="notranslate">`mem`</span>|<span class="notranslate">`vmem`</span>|<span class="notranslate">`VMemF`</span>|total number of out of virtual memory faults|
-  |<span class="notranslate">`mep`</span>|<span class="notranslate">`ep`</span>|<span class="notranslate">`EPf`</span>|total number of max entry processes faults|
-  |<span class="notranslate">`pmem`</span>|<span class="notranslate">`pmem`</span>|<span class="notranslate">`PMemF`</span>|total number of out of physical memory faults (LVE version >= 6)|
-  |<span class="notranslate">`nproc`</span>|<span class="notranslate">`nproc`</span>|<span class="notranslate">`NprocF`</span>|total number of max processes faults (LVE version >= 6)|
-  |<span class="notranslate">`io`</span>|<span class="notranslate">`io`</span>|<span class="notranslate">`IOf`</span>|total number of max io faults (LVE version >= 6)|
-  |<span class="notranslate">`iops`</span>|<span class="notranslate">`iops`</span>|<span class="notranslate">`IOPSf`</span>|total number of max io operations faults (LVE version >= 8)|
-  |<span class="notranslate">`any_faults`</span>|<span class="notranslate">`any`</span>|<span class="notranslate">`anyF`</span>|total number of faults of all types|
-* <span class="notranslate"> `-r FAULTS, --threshold FAULTS` </span>– in combination with <span class="notranslate">`--by-fault`</span>, shows only LVEs with number of faults above; default `1`
-  
-Prefixes <span class="notranslate">`Kb`, `Mb` </span> and <span class="notranslate">`Gb`</span> indicates powers of 1024.
-
-:::tip Note
-All <span class="notranslate">ALIAS</span> options are not case sensitive.
-:::
-
-<div class="notranslate">
-
-#### lvechart
-
-</div>
-
-`/usr/sbin/lvechart` - creates a chart representing LVE usage for user.
-
-**Usage**
-
-<div class="notranslate">
-
-```
-/usr/sbin/lvechart [OPTIONS]
-```
-</div>
-
-**Acceptable options**
-
-| | |
-|-|-|
-|<span class="notranslate"> `--help ` </span> |This help screen|
-|<span class="notranslate"> `--version` </span> |Version number|
-|<span class="notranslate"> `--from` </span> |Run report from date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, last 10 minutes are assumed)|
-|<span class="notranslate"> `--to=` </span> |Run report up to date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, reports results up to now)|
-|<span class="notranslate"> `--period=` </span> |Time period: specify minutes with `m`, `h` - hours, days with `d`, and values: <span class="notranslate">`today`</span>, <span class="notranslate">`yesterday`</span>; `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as today|
-|<span class="notranslate"> `--id= ` </span> |<span class="notranslate">`LVE id`</span> will display record only for that <span class="notranslate">LVE id</span>|
-|<span class="notranslate"> `--user=` </span> |Use username instead of <span class="notranslate"> LVE id </span>, and show only record for that user|
-|<span class="notranslate"> `--server= ` </span> |<span class="notranslate">`Server id`</span> will display record for that server, instead of default (current)|
-|<span class="notranslate"> `--output= ` </span> |Filename to save chart as, if not present, output will be sent to STDOUT|
-|<span class="notranslate"> `--show-all` </span> |Show all graphs (by default shows graphs for which limits are set)|
-|<span class="notranslate"> `--style=` </span> |<span class="notranslate">`admin`, `user`</span> set chart style,  <span class="notranslate">CPU</span> limits are normalized to 100% in user’s style|
-|<span class="notranslate"> `--format=` </span> |<span class="notranslate">`svg`, `png`</span> set chart output format|
-
-<div class="notranslate">
-
-#### dbgovchart
-
-</div>
-
-
-`/usr/sbin/dbgovchart` - creates a chart representing MySQL usage for user.`
-
-**Usage**
-
-<div class="notranslate">
-
-```
-/usr/sbin/dbgovchart [OPTIONS]
-```
-</div>
-
-**Acceptable options**
-
-| | |
-|-|-|
-|<span class="notranslate"> `--help ` </span> |This help screen|
-|<span class="notranslate"> `--version` </span> |Version number|
-|<span class="notranslate"> `--from=` </span> |Run report from date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, last 10 minutes are assumed)|
-|<span class="notranslate"> `--to=` </span> |Run report up to date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, reports results up to now)|
-|<span class="notranslate"> `--period=` </span> |Time period: specify minutes with `m`,  `h` - hours, days with `d`, and values: <span class="notranslate">`today`</span>, <span class="notranslate">`yesterday`</span>; `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as today`|
-|<span class="notranslate"> `--user=` </span> |mysql username|
-|<span class="notranslate"> `--output= ` </span> |Filename to save chart as, if not present, output will be sent to <span class="notranslate">STDOUT</span>|
-|<span class="notranslate"> `--show-all` </span> |Show all graphs (by default shows graphs for which limits are set)|
-|<span class="notranslate"> `--server=` </span> | <span class="notranslate"> `Server id`</span> will display record for that server, instead of default (current)|
-|<span class="notranslate"> `--style=` </span> | <span class="notranslate">`admin`, `user`</span> set chart style,  <span class="notranslate">CPU</span> limits are normalized to 100% in user’s style|
-|<span class="notranslate"> `--format=` </span> | <span class="notranslate">`svg`, `png`</span> set chart output format|
-
-<div class="notranslate">
-
-#### lve-read-snapshot
-
-</div>
-
-**Usage**
-
-<div class="notranslate">
-
-```
-lve-read-snapshot [-h] [--version] [-f FROM [FROM ...]] [-t TO [TO ...]
-                  [ -p PERIOD | --timestamp TIMESTAMP]
-                  [-i ID | -u USER] [-l] [-o file] [-j] [--stats]
-                  [--unit unit]
-```
-</div>
-
-Reads LVE system state snapshots for <span class="notranslate">LVE/user</span>.
-
-**Optional arguments**
-
-* <span class="notranslate">`-h, --help`</span> – show this help message and exit
-* <span class="notranslate">`--version`</span> – version number
-* <span class="notranslate">`-f FROM [FROM ...]`, `--from FROM [FROM ...]`</span> – run report from date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format, if not present last 10 minutes are assumed (default: `2016-10-24 19:28`)
-* <span class="notranslate">`-t TO [TO ...]`, `--to TO [TO ...]`</span> – run report up to date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format, if not present, reports results up to now (default: `2016-10-24 19:38`)
-* <span class="notranslate">`-p PERIOD`, `--period PERIOD`</span> – time period specify minutes with `m`, `h` - hours, days with `d`, and values: <span class="notranslate">`today`, `yesterday`</span>, `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as today (default: `10m`)
-* <span class="notranslate">`--timestamp TIMESTAMP`</span> – time stamp in unix format for get one snapshot (default: <span class="notranslate">`None`</span>)
-* <span class="notranslate">`-i ID, --id ID`</span> – LVE id to show records for (default: <span class="notranslate">`None`</span>)
-* <span class="notranslate">`-u USER`, `--user USER`</span> – user account to show records for (default: <span class="notranslate">`None`</span>)
-* <span class="notranslate">`-l`, `--list`</span> – show timestamp list only (default: <span class="notranslate"> `False`</span>)
-* <span class="notranslate">`-o file`, `--output file`</span> – filename to save snaphots report to, if not present,output will be sent to <span class="notranslate">STDOUT</span> (default: <span class="notranslate">`None`</span>)
-* <span class="notranslate">`-j`, `--json`</span> – output in json format (default: <span class="notranslate">`False`</span>)
-* <span class="notranslate">`--stats`</span> – output stats, instead of snapshots (default: <span class="notranslate">`False`</span>)
-* <span class="notranslate">`--unit unit`</span> – group stats by time unit. Example values `3h`, `24h`, `1d`, `1w`. Other possible value is <span class="notranslate">`auto`</span> for grouping by each incident (default: <span class="notranslate">`1d`</span>)
-  
-One of <span class="notranslate">`-u --user`</span> or <span class="notranslate">`-i --id`</span> should be specified.
-
-<div class="notranslate">
-
-#### lve-create-db
-
-</div>
-
-**Usage**
-
-<div class="notranslate">
-
-```
-lve-create-db [-h] [--recreate] [--print-sql]
-                   [--update-serverid-prompt] [--update-serverid-auto]
-                   [--validate]
-```
-</div>
-
-Creates a database for <span class="notranslate">lve-stats</span>.
-
-**Optional arguments**
-
-* <span class="notranslate">`-h`, `--help`</span> – show this help message and exit
-* <span class="notranslate">`--recreate`</span> – drops and recreates database even if tables exists (default: <span class="notranslate">`False`</span>)
-* <span class="notranslate">`--print-sql`</span> – prints sql and exits, without creating db (default: <span class="notranslate">`False`</span>)
-* <span class="notranslate">`--update-serverid-prompt`</span> – update exist server ID or create new one (default: <span class="notranslate">`False`</span>)
-* <span class="notranslate">`--update-serverid-auto`</span> – update exist server ID with <span class="notranslate">uuid</span> (default: <span class="notranslate">`False`</span>)
-* <span class="notranslate">`--validate`</span> – check the correctness of the database structure (default: <span class="notranslate">`False`</span>)
-
-#### cloudlinux-top
-
-Utility provides information about current MySQL and LVE usage of a running system in JSON format.
-
-#### **Usage**
-
-<div class="notranslate">
-
-```
-cloudlinux_top [-h] [-v] [-j] [--hide-mysql]
-               [-u USERNAME | -r FOR_RESELLER] [-d DOMAIN] [-m MAX]
-               [-o ORDER_BY]
-```
-</div>
-
-**Optional arguments**
-
-* <span class="notranslate"> `-h, --help` </span> – show this help message and exit
-* <span class="notranslate"> `-v, --version`   </span> – show program version number and exit
-* <span class="notranslate"> `-j, --json`   </span> – return data in JSON format
-* <span class="notranslate"> `--hide-mysql`   </span> | `don't show MySQL related info
-* <span class="notranslate"> `-u USERNAME`, `--username USERNAME` </span> – show data only for a specific user. Can be used to filter the output; returns users with username <span class="notranslate">`%USERNAME%`</span>
-* <span class="notranslate"> `-r FOR_RESELLER`, `--for-reseller FOR_RESELLER` </span> – get information only about specified reseller and his users
-* <span class="notranslate"> `-d DOMAIN`, `--domain DOMAIN` </span> – show data only for a specific domain. Can be used to filter the output; returns users with domain <span class="notranslate">`%DOMAIN%`</span>
-* <span class="notranslate"> `-m MAX`, `--max MAX` </span> – show up to <span class="notranslate">`N`</span> records. If <span class="notranslate">`--max`</span> key is omitted. By default will show top 25 users
-* <span class="notranslate"> `-o ORDER_BY`, `--order-by ORDER_BY` </span> – sort output by resource usage; available options: <span class="notranslate">`cpu`, `mysql_cpu`, `io`, `mysql_io`, `iops`, `ep`, `nproc`, `pmem`</span>
-
-#### **Output format**
-
-<div class="notranslate">
-
-```
-{
-  "mySqlGov": "enabled",              # possible values: enabled, error
-  "mySqlGovMode": "abusers",          # see “MySQL Governor > Modes Of Operation”
-                                      # if MySQL Governor is not enabled, value is "none"
- 
-  "resellers": [                      # list of resellers (available only with
-                                      # reseller limits feature)
-      {
-          "id": 1000020005,           # internal record id
-          "limit": <lve_section>,     # current limits (last 5 seconds)
-          "name": "reseller_name",    # reseller’s login in control panel
-          "usage": <lve_section>      # current usage (last 5 seconds)
-      }
-  ],
-  "result": "success",                # see the ‘errors handling’ section
-  "timestamp": 1522858537.337549,
-  "users": [
-      {
-          "domain": "domain.com",     # user’s primary domain (from control panel)
-          "id": 20005,                # lve_id, same as user id in /etc/passwd file
-          "limit": <lve_section>,     # limits for last 5 seconds
-          "reseller": "reseler1",     # user’s reseller (from control panel)
-          "usage": <lve_section>,     # usage for last 5 seconds
-          "username": "user"          # username from /etc/passwd file or “N/A” if user
-                                      # with such id does not exist
-       }
-   ]
- }
-```
-</div>
-
-The structure<sup> *</sup> of <span class="notranslate">`<lve_section>`</span>:
-
-<div class="notranslate">
-
-```
-{
-"cpu": {
- "all": 50.0,      # CPU usage or limit (LVE only)
- "mysql": 0.0*     # CPU usage or limit (MySQL Governor only)
-},
-"ep": 1.0,           # number of entry processes
-"io": {
- "all": 0.0,       # IO usage or limit (LVE only)
- "mysql": 0.0**     # IO usage or limit (MySQL Governor only)
-},
-"iops": 0.0,         # IO operations per second
-"mem": 258048,       # memory usage or limit
-"pno": 1.0           # number of processes
-}
-```
-</div>
-
-
-:::tip Note
-* you can modify this structure using <span class="notranslate">`--show`</span> option, see [usage examples](/lve-stats_2/#examples) for details.
-* MySQL values are only present when <span class="notranslate">MySQL Governor</span> statistics is available and <span class="notranslate">`--hide-mysql`</span> options is not used.
-:::
-
-#### **Units of measurement**
-
-For <span class="notranslate">`limits`</span> and <span class="notranslate">`usage`</span> sections we use the following units of measurement.
-
-| | |
-|-|-|
-|**Value** | **Units of measurement**|
-|<span class="notranslate"> cpu (lve and mysql) </span> | percentage of one <span class="notranslate"> CPU </span> core|
-|<span class="notranslate"> io (lve and mysql) </span> | bytes per second|
-|<span class="notranslate"> iops </span> | number of <span class="notranslate"> IO </span> operations per second|
-|<span class="notranslate"> mem </span> | bytes|
-|<span class="notranslate"> ep </span> | number of entry processes|
-|<span class="notranslate"> pno </span> | number of processes|
-
-
-#### **Errors handling**
-
-The format of the error message is the same as in the other <span class="notranslate">`cloudlinux- *`</span> utilities. When everything is ok, the <span class="notranslate">`result`</span> value is <span class="notranslate">`success`</span>. Otherwise, it contains error message. In case of unexpected errors, the output will be as follows.
-
-<div class="notranslate">
-
-```
-# cloudlinux-top --json 
-{
-  "context": {
-      "error_text": "Very bad error"
-  },
-  "result": "An error occured: \"%(error_text)s\"",
-  "timestamp": 1523871939.639394
-}
-```
-</div>
-
-
-#### **Examples**
-
-
-* get 100 users ordered by <span class="notranslate"> CPU </span> usage
-
-  <div class="notranslate">
-
-  ```
-  # cloudlinux-top --json --order-by cpu --max=100
-  ```
-  </div>
-
-* get information about one user
-
-  <div class="notranslate">
-
-  ```
-  # cloudlinux-top --json -u username
-  ```
-  </div>
-
-* get information about reseller and his users
-
-  <div class="notranslate">
-
-  ```
-  # cloudlinux-top --json --for-reseller=reseller_name
-  ```
-  </div>
-
-* show only <span class="notranslate">IO</span> limits and usage
-
-  <div class="notranslate">
-
-  ```
-  # cloudlinux-top --json --show=io
-  ```
-  </div>
-
-<div class="notranslate">
-
-#### cloudlinux-statistics
-
-</div>
-
-<span class="notranslate">cloudlinux-statistics</span> is a <span class="notranslate">CLI</span> utility that provides historical information about resource usage.
-
-#### **Usage**
-
-<div class="notranslate">
-
-```
-cloudlinux-statistics [-h] [-j] [-v] [--by-usage BY_USAGE]
-                      [--percentage 0..100] [--by-fault BY_FAULT]
-                      [--threshold THRESHOLD] [--server_id SERVER_ID]
-                      [-f FROM] [-t TO] [--period PERIOD]
-                      [--limit LIMIT]
-                      [--show COLUMN_NAME [COLUMN_NAME ...]]
-                      [-o ORDER_BY] [--id ID] [--time-unit TIME_UNIT]
-                      [-r FOR_RESELLER]
-```
-</div>
-
-**Optional arguments**
-
-* <span class="notranslate"> `-h`, `--help` </span> – show this help message and exit
-* <span class="notranslate"> `-j`, `--json` </span> – return data in JSON format
-* <span class="notranslate"> `-v`, `--version` </span> – show program version number and exit
-* <span class="notranslate"> `--server_id SERVER_ID`, `--server-id SERVER_ID` </span> – can be used with the central database for multiple servers; default `...`
-* <span class="notranslate"> `--limit LIMIT` </span> – limit the number of results to display, `0` is unlimited
-* <span class="notranslate"> `--show COLUMN_NAME [COLUMN_NAME ...]` </span> – show only listed columns; <span class="notranslate">`all`</span> for all supported columns (fields)
-  | | |
-  |-|-|
-  |<span class="notranslate">Key</span>|Fields to show|
-  |<span class="notranslate">`all`</span>|all available fields|
-  |<span class="notranslate">`cpu`</span>|CPU field|
-  |<span class="notranslate">`io`</span>|IO field|
-  |<span class="notranslate">`iops`</span>|IOPS field|
-  |<span class="notranslate">`ep`</span>|entry processes (concurrent connections) field|
-  |<span class="notranslate">`nproc`</span>|number of processes field|
-  |<span class="notranslate">`pmem`</span>|physical memory field|
-  |<span class="notranslate">`vmem`</span>|virtual memory field|
-  |<span class="notranslate">`mysql`</span>|`mysql_cpu` & `mysql_io` field|
-
-* <span class="notranslate"> `-o ORDER_BY`, `--order-by ORDER_BY` </span> – order results by one of the following keys (fields):
-  | | |
-  |-|-|
-  |FIELD|DESCRIPTION|
-  |<span class="notranslate">`any_faults`</span>|total number of faults of all types|
-  |<span class="notranslate">`cpu`</span>|average CPU usage`</span>|
-  |<span class="notranslate">`mysql_cpu`</span>|average MySQL CPU usage`</span>|
-  |<span class="notranslate">`io`</span>|average IO usage`</span>|
-  |<span class="notranslate">`mysql_io`</span>|average MySQL IO usage`</span>|
-  |<span class="notranslate">`iops`</span>|average IO operations; (LVE version >= 8)`</span>|
-  |<span class="notranslate">`ep`</span>|average number of entry processes (concurrent connections)`</span>|
-  |<span class="notranslate">`nproc`</span>|average number of processes`</span>|
-  |<span class="notranslate">`pmem`</span>|average physical memory usage`</span>|
-  |<span class="notranslate">`vmem`</span>|average virtual memory usage`</span>|
-  |<span class="notranslate">`cpu_faults`</span>|total number of CPU usage faults`</span>|
-  |<span class="notranslate">`io_faults`</span>|total number of max IO faults`</span>|
-  |<span class="notranslate">`iops_fault`</span>|total number of max IO operations faults; (LVE version >= 8)`</span>|
-  |<span class="notranslate">`ep_faults`</span>|total number of max entry processes faults`</span>|
-  |<span class="notranslate">`nproc_faults`</span>|total number of max processes faults`</span>|
-  |<span class="notranslate">`pmem_faults`</span>|total number of out of physical memory faults`</span>|
-  |<span class="notranslate">`vmem_faults`</span>|total number of out of virtual memory faults`</span>|
-
-* <span class="notranslate"> `-r FOR_RESELLER`, `--for-reseller FOR_RESELLER` </span> – show statistics only for given reseller and his users
-
-Filter items by resource usage.
-
-* <span class="notranslate"> `--by-usage BY_USAGE` </span> – show LVEs with usage (averaged) within 90 percent of the limit available values
-  | | |
-  |-|-|
-  |FIELD|DESCRIPTION|
-  |<span class="notranslate">`cpu`</span>|average CPU usage|
-  |<span class="notranslate">`mysql_cpu`</span>|average MySQL CPU usage|
-  |<span class="notranslate">`io`</span>|average IO usage|
-  |<span class="notranslate">`mysql_io`</span>|average MySQL IO usage|
-  |<span class="notranslate">`iops`</span>|average IO operations; (LVE version >= 8)|
-  |<span class="notranslate">`ep`</span>|average number of entry processes (concurrent connections)|
-  |<span class="notranslate">`nproc`</span>|average number of processes|
-  |<span class="notranslate">`pmem`</span>|average physical memory usage|
-  |<span class="notranslate">`vmem`</span>|average virtual memory usage|
-
-* <span class="notranslate"> `-percentage 0..100` </span> – define percentage for <span class="notranslate">`--by-usage`</span> option; default `90`
-
-Filter items by the number of faults.
-
-* <span class="notranslate"> `--by-fault BY_FAULT` </span> – show only accounts that have some faults for the given limit
-  | | |
-  |-|-|
-  |FIELD|DESCRIPTION|
-  |<span class="notranslate">`any`</span>|faults of all types|
-  |<span class="notranslate">`cpu`</span>|CPU usage faults|
-  |<span class="notranslate">`io`</span>|max IO usage faults|
-  |<span class="notranslate">`iops`</span>|max IO operations faults; (LVE version >= 8)|
-  |<span class="notranslate">`ep`</span>|max entry processes faults|
-  |<span class="notranslate">`nproc`</span>|max processes faults|
-  |<span class="notranslate">`pmem`</span>|out of physical memory faults|
-  |<span class="notranslate">`vmem`</span>|out of virtual memory faults|
-
-* <span class="notranslate"> `--threshold THRESHOLD` </span> – in combination with <span class="notranslate">`--by-fault`</span> shows only accounts with the number of faults more than given; default `1`
-
-Filter items by a time interval.
-
-Allows to get information for the given period of time; you can either set <span class="notranslate">`--from`</span> and <span class="notranslate">`--to`</span> options, or just get information for the recent time period using <span class="notranslate">`--period option`.</span>
-
-:::tip Note
-<span class="notranslate">`--from`</span> and <span class="notranslate">`--to`</span> values are ignored when <span class="notranslate">`--period`</span> is set.
-:::
-
-* <span class="notranslate"> `-f FROM`, `--from FROM` </span> – run report from date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, last 10 minutes are assumed
-* <span class="notranslate"> `-t TO`, `--to TO` </span> – run report up to date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, reports results up to now
-* <span class="notranslate"> `--period PERIOD` </span> – time period; specify minutes with <span class="notranslate">`m`</span>, hours with <span class="notranslate">`h`</span>, days with <span class="notranslate">`d`</span>, and values: <span class="notranslate">`today`, `yesterday`</span>; `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, and <span class="notranslate">`today`</span>
-
-Get detailed statistics.
-
-* <span class="notranslate"> `--id ID` </span> – get detailed statistics for database record with the given id
-* <span class="notranslate"> `--time-unit TIME_UNIT` </span> – group statistics using the given time; 1 minute by default. For example: <span class="notranslate">`1h`</span> or <span class="notranslate">`1h30m`</span> or <span class="notranslate">`dynamic`</span>; available only in pair with <span class="notranslate">`--id`</span>
-
-
-#### **Output format**
-
-There are two different JSON formats used for **summary statistics** and **detailed statistics**.
-
-**Summary statistics**
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json
- {
- "resellers": [
-   {
-     "usage": <lve_section>,
-     "faults": <lve_section>,
-     "name": "reseller",
-     "limits": <lve_section>,
-     "id": 1000020005
-   }
- ],
- "timestamp": 1522920637,
- "mySqlGov": "enabled",            # possible values: ”enabled”, “error”
- "result": "success",
- "users": [
-   {
-     "username": "username",
-     "domain": "example.com",
-     "reseller": "reseller",
-     "limits": <lve_section>,
-     "faults": <lve_section>,
-     "usage": <lve_section>,
-     "id": 20005
-   }
- ]
- }
-```
-</div>
-
-**Detailed statistics**
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json --id=20001
- {
- "timestamp": 1523011550,
- "mySqlGov": "enabled",           # possible values: ”enabled”, “error”
- "result": "success",
- "user": [
-   {
-     "usage": <lve_section>,
-     "faults": <lve_section>,
-     "from": 1523011144,
-     "limits": <lve_section>,
-     "to": 1523011143
-   },
- ...
-   {
-     "usage": <lve_section>,
-     "faults": <lve_section>,
-     "from": 1523011204,
-     "limits": <lve_section>,
-     "to": 1523011203
-   }
- ]
- }
-```
-</div>
-
-For both, **summary statistics** and **detailed statistics**, <span class="notranslate">`<lve_section>`</span> is the same and looks like following<sup> *</sup>.
-
-<div class="notranslate">
-
-```
-{
-   "ep": {
-     "lve": 1        # number of entry processes
-   },
-   "vmem": {
-     "lve": 2428928  # virtual memory usage or limit (deprecated)
-   },
-   "iops": {
-     "lve": 0        # io operations per second
-   },
-   "io": {
-     "lve": 0.0,     # io usage or limit (lve only)
-     "mysql": 0.0**   # io usage or limit (mysql only)
-   },
-   "nproc": {
-     "lve": 1        # number of processes in lve
-   },
-   "cpu": {
-     "lve": 25.6,    # cpu usage (lve only)
-     "mysql": 0.0*   # cpu usage (mysql governor only)
-   },
-   "pmem": {
-     "lve": 360448   # physical memory usage or limit
-   }
- }
-```
-</div>
-
-:::tip Note
-* you can specify only required fields using <span class="notranslate">`--show`</span> option;
-* <span class="notranslate">`mysql`</span> fields are only available with <span class="notranslate"> [MySQL Governor](/mysql_governor/#installation)</span> installed.
-:::
-
-#### **Units of measurement**
-
-For <span class="notranslate">`limits`</span> and <span class="notranslate">`usage`</span> sections we use the following units of measurement.
-
-| | |
-|-|-|
-|Value|Units of measurement|
-|<span class="notranslate">`cpu` (LVE and MySQL)</span> | percentage of one <span class="notranslate">CPU</span> core|
-|<span class="notranslate">`io` (LVE and MySQL) </span> | bytes per second|
-|<span class="notranslate">`iops`</span> | number of <span class="notranslate">IO</span> operations per second|
-|<span class="notranslate">`pmem`</span> and <span class="notranslate">`vmem`</span> | bytes|
-|<span class="notranslate">`ep`</span> | number of entry processes|
-|<span class="notranslate">`nproc`</span> | number of processes in LVE|
-
-#### **Errors handling**
-
-The format of the error message is the same as in the other <span class="notranslate">`cloudlinux- *`</span> utilities. When everything is ok, the <span class="notranslate">`result`</span> value is <span class="notranslate">`success`</span>. Otherwise, it contains error message.
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json 
-{
-  "context": {
-      "error_text": "Very bad error"
-  },
-  "result": "An error occured: \"%(error_text)s\"",
-  "timestamp": 1523871939.639394
-}
-```
-</div>
-
-#### **Examples**
-
-
-* get top 10 users ordered by <span class="notranslate">CPU</span> usage for today
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json --order-by=cpu --period=today --limit=10
-```
-</div>
-
-* get users that hit <span class="notranslate">IO</span> limit more than 10 times for today
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json --period=today --by-fault=io --threshold=10
-```
-</diV>
-
-* get users that used more than 80% of <span class="notranslate">CPU</span> in last 24 hours
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json --by-usage=cpu --percentage=80 --period=24h
-```
-</div>
-
-* get information only about reseller and his users
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json --for-reseller=reseller_name
-```
-</div>
-
-* get information only about <span class="notranslate">CPU</span> and <span class="notranslate">IO</span> usage
-
-<div class="notranslate">
-
-```
-# cloudlinux-statistics --json --show=cpu,io
-```
-</div>
 
 ### Plugins
 
@@ -2749,14 +1556,17 @@ mod_php is not supported, MPM ITK requires a custom patch
 CageFS is not supported for H-Sphere.
 :::
 
+
+See also [Compatibility Matrix](/limits/#compatibility-matrix).
+
 #### Minimum Requirements:
 
 * kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
 * 7GB of disk space.
 
 Depending on your setup, and number of users, you might also need:
-* Up to 8MB per customer in _/var_ directory (to store custom _/etc_ directory)
-* 5GB to 20GB in _/usr/share_ directory (to store safe skeleton of a filesystem)
+* Up to 8MB per customer in `/var` directory (to store custom `/etc` directory)
+* 5GB to 20GB in `/usr/share`directory (to store safe skeleton of a filesystem)
 
 ::: danger Warning
 If at any time you decide to uninstall CageFS, please make sure you follow [uninstall instructions](/cagefs/#uninstalling-cagefs)
@@ -3768,186 +2578,7 @@ CageFS comes with plugin for <span class="notranslate"> ISP Manager </span> to e
 Or you can manage global CageFS settings via CageFS menu
 ![](/images/_img3.jpg)
 
-### Command-line tools
-
-`cagefsctl` is used to manage CageFS. It allows initializing and updating CageFS, as well as enabling/disabling CageFS for individual users.
-
-Use the following syntax to manage CageFS:
-<span class="notranslate"> `/usr/sbin/cagefsctl [OPTIONS]` </span>
-
-
-Options:
-
-| | | |
-|-|-|-|
-|-i | <span class="notranslate"> --init </span> |initialize CageFS (create CageFS if it does not exist)|
-|-r | <span class="notranslate"> --reinit </span> |reinitialize CageFS (make backup and recreate CageFS)|
-|-u | <span class="notranslate"> --update </span> |update files in CageFS (add new and modified files to CageFS, remove unneeded files)|
-|-f | <span class="notranslate"> --force </span> |recreate CageFS (do not make backup, overwrite existing files)|
-|-d | <span class="notranslate"> --dont-clean </span> |do not delete any files from skeleton (use with <span class="notranslate"> --update </span> option)|
-|-k | <span class="notranslate"> --hardlink </span> |use hardlinks if possible|
-| | <span class="notranslate"> --create-mp </span> |Creates _/etc/cagefs/cagefs.mp_ file|
-| | <span class="notranslate"> --mount-skel </span> |mount CageFS skeleton directory|
-| | <span class="notranslate"> --unmount-skel </span> |unmount CageFS skeleton directory|
-| | <span class="notranslate"> --remove-all </span> |disable CageFS, remove templates and _/var/cagefs_ directory|
-| | <span class="notranslate"> --sanity-check </span> |perform basic self-diagnistics of common cagefs-related issues (mostly useful for support)|
-| | <span class="notranslate"> --addrpm </span> |add rpm-packages in CageFS (run <span class="notranslate"> `cagefsctl --update` </span> in order to apply changes)|
-| | <span class="notranslate"> --delrpm </span> |remove rpm-packages from CageFS (run <span class="notranslate"> `cagefsctl --update` </span> in order to apply changes)|
-| | <span class="notranslate"> --list-rpm </span> |list rpm-packages that are installed in CageFS|
-|-e | <span class="notranslate"> --enter </span> |enter into user's CageFS as root|
-| | <span class="notranslate"> --update-list </span> |update specified files only (paths are read from stdin)|
-| | <span class="notranslate"> --update-etc </span> |update _/etc_ directory of all or specified users|
-| | <span class="notranslate"> --set-update-period </span> |set min period of update of CageFS in days (default = 1 day)|
-| | <span class="notranslate"> --force-update </span> |force update of CageFS (ignore period of update)|
-| | <span class="notranslate"> --force-update-etc </span> |force update of _/etc_ directories for users in CageFS|
-| | <span class="notranslate"> --reconfigure-cagefs </span> |configure CageFS integration with other software (control panels, database servers, etc)|
-
-Use the following syntax to manage users:    
-<span class="notranslate"> `/usr/sbin/cagefsctl [OPTIONS] username [more usernames]` </span>
-
-Options:
-
-| | | |
-|-|-|-|
-|-m | <span class="notranslate"> --remount </span> |remount specified user(s)|
-|-M | <span class="notranslate"> --remount-all </span> |remount CageFS skeleton directory and all users (use this each time you have changed _cagefs.mp_ file|
-|-w | <span class="notranslate"> --unmount </span> |unmount specified user(s)|
-|____ | <span class="notranslate"> --unmount-dir </span> |unmount specified dir for all users|
-|-W | <span class="notranslate"> --unmount-all </span> |unmount CageFS skeleton directory and all users|
-|-l | <span class="notranslate"> --list </span> |list users that entered in CageFS|
-| | <span class="notranslate"> --list-logged-in </span> |list users that entered in CageFS via SSH|
-| | <span class="notranslate"> --enable </span> |enable CageFS for the user|
-| | <span class="notranslate"> --disable </span> |disable CageFS for the user|
-| | <span class="notranslate"> --enable-all </span> |enable all users, except specified in _/etc/cagefs/users.disabled_|
-| | <span class="notranslate"> --disable-all </span> |disable all users, except specified in _/etc/cagefs/users.enabled_|
-| | <span class="notranslate"> --display-user-mode </span> |display the current mode ( <span class="notranslate"> "Enable All" </span> or <span class="notranslate"> "Disable All" </span> )|
-| | <span class="notranslate"> --toggle-mode </span> |toggle mode saving current lists of users (lists of enabled and disabled users remain unchanged)|
-| | <span class="notranslate"> --list-enabled </span> |list enabled users|
-| | <span class="notranslate"> --list-disabled </span> |list disabled users|
-| | <span class="notranslate"> --user-status </span> |print status of specified user (enabled or disabled)|
-| | <span class="notranslate"> --getprefix </span> |display prefix for user|
-
-<span class="notranslate"> PHP Selector </span> related options:
- 
-| | |
-|-|-|
-| <span class="notranslate"> --setup-cl-selector </span> | setup <span class="notranslate"> PHP Selector </span> or register new alt-php versions|
-| <span class="notranslate"> --remove-cls-selector </span> |unregister alt-php versions, switch users to default php version when needed|
-| <span class="notranslate"> --rebuild-alt-php-ini </span> |rebuild _alt_php.ini_ file for specified users (or all users if none specified)|
-| <span class="notranslate"> --validate-alt-php-ini </span> |same as <span class="notranslate"> `--rebuild-alt-php-ini` </span> but also validates _alt_php.ini_ options|
-| <span class="notranslate"> --cl-selector-reset-versions </span> |reset php version for specifed users to default (or all users if none specified)|
-| <span class="notranslate"> --cl-selector-reset-modules </span> |reset php modules (extensions) for specific users to defaults (or all users if none specified)|
-| <span class="notranslate"> --create-virt-mp </span> |create virtual mount points for the user|
-| <span class="notranslate"> --create-virt-mp-all </span> |create virtual mount points for all users|
-| <span class="notranslate"> --remount-virtmp </span> |create virtual mount points and remount user|
-| <span class="notranslate"> --apply-global-php-ini </span> |use with 0, 1 or 2 arguments from the list: <span class="notranslate"> `error_log`, `date.timezone` </span> without arguments applies all global php options including the two above|
-
-Common options:
-
-| | | |
-|-|-|-|
-|___ | <span class="notranslate"> --disable-cagefs </span> |disable CageFS|
-| | <span class="notranslate"> --cagefs-status </span> |print CageFS status: ( <span class="notranslate"> enabled </span> or <span class="notranslate"> disabled </span> )|
-| | <span class="notranslate"> --set-min-uid </span> |Set min <span class="notranslate"> UID </span> |
-| | <span class="notranslate"> --get-min-uid </span> |Display current MIN_UID setting|
-| | <span class="notranslate"> --print-suids </span> |Print list of <span class="notranslate"> SUID </span> and SGID programs in skeleton|
-| | <span class="notranslate"> --do-not-ask </span> |assume <span class="notranslate"> "yes" </span> in all queries (should be the first option in command)|
-| | <span class="notranslate"> --clean-var-cagefs </span> |clean _/var/cagefs_ directory (remove data of non-existent users)|
-| | <span class="notranslate"> --set-tmpwatch </span> |set `tmpwatch` command and parameters (save to _/etc/cagefs/cagefs.ini_ file)|
-| | <span class="notranslate"> --tmpwatch </span> |execute tmpwatch (remove outdated files in tmp directories in CageFS for all users)|
-| | <span class="notranslate"> --toggle-plugin </span> |disable/enable CageFS plugin|
-|-v | <span class="notranslate"> --verbose </span> |verbose output|
-| | <span class="notranslate"> --wait-lock </span> |wait for end of execution of other `cagefsctl` processes (when needed) before execution of the command|
-|-h | <span class="notranslate"> --help </span> |this message|
-
-
-
-#### Running Command Inside CageFS
-
-
-<span class="notranslate"> _[lve-wrappers 0.6-1+]_ </span>
-
-Sometimes you will need to execute a command as user inside CageFS.
-
-If a user has shell enabled - you can simply use:
-<div class="notranslate">
-
-```
-$ /bin/su - $USERNAME  -c "_command_"
-```
-</div>
-Yet, if a user have they shell disabled, it wouldn't work. To solve this issue, we have added command:
-<div class="notranslate">
-
-```
-$ /sbin/cagefs_enter_user $USERNAME "_command_"
-```
-</div>
-
-If you disable CageFS for a user, then <span class="notranslate"> `cagefs_enter` </span> will be executed without <span class="notranslate"> `proxyexec` </span> .
-
-You can forcibly disable <span class="notranslate"> `cagefs_enter` </span> start via <span class="notranslate"> `proxyexec` </span> for all users (regardless if CageFS is enabled or disabled) by specifying the parameter <span class="notranslate"> _cagefs_enter_proxied=0_ in _/etc/sysconfig/cloudlinux_ </span> .
-
-<span class="notranslate"> _/bin/cagefs_enter.proxied_ </span> can be executed instead of <span class="notranslate"> _/bin/cagefs_enter_ </span> to enter CageFS without <span class="notranslate"> `proxyexec` </span> . Note that starting <span class="notranslate"> `cagefs_enter` </span> via <span class="notranslate"> `proxyexec` </span> is necessary to enable sending local notification messages to users with enabled CageFS. <span class="notranslate"> `cagefs_enter` </span> is executed via <span class="notranslate"> `proxyexec` </span> by default.
-
-
-#### Sanity Check
-
-
-<span class="notranslate"> _[ CageFS 6.0-34+]_ </span>
-
-CageFS <span class="notranslate"> `--sanity-check` </span> utility allows to check CageFS configuration consistency, so that an administrator can save the time investigating issues with CageFS and ensure that custom configuration is correct.
-
-To start, run the command:
-<div class="notranslate">
-
-```
-cagefsctl --sanity-check
-```
-</div>
-At the moment 7 types of check are implemented:
-
-1. _Check cagefs mount points exists_ - reads _cagefs.mp_ file and verifies if the directories specified in it really exist on the disk. To learn more, visit [Mount points](/cagefs/#mount-points) and [Split by username](/cagefs/#split-by-username)
-
-2. _Check cagefs <span class="notranslate"> `users.enabled` </span> is a directory_ - ensures that if  <span class="notranslate"> _/etc/cagefs/users.enabled_ </span> exists, then it is a directory, not a file (if it is recognized as a file, then it would cause a breakdown).
-
-3. _Check cagefs <span class="notranslate"> `users.disabled` </span> is a directory_ - ensures that if  <span class="notranslate"> _/etc/cagefs/users.disabled_ </span> exists, then it is a directory, not a file (if it is recognized as a file, then it would cause a breakdown).
-
-4. _Check cagefs <span class="notranslate"> `disable.etcfs` </span> exists_ - checks if <span class="notranslate"> _/etc/cagefs/etc.safe/disable.etcfs_ </span> exists.
-
-5. _Check cagefs users can enter cagefs_ - chooses two users in the system with enabled CageFS (the first and the second ones in the unsorted list) and tries to log in to CageFS under their credentials and see what happens. It runs <span class="notranslate"> `su -l "$USER" -s /bin/bash -c "whoami"` </span> and compares the output with the <span class="notranslate"> $USER </span> and <span class="notranslate"> su </span> command retcode estimation.
-
-::: tip Note
-If a login fails, it can be due to various reasons, that can only be determined in manual mode. The checker only gives the output of the command.
-:::
-
-6. _Check cagefs proxy commands configs are parsable_ - tries to load <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files and parse them to check the syntax. In case of any parsing error the test will fail. To learn more, visit [Executing by proxy](/cagefs/#executing-by-proxy) .
-
-7. _Check cagefs virt.mp files syntax_ - reads all _/var/cagefs///virt.mp_ files (if any) and checks their syntax validity. At the moment there are only two checks of the syntax: the file is not empty if it exists, and the file is not starting with the sub directory definitions (with @). To learn more, visit [Per-user virtual mount points](/cagefs/#per-user-virtual-mount-points)
-
-8. _Check MultiPHP system default PHP version_ – checks that MultiPHP system default PHP version is **NOT** Alt-PHP. That means <span class="notranslate"> PHP Selector </span> should work properly. If MultiPHP system default PHP version is Alt-PHP, <span class="notranslate"> PHP Selector </span> does not work and should be disabled. To learn more on how to disable <span class="notranslate"> PHP Selector, </span> visit [cPanel LVE Manager](/lve_manager/#cpanel-lve-manager) 
-
-Possible results of the checks:
-
-* <span class="notranslate"> OK </span> - the check succeeded.
-
-* <span class="notranslate"> FAILED </span> - the check revealed a problem.
-
-* <span class="notranslate"> SKIPPED </span> - the check was skipped as it made no sense in such environment (e.g. wrong control panel) or can not be performed for some reason (e.g no users with enabled CageFS found). The actual result does not mean that a problem exists and can be considered as positive.
-
-* <span class="notranslate"> INTERNAL_TEST_ERROR </span> - the check failed because of a problem inside the checker itself. Must be reported to the developers.
-
-In case if at least one of the checks resulted neither <span class="notranslate"> OK </span> nor <span class="notranslate"> SKIPPED </span> then the checker will end with ret code >0.
-
-
-#### CageFS Quirks
-
-Due to the nature of CageFS, some options will not work as before or will require some changes:
-
-* lastlog will not work ( <span class="notranslate"> _/var/log/lastlog_ </span> ).
-* PHP will load php.ini from <span class="notranslate"> _/usr/selector/php.ini._ </span> That file is actually a link to the real _php.ini_ file from your system. So the same _php.ini_ will be loaded in the end.
-* You have to run <span class="notranslate"> `cagefsctl --update` </span> any time you have modified _php.ini_, or you want to get new/updated software inside CageFS.
-* CageFS installation changes <span class="notranslate"> `jailshell` </span> to regular bash on cPanel - [read why](http://kb.cloudlinux.com/2015/11/why-cagefs-installation-change-jailshell-to-regular-bash-on-cpanel/).
+See also [CageFS CLI tools](/command-line_tools/#cagefs).
 
 ## MySQL Governor
 ### General information and requirements
@@ -4454,7 +3085,7 @@ This operation may take some time.
 #### abrt plugin
 
 
-We have created a plugin for <span class="notranslate"> abrt </span> tool to automatically upload core dumps in case <span class="notranslate">MySQL Governor</span> crashes.
+We have created a plugin for <span class="notranslate">**abrt**</span> tool to automatically upload core dumps in case <span class="notranslate">MySQL Governor</span> crashes.
 
 To install the plugin:
 <div class="notranslate">
@@ -4474,332 +3105,7 @@ AppLists=/usr/sbin/db_governor,/usr/sbin/dbtop,/usr/sbin/dbctl
 ```
 </div>
 
-### Command-line tools
-
-<span class="notranslate"> dbtop </span> - monitors MySQL usage on per user bases. [More info...](/mysql_governor/#dbtop)  
-<span class="notranslate"> dbctl </span> - command line tool to manage <span class="notranslate"> DB Governor configuration.  [More info...](/mysql_governor/#dbctl) </span>  
-<span class="notranslate"> lveinfo --dbgov </span> - provides historical information about usage and customer restrictions. [More info...](/mysql_governor/#lveinfo-dbgov)  
-<span class="notranslate"> dbgovchar </span> - generates charts for MySQL usage. [More info...](/mysql_governor/#dbgovchart)
-
-
-#### dbtop
-
-
-Utility to monitor MySQL usage. Requires <span class="notranslate"> db_governor </span> to be running. It shows usage for the current, mid and long intervals.
-
-**Options:**
-
-| | |
-|-|-|
-| <span class="notranslate"> -c </span> |show one time user list (no interactive mode) | 
-| <span class="notranslate"> -r interval </span> |refresh interval for interactive mode (in seconds)|
-
-**Control keys**
-
-| | |
-|-|-|
-|<span class="notranslate"> z </span> |toggle color mode and two-color mode | 
-|<span class="notranslate"> q </span> | <span class="notranslate"> F10, Ctrl-c </span> - quit program | 
-|<span class="notranslate"> u </span> |sort table by username | 
-|<span class="notranslate"> c </span> |sort table by cpu column | 
-|<span class="notranslate"> r </span> |sort table by read column | 
-|<span class="notranslate"> w </span> |sort table by write column | 
-|<span class="notranslate"> l </span> |sort by restriction level | 
-|<span class="notranslate"> t </span> |sort by time before restrictions will be lifted.|
-
-Control keys, that sort table, displays into header of table bold and underlined symbol.
-Sorted field will be highlighted by *.
-<span class="notranslate"> CAUSE </span> field shows current stage, reason for restriction and number of seconds before restriction will be lifted:
-Values of column ' <span class="notranslate"> CAUSE </span> ' - cause of restriction or freezing:
-Possible stages: - - <span class="notranslate"> OK </span> , 1 - Restriction 1, 2 - Restriction 2, 3 - Restriction 3, 4 -- restriction level 4
-
-| | |
-|-|-|
-| <span class="notranslate"> c - current </span> |(current value of parameter)|
-| <span class="notranslate"> s - short </span> |(average value of 5 last values of parameter)|
-| <span class="notranslate"> m - middle </span> |(average value of 15 last values of parameter)|
-| <span class="notranslate"> l - long </span> |(average value of 30 last values of parameter)|
-| |and parameter which is cause of restriction|
-| <span class="notranslate"> 1/s:busy_time/12 </span> | first level restricted account with short average restriction <span class="notranslate"> by busy_time </span> with 12 seconds left before re-enabled.|
-
-**Display fields:**
-
-* <span class="notranslate"> cpu </span> - number in %, shows <span class="notranslate"> cpu </span> usage by user
-  * <span class="notranslate"> read </span> - number of bytes (kbytes, mbytes, gbytes) which user reads per second
-  * <span class="notranslate"> write </span> - number of bytes (kbytes, mbytes, gbytes) write user reads per second
-
-
-Accounts highlighted in _red_ color means that the account is restricted.  
-Accounts highlighted in _blue_ color are in cool down period
-
-Command line parameters of <span class="notranslate"> dbtop </span> utility:  
-<span class="notranslate"> -r - dbtop </span> refresh period in seconds ( <span class="notranslate"> dbtop -r12 </span> )
-
-#### dbctl
-
-
-usage: <span class="notranslate"> dbctl command [parameter] [options] </span>
-
-**commands:**
-
-| | |
-|-|-|
-| <span class="notranslate"> set </span> |set parameters for a <span class="notranslate"> db_governor </span> |
-| <span class="notranslate"> list </span> |list users & their limits. It will list all users who had been active since <span class="notranslate"> Governor </span> restart,  as well as those for who explicit limits were set|
-| <span class="notranslate"> list-restricted </span> |list restricted customers, with their limits, restriction reason, and time period they will still be restricted|
-| <span class="notranslate"> ignore </span> |ignore particular user|
-| <span class="notranslate"> watch </span> |start observing particular user again|
-| <span class="notranslate"> delete </span> |remove limits for user/use defaults|
-| <span class="notranslate"> restrict </span> |restrict user using lowest level (or if <span class="notranslate"> --level </span> specified, using the specified level)|
-| <span class="notranslate"> unrestrict </span> |unrestrict username (configuration file remains unchanged)|
-| <span class="notranslate"> unrestrict-all </span> |unrestrict all restricted users (configuration file remains unchanged)|
-| <span class="notranslate"> --help </span> |show this message|
-| <span class="notranslate"> --version </span> |version number|
-| <span class="notranslate"> --lve-mode </span> |set <span class="notranslate"> DB Governor </span> mode of operation. Available values: <span class="notranslate"> off/abusers/all/single/on </span> |
-| | <span class="notranslate"> off </span> - monitor only, don't throttle|
-| | <span class="notranslate"> abusers </span> - when user reaches the limit, put user's queries into LVE for that user (experimental)|
-| | <span class="notranslate"> all </span> - user's queries always run inside LVE for that user (experimental)|
-| | <span class="notranslate"> single </span> - single LVE for all abusers.|
-| | <span class="notranslate"> on </span> - same as <span class="notranslate"> single </span> (deprecated)|
-
-**parameters:**
-
-| | |
-|-|-|
-| <span class="notranslate"> default </span> |set default parameter|
-| <span class="notranslate"> usrename </span> |set parameter for user|
-
-**options:**
-
-| | |
-|-|-|
-| <span class="notranslate"> --cpu=N </span> |limit <span class="notranslate"> CPU </span> (pct) usage|
-| <span class="notranslate"> --read=N </span> |limit <span class="notranslate"> READ </span> (MB/s) usage|
-| <span class="notranslate"> --write=N </span> |limit <span class="notranslate"> WRITE </span> (MB/s) usage|
-| <span class="notranslate"> --level=N </span> |level (1,2,3 or 4) specified (deprecated) - this option is available only for period mode:|
-
-<span class="notranslate"> <restrict_mode use="period"/> </span> (see [Configuration](/mysql_governor/#configuration))
-
-The default mode is " <span class="notranslate"> limit </span> " - when a user hits limits, the account will be marked as restricted and if the user does not hit the limit again during " <span class="notranslate"> unlimit=1m </span> " account will be unrestricted. This mode doesn't have any additional levels/penalties.  
-<span class="notranslate"> <restrict_mode use="limit" unlimit="1m"/> </span>
-
-Changing the <span class="notranslate"> "unlimit" </span> can be done only via the configuration file (see [Configuration](/mysql_governor/#configuration) ).
-<span class="notranslate"> --slow=N: </span> limit time (in seconds) for long running <span class="notranslate"> SELECT </span> queries
-
-Options for parameter <span class="notranslate"> list </span> :
-
-| | |
-|-|-|
-| `--kb` |show limits in Kbytes no pretty print|
-| `--bb` |show limits in bytes no pretty print|
-| `--mb` |show limits in Mbytes no pretty print|
-
-Examples:
-<div class="notranslate">
-
-```
-$ dbctl set test2 --cpu=150,100,70,50 --read=2048,1500,1000,800
-```
-</div>
-
-sets individual limits for <span class="notranslate"> cpu (current, short, middle </span> period) and <span class="notranslate"> read (current, short, middle, long </span> periods) for user <span class="notranslate"> test2 </span>
-<div class="notranslate">
-
-```
-$ dbctl set default --cpu=70,60,50,40
-```
-</div>
-
-changes default <span class="notranslate"> cpu </span> limits.
-
-All new limits will be applied immediately
-
-To unrestrict user:
-<div class="notranslate">
-
-```
-$ dbctl unrestrict username
-```
-</div>
-
-To unrestrict all users:
-<div class="notranslate">
-
-```
-$ dbctl unrestrict-all 
-```
-</div>
-
-To restrict user:
-<div class="notranslate">
-
-```
-$ dbctl restrict dbgov
-```
-</div>
-
-To restrict user to level 2 restriction:
-<div class="notranslate">
-
-```
-$ dbctl restrict dbgov --level=2
-```
-</div>
-
-To make <span class="notranslate"> Governor </span> to ignore user:
-<div class="notranslate">
-
-```
-$ dbctl ignore username
-```
-</div>
-
-Delete user's limits, and use defaults instead:
-<div class="notranslate">
-
-```
-$ dbctl delete username
-```
-</div>
-
-Show limits as bytes:
-<div class="notranslate">
-
-```
-$dbctl list --bb
-```
-</div>
-
-#### lveinfo --dbgov
-
-
-<span class="notranslate"> lveinfo </span> tool is a part of <span class="notranslate"> lve-stats </span> package. It was extended to collect historical information about MySQL usage.
-
-<span class="notranslate"> $ lveinfo --dbgov --help </span>
-<div class="notranslate">
-
-```
-Displays information about historical Db Governor usage
-Usage: lveinfo [OPTIONS] 
-
--h --help              : this help run report from date and time in YYYY-MM-DD HH:MM format if not present last 10 mscreen
--v, --version          : version number
--f, --from=            : inutes are assumed
--t, --to=              : run report up to date and time in YYYY-MM-DD HH:MM format
-      if not present, reports results up to now
-	  --period=          : time period
-      usage            : specify minutes with m,  h - hours, days with d, and values:
-	  : today, yesterday; 5m - last 5 minutes, 4h -- last four hours,
-	  : 2d - last 2 days, as well as today
--o, --order-by=        : orders results by one of the following:
-      con              : average connections
-      cpu              : average CPU usage
-      read             : average READ usage
-      write            : average WRITE usage
--u, --user=            : mysql username
--l, --limit=           : max number of results to display, 10 by default
--c, --csv              : display output in CSV format
--b, --format           : show only specific fields into output
-      available values:
-      ts               : timestamp records
-      username         : user name
-      con              : average connections
-      cpu              : average CPU usage
-      read             : average READ usage
-      write            : average WRITE usage
-      lcpu             : CPU limit
-      lread            : READ limit
-      lwrite           : WRITE limit
-	  --show-all         : full output (show all limits); brief output is default 
-	  
--o, --order-by=        : orders results by one of the following:
-      ts               : timestamp records
-      username         : user name
-      max_sim_req      : max simultaneous requests
-      sum_cpu          : average CPU usage
-      sum_write        : average WRITE usage
-      sum_read         : average READ usage
-      num_of_rest      : number of restricts
-      limit_cpu_end    : limit CPU on period end
-      limit_read_end   : limit READ on period end
-      limit_write_end  : limit WRITE on period end
-	  --id=              : LVE id -- will display record only for that LVE id
-	  -u, --user=            : Use username instead of LVE id, and show only record for that user
-	  -l, --limit=           : max number of results to display, 10 by default
-	  -c, --csv              : display output in CSV format
-	  -b, --by-usage         : show LVEs with usage (averaged or max) within 90% percent of the limit
-      available values:
-      sum_cpu          : average CPU usage
-      sum_write        : average WRITE usage
-      sum_read         : average READ usage
-      num_of_rest      : number of restricts
-      limit_cpu_end    : limit CPU on period end
-      limit_read_end   : limit READ on period end
-      limit_write_end  : limit WRITE on period end
-	  --show-all         : full output (show all limits); brief output is default 
-	  
-	  TS                     : timestamp records
-	  USER                   : user name
-	  CPU                    : average CPU usage
-	  READ                   : average READ usage
-	  WRITE                  : average WRITE usage
-	  CON                    : average connections
-	  lCPU                   : CPU limit
-	  lREAD                  : READ limit
-	  lWRITE                 : WRITE limit
-	  RESTRICT               : C-cpu restrict, R- read restrict, W- write restrict
-```
-</div>
-
-Example:
-<div class="notranslate">
-
-```
-root@cpanel1 [~/ttttt]# lveinfo --dbgov --user=dbgov --period=1d --limit=10
-TS                   USER   CPU     READ    WRITE   CON     lCPU    lREAD   lWRITE   RESTRICT  
-2012-12-06 11:14:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:13:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:12:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:11:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:10:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:09:49  dbgov   90      0.0     0.0     1       90      1000    1000     C          
-2012-12-06 11:08:49  dbgov   0       0.0     0.0     0       400     1000    1000                
-2012-12-06 11:07:49  dbgov   0       0.0     0.0     0       400     1000    1000                
-2012-12-06 11:06:49  dbgov   0       0.0     0.0     0       400     1000    1000   
-```
-</div>
-
-#### dbgovchart
-
-
-<span class="notranslate"> dbgovchart </span> is analog of <span class="notranslate"> lvechart </span> tool to create charts representing customer's to MySQL usage
-
-Usage: <span class="notranslate"> `/usr/sbin/dbgovchart [OPTIONS]` </span>
-
-Acceptable options are:
-<div class="notranslate">
-
-```
---help      This help screen
---version   Version number
---from=     Run report from date and time in YYYY-MM-DD HH:MM format
-            if not present last 10 minutes are assumed
---to=       Run report up to date and time in YYYY-MM-DD HH:MM format
-            if not present, reports results up to now
---period=   Time period
-            specify minutes with m,  h - hours, days with d, and values:
-            today, yesterday
-            5m - last 5 minutes, 4h - last four hours, 2d - last 2 days,
-            as well as today
---user=     mysql username
---output=   Filename to save chart as, if not present, output will be sent to STDOUT
---show-all  Show all graphs (by default shows graphs for which limits are set)
-```
-</div>
-
-Charts examples:
-![](/images/1111.png)
-![](/images/1111_2.png)
+See also [MySQL Governor CLI tools](/command-line_tools/#mysql-governor).
 
 ### Troubleshooting
 
@@ -4866,6 +3172,8 @@ It is **not compatible** with <span class="notranslate">_mod_php/DSO_</span>, in
 ::: tip Note
 PHP Selector is not supported for H-Sphere.
 :::
+
+See also [Compatibility Matrix](/limits/#compatibility-matrix).
 
 ### Installation and update
 
@@ -5618,7 +3926,7 @@ Generated ini files with selected modules and options for each version:
 <span class="notranslate"> _.cl.selector/alt_php70.ini_ </span>  
 <span class="notranslate"> _.cl.selector/alt_php71.ini_ </span>  
 
-Symlinks above are being created according to the settings in <span class="notranslate"> ~/.cl.selector/defaults.cfg </span> and <span class="notranslate"> ~/.cl.selector/alt_php44.cfg </span> files (44 - corresponding PHP version), which are storing <span class="notranslate"> PHP Selector </span> settings for the user. These files are usually taken from user home directory backup or when migrating account from another server. Thus, when migrating account from server to server, <span class="notranslate"> PHP Selector </span> settings are saved.
+Symlinks above are being created according to the settings in <span class="notranslate"> ~/.cl.selector/defaults.cfg </span> and <span class="notranslate">`~/.cl.selector/alt_php44.cfg`</span> files (44 - corresponding PHP version), which are storing <span class="notranslate"> PHP Selector </span> settings for the user. These files are usually taken from user home directory backup or when migrating account from another server. Thus, when migrating account from server to server, <span class="notranslate"> PHP Selector </span> settings are saved.
 
 If no <span class="notranslate"> PHP Selector </span> settings backup files are found when running <span class="notranslate"> `selectorctl --setup-without-cagefs` </span> , then default settings from <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> global file are applied (as in selector normal mode). If the file is absent, then native PHP version will be selected for the user.
 
@@ -6105,122 +4413,7 @@ If <span class="notranslate"> PHP Selector </span> is active, then options set i
 
 That is why it is recommended for administrator to avoid changing System default PHP version to PHP version that is already used by users. At the same time it is recommended for users to choose inherit for domain and use <span class="notranslate"> PHP Selector </span> to choose PHP version. In this case PHP version chosen in <span class="notranslate"> PHP Selector </span> will be always applied for domain.
 
-### Command-line tools
-
-| | |
-|-|-|
-|<span class="notranslate"> /usr/bin/cl-selector </span>  | Tool is used to select version of PHP interpreter inside CageFS. Note. The command is obsolete, please use <span class="notranslate"> [selectorctl](/php_selector/#selectorctl) </span> instead.|
-|<span class="notranslate"> /usr/bin/alt-php-mysql-reconfigure.py </span> | Reconfigures <span class="notranslate"> alt-php </span> extensions to use correct MySQL library, based on the one installed in the system.|
-
-
-#### selectorctl
-
-
-<span class="notranslate"> selectorctl </span> is a new tool that replaces <span class="notranslate"> cl-selector </span> (which is deprecated and should not be used anymore) and <span class="notranslate"> piniset </span> . It is available starting with **CageFS 5.1.3** .
-
-All new features will be implemented as part of <span class="notranslate"> selectorctl </span> .
-
-**Common Options**
-
-| | |
-|-|-|
-|<span class="notranslate"> --interpreter (-i) </span> : | chooses the interpreter to work with. Currently only PHP is supported. If omitted, <span class="notranslate"> --interpreter=php </span> is implied.|
-|<span class="notranslate"> --version (-v) </span> : | specifies alternatives version to work with|
-|<span class="notranslate"> --user (-u) </span> : | specifies user to take action upon.|
-|<span class="notranslate"> --show-native-version (-V) </span> : | prints the version of native interpreter|
-
-**Global Options**
-
-The global options modify settings in <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> file.
-
-| | |
-|-|-|
-|<span class="notranslate"> --list (-l) </span> : | lists all available alternatives for an interpreter. For instance on server with Alt-PHP installed, it produces the following output. Columns are: short alternative version, full alternative version and path to php-cgi binary. |
-| |<span class="notranslate"> $ selectorctl --list <br>5.2 5.2.17 /opt/alt/php52/usr/bin/php-cgi <br>5.3 5.3.28 /opt/alt/php53/usr/bin/php-cgi <br>5.4 5.4.23 /opt/alt/php54/usr/bin/php-cgi <br>5.5 5.5.7 /opt/alt/php55/usr/bin/php-cgi </span>|
-|<span class="notranslate"> --summary (-S) </span> : | prints alternatives state summary. Output format: alternative version, state ('e' for 'enabled', '-' otherwise), chosen as default one or not ('d' for 'default', '-' otherwise). For example:| 
-| |<span class="notranslate"> $ selectorctl --summary <br>5.2 e - <br>5.3 e - <br>5.4 e - <br>5.5 e - <br>native e d </span>|
-| |if used with <span class="notranslate"> `--show-native-version` </span> displays version for native interpreter:|
-| |<span class="notranslate"> $ selectorctl --summary --show-native-version <br>5.2 e - <br>5.3 e - <br>5.4 e - <br>5.5 e - <br>native(5.3) e d </span>|
-|<span class="notranslate"> --current (-C) </span> : | prints currently globally selected default version (it is stored in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ </span> file):|
-| |<span class="notranslate"> $ selectorctl --current <br>native native /usr/bin/php </span>|
-| |If used with <span class="notranslate"> `--show-native-version` </span> , native interpreter version is displayed as well:|
-| |<span class="notranslate"> --current --show-native-version <br>native(5.3) native(5.3.19) /usr/bin/php </span> |
-|<span class="notranslate"> --set-current (-B): </span>  | sets specified version as globally default one (in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ </span> file). For example, to set current default version of PHP to 5.4, use:|
-| |<span class="notranslate"> $ selectorctl --set-current=5.4 </span>|
-|<span class="notranslate"> --disable-alternative (-N): </span> | adds <span class="notranslate"> state=disabled </span> option to alternative section. With it a corresponding alternative gets removed from user alternatives selection list. For instance to disable PHP 5.2, run:|
-| |<span class="notranslate"> $ selectorctl --disable-alternative=5.2 </span>|
-|<span class="notranslate"> --enable-alternative (-Y): </span> | Enables alternative version, removes <span class="notranslate"> state=disabled </span> option, if present, from alternative section. For example to enable PHP 5.2:|
-| |<span class="notranslate"> $ selectorctl --enable-alternative=5.2 </span>|
-|<span class="notranslate"> --enable-extensions (-E): </span> | enables extensions for particular PHP version by adding comma-separated list of extensions of modules for alternative in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ </span> . Requires <span class="notranslate"> --version </span> option. For example:|
-| |<span class="notranslate"> $ selectorctl --enable-extensions=pdo,phar --version=5.2 </span>|
-|<span class="notranslate"> --disable-extensions (-D): </span>  | removes extensions for a particular PHP version. Comma-separated list of extensions will be removed from <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> . Requires <span class="notranslate"> --version </span> . Example:|
-| |<span class="notranslate"> $ selectorctl --disable-extensions=pdo,phar --version=5.2 </span>|
-|<span class="notranslate"> --replace-extensions (-R): </span> | replaces all extensions for particular PHP version to the list of comma separated extensions. Requires <span class="notranslate"> `--version`  option </span> . Example:|
-| |<span class="notranslate"> $ selectorctl --replace-extensions=pdo,phar --version=5.2 </span>|
-|<span class="notranslate"> --list-extensions (-G): </span> | lists extensions for an alternative for a particular version. Requires <span class="notranslate"> --version </span> . Example:|
-| |<span class="notranslate"> $ selectorctl --list-extensions --version=5.3 <br>~ xml <br>- xmlreader <br>- xmlrpc <br>- xmlwriter <br>- xrange <br>+ xsl </span>|
-| |Plus sign (+) stands for 'enabled', minus (–) for 'disabled', tilde (~) means compiled into interpreter. Enabled and disabled state relates to presence in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ </span> file.|
-
-**End User Options**
-
-All end-user settings are contained in individual user's alt_php.ini files and controlled using selectorctl command.
-
-| | |
-|-|-|
-|<span class="notranslate"> --user-summary (-s): </span>  | prints user alternatives state summary. Example:|
-| |<span class="notranslate"> $ selectorctl --user-summary --user=user1 <br>5.2 e - - <br>5.3 e - - <br>5.4 e - - <br>5.5 e - - <br>native e d s </span>|
-| |Columns are: alternative version, state ('e' for 'enabled', '-' otherwise), chosen as default one or not('d' for 'default', '-' otherwise), selected as user default one or not ('s' for 'selected', '-' otherwise). If used with <span class="notranslate"> `--show-native-version` </span> , version for native interpreter is shown in parenthesis:|
-| |<span class="notranslate"> $ selectorctl --user-summary --user=user1 --show-native-version <br>5.2 e - - <br>5.3 e - - <br>5.4 e - - <br>5.5 e - - <br>native(5.3) e d s </span>|
-| |<span class="notranslate"> `--user` </span> option is required. |
-|<span class="notranslate"> --current (-c): </span> | prints currently globally selected default version (in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ </span> file):|
-| |<span class="notranslate"> $ selectorctl --current <br>5.3 5.3.28 /opt/alt/php53/usr/bin/php-cgi </span>|  
-| |If used with <span class="notranslate"> `--show-native-version` </span> to display native version:|
-| |<span class="notranslate"> $ selectorctl --user-current --user=user1 <br>5.3 5.3.28 /opt/alt/php53/usr/bin/php-cgi </span>| 
-| |<span class="notranslate"> `--user` </span> option is required.|
-|<span class="notranslate"> --set-user-current (-b): </span> | sets specified version as the one to use for this end user:|
-| |<span class="notranslate"> $ selectorctl --set-user-current=5.4 --user=user1 </span>|
-| |changes user symlinks for the PHP interpreter to point to alternative 5.4.|
-| |<span class="notranslate"> --user </span> option is required.|
-|<span class="notranslate"> --enable-user-extensions (-e): </span> | Enables comma-separated list of extensions for the user user. Information is saved to <span class="notranslate"> _alt_php.ini_ </span> file. Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
-| |<span class="notranslate"> $ selectorctl --enable-user-extensions=pdo,phar --version=5.2 --user=user1 </span>|
-|<span class="notranslate"> --disable-user-extensions (-d): </span> | Disables extensions provided as comma-separated list. Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
-| |<span class="notranslate"> $ selectorctl --disable-user-extensions=pdo,phar --version=5.2 --user=user1 </span>|
-|<span class="notranslate"> --replace-user-extensions (-r): </span> | Replaces extensions with a provided comma-separated list of extensions Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options:|
-| |<span class="notranslate"> $ selectorctl --replace-user-extensions=pdo,phar --version=5.2 --user=user1 </span>|
-|<span class="notranslate"> --reset-user-extensions (-t): </span> | Resets extensions for end user to default list of extensions as defined in <span class="notranslate"> default.cfg </span> . Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
-| |<span class="notranslate"> $ selectorctl --reset-user-extensions --version=5.2 --user=user1 </span>|
-|<span class="notranslate"> --list-user-extensions (-g): </span> | lists enabled user extensions for an alternative. Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
-| |<span class="notranslate"> $ selectorctl --list-user-extensions --version=5.3 --user=user1 <br>xml <br>xmlreader <br>xmlrpc </span>|
-| |if <span class="notranslate"> `--all` </span> option present, command will list all alternatives extensions marked enabled or disabled for given user. For example:|
-| |<span class="notranslate"> $ selectorctl --list-user-extensions --version=5.3 --user=user1 --all <br>- xmlreader <br>- xmlrpc <br>- xmlwriter <br>- xrange <br>+ xsl </span>|
-| |Plus sign (+) stands for 'enabled', minus (–) stands for 'disabled'. Enabled and disabled state relates to presence or absence of corresponding extensions in user <span class="notranslate"> _alt_php.ini_ </span> file.|
-|<span class="notranslate"> --add-options (-k): </span> | adds options (as in <span class="notranslate"> _php.ini_ </span> ) to user <span class="notranslate"> _alt_php.ini_ </span> file. For example:|
-| |<span class="notranslate"> $ selectorctl --add-options=log_errors:on,display_errors:on --version=5.2 --user=user1 </span>
-| |adds <span class="notranslate"> `log_error` </span> and <span class="notranslate"> `display_errors` </span> options with values <span class="notranslate"> 'on' </span> to user <span class="notranslate"> _alt_php.ini_ </span> file overwriting default values for a user. Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
-|<span class="notranslate"> --replace-options (-m): </span> | replaces all options in user <span class="notranslate"> _alt_php.ini_ </span> file with specified ones. Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
-| |<span class="notranslate"> $ selectorctl --replace-options=log_errors:on,display_errors:on --version=5.2 --user=user1 </span>|
-|<span class="notranslate"> --delete-options (-x): </span> | removes custom options from user <span class="notranslate"> _alt_php.ini_ </span> file. Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
-| |<span class="notranslate"> $ selectorctl --delete-options=log_errors,display_errors --version=5.2 --user=user1 </span>|
-|<span class="notranslate"> --print-options (-P): </span> | print options from <span class="notranslate"> _/etc/cl.selector/php.conf_ </span> file with default values or ones overwritten in user's <span class="notranslate"> _alt_php.ini_ </span> file.|
-| |<span class="notranslate"> $ selectorctl --print-options --version=5.2 --user=user1 <br>TITLE:allow_url_fopen <br>DEFAULT:On <br>COMMENT:Allows PHP file functions to retrieve data from remote <br>locations over FTP or HTTP. This option is a great security risk, <br>thus do not turn it on without necessity. <br>TYPE:bool <br>... </span>|
-| |Requires <span class="notranslate"> `--user`   </span> option. <span class="notranslate"> `--version` </span> option is optional. When <span class="notranslate"> `--version` </span> is omitted, options for current selected version will be printed. By default outputs as plain test. If <span class="notranslate"> `--json` ,  `--csv` ,  `--perl` </span> is specified, outputs data in corresponding format. For example, with <span class="notranslate"> `--perl` </span> option, the output is perl hash structure that can be evaluated. |
-|<span class="notranslate"> --reset-options (-z): </span> | removes custom options from <span class="notranslate"> _alt_php.ini_ </span> files for ALL users and versions. Backup files in home folders are cleared.|
-| |<span class="notranslate"> $ selectorctl --reset-options </span>|
-| |The ranges of affected customers or versions can be narrowed with <span class="notranslate"> `--version` </span> or <span class="notranslate"> `--user`  options </span> :|
-| |<span class="notranslate"> $ selectorctl --reset-options --user=user1,user2 --version=5.3,5.4 </span>|
-|<span class="notranslate"> --list-users (-L): </span> | list users that use particular version of interpreter, specified with <span class="notranslate"> `--version` </span> option. For example, to see all users that use PHP version 5.3:|
-| |<span class="notranslate"> $ selectorctl --list-users --version=5.3 </span>|
-|<span class="notranslate"> --change-to-version (-T): </span> | changes all (or particular user) from one interpreter version to another.|
-| |<span class="notranslate"> $ selectorctl --change-to-version=5.2 --version=5.3 </span>|
-
-**Additional Options**
-
-| | |
-|-|-|
-|<span class="notranslate"> --base64 (-Q) </span> | Sometimes PHP options values can contain commas and other symbols that break command line formatting. In such a case convert a <span class="notranslate"> key:value </span> pair into <span class="notranslate"> base64 </span> and pass it as value for option-related arguments. For example, to add <span class="notranslate"> disable_functions=exec,popen,system </span> and <span class="notranslate"> display_errors=on </span> to user options, do the following:|
-| |<span class="notranslate"> $ selectorctl --add-options=`echo disable_functions:exec,popen,system|base64 -w 0`,`echo display_errors:on|base64 -w 0` --version=5.2 --user=user1 --base64 </span>|
-| |Option <span class="notranslate"> `-w 0`   </span> of <span class="notranslate"> base64 </span> executable stands for <span class="notranslate"> 'disable wrapping of lines' </span> . Without it <span class="notranslate"> base64 </span> output will break the command. |
-|<span class="notranslate"> --quiet </span> | makes <span class="notranslate"> selectorctl </span> continue when it encounter option not found in <span class="notranslate"> _php.conf_ </span> . Without it <span class="notranslate"> selectorctl </span> exits with error.|
+See also [PHP Selector CLI tools](/command-line_tools/#php-selector).
 
 ### Bundled PHP Extensions
 
@@ -6365,13 +4558,472 @@ Please find more info about <span class="notranslate"> New Relic License Key </s
 Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
 ## Python Selector
-### General information and requirements
-### Installation and update
-### Uninstalling
-### Configuration
-### Integration with control panels
-### Command-line tools
-### Troubleshooting
+:::tip Note
+This documentation is for the old version of Python Selector. You can find documentation for the new Python Selector Beta [below](/python_selector/#overview-and-requirements)
+:::
+
+We have the ability to deploy <span class="notranslate"> Python </span> applications via application server. <span class="notranslate"> Python Selector </span> uses <span class="notranslate"> mod_passenger </span> to host <span class="notranslate">Python</span>.
+
+This feature is available for CloudLinux 6 or later. It supports only cPanel servers.
+
+You can find a list of supported <span class="notranslate"> alt-python</span> versions using the following command.
+
+<div class="notranslate">
+
+```
+yum grouplist | grep alt-python
+```
+</div>
+
+### Python Selector Installation
+
+::: tip Note
+The instructions below are suitable only for EasyApache 3 and EasyApache 4. You should follow [this instruction](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:enable_ruby_python_selector) if you use LiteSpeed.
+:::
+Install tools to create isolated <span class="notranslate"> Python </span> environments and <span class="notranslate"> Passenger Apache </span> module. For servers with EasyApache3:
+
+<div class="notranslate">
+
+```
+yum install lvemanager alt-python-virtualenv alt-mod-passenger
+```
+</div>
+
+for EasyApache4:
+
+<div class="notranslate">
+
+```
+yum install lvemanager alt-python-virtualenv ea-apache24-mod-alt-passenger
+```
+</div>
+
+To use <span class="notranslate"> Python Selector </span> you should install alternative <span class="notranslate"> Python </span> packages:
+
+<div class="notranslate">
+
+```
+yum groupinstall alt-python
+```
+</div>
+
+To use MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package:
+
+<div class="notranslate">
+
+```
+yum install alt-python27-devel
+```
+</div>
+
+::: tip Note
+After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> LVE Manager Options </span> tab to show <span class="notranslate">Python App</span> in web-interface.
+:::
+
+::: tip Note
+Adding <span class="notranslate"> Python</span> modules requires executing permissions to gcc/make binaries. Please enable compilers in Compiler Access section of WHM, then run: `cagefsctl --force-update` 
+:::
+
+### End User Access
+
+1. In <span class="notranslate"> _Software/Services_ </span> area choose <span class="notranslate">_Select Python Environment_</span>.
+
+![](/images/clip000133.jpg)
+
+2. Create project form will appear. Choose interpreter version for your application, application folder name (project path) and <span class="notranslate"> URI </span> for accessing your application. Click <span class="notranslate"> “Create project” </span> to create an application.
+
+![](/images/clip000233.jpg)
+
+After a little while a new application entry will be appended to the web-page.
+
+![](/images/clip000255.jpg)
+
+3. You can edit path (folder name of the project in the home directory, for example, <span class="notranslate"> _/home/clman1/project_name_ </span> ), <span class="notranslate"> uri </span> for application, <span class="notranslate"> wsgi </span> handler. If you click <span class="notranslate"> Edit </span> - the value is converted to input field and thus becomes editable. When editing is complete, click <span class="notranslate"> Save </span>.
+
+![](/images/clip000256.jpg)
+
+4. <span class="notranslate"> Wsgi </span> entry is to specify <span class="notranslate"> python wsgi </span> application entry point. It must be specified as filename, must be callable and separated by colon. If your app is running from file <span class="notranslate"> flask/run.py </span> by calling callable app, set <span class="notranslate"> flask/run.py:app </span>.
+
+![](/images/clip000257.jpg)
+
+5. When <span class="notranslate"> Show </span> control is clicked, <span class="notranslate"> python </span> extensions section will be expanded. It gives the ability to add or remove <span class="notranslate"> python </span> modules. When start typing in input field, appropriate hints are shown in drop-down list. Choose the entry you want from drop-down and click <span class="notranslate"> Add </span>.
+
+![](/images/clip000261.jpg)
+
+If you click <span class="notranslate"> Delete </span>, the corresponding module entry will disappear.
+In addition to setting <span class="notranslate"> path, uri </span> and <span class="notranslate"> wsgi </span> , the interpreter version can be changed as well by changing the value in select drop-down.
+
+6. No changes are applied to application environment until <span class="notranslate"> Update </span> button is clicked. Before the <span class="notranslate"> Update </span> button is clicked, all changes can be reverted with <span class="notranslate"> Reset </span> button.
+
+The newly created application will be supplied with <span class="notranslate"> stub </span> only. A real application ought to be put into application folder. After application is placed into application folder, the <span class="notranslate"> wsgi </span> parameter can be set.
+
+Click <span class="notranslate"> Remove </span> to delete the application - the application folder itself will remain unmoved.
+
+_Note. For <span class="notranslate"> LVE Manager </span> version 0.9-10 and higher:_
+
+When creating an application you can use the key <span class="notranslate"> --domain </span> , which attaches application to domain. If <span class="notranslate"> --domain </span> key is not specified, then the main users domain will be used by default.
+To create application run:
+
+<div class="notranslate">
+
+```
+/usr/bin/selectorctl --interpreter=python --version=VERSION[--user=USER] [--domain=DOMAIN] [--print-summary] [--json]–-create-webapp <FOLDER_NAME> <URI>
+```
+</div>
+
+When changing application <span class="notranslate"> URI, --domain </span> key can be used simultaneously, in this case not only <span class="notranslate"> URI </span> will be changed, but also the application domain.
+
+To change application <span class="notranslate"> URI </span> run:
+
+<div class="notranslate">
+
+```
+/usr/bin/selectorctl --interpreter=python [--user=USER][--domain=NEW_DOMAIN] [--print-summary] [--json] --transit-webapp<FOLDER_NAME> <NEW_URI> 
+```
+</div>
+
+The possibility to choose domain when creating an application was added to web interface as well.
+
+![](/images/webapp001_zoom94.png)
+
+Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate"> django </span> -admin).
+
+![](/images/webapp002_zoom93.png)
+
+
+### Hide Python Selector Icon
+
+It is possible to hide or show <span class="notranslate">Python Selector</span> icons by marking or unmarking proper checkbox in <span class="notranslate"> LVE Manager _Options_</span> tab.
+
+![](/images/CL-hide-python-ruby.png)
+
+The same result can be accomplished in CLI by running:
+
+<div class="notranslate">
+
+```
+cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}}}'
+```
+</div>
+ 
+:::tip Note
+If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux Python Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
+For that, you’d need to first uncheck <span class="notranslate">`Hide Python App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists. 
+:::
+
+## Python Selector (Beta)
+
+:::tip Note
+This documentation is for the new version of Python Selector beta. You can find documentation for the old Python Selector [here](/python_selector/#python-selector-installation)
+:::
+
+
+### Overview and Requirements
+
+<span class="notranslate">Python Selector</span> is a CloudLinux component that allows each user to easily deploy and manage Python applications via application server.
+
+#### Requirements
+
+:::danger Important!
+Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already migrated Python applications because it will break migrated applications.
+:::
+
+
+* Python Selector supports the following Alt-Python versions:
+  * <span class="notranslate">`alt-python27 2.7.16`</span>, supported by CloudLinux 6, CloudLinux 7
+  * <span class="notranslate">`alt-python33 3.3.7`</span>, supported by CloudLinux 6, CloudLinux 7
+  * <span class="notranslate">`alt-python34 3.4.9`</span>, supported by CloudLinux 6, CloudLinux 7
+  * <span class="notranslate">`alt-python35 3.5.6`</span>, supported by CloudLinux 6, CloudLinux 7
+  * <span class="notranslate">`alt-python36-3.6.8`</span>, supported by CloudLinux 6, CloudLinux 7
+  * <span class="notranslate">`alt-python36-3.7.2`</span>, supported by CloudLinux 6, CloudLinux 7
+* This feature is available for CloudLinux 7, CloudLinux 6 hybrid and CloudLinux 6.
+* New Python Selector requires LVE Manager version 4.2 or later.
+* It supports cPanel and DirectAdmin servers. On DirectAdmin only on Apache. Plesk will not be supported.
+* Python Selector uses <span class="notranslate">`mod_passenger`</span> to host Python. For more details about <span class="notranslate">`mod_passenger`</span>, please read [documentation](https://www.phusionpassenger.com/).
+* Python Selector works with EasyApache 3 (note EOL at 1st September 2019), EasyApache 4 and LiteSpeed Web Server. Or Apache on DirectAdmin. 
+
+### Migration to the new Python Selector 
+
+The new Python Selector has a bunch of new features:
+
+* the ability to set environment variables for the application
+* the ability to set dependencies from the file requirements
+* the ability to start and stop applications as in Node.js Selector
+* the ability to add and edit custom configurations
+* the ability to install modules from the custom configurations
+
+All existing Python applications (created before the update of LVE Manager to version 5.0.1-1) will work the same as before. You do not need to migrate them unless you’d like to use new features. These applications we define as old applications.
+
+:::warning Important!
+There are some risks during the migration process and the migration can fail. To avoid such issues and make it possible to solve them if any, only user who created a particular application is allowed to initiate the migration process.
+:::
+
+You do not need to migrate the new applications that will be created after the update to the LVE Manager 5.0.1-1. All new features are available for them.
+
+:::warning Important!
+You cannot migrate back to the old application. If you face any issue during the migration, please [contact our support team](https://cloudlinux.zendesk.com/hc/requests/new).
+:::
+
+#### How to migrate an application to the new Python Selector
+
+:::tip Note
+Only user who created an application can migrate it.
+:::
+
+To migrate a Python application:
+* Log in to your control panel.
+* Open Python Selector user interface.
+    ![](/images/Python_general.png)
+* Choose an application to migrate and click ![](/images/Migrate-btn.png) in the <span class="notranslate">_Actions_</span> section. You will see the popup.
+    ![](/images/Python-migration.png)
+* Click <span class="notranslate">_Migrate_</span> in the popup.
+* After successful migration, you will see the confirmation popup.
+
+If you face any issue during the migration, please [contact our support team](https://cloudlinux.zendesk.com/hc/requests/new).
+
+
+### Installation
+
+New clients can install Python Selector using the [CloudLinux Installation Wizard](/lve_manager/#cloudlinux-installation-wizard).
+
+#### cPanel
+
+To use Python Selector, it is required to install the following:
+* alternative Python packages by running the following command:
+  
+    <div class="notranslate">
+
+    ```
+    yum groupinstall alt-python
+    ```
+    </div>
+* LVE Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
+
+    <div class="notranslate">
+
+    ```
+    yum install lvemanager lve-utils alt-python-virtualenv ea-apache24-mod-alt-passenger
+    ```
+    </div>
+ 
+__For EasyApache 3:__
+
+<div class="notranslate">
+
+```
+yum install lve-utils lvemanager alt-python-virtualenv alt-mod-passenger
+```
+</div>
+
+* CageFS for better security. See [CageFS documentation for details](/cagefs/).
+
+
+#### DirectAdmin
+ 
+To use Python Selector, it is required to install the following:
+
+* alternative Python packages by running the following command:
+
+    <div class="notranslate">
+
+    ```
+    yum groupinstall alt-python
+    ```
+    </div>
+ 
+* LVE Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
+
+    <div class="notranslate">
+
+    ```
+    yum install lve-utils lvemanager alt-python-virtualenv alt-mod-passenger
+    ```
+    </div>
+
+* CageFS for better security. See [CageFS documentation for details](/cagefs/).
+
+:::tip Note
+After installation, please make sure that you have unmarked appropriate checkboxes in LVE Manager Options tab to show Python App in the web-interface.
+:::
+ 
+:::tip Note
+Adding Python module requires executing permissions to <span class="notranslate">`gcc/make`</span> binaries. Please enable compilers in Compiler Access section of WHM, then run:
+
+<div class="notranslate">
+
+```
+cagefsctl --force-update
+```
+</div>
+:::
+
+
+See also [Python Selector UI](/lve_manager/#python-selector-ui).
+See also [Python Selector CLI tool](/command-line_tools/#python-selector).
+
+### Deploying Trac using Python Selector
+
+1. In <span class="notranslate">**Setup Python App**</span> create an application. <span class="notranslate">Trac</span> project <span class="notranslate">WSGI</span> script will be located in <span class="notranslate">**App Directory**</span> (e.g. <span class="notranslate">`trac`</span>).
+
+<span class="notranslate">App URI</span> – is a <span class="notranslate">URL</span> where web-interface is located (e.g. <span class="notranslate">Trac</span> – web-interface is located in <span class="notranslate">`YOUR_DOMAIN/trac`</span>).
+
+<span class="notranslate">Trac</span> needs <span class="notranslate">Python</span> version from **2.5** to **3.0,** in the actual example version 2.7 is used.
+
+2. When the App is created, add the following modules: <span class="notranslate">`Trac`, `Genshi`, `MySQL-python`</span>.
+
+2.1. Alternatively, connect to the server via SSH and perform the following steps:
+
+<div class="notranslate"> 
+
+```
+source ~/virtualenv/trac/2.7/bin/activate
+```
+</div>
+
+then:
+
+<div class="notranslate"> 
+
+```
+~/virtualenv/trac/2.7/bin/easy_install Trac mysql-python (using easy_install)
+```
+</div>
+
+or
+
+<div class="notranslate">
+
+```
+~/virtualenv/trac/2.7/bin/pip install trac mysql-python
+```
+</div> 
+
+(using <span class="notranslate">`pip`</span>).
+
+3. In cPanel create MySQL database and a user. Add user to database.
+
+![](/images/Python_trac1.png)
+
+In this example DB <span class="notranslate">`tractest_trac`</span> and user <span class="notranslate">`tractest_trac`</span> were created.
+
+4. Connect to the server via SSH using your cPanel account.
+
+Create <span class="notranslate">Trac</span> project:
+
+ <div class="notranslate">
+ 
+ ```
+ ~/virtualenv/trac/2.7/bin/trac-admin
+ ~/trac_project initenv
+ ```
+ </div>
+
+For the <span class="notranslate">`Database connection string`</span> parameter enter the following: <span class="notranslate">`mysql://user:password@localhost/database_name`</span> – here the data for connecting MySQL database are specified.
+
+::: tip Note
+In case of `... The charset and collation of database are 'latin1' and 'latin1_swedish_ci' error the database must be created with one of (('utf8', 'utf8_bin'), ('utf8mb4', 'utf8mb4_bin')) ...`  while creating the project, you should change database encoding.
+:::
+
+To change encoding, in cPanel run <span class="notranslate">phpMyAdmin</span>, choose <span class="notranslate">`DB`</span>, go to <span class="notranslate">`Operations`</span>, choose the necessary encoding in <span class="notranslate">`Collation`</span> section and click <span class="notranslate">`Go`</span>.
+
+![](/images/trac2.jpg)
+
+After that you have to repeat the procedure of creating a project. When done, the <span class="notranslate">`Trac`</span> project must appear: <span class="notranslate">`~/trac_project`</span>
+
+5. To create project frontend run the following:
+
+<div class="notranslate">
+
+```
+~/virtualenv/trac/2.7/bin/trac-admin ~/track_project deploy ~/trac
+```
+</div>
+
+<span class="notranslate">`~/track_project`</span> — is the path to the project,
+<span class="notranslate">`~/trac`</span> — is the path, that was specified while setting <span class="notranslate">`App Directory`</span>.
+
+Create topic directory by default:
+
+<div class="notranslate">
+
+```
+cd ~/public_html/trac
+mkdir chrome 
+cp -R ~/trac/htdocs/ ~/public_html/trac/chrome/
+```
+</div>
+
+All project static files are located in this directory; the changes can be added here as well.
+
+6. To add path to <span class="notranslate">WSGI</span> file in the created application:
+
+Go back to <span class="notranslate">_cPanel Setup Python App_</span>, change <span class="notranslate">`WSGI file location`</span> for your application to <span class="notranslate">`cgi-bin/trac.wsgi`</span>, click <span class="notranslate">`Update`</span> to apply changes and then click <span class="notranslate">`Restart`</span>.
+
+Your existing application now must look like the following:
+
+![](/images/Python_trac2.png)
+
+7. Adding authorization:
+
+In <span class="notranslate">`~/public_html/trac/.htaccess`</span> after <span class="notranslate">`CLOUDLINUX PASSENGER CONFIGURATION`</span> section add the following lines:
+
+<div class="notranslate">
+
+```
+AuthType Basic
+AuthName "trac"
+AuthUserFile /home/tractest/trac/passwd
+Require valid-user
+```
+</div>
+
+8. Add new user and create password file <span class="notranslate">`/usr/local/apache/bin/htpasswd`</span> with <span class="notranslate">`~/trac/passwd`</span> admin.
+
+Enter password.
+
+<div class="notranslate">
+
+```
+~/virtualenv/trac/2.7/bin/trac-admin  ~/track_project permission add admin TRAC_ADMIN
+```
+</div>
+
+Add admin user to <span class="notranslate">`TRAC_ADMIN`</span> group.
+
+Here the path <span class="notranslate">`trac`</span> directory is equal to <span class="notranslate">`App Directory`</span> in your project.
+
+Now <span class="notranslate">`Trac`</span> is available via <span class="notranslate">`YOUR_DOMAIN/trac`</span>.
+
+
+#### Trac with MySQL
+
+To use <span class="notranslate">Trac</span> with MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package.
+
+To install run:
+<div class="notranslate">
+
+```
+yum install alt-python27-devel --enablerepo=cloudlinux-updates-testing 
+```
+</div>
+
+#### EasyApache 4
+
+CloudLinux has <span class="notranslate"> Python Selector</span>, which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger</span>. However, it does not allow using <span class="notranslate"> cPanel application manager</span>.
+
+It is not correct to install both of those packages on the server because they contain the same <span class="notranslate"> passenger</span> module for Apache web server.
+
+The new <span class="notranslate">ea-ruby24-mod_passenger</span> is available for download from our <span class="notranslate"> updates-testing (beta) </span> repository which allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate">CloudLinux Python Selector</span>.
+
+To install run:
+<div class="notranslate">
+
+```
+# yum install lvemanager alt-python-virtualenv
+# yum install ea-ruby24-mod_passenger --enablerepo=cl-ea4-testing
+```
+</div>
+
 ## Ruby Selector
 ### General information and requirements
 
@@ -6625,64 +5277,8 @@ To install run:
 
 To install <span class="notranslate"> Ruby Selector</span> follow the instructions on the [link](/python_and_ruby_selector/#python-and-ruby-selector-installation).
 
+See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 
-
-### Command-line tools
-
-All the actions mentioned in Deploy and Settings section can be performed from the command line:
-
-To create application run:
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=<ruby> --version=VERSION [--user=USER] [--print-summary] [--json] --create-webapp <FOLDER_NAME> <URI>
-```
-</div>
-To delete application:
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --destroy-webapp <FOLDER_NAME>
-```
-</div>
-To change application folder name:
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --relocate-webapp <FOLDER_NAME> <NEW_FOLDER_NAME>
-```
-</div>
-
-To change application <span class="notranslate"> URI </span>:
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --transit-webapp <FOLDER_NAME> <NEW_URI>
-```
-</div>
-
-To change application interpreter version:
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --set-user-current --version=<NEW VERSION> <FOLDER_NAME>
-```
-</div>
-
-To restart application:
-<div class="notranslate">
-
-```
-selectorctl --interpreter ruby --user cltest1 --domain cltest1.com --restart-webapp testapp
-```
-</div>
-To choose <span class="notranslate"> Ruby </span> version:
-<div class="notranslate">
-
-```
-selectorctl --interpreter=ruby --user=$USER -v 2.0
-```
-</div>
 
 ## Node.js Selector
 ### General information and requirements
@@ -7058,422 +5654,7 @@ Context: virtual host, htaccess
 By default, <span class="notranslate"> Passenger </span> log messages are all written to the Passenger log file. With this option, you can have the app specific messages logged to a different file in addition. In <span class="notranslate"> alt-mod-passenger </span>, you can use it in the context of a virtual host or in the htaccess file.
 
 
-### Command-line tools
-
-Below is a list of commands hoster and end user can run in a command line.
-
-#### **Hoster**
-
-Get information related to Node.js: default version, list of supported versions, status of <span class="notranslate"> Node.js Selector </span> , list of users, their applications, etc:
-<div class="notranslate">
-
-```
-cloudlinux-selector [get] [--json] --interpreter nodejs
-```
-</div>
-
-<span class="notranslate"> JSON </span> output for <span class="notranslate"> _get_ </span> command:
-<div class="notranslate">
-
-```
-{  
-"selector_enabled": true | false,   
-"default_version": "6.11.3",   
-"result": "success",   
-"timestamp": 1508667174.220027  
-"cache_status": "ready"         //  or “updating” during automatic yum cache rebuild  
-"available_versions": {   //  begin of  “versions”
-      "6.11.3" : {   //   begin of version "6.11.3"
-		"name_modifier": "",
-		"status": "enabled",  //  enabled, disabled, not_installed, installing, removing
-		“base_dir”: “/opt/alt/alt-nodejs6”   //  empty when version is not installed
-		“users”: {   //  begin of  “users”                      
-			“user1”: {   //  begin of “user1”
-				“homedir”: “/home/user1”,
-				“applications”: {    //  begin of “applications”
-					“apps_dir/app1” : {   //   begin of application “apps_dir/app1”
-						“domain”: “cltest1.com”,
-						“app_uri”: “apps/my-app1”,
-						“app_mode” : “development”,
-						“startup_file” : “app.js”,
-						“app_status” : “started”,   // ‘started’ or ‘stopped’
-						“config_files” : [
-							“package.json”,
-							“gruntfile.js”
-						],
-						“env_vars” : {
-							“var1” : “value1”,
-							“var2” : “value2”
-						},
-					},   // end of application “apps_dir/app1”
-					“apps_dir/app2” : {    //   begin of application “apps_dir/app2”
-						<< data for application “apps_dir/app2”  (same structure as for application “apps_dir/app1” above) >>
-					},   //  end of application “apps_dir/app2”
-				},   //  end of “applications”
-			},   //  end of “user1”
-			“user2”: {   //  begin of “user2”
-				<< data for user “user2”  (same structure as for “user1” above) >>
-			},   //  end of “user2”
-		},   // end of “users”
-	},    //  end of version “6.11.3”
-	"8.21.5" : {   //   begin of version "8.21.5"
-		<< data for version "8.21.5"  (same structure as for version “6.11.3” above) >>
-	},    //  end of version “8.21.5”
-},    //  end of “versions”}   //   end of json
-```
-</div>
-
-Set default version, supported versions, and status of <span class="notranslate"> Node.js Selector </span> :
-<div class="notranslate">
-
-```
-cloudlinux-selector set [--json] --interpreter nodejs (--selector-status <enabled,disabled> | --default-version <str> | --supported-versions <str>)
-```
-</div>
-
-::: tip Note
-<span class="notranslate"> Node.js Selector </span> is disabled by default. If an available Node.js version is not installed <span class="notranslate"> Node.js Selector </span> is always disabled and it is impossible to enable it.
-:::
-
-To set default Node.js version, please use the following command (note that required Node.js version should be enabled):
-<div class="notranslate">
-
-```
-cloudlinux-selector set --json --interpreter=nodejs --default-version=<ver>
-```
-</div>
-
-**Examples** :  
-This command enables <span class="notranslate"> Node.js Selector </span> :
-
-<div class="notranslate">
-
-```
-cloudlinux-selector set --json --interpreter nodejs --selector-status enabled
-```
-</div>
-
-This command sets default Node.js version as 6:
-<div class="notranslate">
-
-```
-cloudlinux-selector set --json --interpreter nodejs --default-version 6
-```
-</div>
-
-This command sets supported Node.js version as 8:
-<div class="notranslate">
-
-```
-cloudlinux-selector set --json --interpreter nodejs --supported-versions='{"6": false, "8": true}'
-```
-</div>
-
-Install required Node.js version:
-<div class="notranslate">
-
-```
-cloudlinux-selector install-version --json --interpreter nodejs --version 8
-```
-</div>
-
-Uninstall required Node.js version:
-<div class="notranslate">
-
-```
-cloudlinux-selector uninstall-version --json --interpreter nodejs --version 8
-```
-</div>
-
-Enable required Node.js version:
-<div class="notranslate">
-
-```
-cloudlinux-selector enable-version --json --interpreter nodejs --version 8
-```
-</div>
-
-Disable required Node.js version (note that it is impossible to disable default Node.js version):
-<div class="notranslate">
-
-```
-cloudlinux-selector disable-version --json --interpreter nodejs --version 8
-```
-</div>
-
-Change version for application(s):
-<div class="notranslate">
-
-```
-cloudlinux-selector set [--json] --interpreter nodejs ((--user <str> |  --domain <str>) --app-root <str> | --from-version <str>) --new-version <str>
-```
-</div>
-
-**Examples** :  
-This command changes version for the specific application:
-<div class="notranslate">
-
-```
-cloudlinux-selector set --json --interpreter nodejs --user user1 --app-root apps_dir/app1 --new-version 8
-```
-</div>
-
-Common output for all <span class="notranslate"> _set_ </span> commands:
-
-**_in case of success_** :
-<div class="notranslate">
-
-```
-{  "result": "success",   "timestamp": 1508666792.863358}
-```
-</div>
-
-**_in case of error:_**
-<div class="notranslate">
-
-```
-{  "result": "Some error message",  "details" : "Traceback: ..." ,  "context": {},  "timestamp": 1508666792.863358}
-```
-</div>
-
-**_in case of warning:_**
-<div class="notranslate">
-
-```
-{  "result": "success",  "warning" : "Some warning message" ,  "context": {},  "timestamp": 1508666792.863358}
-```
-</div>
-
-To resolve issues related to <span class="notranslate"> _install-version/uninstall-version_ </span> commands (because they are running in the background) you may use this log file <span class="notranslate"> _/var/log/cl-nodejs-last-yum.log_ </span>
-It contains full <span class="notranslate"> _yum_ </span> output from the <span class="notranslate"> **_latest_** </span> performed operation (install or uninstall) and it will be rewritten with each operation.
-
-#### **End User**
-
-::: danger
-options --user and --domain are mutually exclusive now.
-:::
-
-Get config file for the user applications
-
-<div class="notranslate">
-
-```
-cloudlinux-selector read-config [--json] --interpreter nodejs  [(--user <str> |  --domain <str>)] --app-root <str> --config-file <name>
-```
-</div>
-
-JSON output:
-
-<div class="notranslate">
-
-```
-{
-    "result": "success",
-	"timestamp": 1508666792.863358
-	"data": "content of config file as Base64 encoded string"
-}
-```
-
-</div>
-
-
-**Example** :
-
-This command gets config file for <span class="notranslate"> user1 </span> ’s application <span class="notranslate"> app1 </span> :
-
-<div class="notranslate">
-
-```
-cloudlinux-selector read-config --json --interpreter nodejs  --user user1 --app-root app_dir/app1 --config-file package.json
-```
-</div>
-Save config file for the user applications
-<div class="notranslate">
-
-```
-cloudlinux-selector save-config [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str> --config-file <path> --content <content of config file as Base64 encoded string>
-```
-</div>
-
-<span class="notranslate"> JSON </span> output (the same as for all <span class="notranslate"> _set_ </span> commands):
-
-<div class="notranslate">
-
-```
-{
-          "result": "success",
-		  "timestamp": 1508666792.863358
-}
-```
-</div>
-
-**Example** :  
-This command saves config file for <span class="notranslate"> user1 </span> ’s application <span class="notranslate"> app1 </span> :
-
-<div class="notranslate">
-
-```
-cloudlinux-selector save-config --json --interpreter nodejs  --user user1 --app-root app_dir/app1 --config-file package.json  --content                                         VGh1ICAyIE5vdiAxMDo0MzoxMiBFRFQgMjAxNwo=
-```
-</div>
-Get a list of applications for the specific user
-<div class="notranslate">
-
-```
-cloudlinux-selector [get] [--json] --interpreter nodejs  [(--user <str> |  --domain <str>)]
-```
-</div>
-
-**Example** :  
-This command gets a list of applications for the <span class="notranslate"> user1 </span> :
-
-<div class="notranslate">
-
-```
-cloudlinux-selector get --json --interpreter nodejs  --user user1
-```
-</div>
-Create user application
-
-<div class="notranslate">
-
-```
-cloudlinux-selector create [--json] --interpreter nodejs [(--user <str> | --domain <str>)] --app-root <str> --app-uri <str> [--version <str>] [--app-mode <str>] [--startup-file <str>] [--env-vars <json string>]
-```
-</div>
-
-**Example** :  
-This command creates <span class="notranslate"> user1 </span> 's application for the domain <span class="notranslate"> xyz.com </span> :
-<div class="notranslate">
-
-```
-cloudlinux-selector create --json --interpreter nodejs --user user1 --app-root my_apps/app1 --app-uri apps/app1
-```
-</div>
-or
-<div class="notranslate">
-
-```
-cloudlinux-selector create --json --interpreter nodejs --app-root my_apps/app1 --domain xyz.com --app-uri apps/app1
-```
-</div>
-Start, restart, stop, and destroy user application
-<div class="notranslate">
-
-```
-cloudlinux-selector (start | restart | stop | destroy) [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str>
-```
-</div>
-
-**Example** :
-This command starts <span class="notranslate"> user1 </span> 's application:
-<div class="notranslate">
-
-```
-cloudlinux-selector start --json --interpreter nodejs --user user1 --app-root my_apps/app1
-```
-</div>
-Change properties for an application
-<div class="notranslate">
-
-```
-cloudlinux-selector set [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str> [--app-mode <str>] [--new-app-root <str>] [--new-domain <str>] [--new-app-uri <str>] [--new-version <str>] [--startup-file <str>] [--env-vars <json string>]
-```
-</div>
-
-**Example 1** :
-This command sets a production mode, new domain <span class="notranslate"> new.xyz.com </span> , new Node.js version 8, new <span class="notranslate"> URI </span> , new application <span class="notranslate"> root </span> directory and new startup file for <span class="notranslate"> user1 </span> application located on the domain <span class="notranslate"> xyz.com </span> :
-<div class="notranslate">
-
-```
-cloudlinux-selector set --json --interpreter nodejs  --user user1 --app-root my_apps/app1 --mode production  --new-app-root new_apps/new_app1  --new-domain new.xyz.com --new-app-uri new_apps/app1  --new-version 8  --startup-file new_app.js --env-vars '{ "var1" : "value1", "var2" : "value2" }'
-```
-</div>
-
-**Example 2** :
-
-<div class="notranslate">
-
-```
-cloudlinux-selector set --json --interpreter nodejs  --domain xyz.com --app-root my_apps/app1 --mode production  --new-app-root new_apps/new_app1  --new-domain new.xyz.com --new-app-uri new_apps/app1  --new-version 8  --startup-file new_app.js --env-vars '{ "var1" : "value1", "var2" : "value2" }'
-```
-</div>
-
-::: tip Note
-When changing Node.js version all replies from web application to get request will be checked in Node.js Selector (before and after version changing). HTTP response codes and MIME type are comparing. So, make sure application is available via http(s) at least locally.
-:::
-
-Run <span class="notranslate"> _npm install_ </span> command for the user application
-<div class="notranslate">
-
-```
-cloudlinux-selector install-modules [--json] --interpreter nodejs  [(--user <str> |  --domain <str>)] --app-root <str>
-```
-</div>
-
-**Example** :
-This command runs <span class="notranslate"> _npm install_ </span> for <span class="notranslate"> user1 </span> application:
-
-<div class="notranslate">
-
-```
-cloudlinux-selector install-modules --json --interpreter nodejs --user user1 --app-root my_apps/app
-```
-</div>
-
-::: tip Note
-All replies from web application to get request will be checked in Node.js Selector (before and after modules installation). HTTP response codes and MIME type are comparing. So, make sure application is available via http(s) at least locally.
-:::
-
-Run a script from <span class="notranslate"> package.json </span> file of a user application, arguments <span class="notranslate"> _args_ </span> are passed to the script
-<div class="notranslate">
-
-```
-cloudlinux-selector run-script [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str> --script-name <str> [-- <args>...]
-```
-</div>
-
-**Example** :
-<div class="notranslate">
-
-```
-cloudlinux-selector run-script --json --interpreter nodejs --user user1 --app-root my_apps/app --script-name test_script -- --script_opt1 --script_opt2 script_arg1 script_arg2
-```
-</div>
-
-<span class="notranslate"> JSON </span> output:
-
-<div class="notranslate">
-
-```
-{
-          "result": "success",
-		  "timestamp": 1508666792.863358
-		  "data": "script output as Base64 encoded string"
-}
-```
-</div>
-
-Activate virtual environment of NodeJS:
-<div class="notranslate">
-
-```
-source <home_of_user>/nodevenv/<app_root>/<nodejs_version>/bin/activate
-```
-</div>
-
-This command changes prompt to
-**Example** :  
-<div class="notranslate">
-
-```
-[newusr@192-168-245-108 ~]$ source /home/newusr/nodevenv/newapp4/newapp3/8/bin/activate
-[newapp4/newapp3 (8)] [newusr@192-168-245-108 ~]$
-```
-</div>
-
-After ativation user can use <span class="notranslate"> _npm_ </span> and node from a virtual environment without full paths.
-
+See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 
 ### Troubleshooting
 
@@ -8564,64 +6745,7 @@ To disable addition of PWD variable. Default value is Off. If set to On, the PWD
 Maximum buffer in KiB to resend for request that has a body (like POST request body).
 
 
-### Command-line tools
-
-#### switch_mod_lsapi tool
-
-
-switch_mod_lsapi is the command line tool used to manage mod_lsapi PRO.
-
-It has the following syntax:
-
-`/usr/bin/switch_mod_lsapi [OPTIONS]`
-
-`[OPTIONS]`  can be the main and an additional (for usage together with any other main option).
-
-**Main options**
-
-| | |
-|-|-|
-|**Option** | **Description**|
-|`--setup` | setup _mod_lsapi_ configurations for Apache, including PHP handlers setup; create native lsphp (if it doesn't exist) by doing: `cp /opt/alt/php56/usr/bin/lsphp /usr/local/bin/` <br> _* NOT supported for DirectAdmin_ |
-|`--setup-light` | setup PHP handlers only<br> _* supported for cPanel EasyApache 4 only_|
-|`--uninstall` | uninstall _mod_lsapi_ from Apache<br> _* supported for cPanel (EasyApache 3 and EasyApache 4), Plesk, and servers without control panel_|
-|`--enable-domain` | enable _mod_lsapi_ for individual domain<br> _* supported for cPanel EasyApache 3 only_|
-|`--disable-domain` | disable _mod_lsapi_ for individual domain<br> _* supported for cPanel EasyApache 3 only_|
-|`--enable-global` | sets up _mod_lsapi_ as a default way to serve PHP, making it enabled for all domains. Once that mode is enabled, you cannot disable _mod_lsapi_ for an individual domain.<br> _* supported for cPanel only (EasyApache 3 and EasyApache 4)_|
-|`--disable-global` | disable _mod_lsapi_ as a default way to serve PHP, disabling _mod_lsapi_ for all domains, including those selected earlier using<br> _--enable-domain_ _* supported for cPanel EasyApache 3 only_|
-|`--build-native-lsphp` | build native _lsphp_ for cPanel EasyApache 3<br> _* supported for cPanel EasyApache 3 only_|
-|`--build-native-lsphp-cust` | build native _lsphp_ for cPanel EasyApache 3 (with custom PHP source path)<br> _* supported for cPanel EasyApache 3 only_|
-|`--check-php` | check PHP configuration<br> _* NOT supported for DirectAdmin_|
-|`--stat` | return usage statistics in JSON format; the following statistics metrics are collected:<br> • control panel name;<br> • mod_lsapi version;<br> • liblsapi version;<br> • criu version and status;<br> • whether mod_lsapi is enabled;<br> • lsapi configuration options;<br> • number of domains, that use _mod_lsapi_, per each installed PHP version including those set in PHP Selector _(this metric is supported for cPanel EasyApache 4, Plesk and DirectAdmin)_ .|
-
-**Additional options**
-
-| | |
-|-|-|
-|**Option** | **Description**|
-|`--verbose` | switch verbose level on|
-|`--force` | switch force mode on|
-
-
-The following table presents which `[OPTIONS]` are supported for various panels:
-
-| |  |  |  |  |  |  | |
-|-|--|--|--|--|--|--|-|
-| | No Control Panel | cPanel EA3 | cPanel EA4 | DirectAdmin | Plesk | InterWorx | ISPManager|
-|`setup` | + | + | + | custombuild | + | + | +|
-|`setup-light` | - | - | + | - | - | - | -|
-|`uninstall` | + | + | + | custombuild | + | + | +|
-|`enable-domain` | - | + | - | - | - | - | -|
-|`disable-domain` | - | + | - | - | - | - | -|
-|`enable-global` | - | + | + | custombuild | - | - | -|
-|`disable-global` | - | + | - | custombuild | - | - | -|
-|`build-native-lsphp` | - | + | - | - | - | - | -|
-|`build-native-lsphp-cust` | - | + | - | - | - | - | -|
-|`check-php` | + | + | + | - | + | + | +|
-|`verbose` | + | + | + | - | + | + | +|
-|`force` | + | + | + | - | + | + | +|
-|`stat` | + <br> _*without domain info_ | + <br> _*without domain info_ | + | + | + | + <br> _*without domain info_ | + <br> _*without domain info_|
-
+See also [Apache mod_lsapi PRO CLI tools](/command-line_tools/#apache-mod-lsapi-pro).
 
 ### Troubleshooting
 
@@ -9271,4 +7395,1180 @@ This mode is enabled by default and creates a separate lsphp process for each vi
 
 5. There is (default <span class="notranslate"> off </span> ) option in mod_lsapi that creates only one lsphp process for a user, regardless of the number of his virtual hosts. We don't recommend to use this option with CRIU, but if you use it, make sure that your virtual hosts (under the same user) have the same environment configurations. If they are not the same, this may cause undesirable lsphp process operation.
 
+
+## Additional integration components
+
+CloudLinux uses various ways to integrate with existing system. By default we can integrate with:
+
+* PAM - using pam_lve
+* Apache - using mod_hostinglimits, apr library, patched suexec
+* LiteSpeed - built in integration
+
+### LVE PAM module
+
+pam_lve.so is a PAM module that sets up LVE environment. It provides easy way to setup LVE for SSH sessions, as well as other PAM enabled applications, such as crontab, su, etc.
+
+pam_lve.so is installed by default when you convert existing server.
+
+Installation:
+
+<div class="notranslate">
+
+```
+# yum install pam_lve
+```
+</div>
+
+After you install <span class="notranslate"> RPM </span>, add the following line to the PAM config file for the required application:
+
+<div class="notranslate">
+
+```
+session    required     pam_lve.so 500 1 wheel,other
+```
+</div>
+
+In this line:
+* 500 stands for minimum UID for which LVE will be setup. For any user with UID < 500, LVE will not be setup. If <span class="notranslate">CageFS</span> is installed, use:
+<span class="notranslate">`cagefsctl --set-min-uid UID`</span> to setup minimum UID. The parameter in PAM files will be ignored in that case.
+* 1 stands for <span class="notranslate">CageFS</span> enabled (0 – <span class="notranslate">CageFS</span> disabled)
+* 3rd optional argument defines group of users that will not be placed into LVE or <span class="notranslate">CageFS</span>. Starting with **pam_lve 0.3-7** you can specify multiple groups, comma separated.
+
+:::tip Warning
+It is crucial to place all users that su or sudo to root into that group. Otherwise, once such user gains root, user will be inside LVE, and all applications restarted by that user will be inside that user LVE as well.
+:::
+
+For example, to enable LVE for SSH access, add that line to the `/etc/pam.d/sshd`. To enable LVE for SU, add that line to the `/etc/pam.d/su`.
+
+By default, module will not place users with group wheel into lve. If you want to use different group to define users that will not be placed into LVE by pam_lve - pass it as the 3rd argument.
+
+:::tip Warning
+Be careful when you test it, as if you incorrectly add this line to the `/etc/pam.d/sshd`, it will lock you out ssh. Don't log out of your current SSH session, until you sure it works.
+:::
+
+For preventing cases when user enters under usual user (using ssh) and then tries to enter as super user (via sudo or su) - pam_sulve was created, which tries to enter to LVE=1 and leaves it right away. If action fails, user gets message:
+
+<div class="notranslate">
+
+```
+!!!!  WARNING: YOU ARE INSIDE LVE !!!!
+```
+</div>
+
+To check if pam_sulve is enabled on the server:
+
+<div class="notranslate">
+
+```
+grep pam_sulve.so /etc/pam.d/*
+```
+</div>
+
+should not be empty.
+
+### LVE Wrappers
+
+LVE Wrappers are the set of tools that allow system administrator to run various users, programs & daemons within Lightweight Virtual Environment. This allows system administrator to have control over system resources such program can have. Additionally it prevents misbehaving programs running within LVE to drain system resources and slow down or take down the whole system. The tools are provided by lve-wrappers RPM.
+
+You can install them by running:
+
+<div class="notranslate">
+
+```
+$ yum install lve-wrappers
+```
+</div>
+
+#### **Placing programs inside LVE**
+
+LVE Wrappers provide two tools for placing programs inside LVE: <span class="notranslate">`lve_wrapper`</span> and `lve_suwrapper`.
+
+`/bin/lve_wrapper` can be used by any non-root user, as long as that user is in group lve (see `/etc/groups` file).
+
+**Syntax**
+
+<div class="notranslate">
+
+```
+lve_wrapper <command_to_run>
+```
+</div>
+
+**Example**
+
+<div class="notranslate">
+
+```
+$ lve_wrapper make install
+```
+</div>
+
+The program will be executed within LVE with ID matching user's id.
+
+`/bin/lve_suwrapper` can be used by root user or any user in group lve (see `/etc/groups` file) to execute command within specified LVE.
+
+**Syntax**
+
+<div class="notranslate">
+
+```
+lve_suwrapper LVE_ID <command_to_run>
+```
+</div>
+
+**Example**
+
+<div class="notranslate">
+
+```
+# lve_suwrapper 10000 /etc/init.d/postgresql start
+```
+</div>
+
+**Switches**
+
+* `-f` - force namespace
+* `-n` - without namespace
+
+### MPM ITK
+
+CloudLinux <span class="notranslate">httpd RPM</span> comes with <span class="notranslate"> MPM ITK </span> built in. Yet, if you would like to build your own Apache, you need to apply our patch for <span class="notranslate"> MPM ITK </span>
+
+* Download file: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+* Extract: <span class="notranslate">apache2.2-mpm-itk-seculrelve12.patch</span>
+* And apply this patch to your Apache source code.
+
+When running <span class="notranslate"> MPM ITK </span>, you should disable <span class="notranslate">mod_hostinglimits</span>. All the functionality needed by <span class="notranslate"> MPM ITK </span> is already built into the patch.
+
+Directives which can be used by Apache with <span class="notranslate"> ITK </span> patch:
+
+* <span class="notranslate">`AssignUserID`</span> - uses ID as LVE ID
+* <span class="notranslate">`LVEErrorCodeITK`</span> - error code to display on LVE error (508 by default)
+* <span class="notranslate">`LVERetryAfterITK`</span> - same as <span class="notranslate">`LVERetryAfter`</span> - respond with <span class="notranslate">`Retry-After`</span> header when LVE error 508 occurs
+* <span class="notranslate">`LVEId`</span> - ovverides id used for LVE ID instead of <span class="notranslate">`AssignUserID`</span>
+* <span class="notranslate">`LVEUser`</span> - overrides user to use to retrieve LVE ID, instead of AssignUserID
+
+### HostingLimits module for Apache
+
+mod_hostinglimits works with existing <span class="notranslate"> CGI/PHP </span> modules, to put them into LVE context. In most cases the <span class="notranslate"> CGI/PHP </span> process will be placed into LVE with the ID of the user that sites belongs to. mod_hostinglimits detects the user from `SuexecUserGroup` (<span class="notranslate">suexec</span> module), <span class="notranslate">`SuPHP_UserGroup`</span> (from mod_suphp), `AssignUserID` (<span class="notranslate">MPM ITK</span>), <span class="notranslate">`RUidGid` (mod_ruid2 </span> ) directives.
+
+This can be overwritten via LVEId or LVEUser parameter on the Directory level.
+
+:::tip Note
+Those parameters will not work with mod_fcgid and mod_cgid.
+:::
+
+The order of detection looks as follows:
+
+* LVEId
+* LVEUser
+* SuexecUserGroup
+* suPHP_UserGroup
+* RUidGid
+* AssignUserID
+
+
+:::tip Note
+LVE doesn't work for mod_include #include due to its "filter" nature.
+:::
+
+Example:
+
+<div class="notranslate">
+
+```
+LoadModule hostinglimits_module modules/mod_hostinglimits.so
+<IfModule mod_hostinglimits.c>
+ AllowedHandlers cgi-script php5-script php4-script
+ SecureLinks On
+</IfModule>
+```
+</div>
+
+#### **Additional notes**
+
+**mod_hostinglimits** (since version 1.0-22) supports <span class="notranslate">`min-uid - cagefsctl --set-min-uid=600`</span>.
+
+Min UID is read on Apache start/restart and stored in the memory during apache runtime.
+
+If the min UID has changed, you should restart Apache for **mod_hostinglimits** applying new min UID value. Full min UID is supported only with APR.
+
+The following message should appear:
+
+<div class="notranslate">
+
+```
+[notice] mod_hostinglimits: found apr extention version 3.
+```
+</div>
+
+This means that the correct APR is installed with mod_hostinglimits.
+
+mod_hostinglimist has variable for Apache CustomLog format string <span class="notranslate">`%{LVE_ID}y`</span>.
+
+**How to use**:
+
+LogFormat 
+
+<div class="notranslate">
+
+```
+"%h %l %u %t "%r" %>s %b "%{Referer}i" "%{User-Agent}i" req for lve "%{LVE_ID}y"
+```
+</div>
+
+combined
+
+shows in access_log the following info:
+
+<div class="notranslate">
+
+```
+*.*.*.* - - [09/Apr/2015:07:17:06 -0400] "GET /1.php HTTP/1.1" 200 43435 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0" req for lve 500
+
+*.*.*.* - - [09/Apr/2015:07:17:06 -0400] "GET /1.php?=PHPE9568F34-D428-11d2-A769-00AA001ACF42 HTTP/1.1" 200 2524 "************/1.php""Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0" req for lve 500
+
+*.*.*.* - - [09/Apr/2015:07:17:06 -0400] "GET /1.php?=PHPE9568F35-D428-11d2-A769-00AA001ACF42 HTTP/1.1" 200 2146 "************/1.php""Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0" req for lve 500
+```
+</div>
+
+#### Installation
+
+**cPanel**
+
+Installed by default during EasyApache build. Requires <span class="notranslate">`lve-stats`</span> & <span class="notranslate">`lve-utils`</span> packages to be installed.
+
+**DirectAdmin**
+
+Can be built using <span class="notranslate"> custombuild</span>:
+
+<div class="notranslate">
+
+```
+$ yum install liblve-devel
+$ cd /usr/local/directadmin/custombuild
+$ ./build update
+$ ./build set cloudlinux yes
+$ ./build apache
+$ ./build rewrite_confs
+```
+</div>
+
+If you run `suphp`, then run the following:
+
+<div class="notranslate">
+
+```
+$ ./build suphp
+```
+</div>
+
+**Plesk**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**ISPmanager**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**InterWorx**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**H-Sphere**
+
+Included by default in H-Sphere 3.5+
+
+**Standard Apache from RPM**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**Custom Apache installation**
+
+Compile from the source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
+
+<div class="notranslate">
+
+```
+$ wget http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz
+$ yum install cmake
+$ tar -zxvf mod_hostinglimits*.tar.gz
+$ cd mod_hostinglimits*
+$ cmake .
+$ make
+$ make install
+```
+</div>
+
+* Apache Module Identifier: `hostinglimits_module`
+* Source Files: `mod_hostinglimits.c`
+* Compatibility: MPM prefork, worker, event, ITK
+
+#### Directives
+
+<div class="notranslate">
+
+#### **SecureLinks**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Makes sure that for any virtual hosts, only files owned by user specified via SuexecUserGroup or other ways as described above are served. For files owned by any other user apache will return <span class="notranslate">`Access Denied`</span> error. The directive will not affect VirtualHost without user id specified, or with uid < 100|
+|**Syntax**| <span class="notranslate">`SecureLinks On`</span>|
+|**Default**| <span class="notranslate">`SecureLinks Off`</span>|
+|**Context**| server config|
+
+Prevents apache from serving files not owned by user, stopping symlink attacks against php config files.
+
+**Example**
+
+<div class="notranslate">
+
+```
+SecureLinks On
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **SkipErrors**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Allow apache to continue if LVE is not available|
+|**Syntax**| <span class="notranslate">`SkipErrors On`</span>|
+|**Default**| <span class="notranslate">`SkipErrors On`</span>|
+|**Context**| server config|
+
+Prevents Apache from exiting if LVE is not available.
+
+**Example**
+
+<div class="notranslate">
+
+```
+SkipErrors Off
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **AllowedHandlers**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| List of handlers that should be placed into LVE, support regexp|
+|**Syntax**|`AllowedHandlers cgi-script %^php%  my-script`|
+|**Default**| none|
+|**Context**| server config|
+
+This directive allows to list handlers which will be intercepted and placed into LVE.
+
+**Examples**
+
+* Match requests handled by cgi-script handler:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers cgi-script 
+  ```
+  </div>
+
+* Match all requests:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers *
+  ```
+  </div>
+  
+* Match all requests that handled by handler that contains PHP:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers %php%
+  ```
+  </div>
+* Match all requests handled by handler that starts with PHP:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers %^php%
+  ```
+  </div>
+
+***
+
+<div class="notranslate">
+
+#### **DenyHandlers**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| List of handlers that should not be placed into LVE, support regexp|
+|**Syntax**| <span class="notranslate">`DenyHandlers text/html`</span>|
+|**Default**| none|
+|**Context**| server config|
+
+This directive works together with AllowHandlers, to exclude some handlers from being allowed in LVE.
+
+**Example**:
+
+Match all requests, but <span class="notranslate">`text/*`</span>
+
+<div class="notranslate">
+
+```
+AllowedHandlers *DenyHandlers %text/*%
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEErrorCode**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Error code to display once entry is rejected due to maxEntryProcs|
+|**Syntax**| values from 500 to 510|
+|**Default**| 508|
+|**Context**| directory config|
+
+Specifies ErrorCode to use on LVE error (like too many concurrent processes running).
+
+The message that will be displayed by default is:
+<div class="notranslate">
+
+```
+Resource Limit Is Reached.
+
+The website is temporarily unable to serve your request as it exceeded resource limit. 
+
+Please try again later.
+```
+</div>
+
+You can redefine error message using `ErrorDocument` directive
+
+Example:
+<div class="notranslate">
+
+```
+LVEErrorCode 508ErrorDocument 508 508.html
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEid**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Allows to setup separate LVE ID on per directory level. If not set, user ID of a corresponding user is used.|
+|**Syntax**|<span class="notranslate">`LVEId number`</span>|
+|**Default**| User Id is used|
+|**Context**| directory config|
+
+Specifies LVE id for particular directory
+
+**Example**:
+
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+ LVEId 10001
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEUser**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Allows to setup separate LVE ID on per directory level.|
+|**Syntax**|<span class="notranslate">`LVEUser username`</span>|
+|**Default**| none|
+|**Context**| directory config|
+
+Specifies LVE ID for particular directory.
+
+**Example**:
+
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+       LVEUser user1
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEUserGroupID**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Use group ID instead of user ID for LVE container number.|
+|**Syntax**| <span class="notranslate">`LVEUserGroupID On/Off`</span>|
+|**Default**| User Id is used|
+|**Context**| global config only|
+
+* If the option enabled, group ID will be used instead of a user ID. Apache will display the following string in error logs:
+
+<div class="notranslate">
+
+```
+mod_hostinglimits: use GroupID instead of UID 
+mod_hostinglimits: found apr extension version 2 
+mod_hostinglimits: apr_lve_environment_init_group check ok
+```
+</div>
+
+* If a compatible apr library is not found, the following error message will be display in error logs.
+
+<div class="notranslate">
+
+```
+mod_hostinglimits:  apr_lve_* not found!!!
+```
+</div>
+
+**Example**:
+
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+       LVEUserGroupID On
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVERetryAfter**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Returns Retry-After header when LVE error 508 occurs.|
+|**Syntax**|`LERetryAfter MINUTES`|
+|**Default**| 240 minutes|
+|**Context**| directory config|
+
+Specifies interval for <span class="notranslate">`Retry-After`</span> header. The <span class="notranslate">`Retry-After`</span> response-header field can be used to indicate how long the service is expected to be unavailable to the requesting client.
+
+**Example**:
+
+<div class="notranslate">
+
+```
+LVERetryAfter 180
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVESitesDebug**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Provides extended debug info for listed sites.|
+|**Syntax**|<span class="notranslate">`LVESitesDebug test.com test2.com`</span>|
+|**Default**| <span class="notranslate"> none </span>|
+|**Context**| directory config|
+
+Specifies virtual hosts to provide extra debugging information.
+
+**Example**:
+
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+       LVESitesDebug abc.com yx.cnet
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEParseMode**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Determines the way LVE ID will be extraced. In Conf|
+|**Syntax**|`LVEParseMode CONF` `PATH` `OWNER` [`REDIS`](/limits/#redis-support-for-hostinglimits)|
+|Default: | <span class="notranslate">`CONF`</span>|
+|Context: | directory config|
+
+* In `CONF` mode, standard way to extract LVE ID is used (SuexecUserGroup, LVEId, or similar directives).
+
+* In <span class="notranslate">`PATH`</span> mode, username is extracted from the home directory path. The default way to match username is via the following regexp: <span class="notranslate">`/home/([^/]*)/`</span> . Custom regexp can be specified in LVEPathRegexp.
+
+* In <span class="notranslate">`OWNER`</span> mode, the owner of the file is used as an LVE ID.
+
+* In <span class="notranslate">[`REDIS`](/limits/#redis-support-for-hostinglimits)</span> mode, LVE ID is retrieved from Redis database.
+
+**Example**:
+
+<div class="notranslate">
+
+```
+LVEParseMode CONF
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEPathRegexp**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Regexp used to extract username from the path. Used in conjuction with `LVEParseMode PATH`|
+|**Syntax**|`LVEPathRegexp regexp`|
+|**Default**| <span class="notranslate">`/home/([^/]*)/`</span>|
+|**Context**| directory config|
+
+Used to extract usersname via path.
+
+**Example**:
+
+<div class="notranslate">
+
+```
+LVEPathRegexp /home/([^/]*)/
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVELimitRecheckTimeout**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Timeout in milliseconds, a site will return EP without lve_enter for LA decreasing after this time|
+|**Syntax**|`LVELimitRecheckTimeout number`|
+|**Default**| 0|
+|**Context**| httpd.conf, virtualhost|
+
+Example:
+<span class="notranslate"> </span>
+```
+LVELimitRecheckTimeout 1000
+```
+
+<div class="notranslate">
+
+#### **LVEUse429**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Use 429 error code as code returned on max entry limits ( <span class="notranslate"> on/off </span> ).|
+|**Syntax**|`LVEUse429 on`|
+|**Default**|<span class="notranslate">`off`</span>|
+|**Context**| httpd.conf, virtualhost|
+
+**Example**:
+
+<div class="notranslate">
+
+```
+LVEUse429 on
+```
+</div>
+
+Available for RPM based panels, EasyApache 4 and DirectAdmin.
+
+### Redis Support for HostingLimits
+
+Redis support provides a way to query Redis database for LVE id, based on domain in the HTTP request. Given a database like:
+
+<div class="notranslate">
+
+```
+xyz.com 10001
+bla.com  10002
+....
+```
+</div>
+
+The module will retrieve corresponding LVE id from the database.
+
+To enable Redis support, compile from source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
+
+The compilation requires hiredis library.
+
+<div class="notranslate">
+
+```
+$ wget http://repo.cloudlinux.com/cloudlinux/sources/da/mod_hostinglimits.tar.gz
+$ yum install cmake
+$ tar -zxvf mod_hostinglimits*.tar.gz
+$ cd mod_hostinglimits*
+$ cmake -DREDIS:BOOL=TRUE .
+$ make
+$ make install
+```
+</div>
+
+To enable Redis mode, specify:
+
+<div class="notranslate">
+
+```
+LVEParseMode REDIS
+```
+</div>
+
+<div class="notranslate">
+
+#### **LVERedisSocket**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| Socket to use to connect to Redis database.|
+|**Syntax**|<span class="notranslate">`LVERedisSocket path`</span>|
+|**Default**|<span class="notranslate">`/tmp/redis.sock`</span>|
+|**Context**| server config|
+
+Used to specify location of Redis socket.
+
+**Example**:
+
+<div class="notranslate">
+
+```
+LVERedisSocket /var/run/redis.sock
+```
+</div>
+
+<div class="notranslate">
+
+#### **LVERedisAddr**
+
+</div>
+
+| | |
+|-|-|
+|**Description**| IP/port used to connect to Redis database instead of socket.|
+|**Syntax**|<span class="notranslate">`LVERedisAddr IP PORT`</span>|
+|**Default**| <span class="notranslate">`none`</span>|
+|**Context**|<span class="notranslate">server config</span>|
+
+Used to specify IP and port to connect to Redis instead of using Socket
+
+**Example**:
+
+<div class="notranslate">
+
+```
+LVERedisAddr 127.0.0.1 6993
+```
+</div>
+
+#### **LVERedisTimeout**
+
+| | |
+|-|-|
+|**Descriptin**| Number of seconds to wait before attempting to re-connect to Redis.|
+|**Syntax**|<span class="notranslate">`LERetryAfter SECONDS`</span>|
+|**Default**| 60 seconds|
+|**Context**|<span class="notranslate">server config</span>|
+
+Number of seconds to wait before attempting to reconnect to Redis after the last unsuccessful attempt to connect.
+
+**Example**:
+
+<div class="notranslate">
+
+```
+LVERedisTimeout 120
+```
+</div>
+
+### cPanel/WHM JSON API
+
+CloudLinux offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. You can access it using the following URL:
+
+<div class="notranslate">
+
+```
+https:/IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=list
+```
+</div>
+
+The output will look as follows:
+
+<div class="notranslate">
+
+```
+{"data":[{"ID":"default","CPU":"30","NCPU":"1","PMEM":"1024M","VMEM":"1024M","EP":"28","NPROC":"0","IO":"2048"}]}
+```
+</div>
+
+#### **Parameters**
+
+|||
+|-|-|
+|<span class="notranslate">`cgiaction`</span>|always <span class="notranslate">`jsonhandler`</span>|
+|<span class="notranslate">`handler`</span>|should match [lvectl](/command-line_tools/#lvectl) command|
+
+For commands like <span class="notranslate">`set`, `destroy`</span> & <span class="notranslate">`delete`</span>, where you need to specify LVE (user) ID, like `lveid=500` (matches user ID 500).
+
+**Example**:
+
+<div class="notranslate">
+
+```
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=30%&io=2048
+
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=300Mhz&io=2048
+
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=3Ghz&io=2048
+```
+</div>
+
+:::tip Note
+**Speed** limit can be specified in several units of measure - <span class="notranslate"> %, MHz, GHz </span>. The figures will be different according to the unit of measure.
+:::
+
+**Output**:
+
+<div class="notranslate">
+
+```
+{"status":"OK"}
+```
+</div>
+
+To do `set default`, use `lveid=0`, like:
+
+<div class="notranslate">
+
+```
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=0&speed=30%&io=2048
+```
+</div>
+
+For commands like <span class="notranslate">`apply all`, `destroy all`</span>, use:
+
+<div class="notranslate">
+
+```
+handler=apply-all
+
+handler=destroy-all
+```
+</div>
+
+You can use the following commands that allow to specify user name instead of user ID:
+
+| | |
+|-|-|
+|<span class="notranslate">`set-user`</span> | Set parameters for a LVE and/or create a LVE using username instead of ID.|
+|<span class="notranslate"> `list-user  ` </span> | List loaded LVEs, display username instead of user ID.|
+|<span class="notranslate"> `delete-user ` </span> | Delete LVE and set configuration for that user to defaults.|
+
+If the limits for users are set with <span class="notranslate"> cPanel LVE Extension </span>, then turnkey billing solutions can be applied (e.g. WHMCS).
+
+### mod_proctitle
+
+mod_proctitle is a module for gathering URL information per request. It is available only for Apache 2.4 now.
+
+
+**For installation:**
+
+cPanel EasyApache 3 and non cPanel ( _CloudLinux 7 only for non cPanel_ ):
+
+<div class="notranslate">
+
+```
+# yum install mod_proctitle --enablerepo=cloudlinux-updates-testing
+# service httpd restart
+```
+</div>
+
+cPanel EasyApache 4:
+
+<div class="notranslate">
+
+```
+# yum install ea-apache24-mod_proctitle
+# service httpd restart
+```
+</div>
+DirectAdmin:
+<div class="notranslate">
+ 
+```
+# cd /usr/local/directadmin/custombuild
+# ./build update
+# ./build mod_procticle
+```
+</div>
+
+#### How to Read mod_proctitle Information
+
+**How to read information gathered by the module**
+
+
+For reading information saved by module use the following script (the script is not in the package):
+<div class="notranslate">
+
+```
+# CAT PROCTITLES_INFO.SH
+#!/BIN/BASH
+
+HTTPD=HTTPD 
+
+FOR PID IN `/USR/BIN/PGREP $HTTPD`; DO
+    FOR TID IN `LS /PROC/$PID/TASK`; DO
+		FOUND=NO
+		FOR SHM IN `LS /DEV/SHM/APACHE_TITLE_SHM_${PID}_${TID}_* 2>/DEV/NULL`; DO
+			FOUND=YES
+			TITLE=`/USR/BIN/TR -D '\0' < $SHM`
+			THREAD_ID=`/BIN/BASENAME "${SHM}" | SED "S/APACHE_TITLE_SHM_${PID}_${TID}_//"`
+			ECHO "$PID.$TID - $THREAD_ID - $TITLE"
+		BREAK
+		DONE
+	IF [ "$FOUND" = "NO" ]; THEN
+		ECHO "$PID.$TID NOT FOUND"
+	FI
+    DONE
+DONE
+```
+</div>
+Here are the examples of saved by module:
+<div class="notranslate">
+
+```
+# sh proctitles_info.sh
+571258.571258 NOT FOUND
+571300.571300 NOT FOUND
+571303.571303 - 000000000000000 - 1466513333.6 test.cloudlinux.com GET /1.php HTTP/1.1
+571304.571304 - 000000000000000 - 1466513335.3 test.cloudlinux.com GET /1.php HTTP/1.1
+571305.571305 - 000000000000000 - httpd
+571306.571306 - 000000000000000 - httpd
+571307.571307 - 000000000000000 - httpd
+571372.571372 - 000000000000000 - httpd
+571374.571374 - 000000000000000 - httpd
+
+Item info:
+[pid].[tid] - [posix thread id] - [request info]
+```
+</div>
+
+Request information can contain:
+
+<span class="notranslate"> _NOT FOUND_ </span> - means that process of Apache doesn't handle requests.<br>
+<span class="notranslate"> _httpd_ </span> - request is active and waiting for new connection.<br>
+<span class="notranslate"> _[seconds].[tenths of second] [host] [METHOD] [URL] [PROTOCOL]_ </span>
+
+#### Tuning Parameters
+
+**Module parameters for tuning**
+
+| | |
+|-|-|
+|WatchHandlers | List of handlers for monitoring (httpd.conf, virtualhost).|
+|ProctitleUseFilter On/Off | Use old method of cleaning information or new via filter (for prefork better to use <span class="notranslate"> Off </span> )|
+
+### alt-suexec
+
+**What is <span class="notranslate">alt-suexec</span> package needed for?**
+
+If you use standard httpd from our repository, but your users' sites do not match standard Apache location of <span class="notranslate">`/var/www`</span>, then you should use alt-suexec.
+alt-suexec package brings suEXEC binaries pre-compiled for specific locations, like <span class="notranslate"> /home </span> .
+
+**How to switch suEXEC with alt-suexec**
+
+Based on httpd 2.2 basic for 6 and httpd 2.4 basic for CloudLinux 7, the package brings to server a set of suEXECs with different <span class="notranslate"> DOCUMENT ROOT </span> s and <span class="notranslate"> MIN_UID/MIN_GID </span> parameters. The first set of suEXECs is listed by such modes:
+
+<div class="notranslate">
+
+```
+# switch_suexec -h
+USE_BIZ - DOCUMENT ROOT /biz/ MIN_UID 500 MIN_GID 100 CALLER apache
+USE_HOSTING - DOCUMENT ROOT /hosting/ MIN_UID 500 MIN_GID 100 CALLER apache
+USE_HSPHERE - DOCUMENT ROOT /hsphere/local MIN_UID 100 MIN_GID 100 CALLER httpd
+USE_HOME - DOCUMENT ROOT /home/ MIN_UID 500 MIN_GID 100 CALLER apache
+USE_WWW - DOCUMENT ROOT /var/www/ MIN_UID 500 MIN_GID 100 CALLER apache
+USE_FSROOT - DOCUMENT ROOT / MIN_UID 500 MIN_GID 100 CALLER apache
+USE_STORAGE - DOCUMENT ROOT /storage/content/ MIN_UID 500 MIN_GID 100 CALLER apache
+USE_DATAS - DOCUMENT ROOT /datas/ MIN_UID 500 MIN_GID 100 CALLER apache
+```
+</div>
+The package also brings its own utility for installing specific suEXEC:
+
+| | |
+|-|-|
+|-l | list of available suexec|
+|-u | update suexec according to <span class="notranslate"> /etc/sysconfig/alt-suexec </span>|
+|-s | set new suexec and install it|
+|-p | set new suexec path and install it|
+|-o | set new suexec owners and install it|
+|-r | restore native apache suexec|
+
+There are two ways to set up new suEXEC binary:
+
+1) via config file <span class="notranslate"> _/etc/sysconfig/alt-suexec_ </span>
+2) via utility _switch_suexec_
+
+Here are the examples of how to set up suEXEC with <span class="notranslate"> DOC_ROOT = "/home": </span>
+
+**1.**
+
+1) add string <span class="notranslate"> "USE_HOME" </span> to <span class="notranslate"> _/etc/sysconfig/alt-suexec_   </span>
+2) run the command <span class="notranslate"> switch_suexec -u </span>
+
+**2.**
+
+1) <span class="notranslate"> switch_suexec -sUSE_HOME </span>
+
+Result of both methods:
+<div class="notranslate">
+
+```
+# cat /etc/sysconfig/alt-suexec
+USE_HOME
+```
+</div>
+
+Here is standard suEXEC for CloudLinux 6 clean server:
+<div class="notranslate">
+
+``` 
+# /usr/sbin/suexec -V
+-D AP_DOC_ROOT="/var/www"
+-D AP_GID_MIN=100
+-D AP_HTTPD_USER="apache"
+-D AP_LOG_EXEC="/var/log/httpd/suexec.log"
+-D AP_SAFE_PATH="/usr/local/bin:/usr/bin:/bin"
+-D AP_UID_MIN=500
+-D AP_USERDIR_SUFFIX="public_html"
+-D AP_SAFE_DIRECTORY="/usr/local/safe-bin"
+```
+</div>
+
+Here is output of new suEXEC after <span class="notranslate"> USE_HOME </span> installtion:
+<div class="notranslate">
+
+``` 
+# /usr/sbin/suexec -V
+-D AP_DOC_ROOT="/home/"
+-D AP_GID_MIN=100
+-D AP_HTTPD_USER="apache"
+-D AP_LOG_EXEC="/var/log/httpd/suexec.log"
+-D AP_SAFE_PATH="/usr/local/bin:/usr/bin:/bin"
+-D AP_UID_MIN=500
+-D AP_USERDIR_SUFFIX="public_html"
+-D AP_SAFE_DIRECTORY="/usr/local/safe-bin"
+```
+</div>
+
+Description of other switch_suexec parameters:
+
+| | |
+|-|-|
+|-p | if suexec binary file will be placed not in standard way <span class="notranslate"> /usr/sbin </span> - specify this new path with p-option|
+|-o | if suexec binary file not owned by <span class="notranslate"> root:apache </span> - specify new owner with o-option|
+
+For most cases -p and -o options for standard Apache are useless.
+
+Correct suEXEC will be restored even after httpd update or reinstall.
+
+List of pre-built suEXEC binary files stored without suid bit and not executable.
+
+**How to install alt-suexec?**
+
+For installation run the command:
+<div class="notranslate">
+
+```
+yum install alt-suexec
+```
+</div>
+
+**New suexec with custom parameters**
+
+If you need suEXEC with custom parameters absent in current set of alt-suexec, please submit a ticket on [https://cloudlinux.zendesk.com](https://cloudlinux.zendesk.com/) and we will add new suEXEC with needed parameters.
 

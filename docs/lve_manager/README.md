@@ -430,7 +430,7 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 <div class="notranslate">
 
-### Selector
+### PHP Selector
 
 </div>
 
@@ -446,6 +446,631 @@ Choose default modules from the list for a proper PHP version or for native.
 
 ![](/images/lveman_092.jpg)
 ![](/images/lveman_093.jpg)
+
+
+### Python Selector UI
+
+#### Hoster
+
+Hoster interface allows to enable and disable Python Selector and manage individual Python versions.
+
+Go to <span class="notranslate">LVE Manager → Options Tab → Python Selector</span>.
+
+A list of installed Python versions is displayed. There are several columns in the list.
+* <span class="notranslate">Version</span> — displays Python version.
+* <span class="notranslate">Path</span> — Python package location.
+* <span class="notranslate">Applications</span> — number of applications that use this Python version. Click on an application number to go to the list of applications.
+* <span class="notranslate">Enabled</span> — displays if particular Python version is enabled.
+* <span class="notranslate">Actions</span> — allows to install, delete, and make default a particular Python version.
+
+To display all changes immediately click <span class="notranslate">_Refresh_</span>.
+
+![](/images/PythonGeneral.png) 
+
+#### How to enable/disable Python Selector
+
+To enable Python Selector move a slider to <span class="notranslate">_Enable_</span> and complete the action by clicking <span class="notranslate">_Agree_</span> or click <span class="notranslate">_Cancel_</span> to close the popup.
+To disable Python Selector move a slider back to <span class="notranslate">_Disable_</span>.
+
+:::tip Note
+If you disable Python, all users won't be able to manage their applications
+:::
+
+![](/images/PythonEnableDisable.png)
+
+::: tip Note
+Python Selector icon in end user interface is absent when Python is disabled.
+:::
+
+![](/images/PythonEndUserIcon.png)
+
+#### How to manage Python Selector 
+
+In the list of installed Python versions you can enable and disable, install and delete, and set a particular Python version as a default.
+ 
+#### **Enable and disable particular Python version**
+ 
+To enable particular Python version do the following:
+
+* Move a disabled slider in the <span class="notranslate">Enabled</span> column for a particular Python version.
+* In the confirmation popup click <span class="notranslate">_Agree_</span> to save changes or <span class="notranslate">_Cancel_</span> to close popup.
+
+![](/images/PythonEnabled.png)
+
+To disable particular Python version do the following:
+
+* Move an enabled slider in the <span class="notranslate">Enabled</span> column for a particular Python version.
+* In the confirmation popup click <span class="notranslate">_Agree_</span> to save changes or <span class="notranslate">_Cancel_</span> to close popup.
+ 
+#### **Install and delete particular Python version**
+ 
+To install particular Python version do the following:
+
+* Click <span class="notranslate">_Install_</span> button in the Actions column for a particular Python version.
+* In the confirmation popup click <span class="notranslate">_Agree_</span> to save changes or <span class="notranslate">_Cancel_</span> to close popup.
+ 
+To delete particular Python version do the following:
+
+* Click <span class="notranslate">_Bin_</span> icon in the <span class="notranslate">Actions</span> column for a particular Python version.
+* In the confirmation popup click <span class="notranslate">_Agree_</span> to start uninstalling process. Or close popup without changes by clicking <span class="notranslate">_Cancel_</span> button.
+
+:::tip Note
+It is impossible:
+* to remove default Python version
+* to remove version with applications
+* to install or remove version if another installation/uninstalling process is running
+:::
+
+![](/images/PythonInstall.png)
+
+#### **Make a particular Python version as a default**
+
+To make a particular Python version as a default do the following:
+
+* Click <span class="notranslate">_Double-Tick_</span> icon in the Actions column for a particular Python version.
+* In the confirmation popup click <span class="notranslate">_Agree_</span> to save changes or <span class="notranslate">_Cancel_</span> to close popup.
+ 
+:::tip Note
+It is impossible to make default disabled version
+:::
+
+![](/images/PythonChangeDefaultVersion.png)
+
+#### **Applications column**
+ 
+To view and operate with the list of domains with Python versions click a number in the <span class="notranslate">_Applications_</span> column for a particular Python version. A section with a list of Domains for particular Python version will be displayed.
+
+![](/images/PythonDomains.png)
+
+Domains are displayed by three. To load more domains click <span class="notranslate">_Load More_</span> button.
+ 
+To change Python version for a particular application do the following:
+
+* Click <span class="notranslate">_Double-Arrow_</span> icon in the <span class="notranslate">_Actions_</span> column in a particular application row. A confirmation popup will be displayed.
+* In the popup choose Python version from a dropdown.
+* Click <span class="notranslate">_Change_</span> to confirm the action or <span class="notranslate">_Cancel_</span> to close the popup.
+* To refresh state of applications in current version you can click <span class="notranslate">_Refresh_</span>.
+ 
+:::tip Note
+All packages of the application(s) will be re-installed.
+:::
+
+#### End User
+
+:::tip Note
+Python Selector icon in end user interface is absent when Python is disabled
+:::
+
+![](/images/PythonEndUserIcon.png)
+
+End User interface allows end users to setup and manage Python for their web applications.
+
+Go to <span class="notranslate">cPanel → Software Section → Setup Python App</span>.
+ 
+Web Applications page is displayed.
+
+![](/images/PythonEUWebApp.png)
+
+There are several columns in the list:
+
+* <span class="notranslate">App URI</span> — application URI including the domain.
+* <span class="notranslate">App Root Directory</span> — application root directory relative to user's home.
+* <span class="notranslate">Status — started/stopped</span> — displays if an application is running or not and version of the application.
+* <span class="notranslate">Actions</span> — allows to migrate, start, restart, stop, edit, and remove a particular application.
+
+#### How to manage an application
+
+#### **Create application**
+
+1. Click <span class="notranslate">_Create Application_</span> to create an application. The Create Application tab opens.
+
+    ![](/images/PythonCreateApp.png)
+
+2. Specify the following:
+    * <span class="notranslate">Python version</span> — select from the dropdown (required);
+    * <span class="notranslate">Application root</span> — physical address to your application on a server that corresponds with its URI (required);
+    * <span class="notranslate">Application URL</span> —  HTTP/HTTPS link to your application (optional);
+    * <span class="notranslate">Application startup file</span> — the file where WSGI callable object is located. It is required for application to run. Default is <span class="notranslate">`passenger_wsgi.py`</span>;
+    * Application Entry point — WSGI callable object for your application (optional). Default is <span class="notranslate">`application`</span>;
+3. Optionally, add environment variable. To do so, click <span class="notranslate">_Add Variable_</span> and specify variable name and value, then click the <span class="notranslate">_Done_</span> or <span class="notranslate">_Cancel_</span> to close an adding form.
+
+To delete or edit environment variable, click <span class="notranslate">_Bin_</span> or <span class="notranslate">_Pencil_</span> for the required variable.
+
+![](/images/PythonEnvVar.png)
+
+**Start application**
+ 
+To start a stopped application do the following:
+
+* Click <span class="notranslate">_Start_</span> in the <span class="notranslate">_Actions_</span> column in a stopped application row.
+* When an action is completed a <span class="notranslate">_Start_</span> changes to <span class="notranslate">_Stop_</span>.
+ 
+**Stop application**
+ 
+To stop a started application do the following:
+
+* Click <span class="notranslate">_Stop_</span> icon in the <span class="notranslate">_Actions_</span> column in a started application row.
+* When an action is completed a <span class="notranslate">_Stop_</span> changes to <span class="notranslate">_Start_</span>.
+
+![](/images/PythonStartStopApp.png)
+
+**Restart application**
+ 
+To restart a started application do the following:
+
+* Click <span class="notranslate">_Restart_</span> in the <span class="notranslate">_Actions_</span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
+ 
+**Remove application**
+ 
+To remove application do the following:
+
+* Click <span class="notranslate">_Bin_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row.
+* In the confirmation popup click <span class="notranslate">_Agree_</span> to start removing or <span class="notranslate">_Cancel_</span> to close the popup.
+* When an action is completed an application will be removed from the <span class="notranslate">_Web Applications_</span> table and a confirmation popup will be displayed.
+
+![](/images/PythonRestartRemove.png)
+
+**Edit application**
+ 
+To edit application do the following:
+
+* Click the <span class="notranslate">_Pencil_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row. A particular application tab opens.
+
+![](/images/PythonEditApp.png)
+
+The following actions are available:
+
+* Restart application — click <span class="notranslate">_Restart_</span>.
+* Stop application — click <span class="notranslate">_Stop App_</span>.
+* Remove application — click <span class="notranslate">_Destroy_</span> and confirm the action in a popup.
+* Change Python version — choose Python version from a dropdown.
+* Change Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
+* Change Application URL — specify in a field an HTTP/HTTPS link to the application.
+* Open Application URL — click the <span class="notranslate">_Open_</span>.
+* Change Application startup file — specify as <span class="notranslate">`NAME.py`</span> file.
+* Change Application Entry point — specify WSGI callable object for your application.
+* Run pip install command — click <span class="notranslate">_Run pip install_</span> to install the package(s) described in the configuration file.
+* Add Configuration files — click <span class="notranslate">_Add_</span> and specify all required information.
+* Edit available configuration file — click <span class="notranslate">_Edit_</span>, the file opens in a new popup.
+* Remove available configuration file from the list — click <span class="notranslate">_Remove_</span> and confirm the action or click <span class="notranslate">_Cancel_</span> to close the popup.
+* Add Environment variables — click <span class="notranslate">_Add Variable_</span> and specify a name and a value.
+  
+Click <span class="notranslate">_Save_</span> to save all changes or <span class="notranslate">_Cancel_</span> to close the tab.
+
+**Migrate application**
+
+For details see [How to migrate an application to the new Python Selector](/python_selector/#how-to-migrate-an-application-to-the-new-python-selector)
+
+
+### Reseller Limits UI
+
+#### Hoster Interface
+
+Hoster interface allows to monitor and manage limits for hosters’ end users, resellers and resellers’ end users, and also manage packages and monitor statistics.
+
+Hoster credentials allow to control limits for hosters’ end users and resellers. To control reseller end user limits Hoster has to log in as Reseller.
+
+Log in as Hoster to get access to the following functionality.
+
+* <span class="notranslate">[Current Usage](/reseller_limits/#current-usage)</span> tab allows to monitor users and resellers resource usage at the moment.
+* <span class="notranslate">[Users](/reseller_limits/#users)</span> tab with the list of all users and resellers allows viewing and managing all the users and resellers limits.
+* <span class="notranslate">[Statistics](/reseller_limits/#statistics)</span> tab displays the statistics of resource usage for particular timeframe or particular user.
+* <span class="notranslate">[Options](/reseller_limits/#options)</span> tab allows to set LVE faults email notifications for hoster, users, and resellers.
+* <span class="notranslate">[Packages](/reseller_limits/#packages)</span> tab allows to manage resellers packages limits;
+* <span class="notranslate">[Selector](/reseller_limits/#selector)</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
+
+<div class="notranslate">
+
+#### Current Usage
+
+</div>
+
+Choose <span class="notranslate">Current Usage</span> tab to monitor users, resellers and resellers’ end users resource usage at the moment displayed in the table.
+
+<span class="notranslate">Current Usage</span> table provides information on usage of the following:
+* <span class="notranslate"> SPEED (All</span> and MySQL)
+* <span class="notranslate"> memory (MEM)</span>
+* data throughput (<span class="notranslate">IO) (All</span> and MySQL)
+* read/write operations per second (<span class="notranslate">IOPS</span>)
+* number of processes (<span class="notranslate">PNO</span>)
+* entry processes (<span class="notranslate">EP</span>)
+
+Resource usage values are being refreshed every 10 seconds by default which is set in <span class="notranslate">_Auto-refresh_</span> field. You can set <span class="notranslate">_Auto-refresh time_</span> by choosing a value from the drop-down.
+
+You can refresh the table manually by clicking <span class="notranslate">_Refresh now_</span> or you can freeze the values by clicking <span class="notranslate">_pause_</span>. Usage values will not change until the next manual refresh. To unfreeze click <span class="notranslate">_unpause_</span>. The countdown will continue.
+
+Tick <span class="notranslate">_Hide MySQL usage_</span> to hide the information on MySQL usage.
+
+The list of users can be filtered by <span class="notranslate">_Username_</span> and <span class="notranslate">_Domain_</span>.
+
+Hoster can **view** all types of users:
+* <span class="notranslate">End users</span>
+* <span class="notranslate">Resellers</span>
+* <span class="notranslate">Reseller’s end users</span>
+* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>.
+
+But hoster can only **manage**:
+* <span class="notranslate">End users</span>
+* <span class="notranslate">Resellers</span>
+* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>
+
+To manage Reseller’s end users hoster should login as a reseller.
+
+In the drop-down <span class="notranslate">_Show top_</span> you can choose the number of user to be displayed on the page.
+
+![](/images/currentusagetabhoster_zoom60.png)
+
+<div class="notranslate">
+
+#### Users
+
+</div>
+
+Choose <span class="notranslate">_Users_</span> tab to view the list of all users and manage their limits.
+
+To filter the list by user type click <span class="notranslate">_Manage_</span> and in the drop-down choose:
+
+* <span class="notranslate">End users</span> - to manage hosts end users only.
+* <span class="notranslate">Resellers</span> - to manage resellers only.
+* <span class="notranslate">Reseller’s end users</span> - to manage resellers’ end users only.
+* <span class="notranslate">Reseller’s end users (no Reseller limits)</span> - to manage resellers’ end users that do not have limits specified by reseller (these limits are specified by the hoster).
+
+To filter the list by <span class="notranslate">_Username_, _Domain_, _LveID_</span> click <span class="notranslate">_Filter by_</span> and choose the value in the drop-down.
+
+:::tip Note
+A hoster can view the list of resellers’ end users and their limits, but can not manage resellers’ end users limits (if those are set by reseller).
+:::
+
+A hoster can view the limits of all types of users and manage the limits for hosters’ end users and resellers’ end users (only those with Reseller Limits disabled).
+* Tick <span class="notranslate">_Show users with CageFS enabled_</span> to show users with CageFS file system enabled.
+* Tick <span class="notranslate">_Show only ignored users_</span> to show users with ignored <span class="notranslate">MySQL Governor</span>.
+
+![](/images/userstabhoster_zoom70.png)
+
+<div class="notrnslate">
+
+#### Actions
+
+</div>
+
+Click pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
+
+* Enable/disable <span class="notranslate">CageFS</span>
+* <span class="notranslate">**Reset**</span> - to reset limits to default values
+* Apply <span class="notranslate">**Do not limit**</span> to set the limits to unlimited;
+* Setting the limits values:
+  * <span class="notranslate"> SPEED </span>
+  * <span class="notranslate"> SPEED MYSQL </span>
+  * <span class="notranslate"> VMEM </span>
+  * <span class="notranslate"> PMEM </span> 
+  * <span class="notranslate"> IO </span>
+  * <span class="notranslate"> MySQL IO </span>
+  * <span class="notranslate"> IOPS </span>
+  * <span class="notranslate"> EP </span>
+  * <span class="notranslate"> NPROC </span>
+  * <span class="notranslate"> INODES </span> (hard and soft) (for <span class="notranslate">end users</span> and <span class="notranslate">resellers’ end users (with no Reseller Limits)</span>, if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings).
+
+Click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the pop-up.
+
+![](/images/actionshoster.png)
+
+Click on <span class="notranslate">_History_</span> symbol to view the history of a particular user resource usage. Choose time frame to view the history for a particular time period.
+
+![](/images/historyhoster.jpg)
+
+<div class="notranslate">
+
+#### Statistics
+
+</div>
+
+Choose <span class="notranslate">_Statistics_</span> tab to view end users, resellers and resellers’ end users limits usage statistics.
+
+The following parameters can be displayed in the statistics table:
+
+* <span class="notranslate"> SPEED </span> usage per user;
+* <span class="notranslate"> IO </span> usage per user;
+* <span class="notranslate"> EP </span> usage per user;
+* <span class="notranslate"> VMEM </span> usage per user;
+* <span class="notranslate"> PMEM </span> usage per user;
+* <span class="notranslate"> NPROC </span> usage per user;
+* <span class="notranslate"> IOPS </span> usage per user;
+* <span class="notranslate"> MySQL </span> usage per user.
+
+Click <span class="notranslate">_Show_</span> and select columns from the drop-down to set which parameters should be displayed in the table.
+
+Statistics table can be filtered by:
+
+* <span class="notranslate"> Timeframe </span> - to view the statistics for a particular period;
+* <span class="notranslate"> Limit </span> - to view a particular limit type usage only;
+* <span class="notranslate"> Top LVEs </span> - to view top used limits only;
+* <span class="notranslate"> LVE approaching limit </span> - to view the limits that are approaching maximum provided value;
+* <span class="notranslate"> Fault LVE </span> - the limits that have reached the maximum value.
+
+Click <span class="notranslate">_Manage_</span> to choose type of users to be displayed - <span class="notranslate">End users, Resellers, Resellers’ end users</span> or <span class="notranslate">Resellers’ end users (no Reseller limit)</span> by ticking checkbox in the drop-down.
+
+![](/images/statisticstabhoster_zoom70.png)
+
+Click chart symbol in the <span class="notranslate">_View_</span> column to view the detailed resource usage history for a particular account. Use timeframe drop-down to view the history for a particular period of time.
+
+![](/images/history_charts_zoom70.png)
+
+<div class="notranslate">
+
+#### Options
+
+</div>
+
+A hoster can set email notifications for panel administrator, reseller customer, and resellers’ customers in cases of limits faults. Choose <span class="notranslate">_Options_</span> tab to manage LVE Faults email notifications.
+
+In <span class="notranslate">_LVE Faults Email Notifications_</span> section tick the required checkboxes to set a type of notification.
+
+* <span class="notranslate"> _Notify Panel Administrator_ </span> - notify hoster when his end users have exceeded minimum number of faults set for particular limits.
+* <span class="notranslate"> _Notify Reseller_ </span> - notify reseller when his end users have exceeded minimum number of faults set for particular limits.
+* <span class="notranslate"> _Notify Customers_ </span> - notify hosters’ end users when they have exceeded limits.
+* <span class="notranslate"> _Notify Reseller's customers_ </span> - notify resellers’ end users when they have exceeded limits.
+
+![](/images/optionstabemailnotifhoster.png)
+
+In <span class="notranslate">_Faults to include_</span> section tick the checkboxes to include required limits to the notifications.
+Set the frequency of email notifications sending in <span class="notranslate">_Notify …. every.. days/hours/minutes/seconds_</span> section.
+
+![](/images/optionshosterfaultstoinclude.png)
+
+In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter the number of faults required for the notification to be sent for <span class="notranslate">_Panel Admin & Reseller_</span> and <span class="notranslate">_User_</span>.
+
+![](/images/optionstabhosterminimumftn.png)
+
+* In <span class="notranslate">_Inodes limits_</span> section you can reset inode limits to default values and tick <span class="notranslate">_Show end-user inode usage_</span>.
+* In <span class="notranslate">_User interface settings_</span> section tick the required checkboxes to apply user interface settings.
+* In <span class="notranslate">_MySQL Governor settings_</span> section you can customize <span class="notranslate"> MySQL Governor</span>.
+
+![](/images/optionstabhosterinodes.png)
+
+<div class="notranslate">
+
+#### Packages
+
+</div>
+
+<span class="notranslate">_Packages_</span> tab allows to set the limits for as many users as you need by editing packages of the limits. Each account belonging to a particular package adheres to those limits.
+
+Choose <span class="notranslate">_Packages_</span> tab to view and modify:
+
+* limits for user packages (created by hoster);
+* limits for reseller packages (created by hoster);
+* limits for resellers’ end users packages if reseller limits are not set for that reseller (hoster access allows identifying a particular reseller’s end user belonging to a particular reseller (created by reseller)).
+  
+![](/images/packageshostertab_zoom70.png)
+
+To modify package limits click on a pencil symbol in <span class="notranslate">_Actions_</span> column in a particular package row. The following limits for this package are available for setting:
+
+* <span class="notranslate"> SPEED</span> in percent (%);
+* <span class="notranslate"> Virtual memory (VMEM)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> I/O limits (IO)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> IOPS</span> limits;
+* <span class="notranslate"> Concurrent connections (EP)</span>;
+* <span class="notranslate"> Number of processes (NPROC)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> INODES (hard and soft)</span> (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings.)
+
+When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
+
+<div class="notranslate">
+
+#### Selector
+
+</div>
+
+<span class="notranslate">_Selector_</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
+
+* In <span class="notranslate">_Selector is_</span> choose <span class="notranslate">_Enabled_</span> or <span class="notranslate">_Disabled_</span> from the drop-down to enable or disable <span class="notranslate">PHP Selector</span>.
+
+* In <span class="notranslate">_Default PHP version_</span> choose PHP version or <span class="notranslate">_Native_</span> from the drop-down to apply.
+
+* In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
+
+Choose default modules from the list for a particular version of PHP or for <span class="notranslate">native</span>.
+
+![](/images/selector01_zoom70.png)
+
+![](/images/selector02_zoom70.png)
+
+
+#### Reseller Interface
+
+Reseller interface is designed to manage limits for resellers’ end users, to monitor statistics and the history of resource usage and to modify reseller’s end user packages limits.
+
+Log in under a particular reseller credentials to have access to the following functionality:
+
+* <span class="notranslate">[Current Usage](/reseller_limits/#current-usage-tab)</span> tab - allows to monitor resellers’ end users resource usage at the moment;
+* <span class="notranslate"> [Historical Usage](/reseller_limits/#historical-usage-tab)</span> tab - allows to control resellers’ end users resource usage history;
+* <span class="notranslate"> [Users](/reseller_limits/#users-tab)</span> tab with the list of all resellers’ end users allows to view and manage all the reseller’s end user limits;
+* <span class="notranslate"> [Statistics](/reseller_limits/#statistics-tab)</span> tab displays the statistics of resource usage for particular timeframe or particular reseller's end user;
+* <span class="notranslate"> [Options](/reseller_limits/#options-tab)</span> tab allows to set LVE Faults email notifications.
+* <span class="notranslate"> [Packages](/reseller_limits/#packages-tab)</span> tab allows to manage reseller’s end user packages limits.
+
+Please note that reseller can manage all his end users via Reseller Interface. Reseller cannot manage <span class="notranslate"> INODE </span> or <span class="notranslate"> MYSQL </span> limits, neither his own nor for his users.
+
+<div class="notranslate">
+
+#### Current Usage tab
+
+</div>
+
+Current usage table provides the information on the usage of the following:
+* <span class="notranslate"> SPEED (All)</span>
+* <span class="notranslate">memory (MEM)</span>
+* data throughput <span class="notranslate">(IO)(All)</span>
+* read/write operations per second (<span class="notranslate">IOPS</span>)
+* <span class="notranslate">number of processes (PNO)</span>
+* <span class="notranslate">entry processes (EP)</span>
+
+Resource usage data is being refreshed every 10 seconds which is set by default in <span class="notranslate">_Auto-refresh_</span> field. You can set <span class="notranslate">_Auto-refresh time_</span> by choosing the value from the drop-down.
+
+You can refresh the table manually by clicking <span class="notranslate">_Refresh now_</span> or you can freeze the values by clicking <span class="notranslate">_pause_</span> button.
+
+Usage values will not change until the next manual refresh. To unfreeze click on <span class="notranslate">_unpause_</span> button. The countdown will continue.
+
+Reseller cannot manage <span class="notranslate">INODE</span> or MYSQL limits. Neither his own, nor for his users.
+
+The bottom line star in the table displays the total reseller resource usage. It means, that all the usage of resellers’ end users and of his own is displayed as a summary for each parameter.
+
+
+![](/images/currentusagetabresellerr_zoom70.png)
+
+<div class="notranslate">
+
+#### Historical Usage tab
+
+</div>
+
+Choose <span class="notranslate">_Historical Usage_</span> tab to view reseller and resellers’ end users resource usage history and faults. The list of users can be filtered by <span class="notranslate">_Timeframe_</span>.
+
+When reseller’s end user reaches the limits set by hoster for the reseller, this will be displayed on the chart. 
+
+:::tip Note
+In this case reseller’s end user would not necessarily reaches his limits set by the reseller. These faults are not displayed on the chart.
+:::
+
+On the <span class="notranslate">_Historical Usage_</span> page the reseller is also able to see the list of <span class="notranslate">_Top 5 Reseller’s end users_</span> (based on resource usage, for the same period as charts/overall usage). Click <span class="notranslate">_History_</span> in the <span class="notranslate">_Actions_</span> column to view resource usage statistics for particular user.
+
+Click <span class="notranslate">_LVE Statistics_</span> on the top of the <span class="notranslate">Top 5</span> list to go to the <span class="notranslate">_Statistics_</span> page to view or manage the rest of users.
+
+![](/images/historicalusageresellertab_zoom70.png)
+
+<div class="notranslate">
+
+#### Users tab
+
+</div>
+
+Choose <span class="notranslate">_Users_</span> tab to view and manage the list of all resellers’ end users and resource usage limits provided for them. The following limits are available for the resellers’ end users:
+
+* <span class="notranslate">SPEED</span>
+* <span class="notranslate">PMEM</span>
+* <span class="notranslate">IO</span>
+* <span class="notranslate">IOPS</span>
+* <span class="notranslate">EP</span>
+* <span class="notranslate">NPROC</span>
+
+You can filter the list by <span class="notranslate">_Username_, _Domain_, _LVE ID_.</span>
+
+Tick <span class="notranslate">_Show only ignored users_</span> to display only users with <span class="notranslate">MySQL Governor</span> disabled.
+
+![](/images/userstabreseller_zoom70.png)
+
+<div class="notranslate">
+
+#### Actions column
+
+</div>
+
+Click on a pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
+
+* Click <span class="notranslate">Reset</span> to reset limits to default values.
+* Click <span class="notranslate">Apply</span> for <span class="notranslate">Do not limit</span> to set unlimited resources to a user.
+* Set values for <span class="notranslate"> PEED, PMEM, IO, IOPS, EP</span>, and NPROC and click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the window.
+
+![](/images/userstabpopup_zoom70.png)
+
+<div class="notranslate">
+
+#### Statistics tab
+
+</div>
+
+Choose <span class="notranslate">_Statistics_</span> tab to view resource usage limits statistics.
+
+<span class="notranslate">_Statistics_</span> table can be filtered by <span class="notranslate">_Timeframe_, _Limit_, _Top LVEs_, _LVE approaching limit_, _Fault LVE_</span>.
+
+The following parameters are displayed:
+
+* <span class="notranslate"> SPEED</span> per user;
+* <span class="notranslate"> PMEM</span> usage per user;
+* <span class="notranslate"> IO</span> usage per user;
+* <span class="notranslate"> EP</span> usage per user;
+* <span class="notranslate"> NPROC</span> usage per user;
+* <span class="notranslate"> IOPS</span> usage per user.
+
+![](/images/statisticstabreseller_zoom70.png)
+
+
+Use <span class="notranslate">_Charts_</span> in the <span class="notranslate">_View_</span> column to view detailed resource usage charts for a particular period of time.
+
+For example, 7 days period chart.
+
+![](/images/sevendayschartresellers_zoom70.png)
+
+<div class="notranslate">
+
+
+#### Options tab
+
+</div>
+
+Choose <span class="notranslate">_Options_</span> tab to set user email notifications for resellers’ end users.
+
+In <span class="notranslate">_LVE Faults email notifications_</span> section tick appropriate checkboxes to set the required type of notification.
+
+![](/images/optionsresellernotify_zoom70.png)
+
+* <span class="notranslate">_Notify me on users faults_</span> - notify reseller when his users have exceeded limits.
+* <span class="notranslate">_Notify Customers_</span> - notify resellers’ end users when they have exceeded limits.
+* <span class="notranslate">_Notify me when I hit my limits_</span> - notify reseller when overall resource usage limits are reached.
+
+In <span class="notranslate">_Faults to include_</span> section tick checkboxes to include particular limits to email notifications.
+
+![](/images/options02_zoom70.png)
+
+In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter the number of faults required for the notification to be sent for reseller and customer. You can also set the reseller notification frequency.
+
+Set the frequency of sending the reseller email notifications in <span class="notranslate">_Notify Reseller Every ... days/hours/minutes/seconds_</span> section.
+
+![](/images/options03_zoom70.png)
+
+Click <span class="notranslate">_Save Changes_</span> to apply changes.
+
+<div class="notranslate">
+
+#### Packages tab
+
+</div>
+
+Choose <span class="notranslate">_Packages_</span> tab to view and modify limits for reseller’s packages.
+
+![](/images/packagesreseller_zoom70.png)
+
+Click pencil icon in a package row to set the following limits for a package:
+
+* <span class="notranslate">SPEED</span> limit;
+* <span class="notranslate">Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate">I/O</span> limits;
+* <span class="notranslate">IOPS</span> limits;
+* <span class="notranslate">Concurrent connections (EP)</span> limits.
+
+When limits are set click <span class="notranslate">_Save_</span> to apply changes.
+
 
 ### LVE Manager Options
 
