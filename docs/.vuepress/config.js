@@ -121,8 +121,7 @@ module.exports = {
               "/command-line_tools/",
               "/lve_manager/",
               "/cloudlinux_os_components/",
-              "/kernel_related/",
-              "/additional_packages/",
+              "/cloudlinux_os_kernel/",
               "/for_cloudlinux_partners/",
               "/deprecated/"
             ]
