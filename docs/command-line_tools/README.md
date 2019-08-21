@@ -3,7 +3,7 @@
 The list of the commands (CLI) you can use to manage CloudLinux OS components.
 
 * [CageFS](/command-line_tools/#cagefs)
-* [LVE-Stats 2](/command-line_tools/#lve-stats-2)
+* [LVE-stats 2](/command-line_tools/#lve-stats-2)
 * [MySQL Governor](/command-line_tools/#mysql-governor)
 * [PHP Selector](/command-line_tools/#php-selector)
 * [Python Selector](/command-line_tools/#python-selector)
@@ -106,10 +106,11 @@ Common options:
 
 
 
-#### Running Command Inside CageFS
+#### Running command inside CageFS
 
-
-<span class="notranslate"> _[lve-wrappers 0.6-1+]_ </span>
+::: tip Note
+lve-wrappers 0.6-1+
+:::
 
 Sometimes you will need to execute a command as user inside CageFS.
 
@@ -135,12 +136,14 @@ You can forcibly disable <span class="notranslate"> `cagefs_enter` </span> start
 <span class="notranslate"> _/bin/cagefs_enter.proxied_ </span> can be executed instead of <span class="notranslate"> _/bin/cagefs_enter_ </span> to enter CageFS without <span class="notranslate"> `proxyexec` </span> . Note that starting <span class="notranslate"> `cagefs_enter` </span> via <span class="notranslate"> `proxyexec` </span> is necessary to enable sending local notification messages to users with enabled CageFS. <span class="notranslate"> `cagefs_enter` </span> is executed via <span class="notranslate"> `proxyexec` </span> by default.
 
 
-#### Sanity Check
+#### Sanity check
 
 
-<span class="notranslate"> _[ CageFS 6.0-34+]_ </span>
+:::tip Note
+CageFS 6.0-34+
+:::
 
-CageFS <span class="notranslate"> `--sanity-check` </span> utility allows to check CageFS configuration consistency, so that an administrator can save the time investigating issues with CageFS and ensure that custom configuration is correct.
+CageFS <span class="notranslate">`--sanity-check`</span> utility allows to check CageFS configuration consistency, so that an administrator can save the time investigating issues with CageFS and ensure that custom configuration is correct.
 
 To start, run the command:
 <div class="notranslate">
@@ -151,7 +154,7 @@ cagefsctl --sanity-check
 </div>
 At the moment 7 types of check are implemented:
 
-1. _Check cagefs mount points exists_ - reads _cagefs.mp_ file and verifies if the directories specified in it really exist on the disk. To learn more, visit [Mount points](/cagefs/#mount-points) and [Split by username](/cagefs/#split-by-username)
+1. _Check cagefs mount points exists_ - reads _cagefs.mp_ file and verifies if the directories specified in it really exist on the disk. To learn more, visit [Mount points](/cloudlinux_os_components/#mount-points) and [Split by username](/cloudlinux_os_components/#split-by-username)
 
 2. _Check cagefs <span class="notranslate"> `users.enabled` </span> is a directory_ - ensures that if  <span class="notranslate"> _/etc/cagefs/users.enabled_ </span> exists, then it is a directory, not a file (if it is recognized as a file, then it would cause a breakdown).
 
@@ -165,11 +168,11 @@ At the moment 7 types of check are implemented:
 If a login fails, it can be due to various reasons, that can only be determined in manual mode. The checker only gives the output of the command.
 :::
 
-6. _Check cagefs proxy commands configs are parsable_ - tries to load <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files and parse them to check the syntax. In case of any parsing error the test will fail. To learn more, visit [Executing by proxy](/cagefs/#executing-by-proxy) .
+6. _Check cagefs proxy commands configs are parsable_ - tries to load <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files and parse them to check the syntax. In case of any parsing error the test will fail. To learn more, visit [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy).
 
-7. _Check cagefs virt.mp files syntax_ - reads all _/var/cagefs///virt.mp_ files (if any) and checks their syntax validity. At the moment there are only two checks of the syntax: the file is not empty if it exists, and the file is not starting with the sub directory definitions (with @). To learn more, visit [Per-user virtual mount points](/cagefs/#per-user-virtual-mount-points)
+7. _Check cagefs virt.mp files syntax_ - reads all _/var/cagefs///virt.mp_ files (if any) and checks their syntax validity. At the moment there are only two checks of the syntax: the file is not empty if it exists, and the file is not starting with the sub directory definitions (with @). To learn more, visit [Per-user virtual mount points](/cloudlinux_os_components/#per-user-virtual-mount-points)
 
-8. _Check MultiPHP system default PHP version_ – checks that MultiPHP system default PHP version is **NOT** Alt-PHP. That means <span class="notranslate"> PHP Selector </span> should work properly. If MultiPHP system default PHP version is Alt-PHP, <span class="notranslate"> PHP Selector </span> does not work and should be disabled. To learn more on how to disable <span class="notranslate"> PHP Selector, </span> visit [cPanel LVE Manager](/lve_manager/#cpanel-lve-manager) 
+8. _Check MultiPHP system default PHP version_ – checks that MultiPHP system default PHP version is **NOT** Alt-PHP. That means <span class="notranslate"> PHP Selector </span> should work properly. If MultiPHP system default PHP version is Alt-PHP, <span class="notranslate"> PHP Selector </span> does not work and should be disabled. To learn more on how to disable <span class="notranslate"> PHP Selector, </span> visit [cPanel LVE Manager](/cloudlinux_os_components/#php-selector) 
 
 Possible results of the checks:
 
@@ -184,16 +187,17 @@ Possible results of the checks:
 In case if at least one of the checks resulted neither <span class="notranslate"> OK </span> nor <span class="notranslate"> SKIPPED </span> then the checker will end with ret code >0.
 
 
-#### CageFS Quirks
+#### CageFS quirks
+
 
 Due to the nature of CageFS, some options will not work as before or will require some changes:
 
-* lastlog will not work ( <span class="notranslate"> _/var/log/lastlog_ </span> ).
+* lastlog will not work ( <span class="notranslate"> _/var/log/lastlog_ </span>).
 * PHP will load php.ini from <span class="notranslate"> _/usr/selector/php.ini._ </span> That file is actually a link to the real _php.ini_ file from your system. So the same _php.ini_ will be loaded in the end.
 * You have to run <span class="notranslate"> `cagefsctl --update` </span> any time you have modified _php.ini_, or you want to get new/updated software inside CageFS.
-* CageFS installation changes <span class="notranslate"> `jailshell` </span> to regular bash on cPanel - [read why](http://kb.cloudlinux.com/2015/11/why-cagefs-installation-change-jailshell-to-regular-bash-on-cpanel/).
+* CageFS installation changes <span class="notranslate"> `jailshell` </span> to regular bash on cPanel - [read why](https://cloudlinux.zendesk.com/hc/articles/115004517685-Why-CageFS-installation-changes-jailshell-to-regular-bash-on-cPanel-).
 
-## LVE-Stats 2
+## LVE-stats 2
 
 | | |
 |-|-|
@@ -594,7 +598,7 @@ The structure<sup> *</sup> of <span class="notranslate">`<lve_section>`</span>:
 
 
 :::tip Note
-* you can modify this structure using <span class="notranslate">`--show`</span> option, see [usage examples](/lve-stats_2/#examples) for details.
+* you can modify this structure using <span class="notranslate">`--show`</span> option, see [usage examples](/command-line_tools/#examples) for details.
 * MySQL values are only present when <span class="notranslate">MySQL Governor</span> statistics is available and <span class="notranslate">`--hide-mysql`</span> options is not used.
 :::
 
@@ -897,7 +901,7 @@ For both, **summary statistics** and **detailed statistics**, <span class="notra
 
 :::tip Note
 * you can specify only required fields using <span class="notranslate">`--show`</span> option;
-* <span class="notranslate">`mysql`</span> fields are only available with <span class="notranslate"> [MySQL Governor](/mysql_governor/#installation)</span> installed.
+* <span class="notranslate">`mysql`</span> fields are only available with <span class="notranslate"> [MySQL Governor](/cloudlinux_os_components/#installation-and-update-3)</span> installed.
 :::
 
 #### **Units of measurement**
@@ -983,16 +987,15 @@ The format of the error message is the same as in the other <span class="notrans
 
 ## MySQL Governor
 
-<span class="notranslate"> dbtop </span> - monitors MySQL usage on per user bases.
-<span class="notranslate"> dbctl </span> - command line tool to manage <span class="notranslate">DB Governor</span> configuration.
-<span class="notranslate"> lveinfo --dbgov </span> - provides historical information about usage and customer restrictions.
-<span class="notranslate"> dbgovchar </span> - generates charts for MySQL usage.
+* <span class="notranslate">`dbtop`</span> monitors MySQL usage on per user bases.
+* <span class="notranslate">`dbctl`</span> is a command line tool to manage <span class="notranslate">DB Governor</span> configuration.
+* <span class="notranslate">`lveinfo --dbgov`</span> provides historical information about usage and customer restrictions. 
+* <span class="notranslate">`dbgovchart`</span> generates charts for MySQL usage.
 
 
 #### dbtop
 
-
-Utility to monitor MySQL usage. Requires <span class="notranslate"> db_governor </span> to be running. It shows usage for the current, mid and long intervals.
+Utility to monitor MySQL usage. Requires <span class="notranslate">`db_governor`</span> to be running. It shows usage for the current, mid and long intervals.
 
 **Options:**
 
@@ -1018,7 +1021,12 @@ Control keys, that sort table, displays into header of table bold and underlined
 Sorted field will be highlighted by *.
 <span class="notranslate"> CAUSE </span> field shows current stage, reason for restriction and number of seconds before restriction will be lifted:
 Values of column ' <span class="notranslate"> CAUSE </span> ' - cause of restriction or freezing:
-Possible stages: - - <span class="notranslate"> OK </span> , 1 - Restriction 1, 2 - Restriction 2, 3 - Restriction 3, 4 -- restriction level 4
+Possible stages:
+* `-` <span class="notranslate"> OK </span>
+* `1` - Restriction 1
+* `2` - Restriction 2
+* `3` - Restriction 3
+* `4` - Restriction level 4
 
 | | |
 |-|-|
@@ -1047,7 +1055,7 @@ Command line parameters of <span class="notranslate"> dbtop </span> utility:
 
 usage: <span class="notranslate"> dbctl command [parameter] [options] </span>
 
-**commands:**
+**Commands:**
 
 | | |
 |-|-|
@@ -1069,14 +1077,14 @@ usage: <span class="notranslate"> dbctl command [parameter] [options] </span>
 | | <span class="notranslate"> single </span> - single LVE for all abusers.|
 | | <span class="notranslate"> on </span> - same as <span class="notranslate"> single </span> (deprecated)|
 
-**parameters:**
+**Parameters**
 
 | | |
 |-|-|
 | <span class="notranslate"> default </span> |set default parameter|
 | <span class="notranslate"> usrename </span> |set parameter for user|
 
-**options:**
+**Options**
 
 | | |
 |-|-|
@@ -1085,15 +1093,16 @@ usage: <span class="notranslate"> dbctl command [parameter] [options] </span>
 | <span class="notranslate"> --write=N </span> |limit <span class="notranslate"> WRITE </span> (MB/s) usage|
 | <span class="notranslate"> --level=N </span> |level (1,2,3 or 4) specified (deprecated) - this option is available only for period mode:|
 
-<span class="notranslate"> <restrict_mode use="period"/> </span> (see [Configuration](/mysql_governor/#configuration))
+<span class="notranslate"> <restrict_mode use="period"/> </span> (see [Configuration](/cloudlinux_os_components/#configuration-and-operation))
 
 The default mode is " <span class="notranslate"> limit </span> " - when a user hits limits, the account will be marked as restricted and if the user does not hit the limit again during " <span class="notranslate"> unlimit=1m </span> " account will be unrestricted. This mode doesn't have any additional levels/penalties.  
 <span class="notranslate"> <restrict_mode use="limit" unlimit="1m"/> </span>
 
-Changing the <span class="notranslate"> "unlimit" </span> can be done only via the configuration file (see [Configuration](/mysql_governor/#configuration) ).
+Changing the <span class="notranslate"> "unlimit" </span> can be done only via the configuration file (see [Configuration](/cloudlinux_os_components/#configuration-and-operation)).
+
 <span class="notranslate"> --slow=N: </span> limit time (in seconds) for long running <span class="notranslate"> SELECT </span> queries
 
-Options for parameter <span class="notranslate"> list </span> :
+Options for parameter <span class="notranslate">`list`</span>:
 
 | | |
 |-|-|
@@ -1305,7 +1314,7 @@ Acceptable options are:
 </div>
 
 Charts examples:
-![](/images/1111.png)
+
 ![](/images/1111_2.png)
 
 
@@ -1313,18 +1322,15 @@ Charts examples:
 
 | | |
 |-|-|
-|<span class="notranslate"> /usr/bin/cl-selector </span>  | Tool is used to select version of PHP interpreter inside CageFS. Note. The command is obsolete, please use <span class="notranslate"> [selectorctl](/php_selector/#selectorctl) </span> instead.|
 |<span class="notranslate"> /usr/bin/alt-php-mysql-reconfigure.py </span> | Reconfigures <span class="notranslate"> alt-php </span> extensions to use correct MySQL library, based on the one installed in the system.|
-
 
 #### selectorctl
 
+<span class="notranslate">`selectorctl`</span> is a new tool that replaces <span class="notranslate">`cl-selector`</span> (which is deprecated and should not be used anymore) and <span class="notranslate">`piniset`</span>. It is available starting with **CageFS 5.1.3**.
 
-<span class="notranslate"> selectorctl </span> is a new tool that replaces <span class="notranslate"> cl-selector </span> (which is deprecated and should not be used anymore) and <span class="notranslate"> piniset </span> . It is available starting with **CageFS 5.1.3** .
+All new features will be implemented as part of <span class="notranslate">`selectorctl`</span>.
 
-All new features will be implemented as part of <span class="notranslate"> selectorctl </span> .
-
-**Common Options**
+**Common options**
 
 | | |
 |-|-|
@@ -1333,7 +1339,7 @@ All new features will be implemented as part of <span class="notranslate"> selec
 |<span class="notranslate"> --user (-u) </span> : | specifies user to take action upon.|
 |<span class="notranslate"> --show-native-version (-V) </span> : | prints the version of native interpreter|
 
-**Global Options**
+**Global options**
 
 The global options modify settings in <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> file.
 
@@ -1363,11 +1369,11 @@ The global options modify settings in <span class="notranslate"> /etc/cl.selecto
 | |<span class="notranslate"> $ selectorctl --replace-extensions=pdo,phar --version=5.2 </span>|
 |<span class="notranslate"> --list-extensions (-G): </span> | lists extensions for an alternative for a particular version. Requires <span class="notranslate"> --version </span> . Example:|
 | |<span class="notranslate"> $ selectorctl --list-extensions --version=5.3 <br>~ xml <br>- xmlreader <br>- xmlrpc <br>- xmlwriter <br>- xrange <br>+ xsl </span>|
-| |Plus sign (+) stands for 'enabled', minus (–) for 'disabled', tilde (~) means compiled into interpreter. Enabled and disabled state relates to presence in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ </span> file.|
+| |Plus sign (+) stands for 'enabled', minus (–) for 'disabled', tilde (~) means compiled into interpreter. Enabled and disabled state relates to presence in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_</span> file.|
 
-**End User Options**
+**End user options**
 
-All end-user settings are contained in individual user's alt_php.ini files and controlled using selectorctl command.
+All end user settings are contained in individual user's alt_php.ini files and controlled using selectorctl command.
 
 | | |
 |-|-|
@@ -1417,19 +1423,21 @@ All end-user settings are contained in individual user's alt_php.ini files and c
 |<span class="notranslate"> --change-to-version (-T): </span> | changes all (or particular user) from one interpreter version to another.|
 | |<span class="notranslate"> $ selectorctl --change-to-version=5.2 --version=5.3 </span>|
 
-**Additional Options**
+**Additional options**
 
 | | |
 |-|-|
 |<span class="notranslate"> --base64 (-Q) </span> | Sometimes PHP options values can contain commas and other symbols that break command line formatting. In such a case convert a <span class="notranslate"> key:value </span> pair into <span class="notranslate"> base64 </span> and pass it as value for option-related arguments. For example, to add <span class="notranslate"> disable_functions=exec,popen,system </span> and <span class="notranslate"> display_errors=on </span> to user options, do the following:|
 | |<span class="notranslate"> $ selectorctl --add-options=`echo disable_functions:exec,popen,system|base64 -w 0`,`echo display_errors:on|base64 -w 0` --version=5.2 --user=user1 --base64 </span>|
 | |Option <span class="notranslate"> `-w 0`   </span> of <span class="notranslate"> base64 </span> executable stands for <span class="notranslate"> 'disable wrapping of lines' </span> . Without it <span class="notranslate"> base64 </span> output will break the command. |
-|<span class="notranslate"> --quiet </span> | makes <span class="notranslate"> selectorctl </span> continue when it encounter option not found in <span class="notranslate"> _php.conf_ </span> . Without it <span class="notranslate"> selectorctl </span> exits with error.|
+|<span class="notranslate"> --quiet </span> | makes <span class="notranslate"> selectorctl </span> continue when it encounter option not found in <span class="notranslate"> _php.conf_ </span>. Without it <span class="notranslate"> selectorctl </span> exits with error.|
+
 
 ## Python Selector
 
 
 ### Old Python Selector
+
 
 To create application run:
 
@@ -1783,7 +1791,7 @@ Common output for all <span class="notranslate">`set`</span> commands:
 ```
 </div>
 
-#### End User
+#### End user
 
 :::tip Note
 To start all users CLI commands use <span class="notranslate">`cagefs_enter`</span> command:
@@ -2000,35 +2008,36 @@ To start all users CLI commands use <span class="notranslate">`cagefs_enter`</sp
     ```
     </div>
 
+
 ## Ruby Selector
 
 To create application run:
 <div class="notranslate">
 
 ```
-/usr/bin/selectorctl --interpreter=<ruby> --version=VERSION [--user=USER] [--print-summary] [--json] --create-webapp <FOLDER_NAME> <URI>
+/usr/bin/selectorctl --interpreter=ruby --version=VERSION [--user=USER] [--print-summary] [--json] --create-webapp <FOLDER_NAME> <URI>
 ```
 </div>
 To delete application:
 <div class="notranslate">
 
 ```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --destroy-webapp <FOLDER_NAME>
+/usr/bin/selectorctl --interpreter=ruby [--user=USER] [--print-summary] [--json] --destroy-webapp <FOLDER_NAME>
 ```
 </div>
 To change application folder name:
 <div class="notranslate">
 
 ```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --relocate-webapp <FOLDER_NAME> <NEW_FOLDER_NAME>
+/usr/bin/selectorctl --interpreter=ruby [--user=USER] [--print-summary] [--json] --relocate-webapp <FOLDER_NAME> <NEW_FOLDER_NAME>
 ```
 </div>
 
-To change application <span class="notranslate"> URI </span>:
+To change application <span class="notranslate"> URI </span> :
 <div class="notranslate">
 
 ```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --transit-webapp <FOLDER_NAME> <NEW_URI>
+/usr/bin/selectorctl --interpreter=ruby [--user=USER] [--print-summary] [--json] --transit-webapp <FOLDER_NAME> <NEW_URI>
 ```
 </div>
 
@@ -2036,7 +2045,7 @@ To change application interpreter version:
 <div class="notranslate">
 
 ```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER] [--print-summary] [--json] --set-user-current --version=<NEW VERSION> <FOLDER_NAME>
+/usr/bin/selectorctl --interpreter=ruby [--user=USER] [--print-summary] [--json] --set-user-current --version=<NEW VERSION> <FOLDER_NAME>
 ```
 </div>
 
@@ -2054,7 +2063,6 @@ To choose <span class="notranslate"> Ruby </span> version:
 selectorctl --interpreter=ruby --user=$USER -v 2.0
 ```
 </div>
-
 
 ## Node.js Selector
 
@@ -2141,7 +2149,7 @@ cloudlinux-selector set --json --interpreter=nodejs --default-version=<ver>
 ```
 </div>
 
-**Examples** :  
+**Examples**:  
 This command enables <span class="notranslate"> Node.js Selector </span> :
 
 <div class="notranslate">
@@ -2245,7 +2253,7 @@ Common output for all <span class="notranslate"> _set_ </span> commands:
 To resolve issues related to <span class="notranslate"> _install-version/uninstall-version_ </span> commands (because they are running in the background) you may use this log file <span class="notranslate"> _/var/log/cl-nodejs-last-yum.log_ </span>
 It contains full <span class="notranslate"> _yum_ </span> output from the <span class="notranslate"> **_latest_** </span> performed operation (install or uninstall) and it will be rewritten with each operation.
 
-#### **End User**
+#### **End user**
 
 ::: danger
 options --user and --domain are mutually exclusive now.
@@ -2275,7 +2283,7 @@ JSON output:
 </div>
 
 
-**Example** :
+**Example**:
 
 This command gets config file for <span class="notranslate"> user1 </span> ’s application <span class="notranslate"> app1 </span> :
 
@@ -2305,7 +2313,7 @@ cloudlinux-selector save-config [--json] --interpreter nodejs  [(--user <str> | 
 ```
 </div>
 
-**Example** :  
+**Example**:  
 This command saves config file for <span class="notranslate"> user1 </span> ’s application <span class="notranslate"> app1 </span> :
 
 <div class="notranslate">
@@ -2322,7 +2330,7 @@ cloudlinux-selector [get] [--json] --interpreter nodejs  [(--user <str> |  --dom
 ```
 </div>
 
-**Example** :  
+**Example**:  
 This command gets a list of applications for the <span class="notranslate"> user1 </span> :
 
 <div class="notranslate">
@@ -2340,7 +2348,7 @@ cloudlinux-selector create [--json] --interpreter nodejs [(--user <str> | --doma
 ```
 </div>
 
-**Example** :  
+**Example**:  
 This command creates <span class="notranslate"> user1 </span> 's application for the domain <span class="notranslate"> xyz.com </span> :
 <div class="notranslate">
 
@@ -2363,7 +2371,7 @@ cloudlinux-selector (start | restart | stop | destroy) [--json] --interpreter no
 ```
 </div>
 
-**Example** :
+**Example**:
 This command starts <span class="notranslate"> user1 </span> 's application:
 <div class="notranslate">
 
@@ -2379,7 +2387,7 @@ cloudlinux-selector set [--json] --interpreter nodejs  [(--user <str> | --domain
 ```
 </div>
 
-**Example 1** :
+**Example 1**:
 This command sets a production mode, new domain <span class="notranslate"> new.xyz.com </span> , new Node.js version 8, new <span class="notranslate"> URI </span> , new application <span class="notranslate"> root </span> directory and new startup file for <span class="notranslate"> user1 </span> application located on the domain <span class="notranslate"> xyz.com </span> :
 <div class="notranslate">
 
@@ -2388,7 +2396,7 @@ cloudlinux-selector set --json --interpreter nodejs  --user user1 --app-root my_
 ```
 </div>
 
-**Example 2** :
+**Example 2**:
 
 <div class="notranslate">
 
@@ -2409,8 +2417,8 @@ cloudlinux-selector install-modules [--json] --interpreter nodejs  [(--user <str
 ```
 </div>
 
-**Example** :
-This command runs <span class="notranslate"> _npm install_ </span> for <span class="notranslate"> user1 </span> application:
+**Example**:
+This command runs <span class="notranslate">`npm install`</span> for <span class="notranslate"> user1 </span> application:
 
 <div class="notranslate">
 
@@ -2431,7 +2439,7 @@ cloudlinux-selector run-script [--json] --interpreter nodejs  [(--user <str> | -
 ```
 </div>
 
-**Example** :
+**Example**:
 <div class="notranslate">
 
 ```
@@ -2461,7 +2469,7 @@ source <home_of_user>/nodevenv/<app_root>/<nodejs_version>/bin/activate
 </div>
 
 This command changes prompt to
-**Example** :  
+**Example**:  
 <div class="notranslate">
 
 ```
@@ -2470,12 +2478,9 @@ This command changes prompt to
 ```
 </div>
 
-After ativation user can use <span class="notranslate">`npm`</span> and node from a virtual environment without full paths.
+After activation user can use <span class="notranslate">`npm`</span> and node from a virtual environment without full paths.
 
 ## Apache mod_lsapi PRO
-
-#### switch_mod_lsapi tool
-
 
 switch_mod_lsapi is the command line tool used to manage mod_lsapi PRO.
 
@@ -2530,7 +2535,6 @@ The following table presents which `[OPTIONS]` are supported for various panels:
 |`force` | + | + | + | - | + | + | +|
 |`stat` | + <br> _*without domain info_ | + <br> _*without domain info_ | + | + | + | + <br> _*without domain info_ | + <br> _*without domain info_|
 
-
 ## Other CLI tools
 
 
@@ -2540,6 +2544,8 @@ The following table presents which `[OPTIONS]` are supported for various panels:
 * [lvetop](/command-line_tools/#lvetop)
 * [cldetect](/command-line_tools/#cldetect)
 * [cldiag](/command-line_tools/#cldiag)
+* [cloudlinux-config](/command-line_tools/#cloudlinux-config)
+
 
 ### cldeploy
 
@@ -2592,9 +2598,10 @@ $ cldeploy --hostinglimits           # update httpd and install mod_hostinglimit
 ```
 </div>
 
+
 ### lvectl
 
-lvectl is the primary tool for LVE management. To use it, you have to have administrator access. lvectl is a part of lve-utils package.
+`lvectl` is the primary tool for LVE management. To use it, you have to have administrator access. lvectl is a part of lve-utils package.
 
 **lvectl syntax**
 
@@ -2633,6 +2640,7 @@ lvectl is the primary tool for LVE management. To use it, you have to have admin
 | <span class="notranslate"> `lve-version` </span> |LVE version number|
 | <span class="notranslate"> `set-reseller` </span> |create LVE container and set LVE parameters for a reseller|
 | <span class="notranslate"> `set-reseller-default` </span> |set default limits for resellers users|
+| <span class="notranslate"> `remove-reseller`</span> |delete LVE container and the record in the config, move LVE containers to the host container|
 
 **Options**
 
@@ -2826,9 +2834,8 @@ Starting from <span class="notranslate">**_lve-utils 3.0-21_**</span> a behaviou
 If **fs.proc_super_gid** was configured by an admin to some existing group, the command will just add Nagios user to this group.
 
 ### cldiag
-
-   
-`cldiag` utility is included in |<span class="notranslate">`lve-utils`</span> package and is intended for:
+ 
+`cldiag` utility is included in <span class="notranslate">`lve-utils`</span> package and is intended for:
 
 * server diagnostics performed by a server administrator for detecting the most common errors in the configuration or software operation;
 * the focused check of the servers for typical errors performed by the support engineers before proceeding to the detailed analysis of the customer tickets;
@@ -2889,7 +2896,7 @@ Fails if <span class="notranslate">`/usr/local/directadmin/custombuild/options.c
 
 Checks fs.enforce_symlinksifowner is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
 
-Checking specified kernel setup described in [this docs section](/kernel_settings/#symlink-owner-match-protection) for deprecated value and displaying its current value.
+Checking specified kernel setup described in [this docs section](/cloudlinux_os_kernel/#symlink-owner-match-protection) for deprecated value and displaying its current value.
 
 Fails if <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span> contains value `2` (it is deprecated and can cause issues for the system operation).
  
@@ -2923,7 +2930,7 @@ Fails if <span class="notranslate">`/etc/ssh/sshd_config`</span> contains <span 
 
 Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
 
-First checking if user <span class="notranslate">`Apache`</span> is available in the system (on some panels users `httpd` or <span class="notranslate">`nobody`</span> with special GID are present instead of <span class="notranslate">`Apache`</span>, they are detected correctly as well). Then, if such user exists, checking that his GID equals to the one specified in sysctl or that this user belongs to this supplemental group. If these conditions are met, then the protection effect described in [this docs section](/kernel_settings/#symlink-owner-match-protection) is applied to this user, and the appropriate message will be displayed.
+First checking if user <span class="notranslate">`Apache`</span> is available in the system (on some panels users `httpd` or <span class="notranslate">`nobody`</span> with special GID are present instead of <span class="notranslate">`Apache`</span>, they are detected correctly as well). Then, if such user exists, checking that his GID equals to the one specified in sysctl or that this user belongs to this supplemental group. If these conditions are met, then the protection effect described in [this docs section](/cloudlinux_os_kernel/#symlink-owner-match-protection) is applied to this user, and the appropriate message will be displayed.
  
 Fails if Apache user is not in the group specified in <span class="notranslate">`/proc/sys/fs/symlinkown_gid`</span>.
 
@@ -2950,7 +2957,7 @@ Possible reasons for failure:
 
 9. <span class="notranslate">`--check-cagefs`</span>
 
-All checks for CageFS are described separately in [this docs section](/cagefs/#sanity-check) and their start from cagefsctl utility is completely equivalent to the start from cldiag and is designed only for a better experience.
+All checks for CageFS are described separately in [this docs section](/command-line_tools/#sanity-check) and their start from cagefsctl utility is completely equivalent to the start from cldiag and is designed only for a better experience.
  
 This checker includes a set of CageFS sub-checkers, failure of one (or more) of them causes general checker failure.
 
@@ -2987,7 +2994,7 @@ The following checkers are available in <span class="notranslate">**lve-utils >=
 
 Checks the validity of LVE limits on the server.
 
-[See this page for detailed description](/limits/#lve-limits-validation).
+[See this page for detailed description](/limits/#limits-validation).
  
 
 13. <span class="notranslate">`--check-rpmdb`</span>
@@ -2998,7 +3005,140 @@ Check that rpm database is operable and utils using it (e.g. yum) can work prope
 
 To start all available checkers at once, the keys <span class="notranslate">`-a | --all`</span> are used. This does not include Check compatibility for PHP Selector, it must be started separately with <span class="notranslate">`--check-phpselector`</span> key.
 
-### Automatic problems notifications<sup> cPanel only</sup>
+
+### cloudlinux-config
+
+**cloudlinux-config** utility shows/sets various parameters related to [LVE Manager](/lve_manager/#lve-manager-options) UI, [MySQL Governor](/cloudlinux_os_components/#configuration-and-operation) and [faults notifications for LVE-Stats 2](/cloudlinux_os_components/#configuration)
+
+**Usage:**
+
+<div class="notranslate">
+
+```
+cloudlinux-config get [--json] [--for-reseller resname ]
+cloudlinux-config set [--json] --data <str> [--for-reseller resname ]
+cloudlinux-config set [--json] --reset-inodes-limit
+```
+</div>
+
+**Commands:**
+
+| | |
+|-|-|
+|<span class="notranslate">`get`</span>| Shows the values of all supported parameters|
+|<span class="notranslate">`set`</span>| Sets values for supported parameters|
+
+**Options**
+
+| | |
+|-|-|
+|<span class="notranslate">`--json`</span>| Sets/returns values in json format|
+|<span class="notranslate">`--data`</span>| Sets values from the data string that follows|
+|<span class="notranslate">`--for-reseller`</span>| Sets/limits the output only to the data related to reseller _resname_ |
+|<span class="notranslate">`--reset-inodes-limit`</span>| Resets inode limits (in case disk quota breaks)|
+
+**JSON data structure**
+
+All options are enclosed inside <span class="notranslate">`options`</span> (Level 0) string. All options are enclosed in `" "`, while values come as is. Here's an example:
+
+<div class="notranslate">
+
+```
+'{"options":{"L1_option1":value1, "L1_option2":value2}}'
+```
+</div>
+
+Each Level1 option can have nested Level2 options specified using the same syntax, the same goes for Level2 and Level3 options respectively.
+
+**LVE-Stats 2 faults notification settings**
+
+| | | | | | |
+|-|-|-|-|-|-|
+| Level1| Level2| Level3| Level4| Possible values| Description|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>| <span class="notranslate">`concurrentConnections`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include concurrent connection value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`cpu`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include CPU consumption value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`io`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include IO value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`iops`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include IOPS value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`mem`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include RAM consumption value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`nproc`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include number of processes value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`admin`</span>| | `N`| The minimum number of faults to notify for admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`user`</span>| | `N`| The minimum number of faults to notify for users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`reseller`</span><sup> *</sup>| | `N`| The minimum number of faults to notify for reseller|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`customer`</span><sup> *</sup>| | `N`| The minimum number of faults to notify for reseller's customers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`admin`</span>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`admin`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`user`</span>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`user|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`reseller`</span><sup> *</sup>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for resellers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`reseller`</span><sup> *</sup>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for resellers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`customer`</span><sup> *</sup>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for reseller's customers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`customer*|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for reseller's customers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyAdmin`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notifications to admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellerCustomers`</span>| | | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to reseller users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellerOnCustomers`</span><sup> *</sup>| | | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send users' faults notifications to the respective reseller|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyReseller`</span><sup> *</sup>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to reseller|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyCustomers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notifications to users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to resellers|
+
+::: tip Note  
+Options marked with `*` are for reseller use only
+:::
+
+**MySQL Governor settings**
+
+| | | | | | |
+|-|-|-|-|-|-|
+| Level1| Level2| Level3| Level4| Possible values| Description|
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`errorLog`</span>|<span class="notranslate">`level`</span>| | <span class="notranslate">`DEBUG`</span>/<span class="notranslate">`ERROR`</span>| Sets error log level |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`errorLog`</span>|<span class="notranslate">`logPath`</span>| |<span class="notranslate">`/var/log/dbgovernor-error.log`</span>| Sets error log destination file |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`gatherDataForDetailedStats`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Enables gathering data for detailed statistics |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`logRestrictedUsersQueries`</span>| | | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Enables logging of restricted user queries |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`modeOfOperation`</span>| | |<span class="notranslate">`off`</span>/<span class="notranslate">`single`</span>/<span class="notranslate">`abusers`</span>/<span class="notranslate">`all`</span>| Sets the mode of operation |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictLog`</span>|<span class="notranslate">`format`</span>| |<span class="notranslate">`SHORT`</span>/<span class="notranslate">`MEDIUM`</span>/<span class="notranslate">`LONG`</span>/<span class="notranslate">`VERYLONG`</span>| Sets the format for restrict log |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictLog`</span>|<span class="notranslate">`logPath`</span>| |<span class="notranslate">`/var/log/dbgovernor-restrict.log`</span>| Sets the format for restrict log |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictType`</span>|<span class="notranslate">`mode`</span>| |<span class="notranslate">`period`</span>/<span class="notranslate">`limit`</span>| Sets the restriction mode |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictType`</span>|<span class="notranslate">`unlimit`</span>|<span class="notranslate">`period`</span>| `N`| Sets the restriction expiration period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictType`</span>|<span class="notranslate">`unlimit`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets the restriction expiration period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level1`</span>|<span class="notranslate">`period`</span>| `N`| Sets L1 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level1`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L1 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level2`</span>|<span class="notranslate">`period`</span>| `N`| Sets L2 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level2`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L2 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level3`</span>|<span class="notranslate">`period`</span>| `N`| Sets L3 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level3`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L3 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level4`</span>|<span class="notranslate">`period`</span>| `N`| Sets L4 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level4`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L4 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>| <span class="notranslate">`timeout`</span>|<span class="notranslate">`period`</span>| `N`| Sets restriction time period timeout|
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`timeout`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L1 restriction time period timeout units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`scriptPath`</span>| | | <span class="notranslate">`/path/to/script`</span>| Path to script to be triggered when account is restricted |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`slowQueries`</span>|<span class="notranslate">`kill`</span>| | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Enables killing of slow queries |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`slowQueries`</span>|<span class="notranslate">`logPath`</span>| |<span class="notranslate">`/path/to/sqkill.log`</span>| Sets the path to slow query kill log file |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`slowQueries`</span>|<span class="notranslate">`timeout`</span>| | `N`| Time to kill slow SELECT queries for account (seconds) |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`userMaxConnections`</span>| | | `N`| Sets the maximum number of user connections to database |
+
+**LVE Manager UI settings**
+
+| | | | |
+|-|-|-|-|
+| Level1| Level2| Possible values| Description|
+|<span class="notranslate">`inodeLimits`</span>|<span class="notranslate">`showUserInodesUsage`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Show end user inode usage|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hideLVEUserStat`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide LVE end user usage statistic|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hidePHPextensions`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide PHP extension selection|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hidePythonApp`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide Python App in web-interface|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hideRubyApp`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide Ruby App in web-interface|
+
+**Examples**
+
+* display Python/Ruby Selector in User UI (cPanel)
+
+<div class="notranslate">
+
+```
+$ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}‌}}'
+```
+</div>
+
+
+### Automatic problems notifications
 
 The utility generates HTML reports and emails them to the administrator. You can change email for notifications by adding the following line to the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span>.
 
@@ -3068,14 +3208,14 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
 
   Checks <span class="notranslate">`fs.enforce_symlinksifowner`</span> is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
 
-  To fix warning, change the value of <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span>. See [Symlink Owner Match Protection](/kernel_settings/#symlink-owner-match-protection) to know more about the <span class="notranslate">`fs.enforce_symlinksifowner`</span> parameter and configure it correctly.
+  To fix warning, change the value of <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span>. See [Symlink Owner Match Protection](/cloudlinux_os_kernel/#symlink-owner-match-protection) to know more about the <span class="notranslate">`fs.enforce_symlinksifowner`</span> parameter and configure it correctly.
   
   Fixing that warning makes the server more protected against symlink attacks and enables protection of PHP configs and other sensitive files.
 * <a name="check-symlinkowngid"></a><span class="notranslate">`--check-symlinkowngid`</span>
   
   Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
 
-  Symlink Owner Match Protection is not enabled for the <span class="notranslate">`Apache`</span> user. To enable it, see [Symlink Owner Match Protection](/kernel_settings/#symlink-owner-match-protection) and set value of apache GID to the <span class="notranslate">`fs.symlinkown_gid`</span> parameter.
+  Symlink Owner Match Protection is not enabled for the <span class="notranslate">`Apache`</span> user. To enable it, see [Symlink Owner Match Protection](/cloudlinux_os_kernel/#symlink-owner-match-protection) and set value of apache GID to the <span class="notranslate">`fs.symlinkown_gid`</span> parameter.
 
   Enabling Symlink Owner Match Protection provides protection for the <span class="notranslate">`Apache `</span>user and it may improve your server security.
 * <a name="check-suexec"></a><span class="notranslate">`--check-suexec`</span>
@@ -3102,7 +3242,7 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
 
   To fix the issue, replace <span class="notranslate">`UsePAM no`</span> with <span class="notranslate">`Use PAM yes`</span> in the <span class="notranslate">`/etc/ssh/sshd_config`</span> file.
   
-  Fix the warning to provide correct work of <span class="notranslate">`pam_lve`</span> module with sshd and CageFS ssh sessions, for details, please [read this documentation about LVE PAM](/limits/#lve-pam-module).
+  Fix the warning to provide correct work of <span class="notranslate">`pam_lve`</span> module with sshd and CageFS ssh sessions, for details, please [read this documentation about LVE PAM](/cloudlinux_os_components/#lve-pam-module).
 
 * <a name="check-defaults-cfg"></a><span class="notranslate">`--check-defaults-cfg`</span>
 
@@ -3115,7 +3255,7 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
 
 * <a name="check-cagefs"></a><span class="notranslate">`--check-cagefs`</span>
 
-  Depending on the error you get, resolution options may differ. See the full list of checks that <span class="notranslate">`--check-cagefs`</span> performs [here](/cagefs/#sanity-check). There you also can find possible failure reasons.
+  Depending on the error you get, resolution options may differ. See the full list of checks that <span class="notranslate">`--check-cagefs`</span> performs [here](/command-line_tools/#sanity-check). There you also can find possible failure reasons.
 
 * <a name="check-phpselector"></a><span class="notranslate">`--check-phpselector`</span>
 
@@ -3127,5 +3267,3 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
   * In case of non-installed `mod_suexec` package - install it.
   * In case of non-installed `mod_suphp` package - install it.
   * In case of unsupported handler - see [this table](/limits/#compatibility-matrix) to set the compatible handler.
-
-

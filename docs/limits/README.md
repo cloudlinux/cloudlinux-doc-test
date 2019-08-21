@@ -5,15 +5,17 @@ CloudLinux has support for the following limits:
 | |  |  |  | |
 |--|---|--|--|--|
 |Limits | Units | Default Value | Description | Supported Kernels / OS|
-|<span class="notranslate"> [SPEED](/limits/#speed-limits) </span> | % of a core, or HZ | 100% | <span class="notranslate"> CPU </span> speed limit, relative to a single core, or specified in HZ (portable across <span class="notranslate"> CPU </span> s) | all|
-|<span class="notranslate"> CPU </span> [deprecated] | % of <span class="notranslate"> CPU </span> | 25% | <span class="notranslate"> CPU </span> Limit (smallest of <span class="notranslate"> CPU </span> & NCPU is used) | all|
-|[NCPU](/limits/#cpu-limits) [deprecated] | number of cores | 1 CORE | Max number of cores (smallest of <span class="notranslate"> CPU </span> & NCPU used) | all|
-|[PMEM](/limits/#memory-limits) | KB | 1024MB | Physical memory limit (RSS field in ps/RES in top). Also includes shared memory and disk cache | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
-|[VMEM](/limits/#memory-limits) | KB | 0 | Virtual memory limit (VSZ field in ps/VIRT in top) | all|
-|[IO](/limits/#io) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL7, CL6 lve1.1.9+ kernel, CL5 hybrid kernel|
-|IOPS [lve1.3+] | Operations per second | 1024 | Restricts total number of read/write operations per second. | CL7, CL6 and CL5 hybrid kernels lve1.3+|
-|[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
+|<span class="notranslate"> [SPEED](/limits/#speed-limit) </span> | % of a core, or HZ | 100% | <span class="notranslate"> CPU </span> speed limit, relative to a single core, or specified in HZ (portable across <span class="notranslate"> CPU </span> s) | all|
+|<span class="notranslate">[CPU](/deprecated/#cpu-limits)</span> [deprecated] | % of <span class="notranslate"> CPU </span> | 25% | <span class="notranslate"> CPU </span> Limit (smallest of <span class="notranslate"> CPU </span> & NCPU is used) | all|
+|[NCPU](/deprecated/#cpu-limits) [deprecated] | number of cores | 1 CORE | Max number of cores (smallest of <span class="notranslate"> CPU </span> & NCPU used) | all|
+|[PMEM](/limits/#physical-memory-limit) | KB | 1024MB | Physical memory limit (RSS field in ps/RES in top). Also includes shared memory and disk cache | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
+|[VMEM](/limits/#virtual-memory-limit) | KB | 0 | Virtual memory limit (VSZ field in ps/VIRT in top) | all|
+|[IO](/limits/#io) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL7, CL6 lve1.1.9+ kernel|
+|[IOPS](/limits/#iops) [lve1.3+] | Operations per second | 1024 | Restricts total number of read/write operations per second. | CL7 and CL6  kernel|
+|[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | CL6 and CL7 kernels|
 |[EP](/limits/#entry-processes) | number | 20 | Limit on entry processes. Usually represents max number of concurrent connections to apache dynamic scripts as well as SSH and cron jobs running simultaneously. | all|
+
+
 
 ::: tip Note
 It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6/7 system and are causing unexpected issues.
@@ -41,13 +43,13 @@ Bellow you can find recommendations for your typical shared hosting setup. The r
 * <span class="notranslate">NPROC=100</span>
 * <span class="notranslate">EP=40</span>
 
-## Understanding Limits
+## Understanding limits
 
 LVE is a kernel level technology developed by the CloudLinux team. The technology has common roots with container based virtualization and uses cgroups in its latest incarnation. It is lightweight and transparent. The goal of LVE is to make sure that no single web site can bring down your web server.
 
 Today, a single site can consume all <span class="notranslate"> CPU, IO, Memory</span> resources or Apache processes - and bring the server to a halt. LVE prevents that. It is done via collaboration of Apache module, PAM module and kernel.
 
-[mod_hostinglimits](/limits/#hostinglimits) is Apache module that:
+[mod_hostinglimits](/cloudlinux_os_components/#hostinglimits-module-for-apache) is Apache module that:
 
 * detects VirtualHost from which the request came;
 * detects if it was meant for CGI or PHP script;
@@ -94,7 +96,7 @@ Starting from kernels lve1.4.x iolimits module is a part of kmod-lve and could n
 
 You need to reboot the server, after you set this option to make the changes live.
 
-#### Controlling LVE Limits
+#### Controlling LVE limits
 
 The best way to control LVE limits is using <span class="notranslate">LVE Manager</span> in your favorite control panel. Alternatively, you can use command line tool `lvectl` to control limits.
 The limits are saved in <span class="notranslate">`/etc/container/ve.cfg`</span> 
@@ -125,10 +127,10 @@ Example:
 
 Sets <span class="notranslate">CPU</span> limit to 25%, <span class="notranslate">IO</span> limit to 1024KB/s, <span class="notranslate">virtual memory</span> limit to 1GB (memory limit is set as a number of 4096 bytes pages), <span class="notranslate">physical memory</span> limit to 1GB, <span class="notranslate"> CPU</span> cores per LVE to 1, maximum entry processes to 200 and no limit for number of processes for all LVEs. It also sets the limit of 30% and number of processes limit to 5 for LVE with ID 532.
 
-#### Checking LVE Usage
+#### Checking LVE usage
 
 
-One of the best way to monitor current usage is [lvetop](/limits/#lvetop):
+One of the best way to monitor current usage is [lvetop](/command-line_tools/#lvetop):
 
 <div class="notranslate">
 
@@ -154,7 +156,7 @@ You can also check the content of <span class="notranslate">`/proc/lve/list`</sp
 
 Additionally you can use tool lveps to see <span class="notranslate">CPU</span> usage, and processes within LVE.
 
-## Limits Validation
+## Limits validation
 
 Starting from <span class="notranslate">**lve-utils**</span> **version 3.1-1**, the validation of EP and NPROC limits is supported. If an administrator sets the NPROC limit less than (EP + 15), the following warning is shown:
 
@@ -197,7 +199,7 @@ This command supports limits validation both for packages existing in the system
 
 6. The <span class="notranslate">`cloudlinux-package`</span> and <span class="notranslate">`cloudlinux-limits`</span> commands support all validation types described above, and support limits validation and exceptions lists as described below.
 
-#### Exceptions List (validation is not supported)
+#### Exceptions list (validation is not supported)
 
 
 1.    a) When EP limit for a package is greater than a custom NPROC limit for a user included in this package.
@@ -221,7 +223,7 @@ This command supports limits validation both for packages existing in the system
  b) <span class="notranslate">`cloudlinux-limits --json enable-reseller-limits --all`</span>
 
 
-#### Existing Limits Validation
+#### Existing limits validation
 
  
 The automatic validation using <span class="notranslate">`cldiag`</span> utility by cron job is enabled on a server by default. You can disable it in the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> config file using <span class="notranslate">`ENABLE_CLDIAG`</span> option (**Warning!** This option disables all automatic checks using cldiag!) When calling this utility automatically by cron, it checks all limits existing on the server and send an administrator a report with limits check results. You can use the following command to validate existing limits: <span class="notranslate">`cldiag --check-lve-limits`</span>.
@@ -229,11 +231,12 @@ The automatic validation using <span class="notranslate">`cldiag`</span> utility
 
 The important difference between checking existing and setting limits is that even if validation fails when setting limits (see exceptions list above), checking existing limits will catch invalid limits in any case. I.e. even if a server administrator set invalid limits, validation of existing limits will catch invalid limit in any case.
 
-#### Best Practice
+#### Best practice
 
 Set NPROC limit greater than (EP + 15).
 
-## SPEED Limit
+
+## SPEED limit
 
 :::tip Note
 <span class="notranslate">lve-utils 1.4+</span>
@@ -259,13 +262,13 @@ This should allow hosting companies to set same approximate performance level li
 Note. We strongly recommend setting <span class="notranslate">CPU</span> speed limits not less than 100%. As such limits cause <span class="notranslate">CPU</span> context switching which leads to increased `%sys`.
 :::
 
-## Memory Limit
+## Memory limit
 
 Memory is controlled using virtual (VMEM) and physical (PMEM) memory limits.
 
-### Virtual Memory Limit
+### Virtual memory limit
 
-Virtual memory limit corresponds to the amount of memory processes can allocate within LVE. You can see individual process virtual memory usage by monitoring <span class="notranslate"> VIRT </span> column in <span class="notranslate"> top </span> output for the process.
+Virtual memory limit corresponds to the amount of memory processes can allocate within LVE. You can see individual process virtual memory usage by monitoring <span class="notranslate">VIRT</span> column in <span class="notranslate"> top </span> output for the process.
 
 When process tries to allocate more memory, CloudLinux checks if the new total virtual memory used by all processes within LVE is more then a limit set. In such case CloudLinux will prevent memory from being allocated and increments fVMEM counter. In most cases, but not all of them - this causes process to fail. For CGI/PHP scripts it will usually cause 500 and 503 error.
 
@@ -273,7 +276,7 @@ When process tries to allocate more memory, CloudLinux checks if the new total v
 It is recommended to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6 and 7 system and can cause unexpected issues.
 :::
 
-### Physical Memory Limit
+### Physical memory limit
 
 Physical memory limit corresponds to the amount of memory actually used by end customer's processes. You can see individual process physical memory usage by monitoring RES column in top output for the process. Because similar processes (like PHP) share a lot of their memory, physical memory usage is often much lower then virtual memory usage.
 
@@ -284,7 +287,7 @@ When LVE goes over physical memory limit, CloudLinux will first free up memory u
 
 ### Troubleshooting
 
-####**Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)**
+#### **Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)**
 
 If you see no processes under some user, but lve manager keeps telling it is using some memory, then most probably memory is taken by users disk cache. To check personal users disk cache (if lveinfo shows memory usage but not processes there):
 
@@ -332,7 +335,7 @@ The IO limits will only affect <span class="notranslate"> DISK IO</span>, and wi
 
 <div class="notranslate">
 
-## Entry Processes
+## Entry processes
 
 </div>
 
@@ -346,13 +349,14 @@ To solve that, we have created entry processes (often called concurrent connecti
 
 <div class="notranslate">
 
-## Number of Processes
+## Number of processes
 
 </div>
 
 <span class="notranslate"> NPROC </span> controls the total number of processes and threads within LVE. Once the limit is reached, no new process can be created (until another one dies). When that happens <span class="notranslate"> NPROC </span> counter is incremented. Apache might return 500 or 503 errors in such case.
 
-## Network Traffic Bandwidth Control and Accounting System
+
+## Network traffic bandwidth control and accounting system
 
 :::tip Note
 Requires kernel lve1.4.4.el6 or higher, or lve1.4.56.el7 or higher
@@ -457,7 +461,9 @@ The current version of CloudLinux network control system doesn’t limit network
 Network limits are supported only for processes inside LVE. By default it does not limit static content, but only PHP/cgi scripts processed by Apache and processes launched over ssh etc.
 :::
 
-## Compatibility Matrix
+
+## Compatibility matrix
+
 
 | |  |  |  |  |  |  | |
 |-|--|--|--|--|--|--|-|
@@ -475,7 +481,8 @@ Network limits are supported only for processes inside LVE. By default it does n
 |<span class="notranslate"> Cron Jobs </span> | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 
 1. Requires patched version of MPM-ITK. CL httpd RPM has ITK worker with the patch. Patch is also available at: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
-2. CloudLinux 7 and CloudLinux 6 kernels only. 3. The DirectAdmin and CloudLinux PHP provide patched version. For other PHP distributions, please use patches available here: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+2. CloudLinux 7 and CloudLinux 6 kernels only.
+3. The DirectAdmin and CloudLinux PHP provide patched version. For other PHP distributions, please use patches available here: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
 
 :::tip Note

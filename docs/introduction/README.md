@@ -11,7 +11,7 @@ CloudLinux OS is designed for shared hosting providers. It isolates each custome
   LVE is the Lightweight Virtual Environment.
   LVE Manager allows you to maintain fine-tuned control over your resources, including CPU, IO, memory, inodes, numbers of processes, and concurrent connections, that any single account can use. It is lightweight and transparent. Now you can limit abusers while allowing good customers to use what they need.
 
-  [See more](/lve_manager/#lve-manager).
+  [See more](/lve_manager/).
 * **CageFS**
 
     CageFS is a virtualized, per-user file system that uniquely encapsulates each customer, preventing users from seeing each other and viewing sensitive information. CageFS prevents a large number of attacks, including most privilege escalation and information disclosure attacks. It is completely transparent to your customers, without any need for them to change their scripts.
@@ -19,7 +19,7 @@ CloudLinux OS is designed for shared hosting providers. It isolates each custome
     [See more](/cloudlinux_os_components/#cagefs).
 * **MySQL Governor**
 
-    MySQL Governor tracks CPU and disk IO usage for every user in real time and throttles MySQL queries by using same-per-user LVE limits. By using the [dbtop utility](/cloudlinux_os_components/#dbtop), it is possible to see usage as it happens on a per-customer basis, ensuring that system admins always know what is going on.
+    MySQL Governor tracks CPU and disk IO usage for every user in real time and throttles MySQL queries by using same-per-user LVE limits. By using the [dbtop utility](/command-line_tools/#dbtop), it is possible to see usage as it happens on a per-customer basis, ensuring that system admins always know what is going on.
 
     [See more](/cloudlinux_os_components/#mysql-governor).
 * **PHP Selector**
@@ -47,7 +47,7 @@ CloudLinux OS is designed for shared hosting providers. It isolates each custome
     Mod_lsapi PRO is the fastest and most reliable way to serve PHP pages. It is a drop-in replacement for SuPHP, FCGID, RUID2, and ITK. It has a low memory footprint and understands PHP directives from `.htaccess` files.
 
     [See more](/cloudlinux_os_components/#apache-mod-lsapi-pro).
-* **Reseller Limits**
+* **Reseller limits**
 
 
     Reseller limits is a feature that allows hosters to set limits for the resources each reseller can operate with. Hoster also provides controls to the reseller on what resources each reseller’s end user will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
@@ -55,9 +55,9 @@ CloudLinux OS is designed for shared hosting providers. It isolates each custome
     When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
 
     [See more](/cloudlinux_os_components/#reseller-limits).
-* **LVE-Stats 2**
+* **LVE-stats 2**
 
-    LVE-Stats 2 collects LVE usage statistics (CPU, memory, disk space usage) and allows to query the data.
+    LVE-stats 2 collects LVE usage statistics (CPU, memory, disk space usage) and allows to query the data.
 
     [See more](/cloudlinux_os_components/#lve-stats-2).
 
@@ -65,7 +65,7 @@ CloudLinux OS is designed for shared hosting providers. It isolates each custome
 
 CloudLinux supports the same end-of-life policy as RHEL. Using a supported operating system is critical to maintaining a stable server environment.
 
-Currently Supported:
+Currently supported:
 
 | |  | |
 |-|--|-|

@@ -7,7 +7,7 @@
 
 When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
 
-#### Types of users
+#### Types of Users
 
 Starting from the **version 3.0-18**, <span class="notranslate">LVE Manager</span> operates with four types of users and their resource usage limits.
 
@@ -18,19 +18,19 @@ The types of users are as follows:
 * <span class="notranslate">**Reseller’s End User**</span> is a type of user that purchases hosting from a reseller and uses it for his own purposes.
 * <span class="notranslate">**Reseller’s End User (no Reseller limit)**</span> is a type of user that purchases hosting from a reseller and uses it for his own purposes but does not have limits set by a reseller. These limits are set by the hoster.
 
-#### Types of limits
+#### Types of Limits
 
 See the comparison Table with types of limits.
 
 | |  |  | |
 |-|--|--|-|
 |**Limits** | **Reseller limits** | **Reseller’s end user limits** | **Hoster’s end user limits**|
-|<span class="notranslate"> [SPEED](/limits/#speed-limits) </span> | Yes | Yes | Yes|
-|<span class="notranslate"> [PMEM](/limits/#memory-limits) </span> | Yes | Yes | Yes|
-|<span class="notranslate"> [IO](/limits/#io) </span> | Yes | Yes | Yes|
-|<span class="notranslate"> [IOPS Limits](/limits/#iops) </span> | Yes | Yes | Yes|
-|<span class="notranslate"> [EP](/limits/#entry-processes) </span> | Yes | Yes | Yes|
-|<span class="notranslate"> [NPROC](/limits/#number-of-processes) </span> | Yes | Yes | Yes|
+|<span class="notranslate"> [SPEED</span>| Yes | Yes | Yes|
+|<span class="notranslate"> [PMEM</span>| Yes | Yes | Yes|
+|<span class="notranslate"> [IO</span>| Yes | Yes | Yes|
+|<span class="notranslate"> [IOPS</span>| Yes | Yes | Yes|
+|<span class="notranslate"> [EP</span>| Yes | Yes | Yes|
+|<span class="notranslate"> [NPROC</span>| Yes | Yes | Yes|
 |<span class="notranslate"> Inodes </span> | Yes (default for all users) | No | Yes|
 |<span class="notranslate"> MySQL Limits </span> | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes|
 
@@ -59,7 +59,7 @@ If you are using CloudLinux 6 kernel you would have to migrate to <span class="n
 Use the detailed instruction below:
 
 1. Install CloudLinux 7 or <span class="notranslate">CloudLinux 6 Hybrid</span> on a new server. Follow the instructions described [here](/cloudlinux_installation/#installing-new-servers). Or you can convert your CentOS 6.x or CentOS 7.x system to CloudLinux 6 or CloudLinux 7 respectively. To do this, follow the instructions described on the [link](/cloudlinux_installation/#converting-existing-servers).
-2. If you have installed the CloudLinux 6, please convert it to the <span class="notranslate"> CloudLinux 6 Hybrid Kernel</span>. Follow the instructions described [here](/kernel_settings/#hybrid-kernel).
+2. If you have installed the CloudLinux 6, please convert it to the <span class="notranslate"> CloudLinux 6 Hybrid Kernel</span>. Follow the instructions described [here](/cloudlinux_os_kernel/#hybrid-kernels).
 3. Install <span class="notranslate">LVE Manager</span> with <span class="notranslate">Reseller Limit</span> support or update it up to version 3.0-18 (or later) by running the following commands:
 
     <div class="notranslate">
@@ -107,7 +107,8 @@ Use the detailed instruction below:
     ```
     </div>
 
-#### How to enable and disable reseller limits
+
+#### How to enable and disable Reseller limits
 
 To start using a new feature <span class="notranslate">**Reseller limits**</span> you would have to enable reseller limits for a particular reseller first.
 
@@ -136,7 +137,7 @@ When the checkbox is selected, user <span class="notranslate">**Reseller**</span
 Resellers’ end users can use as much resources in total as it is provided for that particular reseller by a hoster. The summary usage of all end users that belong to that particular reseller will not exceed the amount of resources provided to reseller by a hoster. If no Reseller Limits are set, reseller’s end user will be limited by default limits set by a hoster.
 :::
 
-#### How to Disable Reseller Limits
+#### How to disable Reseller limits
 
 To disable Reseller limits, please do the following:
 
@@ -147,16 +148,15 @@ To disable Reseller limits, please do the following:
 If you disable Reseller limits everything will work the same as before. All the end user limits set by the reseller will be saved. But all custom default reseller limits will be disabled.
 :::
 
-See also [Reseller Limits UI](/lve_manager/#reseller-limits-ui).
+See also [Reseller limits UI](/lve_manager/#reseller-limits).
 
 ## LVE-Stats 2
 ### General information and requirements
-
 #### Why is it needed?
 
-* Old LVE-statistics store averages as integer numbers, as % of <span class="notranslate">CPU</span> usage. If user used 100% of <span class="notranslate">CPU</span> for 1 second within an hour, it is only 1-2% for a minute, and 0 for 5 minutes. Data in old LVE-statistics is aggregated to 1-hour intervals. So, such peak load will not be recorded and we need to store data with much higher precision.
+* Old LVE-statistics store averages as integer numbers, as % of <span class="notranslate">CPU</span> usage. If user used 100% of <span class="notranslate">CPU</span> for 1 second within an hour, it is only 1-2% for a minute, and 0 for 5 minutes. Data in old LVE-statistics is aggregated to 1-hour intervals. So, such peak load will noExat be recorded and we need to store data with much higher precision.
 * 100% <span class="notranslate">CPU</span> usage in old lve statistics means “all cores”. On 32 core servers usage is not visible for most users (as they are limited to 1 core).
-* Old LVE-statistics does not provide a way to determine a cause of LVE faults, i.e. what processes are running when user hits LVE limits.
+* Old LVE-statistics does not provide a way to determine a cause of LVE faults, i.e. what processes are running when user hits LVE limits.Example
 * Notifications in old LVE-statistics are not accurate because they are based on average values for <span class="notranslate">CPU, IO, IOPS.</span>
 * Old LVE-statistics functionality is hard to extend.
 
@@ -203,7 +203,7 @@ Settings of old <span class="notranslate">lve-stats</span> (ver. 0.x) are import
 
 SQLite database file is located in <span class="notranslate">`/var/lve/lvestats2.db`</span>, data from old <span class="notranslate">lve-stats</span> (ver. 0.x) are being migrated automatically in the background. Migrating process can last 2-8 hours (during this time lags are possible when admin is trying to check statistics, at the same time users will not be affected). Migrating the latest 30 days, <span class="notranslate">SQLite DB</span> stable migration is provided.
 
-Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux (except <span class="notranslate">PosgreSQL</span> for CL5).
+Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux.
 
 #### Downgrade
 
@@ -278,6 +278,7 @@ Configuration files for plugins are located in <span class="notranslate">`/etc/s
 * <span class="notranslate">`NOTIFY_INTERVAL_USER`</span> – period of time to notify customer (default `12h`);
 * <span class="notranslate">`NOTIFY_FROM_EMAIL`</span> - sender email address. For example: <span class="notranslate">`NOTIFY_FROM_EMAIL=main_admin@host.com`;</span>
 * <span class="notranslate">`NOTIFY_FROM_SUBJECT`</span> - email message subject. For example: <span class="notranslate">`NOTIFY_FROM_SUBJECT=Message from notifier`</span>
+* <span class="notranslate">`NOTIFY_CHARSET_EMAIL`</span> – charset type for email. Available for <span class="notranslate">__lve-stats-2.9.4-1__</span> and later. Default is <span class="notranslate">`us-ascii`</span>. For example: <span class="notranslate">`NOTIFY_CHARSET_EMAIL=utf-8`</span>
 
 These values can also be set using [cloudlinux-config CLI](/command-line_tools/#cloudlinux-config) utility
 
@@ -304,16 +305,15 @@ service lvestats restart
 
 <span class="notranslate">`/etc/logrotate.d/lvestats`</span> - configuration file for <span class="notranslate">`/var/log/lve-stats.log rotation`</span>
 
+### LVE-stats2 and DB servers compatible work setup
 
-### LVE Stats2 and DB Servers Compatible Work Setup
-
-#### LVE Stats2 and MySQL DB Server Compatible Work Setup
+#### LVE-stats2 and MySQL DB server compatible work setup
 
 :::tip Note
 Run all the commands below under root.
 :::
 
-**1. MySQL Server Setup**
+**1. MySQL server setup**
 
 If MySQL Server is not installed, then install it according to control panel documentation.
 
@@ -342,7 +342,7 @@ For non-panel system:
   </div>
 
 
-**2. Database Setup**
+**2. Database setup**
 
 * Run MySQL administrative utility: <span class="notranslate">`mysql`</span>.
 * In utility run the commands:
@@ -389,7 +389,7 @@ For non-panel system:
 DB name, username and their passwords above are given for an example - you can use any of your choices. Using old DB from <span class="notranslate">LVE Stats</span> version 1 is also acceptable as <span class="notranslate">LVE Stats2</span> uses different tables and the old information will not be corrupted.
 :::
 
-**3.** <span class="notranslate">**LVE Stats 2**</span> **Setup**
+**3.** <span class="notranslate">**LVE-stats2**</span> **setup**
 
 * Stop <span class="notranslate">LVE Stats 2</span> server by running the command:
 
@@ -430,7 +430,7 @@ service lvestats restart
 </div>
 
 
-**4. Additional Security Settings**
+**4. Additional security settings**
 
 If you need to provide access to <span class="notranslate">LVE Stats</span> information utilities (<span class="notranslate">`lveinfo`, `lvechart`, `lve-read-snapshot`</span>) for different users, then we recommend creating one more DB user with read-only privilege to guarantee information security. It can be done by running the following commands in administrative utility:
 
@@ -474,7 +474,7 @@ These steps allow hiding main DB user username/password from other system users.
 If there is no need in such access differentiation, then <span class="notranslate">`/etc/sysconfig/lvestats2`</span> file access permission should be 644, so that it could be read by all users and could be changed only by root.
 
 
-**5. Using Special Characters in Database Password**
+**5. Using special characters in database password**
 
 Since scheme <span class="notranslate">`://user:password@host[:port]/database_name`</span> [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) is used in <span class="notranslate">`connect_string`</span> config option, then usage of special characters in user DB password is not allowed.
 
@@ -508,14 +508,14 @@ After that <span class="notranslate">`сonnect_string`</span> will look as follo
 </div>
 
 
-#### LVE Stats 2 and PostgreSQL DB Server Compatible Work Setup
+#### LVE-stats2 and PostgreSQL DB server compatible work setup
 
 
 :::tip Note
 Run all the commands below under <span class="notranslate">root</span>.
 :::
 
-**1.** **<span class="notranslate">PostgreSQL</span>** **Server Installation and Setup**
+**1.** **<span class="notranslate">PostgreSQL</span>** **server installation and setup**
 
 * **PostgreSQL installation and initialization**
 
@@ -573,7 +573,7 @@ Run all the commands below under <span class="notranslate">root</span>.
     </div>
 
 
-**2. DB for** <span class="notranslate">**lve-stats-2.x**</span> **- Creating and Setup**
+**2. DB for** <span class="notranslate">**LVE-stats-2.x**</span> **- creating and setup**
 
 * Run standard <span class="notranslate">PostgreSQL psql</span> administrative utility:
 
@@ -645,7 +645,7 @@ psql -w -U postgres
 DB name, username and their passwords above are given for an example - you can use any of your choices. Using old DB from <span class="notranslate">LVE Stats</span> version 1 is also acceptable as <span class="notranslate">LVE Stats 2</span> uses different tables and the old information will not be corrupted
 :::
 
-**3.** <span class="notranslate">**Lve-stats-2.x**</span> **Setup**
+**3.** <span class="notranslate">**LVE-stats-2.x**</span> **setup**
 
 * Stop <span class="notranslate">lve-stats2</span> server by running:
 
@@ -690,7 +690,7 @@ service lvestats restart
 ```
 </div>
 
-**4. Additional Security Settings**
+**4. Additional security settings**
 
 If you need to provide access to <span class="notranslate">LVE Stats</span> information utilities (<span class="notranslate">`lveinfo`, `lve-read-snapshot`</span> ) for other users (or if <span class="notranslate">CageFS</span> is disabled), then in order to guarantee DB security the following steps are required:
 
@@ -726,7 +726,7 @@ service lvestats restart
 </div>
 
 
-**5. Using Special Characters in Database Password**
+**5. Using special characters in database password**
 
 Since scheme <span class="notranslate">`://user:password@host[:port]/database_name`</span> [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) is used in <span class="notranslate">`connect_string`</span> config option, then usage of special characters in user DB password is not allowed.
 
@@ -759,7 +759,7 @@ After that <span class="notranslate">`сonnect_string`</span> will look as follo
 ```
 </div>
 
-#### Customize lve-stats-2 notifications 
+#### Customize LVE-stats2 notifications 
 
 <span class="notranslate">[Jinja2](http://jinja.pocoo.org/)</span> is used as a template engine for the notifications.
 
@@ -836,12 +836,11 @@ Customized subjects have the higher priority than the key <span class="notransla
 
 Example for the file <span class="notranslate">`user_notify.txt`</span>
 
-<div class="notranslate">
-
+<div class="notranslate" v-pre>
+	
 ```
 Subject: Customized subject example
 Dear {{TONAME}},
-
  
 Your {{DOMAIN}} web hosting account exceeded one or more of its resources within the last {{PERIOD}}.
 {% if epf %}Exceeded the maximum of {{lep}} concurrent website connections. Your website was not available {{epf}} times because of this problem.
@@ -867,8 +866,7 @@ Your Friendly Web Hosting Support Team
 
 ### Plugins
 
-
-LVE <span class="notranslate"> Stats 2 </span> comes with a set of generic plugins:
+LVE-stats2 comes with a set of generic plugins:
 
 | |  |  |  | |
 |-|--|--|--|-|
@@ -891,9 +889,9 @@ LVE <span class="notranslate"> Stats 2 </span> comes with a set of generic plugi
 |LVEDestroyer | - | N | 5 | destroys LVEs that weren't active for X iterations. Number of iterations is passed from config using iterations variable. <span class="notranslate">`iterations=0`</span> means plugin disabled|
 
 
-To enable non-default plugin, copy or link it to _/usr/share/lve-stats/plugins_ directory.
+To enable non-default plugin, copy or link it to `/usr/share/lve-stats/plugins` directory.
 
-For example to enable _ResMEMCollector_ plugin, do:
+For example to enable `ResMEMCollector` plugin, do:
 
 <div class="notranslate">
 
@@ -904,30 +902,22 @@ service lvestats restart
 </div>
 
 
-#### Creating a Plugin for LVE Stats 2
-
-
-* [Introduction](/lve-stats_2/#introduction)
-
-* [Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement)
-
-* [Plugin Configuration](/lve-stats_2/#plugin-configuration)
-
-* [Types of Plugins](/lve-stats_2/#types-of-plugins)
+#### Creating a plugin for LVE-stats2
 
 #### Introduction
 
-<span class="notranslate">LVE Stats 2</span> complex has scalable architecture, which allows to connect custom plugins.
+
+<span class="notranslate"> LVE Stats 2 </span> complex has scalable architecture, which allows to connect custom plugins.
 
 
-<span class="notranslate">LVE Stats</span> server searches for plugins in the directory which is specified with plugins parameter of server’s _/etc/sysconfig/lvestats2_ configuration file. Default directory is <span class="notranslate"> _/usr/share/lve-stats/plugins_. </span>
+<span class="notranslate"> LVE Stats </span> server searches for plugins in the directory which is specified with plugins parameter of server’s _/etc/sysconfig/lvestats2_ configuration file. Default directory is <span class="notranslate"> _/usr/share/lve-stats/plugins_. </span>
 
 Each plugin must be of a <span class="notranslate"> Python </span> class, must be written in <span class="notranslate"> Python </span> language and its file must have <span class="notranslate"> .py </span> extension. Files with all other extensions will be ignored. For normal server work access permission 400 is enough; owner – <span class="notranslate"> root </span> .
 
 Plugin classes can be of the same name, but better not, because classes' names can affect the set of parameters in <span class="notranslate"> _set_config_ </span> method. You can find detailed plugins' configuring information below, in appropriate chapter.
 
 Plugin class must contain <span class="notranslate"> _execute()_ </span> method, which is invoked by the server every 5 seconds (by default, can be changed by interval parameter of configuration file).
-Also <span class="notranslate"> set_config </span> method (configuration settings) can be available. You can find more info in <span class="notranslate"> [Plugins Configuration](/lve-stats_2/#plugin-configuration) </span> chapter.
+Also <span class="notranslate"> set_config </span> method (configuration settings) can be available. You can find more info in <span class="notranslate">[Plugins Configuration](/cloudlinux_os_components/#plugin-configuration)</span> chapter.
 
 Additionally the following attributes can be set (plugin class instance variable):
 
@@ -943,7 +933,7 @@ Plugin class can be inherited from <span class="notranslate"> _LveStatsPlugin_ <
 
 <span class="notranslate"> _LveStatsPlugin_ </span> class is defined in the file: <span class="notranslate"> _/opt/alt/python27/lib/python2.7/site-packages/lvestats/core/plugin.py_ . </span>
 
-#### Server Plugin Arrangement
+#### Server plugin arrangement
 
 
 When the server starts, it performs the search of plugins in the directory specified in _/etc/sysconfig/lvestats2_ configuration file. This directory is scanned only when the server starts, therefore if any plugin was added into the directory, the server has to be restarted with the following command:
@@ -987,10 +977,10 @@ This is useful to correctly unload the plugin (terminate all subsidiary processe
 If a plugin implements handler for SIGTERM, then this handler must end with <span class="notranslate"> `sys.exit(0)` </span> command. Otherwise plugin process will not be terminated correctly and will become orphaned.
 :::
 
-#### Plugin Configuration
+#### Plugin configuration
 
 
-<span class="notranslate">LVE Stats 2</span> Server allows to configure each plugin separately.
+<span class="notranslate"> LVE Stats 2 </span> Server allows to configure each plugin separately.
 
 On initialization stage the server invokes <span class="notranslate"> _set_config()_ </span> method of the plugin and locates there a dictionary which contains:
 
@@ -1005,14 +995,15 @@ If a plugin doesn't require any configuration to be done, then set_config method
 In addition, plugins can use their own configuration methods.
 :::
 
-#### Types of Plugins
+#### Types of plugins
+
 
 According to server architecture, plugins can be of the following types:
 
-* <span class="notranslate">collectors</span>
-* <span class="notranslate">analyzers</span>
-* <span class="notranslate">persistors</span>
-* <span class="notranslate">notifiers</span>
+* <span class="notranslate"> collectors </span>
+* <span class="notranslate"> analyzers </span>
+* <span class="notranslate"> persistors </span>
+* <span class="notranslate"> notifiers </span>
 
 <span class="notranslate"> Collectors </span> are designed to collect information; <span class="notranslate"> analyzers </span> – to analyze it and form some other data on its basis; <span class="notranslate"> persistors </span> – to save information from the common dictionary into files, databases, etc.; <span class="notranslate"> notifiers </span> - to notify system users about any events.
 
@@ -1021,7 +1012,8 @@ This division is rather arbitrary. There is an opportunity to execute all the ac
 Also it is possible to implement the systems of lazy-write, planning of collecting/processing tasks and notifying users about different events.
 
 
-#### Examples of Plugins
+#### Examples of plugins
+
 
 Here is a practical example of a user plugin.
 
@@ -1036,13 +1028,14 @@ Specification:
 As file size check, fixing the result and notification sending must be held with different periods, then it’s impossible to realize all the tasks by means of one plugin.
 The fact that one minute (60 seconds) is multiple to 5 seconds doesn’t matter in this case, because default period can be changed in server’s configuration file, but the condition of fixing the result once a minute is a part of the specification, which can not be violated. In addition, notification email period is known in advance, as it is specified by user in configuration file.
 
-That is why we realize 4 plugins: <span class="notranslate">**collector, analyzer, persistor**</span> and <span class="notranslate">**notifier**</span>.
+That is why we realize 4 plugins: <span class="notranslate"> **collector, analyzer, persistor** </span> and <span class="notranslate"> **notifier** </span>.
 
 
 #### **Collector**
 
 
 <span class="notranslate"> Collector's </span> aim is to determine the size of a proper file.
+
 <div class="notranslate">
 
 ```
@@ -1090,11 +1083,12 @@ class FSize_watcher_collector (LveStatsPlugin):
 ```
 </div>
 
-Plugin algorithm is extremely simple – file size is read and written into data dictionary. Files name is read from <span class="notranslate">_set_config_</span> method configuration. If the name is not specified, then <span class="notranslate"> None </span> is written into appropriate variable. All the errors are completely ignored (e.g. if specified file doesn't exist or there's no way to read any of it's information).
+Plugin algorithm is extremely simple – file size is read and written into data dictionary. Files name is read from <span class="notranslate"> _set_config_ </span> method configuration. If the name is not specified, then <span class="notranslate"> None </span> is written into appropriate variable. All the errors are completely ignored (e.g. if specified file doesn't exist or there's no way to read any of it's information).
 
-<span class="notranslate">_order_</span> attribute is specified as 0 to make this plugin go the first among three. Data collector must always be the first in plugins logical chain, because it provides all the necessary information for the analyzer which goes the next. Specific values of <span class="notranslate"> _order_ </span> can be of any kind, but what is important is that when the server starts, all the plugins line up in proper sequence: <span class="notranslate"> collector – analyzer – persistor </span> .
+<span class="notranslate"> _order_ </span> attribute is specified as 0 to make this plugin go the first among three. Data collector must always be the first in plugins logical chain, because it provides all the necessary information for the analyzer which goes the next. Specific values of <span class="notranslate"> _order_ </span> can be of any kind, but what is important is that when the server starts, all the plugins line up in proper sequence: <span class="notranslate"> collector – analyzer – persistor </span> .
 
 In order to make plugin work, we have to create configuration file <span class="notranslate"> _/etc/sysconfig/lvestats.config/FSize_watcher_collector.cfg_ </span> with the following content:
+
 <div class="notranslate">
 
 ```
@@ -1177,7 +1171,7 @@ If file size is not found in data dictionary, then plugin just ends.
 
 All the errors are completely ignored.
 
-<span class="notranslate">Analyzer</span> is unconfigurable, that is why it doesn’t require any configuration file and it doesn’t contain <span class="notranslate">_set_config_</span> method.
+<span class="notranslate"> Analyzer </span> is unconfigurable, that is why it doesn’t require any configuration file and it doesn’t contain <span class="notranslate"> _set_config_ </span> method.
 
 Plugin starts every 60 seconds (1 minute), because we need data fixation to be performed one time in a minute.
 
@@ -1185,7 +1179,7 @@ Plugin starts every 60 seconds (1 minute), because we need data fixation to be p
 #### **Persistor**
 
 
-<span class="notranslate">Persistor</span> saves information from the common dictionary into files, databases, etc.
+<span class="notranslate"> Persistor </span> saves information from the common dictionary into files, databases, etc.
 
 <div class="notranslate">
 
@@ -1265,8 +1259,7 @@ class FSize_watcher_saver (LveStatsPlugin):
 ```
 </div>
 
-Configuration file <span class="notranslate">_/etc/sysconfig/lvestats.config/FSize_watcher_saver.cfg_</span>:
-
+Configuration file <span class="notranslate">`/etc/sysconfig/lvestats.config/FSize_watcher_saver.cfg`</span>:
 <div class="notranslate">
 
 ```
@@ -1276,15 +1269,15 @@ log_filename = /var/log/FSize_watcher.log
 ```
 </div>
 
-This plugin starts after <span class="notranslate">analyzer (order=2)</span> , checks new file size <span class="notranslate"> `presence` </span> flag, and if positive – writes it into log. If the flag is cleared (which means the size hasn't changed), then plugin simply ends.
+This plugin starts after <span class="notranslate"> analyzer (order=2) </span> , checks new file size <span class="notranslate"> `presence` </span> flag, and if positive – writes it into log. If the flag is cleared (which means the size hasn't changed), then plugin simply ends.
 
 Starts once in a minute (period=60).
 
 Also this plugin shows the work of signal handler.
 
-Plugin constructor registers handler-function of a  proper signal: <span class="notranslate">_signal.signal(signal.SIGTERM, self.sigterm_handler)_</span>. This means, that when the server finishes its work, then <span class="notranslate"> _sigterm_handler_ </span> method of plugin class will be invoked. In the actual example the function just writes a notification into log, tracing the fact of it's invocation.
+Plugin constructor registers handler-function of a  proper signal: <span class="notranslate"> _signal.signal(signal.SIGTERM, self.sigterm_handler)_ .  </span> This means, that when the server finishes its work, then <span class="notranslate"> _sigterm_handler_ </span> method of plugin class will be invoked. In the actual example the function just writes a notification into log, tracing the fact of it's invocation.
 
-Pay attention on <span class="notranslate"> _sys.exit(0)_ </span> command in the end of the handler. Find the information on it in <span class="notranslate"> [Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement) </span> section.
+Pay attention on <span class="notranslate"> _sys.exit(0)_ </span> command in the end of the handler. Find the information on it in <span class="notranslate"> [Server Plugin Arrangement](/cloudlinux_os_components/#server-plugin-arrangement) </span> section.
 
 In addition see into examples of file log <span class="notranslate"> _/var/log/FSize_watcher.log_ </span> formed by the plugins above:
 <div class="notranslate">
@@ -1341,7 +1334,7 @@ Also we can notice that handler <span class="notranslate"> SIG_TERM </span> was 
 #### **Notifier**
 
 
-<span class="notranslate"> Notifier </span> informs system users about any events.
+<span class="notranslate">Notifier</span> informs system users about any events.
 <div class="notranslate">
 
 ```
@@ -1431,8 +1424,7 @@ class FSize_watcher_notifier (LveStatsPlugin):
 ```
 </div>
 
-Configuration file <span class="notranslate">_/etc/sysconfig/lvestats.config/FSize_watcher_notifier.cfg_</span>:
-
+Configuration file <span class="notranslate"> _/etc/sysconfig/lvestats.config/FSize_watcher_notifier.cfg_ : </span>
 <div class="notranslate">
 
 ```
@@ -1478,6 +1470,7 @@ Thu Feb  5 11:57:00 2015 - FSize_watcher_notifier plugin: email message was succ
 
 #### File info and format for /var/lve/info file
 
+
 This file is used by control panels to display to user their 'current' usage. The file is updated every 5 seconds by lve-stats.
 
 When writing to this file we make sure that: average <span class="notranslate"> CPU/IOPS/MEM </span> is never greater then <span class="notranslate"> LIMIT </span> for that resource.
@@ -1492,7 +1485,6 @@ Example:
 First line of the file is ' <span class="notranslate"> default limits </span> '.
 
 Fields:
-
 <div class="notranslate">
 
 ```
@@ -1521,12 +1513,11 @@ LVE_VERSION >=8
 ```
 </div>
 
-
 ### Troubleshooting
 
-<span class="notranslate">lvestats</span> service and utilities write fatal errors to system log.
+<span class="notranslate"> lvestats </span> service and utilities write fatal errors to system log.
 
-There is <span class="notranslate">_/var/log/lve-stats.log_</span> file with additional information (warnings, tracebacks for errors).
+There is <span class="notranslate">`/var/log/lve-stats.log`</span> file with additional information (warnings, tracebacks for errors).
 
 ## CageFS
 
@@ -1542,11 +1533,11 @@ The benefits of CageFS are:
 * User's will have limited view of _/proc_ file system, and will not be able to see other users' processes
 
 At the same time, user's environment will be fully functional, and user should not feel in any way restricted. No adjustments to user's scripts are needed. CageFS will cage any scripts execution done via:
-* <span class="notranslate">Apache (suexec, suPHP, mod_fcgid, mod_fastcgi)</span>
-* <span class="notranslate">LiteSpeed Web Server</span>
-* <span class="notranslate">Cron Jobs</span>
+* <span class="notranslate"> Apache (suexec, suPHP, mod_fcgid, mod_fastcgi) </span>
+* <span class="notranslate"> LiteSpeed Web Server </span>
+* <span class="notranslate"> Cron Jobs  </span>
 * SSH
-* Any other <span class="notranslate">PAM</span> enabled service
+* Any other <span class="notranslate"> PAM </span> enabled service
 
 ::: tip Note
 mod_php is not supported, MPM ITK requires a custom patch
@@ -1556,8 +1547,22 @@ mod_php is not supported, MPM ITK requires a custom patch
 CageFS is not supported for H-Sphere.
 :::
 
-
 See also [Compatibility Matrix](/limits/#compatibility-matrix).
+
+#### Minimum requirements
+
+* kernel: CL6 with lve1.2.17.1 or later, CL7.
+* 7GB of disk space.
+
+Depending on your setup, and number of users, you might also need:
+* Up to 8MB per customer in _/var_ directory (to store custom _/etc_ directory)
+* 5GB to 20GB in _/usr/share_ directory (to store safe skeleton of a filesystem)
+
+::: danger Warning
+If at any time you decide to uninstall CageFS, please make sure you follow [uninstall instructions](/cagefs/#uninstalling-cagefs)
+:::
+
+
 
 #### Minimum Requirements:
 
@@ -1593,7 +1598,7 @@ $ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
 </div>
 
 ::: danger
-If you are placing skeleton in <span class="notranslate"> _/home_ </span> directory on cPanel servers, you must configure the following option in cPanel WHM: <span class="notranslate"> **WHM -> Server Configuration -> Basic cPanel/WHM Setup -> Basic Config -> Additional home directories** </span>  
+If you are placing skeleton in <span class="notranslate">`/home`</span> directory on cPanel servers, you must configure the following option in cPanel WHM: <span class="notranslate"> **WHM -> Server Configuration -> Basic cPanel/WHM Setup -> Basic Config -> Additional home directories** </span>  
 Change the value to blank (not default <span class="notranslate"> Home </span> ). Without changing this option, cPanel will create new accounts in incorrect places.
 :::
 
@@ -1611,11 +1616,12 @@ Web interface to manage CageFS is available for cPanel, Plesk 10+, DirectAdmin, 
 
 Once you initialized the template you can start enabling users. By default CageFS is disabled for all users.
 
-Starting from **cagefs-6.1-27** <span class="notranslate"> _fs.proc_can_see_other_uid_ </span> will be migrated (one time) from _/etc/sysctl.conf_ into _/etc/sysctl.d/90-cloudlinux.conf_ . If this variable is not set in either file, it will default to 0.
+Starting from **cagefs-6.1-27** <span class="notranslate">`fs.proc_can_see_other_uid`</span> will be migrated (one time) from _/etc/sysctl.conf_ into _/etc/sysctl.d/90-cloudlinux.conf_ . If this variable is not set in either file, it will default to 0.
 
-It is strongly advised against setting this variable in _90-cloudlinux.conf_. Define it in _/etc/sysctl.conf_ or in some other config file with an index number greater than _90-cloudlinux.conf_ , e.g. _/etc/sysctl.d/95-custom.conf_.
+It is strongly advised against setting this variable in `90-cloudlinux.conf`. Define it in `/etc/sysctl.conf` or in some other config file with an index number greater than `90-cloudlinux.conf`, e.g. `/etc/sysctl.d/95-custom.conf`.
 
-You can find more information on <span class="notranslate">_fs.proc_can_see_other_uid_</span> automatic migration in [Kernel Config Variables](/kernel_settings/#kernel-config-variables).
+You can find more information on <span class="notranslate">`fs.proc_can_see_other_uid`</span> automatic migration in [Kernel Config Variables](/cloudlinux_os_kernel/#kernel-config-variables).
+
 
 ### Uninstalling
 
@@ -1639,8 +1645,8 @@ $ yum remove cagefs
 ```
 </div>
 
-### Managing Users
 
+### Managing users
 
 CageFS provides for two modes of operations:
 
@@ -1709,44 +1715,45 @@ $ /usr/sbin/cagefsctl --display-user-mode
 ```
 </div>
 
+
 ### Configuration
 
-* [File System Templates](/cagefs/#file-system-templates)
+* [File system templates](/cloudlinux_os_components/#file-system-templates)
 
-* [Excluding Files](/cagefs/#excluding-files)
+* [Excluding files](/cloudlinux_os_components/#excluding-files)
 
-* [Excluding Users](/cagefs/#excluding-users)
+* [Excluding users](/cloudlinux_os_components/#excluding-users)
 
-* [Mount Points](/cagefs/#mount-points)
+* [Mount points](/cloudlinux_os_components/#mount-points)
 
-  * [Per user virtual mount points](/cagefs/#per-user-virtual-mount-points)
+  * [Per user virtual mount points](/cloudlinux_os_components/#per-user-virtual-mount-points)
 
-  * [Split by Username](/cagefs/#split-by-username)
+  * [Split by username](/cloudlinux_os_components/#split-by-username)
   
-  * [Mounting user’s home directory inside CageFS](/cagefs/#mounting-users-home-directory-inside-cagefs)  
+  * [Mounting user’s home directory inside CageFS](/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs)  
 
-* [Base Home Directory](/cagefs/#base-home-directory)
+* [Base home directory](/cloudlinux_os_components/#base-home-directory)
 
-* [PostgreSQL support](/cagefs/#postgresql-support)
+* [PostgreSQL support](/cloudlinux_os_components/#postgresql-support)
 
-* [PAM Configuration](/cagefs/#pam-configuration)
+* [PAM configuration](/cloudlinux_os_components/#pam-configuration)
 
-* [Executing By Proxy](/cagefs/#executing-by-proxy)
+* [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
 
-* [Custom /etc files per customer](/cagefs/#custom-etc-files-per-customer)
+* [Custom /etc files per customer](/cloudlinux_os_components/#custom-etc-files-per-customer)
 
-* [Moving <span class="notranslate"> cagefs-skeleton </span> directory](/cagefs/#moving-cagefs-skeleton-directory)
+* [Moving <span class="notranslate"> cagefs-skeleton </span> directory](/cloudlinux_os_components/#moving-cagefs-skeleton-directory)
 
-* [Moving /var/cagefs directory](/cagefs/#moving-var-cagefs-directory)
+* [Moving /var/cagefs directory](/cloudlinux_os_components/#moving-var-cagefs-directory)
 
-* [TMP directories](/cagefs/#tmp-directories)
+* [TMP directories](/cloudlinux_os_components/#tmp-directories)
 
-* [Syslog](/cagefs/#syslog)
+* [Syslog](/cloudlinux_os_components/#syslog)
 
-* [Excluding mount points](/cagefs/#excluding-mount-points)
+* [Excluding mount points](/cloudlinux_os_components/#excluding-mount-points)
 
 
-#### File System Templates
+#### File system templates
 
 CageFS creates a filesystem template in <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> directory. CageFS template will be mounted for each customer.  The template is created by running:
 <div class="notranslate">
@@ -1825,22 +1832,40 @@ ffmpeg RPM should be installed on the system already.
 :::
 
 
-#### Excluding Files
+#### Excluding files
 
 
 To exclude files and directories from CageFS, edit file:  
-<span class="notranslate"> _/etc/cagefs/custom.black.list_ </span>  
+<span class="notranslate">`/etc/cagefs/custom.black.list`</span>  
 And add files or directories in there, one per line.
 
-Please do not edit <span class="notranslate"> _/etc/cagefs/black.list_ </span> file because it is replaced during the update of CageFS package.
+Execute the following command to apply changes:
+<div class="notranslate">
 
-#### Excluding Users
+```
+cagefsctl --force-update
+```
+</div>
+
+Please do not edit <span class="notranslate">`/etc/cagefs/black.list`</span> file because it is replaced during the update of CageFS package.
+
+#### Excluding users
 
 
-To exclude users from CageFS, create a file (any name would work) inside <span class="notranslate"> _/etc/cagefs/exclude_ </span> folder, and list users that you would like to exclude from CageFS in that file.
+To exclude users from CageFS, create a file (any name would work) inside <span class="notranslate">`/etc/cagefs/exclude`</span> folder, and list users that you would like to exclude from CageFS in that file (each user in separate line).
+
+Then execute the following command to apply changes: 
+<div class="notranslate">
+
+```
+cagefsctl --user-status USER
+```
+</div>
+
+And check that the command shows <span class="notranslate">`Disabled`</span>.
 
 
-#### Mount Points
+#### Mount points
 
 
 CageFS creates individual namespace for each user, making it impossible for users to see each other's files and creating high level of isolation. The way namespace is organized:
@@ -1852,7 +1877,7 @@ CageFS creates individual namespace for each user, making it impossible for user
 4. Separate /etc directory is created and populated for each user inside <span class="notranslate"> /var/cagefs/[prefix]/username </span>
 5. /tmp directory is mounted for each user separately into <span class="notranslate"> ~username/.cagefs-tmp directory </span>
 6. Additional custom directories can be mounted for each user by defining them in /etc/cagefs/cagefs.mp
-7. You can define custom directories per user using [virt.mp](/cagefs/#per-user-virtual-mount-points) files _[CageFS 5.1 and higher]_
+7. You can define custom directories per user using [virt.mp](/cloudlinux_os_components/#per-user-virtual-mount-points) files _[CageFS 5.1 and higher]_
 
 To define individual custom directories in /etc/cagefs/cagefs.mp following format is used:
 
@@ -1898,7 +1923,7 @@ This command will kill all current processes and reset mount points.
 
 _[CageFS 5.1 and higher]_
 
-* _Please, see [Split by username](/cagefs/#split-by-username) feature, as it might be simpler to implement in some cases._ 
+* _Please, see [Split by username](/cloudlinux_os_components/#split-by-username) feature, as it might be simpler to implement in some cases._ 
 
 Starting with CageFS 5.1 you can specify additional directories to be mounted inside user's CageFS. This can be specified for each user.
 To specify virtual mount points for a user, create a file:
@@ -1933,7 +1958,7 @@ virdir2,mask
 
 Note that CageFS will automatically create those files for Plesk 10 & higher.
 
-For example if we have Plesk 11.5 with two users <span class="notranslate"> _cltest1_ </span> , and <span class="notranslate"> _cltest2_ </span> :
+For example if we have Plesk 11.5 with two users <span class="notranslate">_cltest1_</span>, and <span class="notranslate">_cltest2_</span>:
 <div class="notranslate">
 
 ```
@@ -1964,7 +1989,7 @@ and file: _/var/cagefs/01/cltest2/virt.mp:_
 </div>
 
 
-#### **Split by Username**
+#### **Split by username**
 
 _[CageFS 5.3.1+]_
 
@@ -2019,7 +2044,7 @@ This new mounting mode is enabled by default. You can switch to old mounting mod
 New mounting mode will be disabled automatically when "mounting base home directory" mode is enabled <span class="notranslate"> (`mount_basedir=1` setting in _/etc/cagefs/cagefs.base.home.dirs_ </span> file).
 :::
 
-#### Base Home Directory
+#### Base home directory
 
 
 If you have a custom setup where home directories are in a special format, like: <span class="notranslate"> _/home/$USERNAME/data_ </span> , you can specify it using regular expressions. This is needed by CageFS to create safe home space for end user, where no other users are visible.
@@ -2154,7 +2179,7 @@ flags=-umcl
 to prevent symlink from being removed.
 
 
-#### PAM Configuration
+#### PAM configuration
 
 
 CageFS depends on <span class="notranslate"> **pam_lve** </span> module tor PAM enabled services. When installed, the module is automatically installed for following services:
@@ -2173,7 +2198,7 @@ session    required     pam_lve.so      100     1
 Where 100 stands for minimum <span class="notranslate"> UID </span> to put into <span class="notranslate"> CageFS & LVE </span> , and 1 stands for CageFS enabled.
 
 
-#### Executing By Proxy
+#### Executing by proxy
 
 
 Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate"> **passwd, sendmail** ,  </span> etc.
@@ -2188,25 +2213,23 @@ $ cagefsctl --update
 ```
 </div>
 
-All the cPanel scripts located in <span class="notranslate"> _/usr/local/cpanel/cgi-sys/_ </span> that user might need to execute should be added to <span class="notranslate"> _proxy.commands_ </span> .
+All the cPanel scripts located in <span class="notranslate">`/usr/local/cpanel/cgi-sys/`</span> that user might need to execute should be added to <span class="notranslate">`proxy.commands`</span>.
 
-**Users with duplicate UIDs**
-
-The syntax of <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files is as follows:  
-<span class="notranslate"> _ALIAS:wrapper_name=username:path_to_executable_ </span>
+The syntax of <span class="notranslate">`/etc/cagefs/*.proxy.commands`</span> files is as follows:  
+<span class="notranslate">`ALIAS:wrapper_name=username:path_to_executable`</span>
 
 
-Mandatory parameters are <span class="notranslate"> _ALIAS_ </span> and <span class="notranslate"> _path_to_executable_ </span> .
+Mandatory parameters are <span class="notranslate">`ALIAS`</span> and <span class="notranslate">`path_to_executable`</span>.
 
-* <span class="notranslate"> ALIAS </span> - any name which is unique within all <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files;
+* <span class="notranslate">`ALIAS`</span> - any name which is unique within all <span class="notranslate">`/etc/cagefs/*.proxy.commands`</span> files;
 
-* <span class="notranslate"> wrapper_name </span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate"> _path_to_executable_ inside CageFS </span> . Wrapper files are located in <span class="notranslate"> _/usr/share/cagefs/safeprograms_ </span> . If wrapper name is not specified, then default wrapper <span class="notranslate"> _/usr/share/cagefs/safeprograms/cagefs.proxy.program_ </span> is used. Also, a reserved word <span class="notranslate"> `noproceed` </span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate"> ALIAS </span> , as in the example below.
+* <span class="notranslate">`wrapper_name`</span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate">`path_to_executable_ inside CageFS`</span>. Wrapper files are located in <span class="notranslate">`/usr/share/cagefs/safeprograms`</span>. If wrapper name is not specified, then default wrapper <span class="notranslate">`/usr/share/cagefs/safeprograms/cagefs.proxy.program`</span> is used. Also, a reserved word <span class="notranslate">`noproceed`</span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate">`ALIAS`</span>, as in the example below.
 
-* <span class="notranslate"> username </span> - the name of a user on whose behalf <span class="notranslate"> _path_to_executable_ </span> will run in the real system. If <span class="notranslate"> username </span> is not specified, then <span class="notranslate"> _path_to_executable_ </span> will run on behalf the same user that is inside CageFS.
+* <span class="notranslate">`username`</span> - the name of a user on whose behalf <span class="notranslate">`path_to_executable`</span> will run in the real system. If <span class="notranslate">`username`</span> is not specified, then <span class="notranslate">`path_to_executable`</span> will run on behalf the same user that is inside CageFS.
 
-* <span class="notranslate"> path_to_executable </span> - the path to executable file which will run via <span class="notranslate"> `proxyexec` </span> .
+* <span class="notranslate">`path_to_executable`</span> - the path to executable file which will run via <span class="notranslate">`proxyexec`</span>.
 
-Example of a simple command executed via <span class="notranslate"> proxyexec </span> :
+Example of a simple command executed via <span class="notranslate">`proxyexec`</span>:
 <div class="notranslate">
 
 ```
@@ -2214,7 +2237,7 @@ SENDMAIL=/usr/sbin/sendmail
 ```
 </div>
 
-Example of <span class="notranslate"> crontab </span> command execution with custom wrapper under <span class="notranslate"> root </span> (privilege escalation). The command uses two <span class="notranslate"> ALIAS </span> , that is why in the second line <span class="notranslate"> `noproceed` </span> is specified instead of wrapper name.
+Example of <span class="notranslate"> crontab </span> command execution with custom wrapper under <span class="notranslate">root</span> (privilege escalation). The command uses two <span class="notranslate">ALIAS</span> , that is why in the second line <span class="notranslate">`noproceed`</span> is specified instead of wrapper name.
 <div class="notranslate">
 
 ```
@@ -2223,7 +2246,10 @@ CRONTAB_SAVE:noproceed=root:/usr/bin/crontab
 ```
 </div>
 
-Sometimes hosters may have users with non unique <span class="notranslate"> UIDs </span> . Thus, <span class="notranslate"> `proxyexec` </span> may traverse users directory to find a specific one. That behavior turns into inappropriate if users directory is not cached locally (for example LDAP is in use).
+**Users with duplicate UIDs**
+
+
+Sometimes hosters may have users with non unique <span class="notranslate">UIDs</span>. Thus, <span class="notranslate">`proxyexec`</span> may traverse users directory to find a specific one. That behavior turns into inappropriate if users directory is not cached locally (for example LDAP is in use).
 
 To turn this feature off:
 <div class="notranslate">
@@ -2244,17 +2270,16 @@ rm /etc/cagefs/proxy.disable.duid
 
 #### Custom /etc files per customer
 
-:::tip Note
-4.0-5 and later
-:::
+
+_[4.0-5 and later]_
 
 To create a custom file in /etc directory for end user, create a directory:  
-<span class="notranslate"> _/etc/cagefs/custom.etc/[username]_</span>
+<span class="notranslate"> _/etc/cagefs/custom.etc/[username]_ </span>
 
 Put all custom files, and sub-directories into that direcotry.
 
-For example, if you want to create custom <span class="notranslate">_/etc/hosts_</span> file for <span class="notranslate">USER1</span>, create a directory:  
-<span class="notranslate">_/etc/cagefs/custom.etc/USER1_</span>
+For example, if you want to create custom <span class="notranslate"> _/etc/hosts_ file for USER1 </span> , create a directory:  
+<span class="notranslate"> _/etc/cagefs/custom.etc/USER1_ </span>
 
 Inside that directory, create a <span class="notranslate"> _hosts_ </span> file, with the content for that user.
 
@@ -2291,7 +2316,7 @@ Sometimes you might need to move <span class="notranslate"> cagefs-skeleton </sp
 
 There are two ways:
 
-1. If <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> is not created yet ( <span class="notranslate"> cagefsctl --init </span> wasn't executed), then execute:
+1. If <span class="notranslate">`/usr/share/cagefs-skeleton`</span> is not created yet ( <span class="notranslate"> cagefsctl --init </span> wasn't executed), then execute:
 
 <div class="notranslate">
 
@@ -2313,11 +2338,12 @@ $ cagefsctl --unmount-all
 $ cat /proc/mounts | grep cagefs 
 # if you see any cagefs entries, execute "cagefsctl --unmount-all" again.
 $ mv /usr/share/cagefs-skeleton /home/cagefs-skeleton 
-$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeletoncagefsctl --enable-cagefs
+$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
+$ cagefsctl --enable-cagefs
 ```
 </div>
 
-On cPanel servers, if you place skeleton into <span class="notranslate"> _/home_   </span> directory, then you should configure the following option:
+On cPanel servers, if you place skeleton into <span class="notranslate">`/home`</span> directory, then you should configure the following option:
 
 In _cPanel WHM_ choose <span class="notranslate"> _Server Configuration_ </span> and go to <span class="notranslate"> _Basic cPanel/WHM Setup_ </span> , then in <span class="notranslate"> _Basic Config_ </span> change <span class="notranslate"> _Additional home directories_   </span> default value to blank (not <span class="notranslate"> "home" </span> ).
 
@@ -2325,10 +2351,12 @@ In _cPanel WHM_ choose <span class="notranslate"> _Server Configuration_ </span>
 If this option is not set, then cPanel will create new accounts in incorrect places.
 :::
 
+
+
 #### Moving /var/cagefs directory
 
 
-To move <span class="notranslate"> _/var/cagefs_ </span> to another location:
+To move <span class="notranslate">`/var/cagefs`</span> to another location:
 
 <div class="notranslate">
  
@@ -2338,7 +2366,7 @@ $ cagefsctl --unmount-all
 ```
 </div>
 
-Verify that <span class="notranslate"> _/var/cagefs.bak_ </span> directory does not exist (if it exists - change name "cagefs.bak" to something else)
+Verify that <span class="notranslate">`/var/cagefs.bak`</span> directory does not exist (if it exists - change name "cagefs.bak" to something else)
 
 <div class="notranslate">
 
@@ -2367,7 +2395,7 @@ $ rm -rf /var/cagefs.bak
 ```
 </div>
 
-#### TMP Directories
+#### TMP directories
 
 
 CageFS makes sure that each user has his own <span class="notranslate"> _/tmp_ </span> directory, and that directory is the part of end-user's quota.
@@ -2468,9 +2496,12 @@ The following features are applied during the cleanup:
 **Disable PHP sessions cleanup on cPanel and Plesk**
 
 Here is a possible workaround for PHP session expiration problem (session lives longer than it is possible in a control panel). To use your own custom PHP sessions cleanup scripts - you can turn off built-in sessions cleanup implementation in the following way: 
-add <span class="notranslate">`clean_user_php_sessions=false`</span> line to <span class="notranslate">_/etc/sysconfig/cloudlinux_</span>.
+add <span class="notranslate"> `clean_user_php_sessions=false` line to _/etc/sysconfig/cloudlinux_ </span> .
+
+
 
 #### Syslog
+
 
 By default, <span class="notranslate"> _/dev/log_ </span> should be available inside end user's <span class="notranslate"> CageFS </span> . This is needed so that user's cronjobs and other things that user <span class="notranslate"> _dev/log_ </span> would get recorded in the system log files.
 
@@ -2527,15 +2558,13 @@ The plugin allows to:
 
 * Initialize CageFS;
 
-* Select [mode of operation](/cagefs/#managing-users) ;
+* Select [mode of operation](/cloudlinux_os_components/#managing-users);
 
 * See and modify the list of enabled/disabled users;
 
 * Update CageFS skeleton.
 
-
 #### cPanel
-
 
 CageFS plugin for cPanel is located in <span class="notranslate"> Plugins </span> section of WHM.
 
@@ -2543,17 +2572,15 @@ It allows to initialize CageFS, select users CageFS will be enabled for, as well
 
 ![](/images/_img1_zoom73.png)
 
-To enable CageFS for a proper user (users), in <span class="notranslate"> CageFS User Manager </span> choose a user from the list on the right ( <span class="notranslate"> Disabled </span> users) and click <span class="notranslate">Toggle</span>. The user will move to the list on the left ( <span class="notranslate"> Enabled </span> users).
+To enable CageFS for a proper user (users), in <span class="notranslate"> CageFS User Manager </span> choose a user from the list on the right ( <span class="notranslate"> Disabled </span> users) and click <span class="notranslate"> Toggle </span> . The user will move to the list on the left ( <span class="notranslate"> Enabled </span> users).
 
-To disable a user (users), choose a user from the list on the left ( <span class="notranslate"> Enabled </span> users) and click <span class="notranslate">Disable CageFS</span>. The user will move to the list on the right (<span class="notranslate">Disabled</span> users).
+To disable a user (users), choose a user from the list on the left ( <span class="notranslate"> Enabled </span> users) and click <span class="notranslate"> Disable CageFS </span> . The user will move to the list on the right ( <span class="notranslate"> Disabled </span> users).
 
 To update CageFS skeleton, click <span class="notranslate"> Update CageFS Skeleton </span> .
 
 ![](/images/_img2_zoom71.png)
 
-
 #### Plesk
-
 
 CageFS comes with a plugin for Plesk 10.x. It allows initializing and updating CageFS template, as well as managing users and mode of operation for CageFS.
 
@@ -2578,6 +2605,7 @@ CageFS comes with plugin for <span class="notranslate"> ISP Manager </span> to e
 Or you can manage global CageFS settings via CageFS menu
 ![](/images/_img3.jpg)
 
+
 See also [CageFS CLI tools](/command-line_tools/#cagefs).
 
 ## MySQL Governor
@@ -2587,7 +2615,7 @@ See also [CageFS CLI tools](/command-line_tools/#cagefs).
 <span class="notranslate">MySQL Governor</span> 0.8-32+
 :::
 
-<span class="notranslate"> MySQL Governor</span> is software to monitor and restrict MySQL usage in shared hosting environment. The monitoring is done via resource usage statistics per each MySQL thread.
+<span class="notranslate"> MySQL Governor </span> is software to monitor and restrict MySQL usage in shared hosting environment. The monitoring is done via resource usage statistics per each MySQL thread.
 
 <span class="notranslate"> MySQL Governor </span> can also kill off slow <span class="notranslate"> SELECT </span> queries.
 
@@ -2601,9 +2629,10 @@ See also [CageFS CLI tools](/command-line_tools/#cagefs).
 |<span class="notranslate"> READ </span> | bytes | bytes read. Cached reads are not counted, only those that were actually read from disk will be counted|
 |<span class="notranslate"> WRITE </span> | bytes | bytes written. Cached writes are not counted, only once data is written to disk, it is counted|
 
-You can set different limits for different periods: current, short, med, long. By default those periods are defined as 1 second, 5 seconds, 1 minute and 5 minutes. They can be re-defined using [configuration file](/mysql_governor/#configuration) . The idea is to use larger acceptable values for shorter periods. Like you could allow a customer to use two cores (200%) for one second, but only 1 core (on average) for 1 minute, and only 70% within 5 minutes. That would make sure that customer can burst for short periods of time.
+You can set different limits for different periods: current, short, med, long. By default those periods are defined as 1 second, 5 seconds, 1 minute and 5 minutes. They can be re-defined using [configuration file](/cloudlinux_os_components/#configuration-and-operation). The idea is to use larger acceptable values for shorter periods. Like you could allow a customer to use two cores (200%) for one second, but only 1 core (on average) for 1 minute, and only 70% within 5 minutes. That would make sure that customer can burst for short periods of time.
 
 When customer is restricted, the customer will be placed into special LVE with ID 3. All restricted customers will be placed into that LVE, and you can control amount of resources available to restricted customers. Restricted customers will also be limited to only 30 concurrent connections. This is done so they wouldn't use up all the MySQL connections to the server.
+
 
 ### Installation and update
 
@@ -2726,7 +2755,7 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install --yes
 </div>
 
 
-Please note that restore of previous packages in case of failed installation would also be confirmed with <span class="notranslate"> --yes </span> flag.
+Please note that restore of previous packages in case of failed installation would also be confirmed with <span class="notranslate">`--yes`</span> flag.
 
 ::: danger IMPORTANT
 Use <span class="notranslate"> --yes </span> flag on your own risk, because it confirms installation in any case - even in case if there are troubles during installation (for example, network problems causing incomplete download of packages), everything would be confirmed.
@@ -2763,13 +2792,13 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --delete
 
 The script will install original MySQL server, and remove <span class="notranslate">MySQL Governor</span>.
 
-### Configuration and Operation
+### Configuration and operation
 
 #### Configuration
 
-<span class="notranslate">MySQL Governor</span> configuration is located in <span class="notranslate">/etc/container/mysql-governor.xml</span> 
+<span class="notranslate"> MySQL Governor </span> configuration is located in <span class="notranslate"> /etc/container/mysql-governor.xml </span> 
 
-It is best to modify it using <span class="notranslate">[dbctl](/mysql_governor/#dbctl)</span> tool.
+It is best to modify it using <span class="notranslate"> [dbctl](/command-line_tools/#dbctl) </span> tool.
 
 Once configuration file is updated, please, restart the <span class="notranslate"> MySQL Governor </span> using:
 
@@ -2867,9 +2896,10 @@ user_max_connections="30"/>
 ```
 </div>
 
-These values can also be set using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility.
+These values can also be set using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
 
-#### Modes Of Operation
+
+#### Modes of operation
 
 :::tip Note
 <span class="notranslate">MySQL Governor</span> 1.0+
@@ -2877,20 +2907,19 @@ These values can also be set using [cloudlinux-config](/command-line_tools/#clou
 
 <span class="notranslate"> MySQL Governor </span> has multiple modes of operation. Some of them are experimental at this moment.  
 Mode:  
-<span class="notranslate"> **off -- Monitor Only**:</span> In this mode <span class="notranslate"> MySQL Governor </span> will not throttle customer's queries, instead it will let you monitor the MySQL usage to see the abusers at any given moment of time (and historically). This mode is good when you are just starting and want to see what is going on  
-<span class="notranslate"> **single -- Single restricted's LVE for all restricted customers (deprecated)**:</span> In that mode once customer reaches the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available  
-<span class="notranslate"> **abusers - Use LVE for a user to restrict queries (default mode)**:</span> In that mode, once user goes over the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing less of a new queries being sent to MySQL. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_  
-<span class="notranslate"> **all - Always run queries inside user's LVE**:</span> This way there are no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating <span class="notranslate"> MySQL Governor </span> . The benefits of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes what so ever. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_
+<span class="notranslate"> **off -- Monitor Only** :  </span> In this mode <span class="notranslate"> MySQL Governor </span> will not throttle customer's queries, instead it will let you monitor the MySQL usage to see the abusers at any given moment of time (and historically). This mode is good when you are just starting and want to see what is going on  
+<span class="notranslate"> **single -- Single restricted's LVE for all restricted customers (deprecated)** :  </span> In that mode once customer reaches the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available  
+<span class="notranslate"> **abusers - Use LVE for a user to restrict queries (default mode)** :  </span> In that mode, once user goes over the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing less of a new queries being sent to MySQL. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_  
+<span class="notranslate"> **all - Always run queries inside user's LVE** :  </span> This way there are no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating <span class="notranslate"> MySQL Governor </span> . The benefits of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes what so ever. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_
 
-If <span class="notranslate"> dbuser-map </span> file is absent on the server, "<span class="notranslate">abusers</span>" mode emulates "<span class="notranslate">single</span>".
+If <span class="notranslate"> dbuser-map </span> file is absent on the server, " <span class="notranslate"> abusers </span> " mode emulates " <span class="notranslate"> single </span> ".
 
-With <span class="notranslate"> **single**   </span> and <span class="notranslate"> **abusers**</span> mode, once user is restricted, the queries for that user will be limited as long as user is using more than limits specified. After a minute that user is using less, we will unrestricted that user.
+With <span class="notranslate"> **single**   </span> and <span class="notranslate"> **abusers**   </span> mode, once user is restricted, the queries for that user will be limited as long as user is using more than limits specified. After a minute that user is using less, we will unrestricted that user.
 
-You can specify modes of operation using <span class="notranslate"> [dbctl](/mysql_governor/#dbctl) </span> or by changing [configuration file](/mysql_governor/#configuration) .
-<span class="notranslate"> dbuser-map </span> file is located in <span class="notranslate">/etc/container/dbuser-map</span>.
+You can specify modes of operation using <span class="notranslate"> [dbctl](/command-line_tools/#dbctl) </span> or by changing [configuration file](/cloudlinux_os_components/#configuration-3).
+<span class="notranslate"> dbuser-map </span> file is located in <span class="notranslate">`/etc/container/dbuser-map`</span>.
 
-#### Starting And Stopping
-
+#### Starting and stopping
 
 To start:
 <div class="notranslate">
@@ -2908,13 +2937,12 @@ $ service db_governor stop
 ```
 </div>
 
-#### Mapping a User to Database 
+#### Mapping a user to a database 
 
-:::tip Note
-<span class="notranslate">MySQL Governor</span> 1.x
-:::
 
-Traditionally <span class="notranslate"> MySQL Governor </span> used prefixes to map user to database. With the latest version, we automatically generate <span class="notranslate"> user -> database user </span> mapping for <span class="notranslate"> cPanel </span> and <span class="notranslate"> DirectAdmin </span> control panels (other panels will follow).
+**[** <span class="notranslate"> **MySQL Governor** </span> **1.x]**
+
+Traditionally <span class="notranslate"> MySQL Governor </span> used prefixes to map user to database. With the latest version, we automatically generate <span class="notranslate"> user -> database user </span> mapping for <span class="notranslate"> cPanel </span>, <span class="notranslate"> Plesk </span> and <span class="notranslate"> DirectAdmin </span> control panels.
 
 The mapping file is located in: <span class="notranslate"> /etc/container/dbuser-map </span>
 
@@ -2957,7 +2985,7 @@ service db_governor restart
 ```
 </div>
 
-#### Log Files
+#### Log files
 
 
 <span class="notranslate"> **Error_log** </span>
@@ -3042,10 +3070,10 @@ Starting from cPanel & WHM version 78, cPanel supports MariaDB 10.3: https://doc
 :::
 
 ::: tip Note
-cPanel does not officially support MySQL 8.0, that is why we don’t recommend to use it on cPanel servers. Use on your own risk for <span class="notranslate">DirectAdmin and Plesk</span> servers, because downgrade can corrupt your databases.
+cPanel does not officially support MySQL 8.0, that is why we don’t recommend to use it on cPanel servers. Use on your own risk for <span class="notranslate"> DirectAdmin and Plesk </span> servers, because downgrade can corrupt your databases.
 :::
 
-### Backing Up MySQL
+### Backing up MySQL
 
 
 On <span class="notranslate"> cPanel </span> server disable MySQL service monitoring before doing the job:
@@ -3085,7 +3113,7 @@ This operation may take some time.
 #### abrt plugin
 
 
-We have created a plugin for <span class="notranslate">**abrt**</span> tool to automatically upload core dumps in case <span class="notranslate">MySQL Governor</span> crashes.
+We have created a plugin for <span class="notranslate"> abrt </span> tool to automatically upload core dumps in case <span class="notranslate"> MySQL Governor </span> crashes.
 
 To install the plugin:
 <div class="notranslate">
@@ -3097,7 +3125,7 @@ $ yum install cl-abrt-plugin --enablerepo=cloudlinux-updates-testing
 
 It will monitor crash reports for <span class="notranslate"> `/usr/sbin/db_governor, /usr/sbin/dbtop and /usr/sbin/dbctl` </span>
 
-You can modify <span class="notranslate"> `/etc/libreport/plugins/dropbox.conf` </span> to monitor other software as well by adding them to <span class="notranslate"> AppList </span> .
+You can modify <span class="notranslate"> `/etc/libreport/plugins/dropbox.conf` </span> to monitor other software as well by adding them to <span class="notranslate"> AppList</span>.
 <div class="notranslate">
 
 ```
@@ -3156,18 +3184,20 @@ When you change root or administrator credentials in <span class="notranslate"> 
 ```
 </div>
 
-The command updates credentials in MySQL <span class="notranslate"> Governor </span> configuration file and restarts <span class="notranslate"> db_governor </span> service afterwards.
+The command updates credentials in MySQL <span class="notranslate">Governor</span> configuration file and restarts <span class="notranslate">`db_governor`</span> service afterwards.
 
-After applying the command MySQL <span class="notranslate"> Governor </span> successfully connects to MySQL.
+After applying the command MySQL <span class="notranslate">Governor</span> successfully connects to MySQL.
 
 ## PHP Selector
+
+
 ### General information and requirements
 
 <span class="notranslate"> PHP Selector </span> is a CloudLinux component that sits on top of CageFS. It allows each user to select PHP version and module based on their needs. <span class="notranslate"> PHP Selector </span> requires account to have CageFS enabled to work.
 
 <span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate"> _suPHP, mod_fcgid, CGI (suexec), LiteSpeed_ </span> .
 
-It is **not compatible** with <span class="notranslate">_mod_php/DSO_</span>, including <span class="notranslate">_mod_ruid2_</span> and <span class="notranslate"> _MPM ITK_</span>.
+It is **not compatible** with <span class="notranslate"> _mod_php/DSO_ </span> , including <span class="notranslate"> _mod_ruid2_ </span> and <span class="notranslate"> _MPM ITK_ . </span>
 
 ::: tip Note
 PHP Selector is not supported for H-Sphere.
@@ -3177,9 +3207,9 @@ See also [Compatibility Matrix](/limits/#compatibility-matrix).
 
 ### Installation and update
 
-The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cagefs/)  &  <span class="notranslate"> [LVE Manager](/lve_manager/)  installed. </span>
+The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cagefs/) & <span class="notranslate">[LVE Manager](/lve_manager/) installed.</span>
 
-Use [compatibility matrix](/limits/#compatiblity_matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
+Use [compatibility matrix](/limits/#compatibility-matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
 
 Installation of different versions of PHP & modules:
 <div class="notranslate">
@@ -3197,10 +3227,10 @@ $ yum update cagefs lvemanager
 ```
 </div>
 
-<span class="notranslate"> **cPanel/WHM** : Make sure 'Select PHP version' </span> is enabled in <span class="notranslate"> Feature Manager</span>.
+<span class="notranslate">**cPanel/WHM**: Make sure 'Select PHP version' </span> is enabled in <span class="notranslate"> Feature Manager </span> .
 
 :::danger IMPORTANT
-Please, do not use settings like <span class="notranslate">_SuPHP_ConfigPath, PHPRC, PHP_INI_SCAN_DIR_</span>. Do not redefine path to <span class="notranslate"> php.ini </span> and ini-files for PHP modules. Doing that can break <span class="notranslate"> PHP Selector </span> functionality.
+Please, do not use settings like <span class="notranslate">`SuPHP_ConfigPath`, `PHPRC`, `PHP_INI_SCAN_DIR`</span>. Do not redefine path to <span class="notranslate">`php.ini`</span> and ini-files for PHP modules. Doing that can break <span class="notranslate">PHP Selector</span> functionality.
 :::
 
 For example, alternative php5.2 versions should load <span class="notranslate">`/opt/alt/php52/etc/php.ini`</span> file and scan <span class="notranslate">`/opt/alt/php52/etc/php.d`</span> directory for modules:
@@ -3214,11 +3244,11 @@ additional .ini files parsed              /opt/alt/php52/etc/php.d/alt_php.ini
 ```
 </div>
 
-Those are default locations for <span class="notranslate"> alt-php </span> .
+Those are default locations for <span class="notranslate">alt-php</span>.
 
-If you need custom PHP settings per user, please change them via <span class="notranslate"> "Edit PHP settings" </span> feature of <span class="notranslate"> PHP Selector</span>.
+If you need custom PHP settings per user, please change them via <span class="notranslate">"Edit PHP settings"</span> feature of <span class="notranslate"> PHP Selector </span> .
 
-If a list of default modules is absent on the server in the <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ file for some alt-PHP version and there is _nd_mysqli_ extension in this version, then on installation/update of the LVE Manager, </span> the _mysqli_ extension will be disabled and _nd_mysqli_ extension will be enabled automatically.
+If a list of default modules is absent on the server in the <span class="notranslate">`/etc/cl.selector/defaults.cfg`</span> file for some alt-PHP version and there is `nd_mysqli` extension in this version, then on installation/update of the LVE Manager the `mysqli` extension will be disabled and `nd_mysqli` extension will be enabled automatically.
 
 * If _nd_mysqli_ module is absent or a list of enabled modules is available, then they won't be changed automatically.
 * If alt-PHP is not installed on LVE Manager installation/update, then they won’t be changed automatically.
@@ -3231,7 +3261,7 @@ To change the modules status (enabled/disabled) manually, run the following comm
 ```
 </div>
 
-####**Update**
+#### Update
 
 To update PHP Selector, run the following command:
 <div class="notranslate">
@@ -3251,13 +3281,13 @@ LiteSpeed detects CloudLinux OS and applies all settings out-of-the-box.
 
 If the settings were not applied, you can use the following steps to set up LiteSpeed to use <span class="notranslate"> PHP Selector. </span>
 
-####**How to set up LiteSpeed version lower than 5.3 to use PHP Selector**
+**How to set up LiteSpeed version lower than 5.3 to use PHP Selector**
 
 To enable <span class="notranslate"> PHP Selector </span> with <span class="notranslate"> LiteSpeed Web Server </span> follow <span class="notranslate"> PHP Selector  </span> [installation guide](/php_selector/#installation-and-update) , and then adjust following settings in <span class="notranslate"> LiteSpeed </span> :
 
-1. <span class="notranslate"> CloudLinux (Admin Console --> Configuration --> Server --> General): CageFS </span>
-2. Enable <span class="notranslate"> SuExec: Server--> General --> PHP SuEXEC --> Yes </span>
-3. Go to <span class="notranslate"> _External App_ </span> tab, the new <span class="notranslate"> **lsphp_selector** </span> is here.
+1. <span class="notranslate">CloudLinux (Admin Console | Configuration | Server | General): CageFS </span>
+2. Enable <span class="notranslate">SuExec: Server | General | PHP SuEXEC | Yes </span>
+3. Go to <span class="notranslate">_External App_</span> tab, the new <span class="notranslate"> **lsphp_selector** </span> is here.
 
 :::tip Note
 You can select any other application or create a custom one.
@@ -3265,9 +3295,9 @@ You can select any other application or create a custom one.
 
 ![](/images/litespeed1_zoom70.png)
 
-4. The <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper** </span> on <span class="notranslate"> Plesk </span> . For other control panels, <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/usr/local/bin/lsphp** </span> .
+4. The <span class="notranslate">_Command_</span> line should be <span class="notranslate"> **/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper** </span> on <span class="notranslate"> Plesk </span> . For other control panels, <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/usr/local/bin/lsphp** </span> .
 
-<span class="notranslate"> _Run On Start Up_ </span> line must contain <span class="notranslate"> **Yes** </span> or <span class="notranslate"> **No** </span> .
+<span class="notranslate"> _Run On Start Up_ </span> line must contain <span class="notranslate"> **Yes** </span> or <span class="notranslate"> **No** </span>.
 
 For <span class="notranslate"> Plesk </span> :
 
@@ -3277,14 +3307,14 @@ For other control panels:
 
 ![](/images/litespeed2_zoom70.png)
 
-5. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector**</span>.
+5. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
 
 ![](/images/litespeed4_zoom70.png)
 
 
 ![](/images/litespeed5_zoom70.png)
 
-####**Additional settings for LiteSpeed version 5.3+**
+**Additional settings for LiteSpeed version 5.3 +**
 
 Go to <span class="notranslate"> Server --> PHP </span> tab. Click <span class="notranslate"> _Edit_ </span> in the <span class="notranslate"> _PHP Handler Defaults_ </span> section. We recommend to set up the following settings:
 
@@ -3339,7 +3369,7 @@ path phpcgibinary /usr/local/bin/php-cgi-etc
 ```
 </div>
 
-Make sure there is no other lines with <span class="notranslate"> _path phpcgibinary_ </span> defined in the file.
+Make sure there is no other lines with <span class="notranslate">`path phpcgibinary`</span> defined in the file.
 
 Restart <span class="notranslate"> ISPmanager </span> :
 <div class="notranslate">
@@ -3387,18 +3417,16 @@ These commands can affect PHP version of your clients’ web sites. Use them wit
 
 #### Disabling PHP extension globally
 
-If you want to disable PHP extension globally, you don't need to remove file <span class="notranslate">`/opt/alt/phpXX/etc/php.d.all/$EXTENSION.ini`</span>. You should just comment out <span class="notranslate"> "extension=" </span> directives in it.
+If you want to disable PHP extension globally, you don't need to remove file <span class="notranslate"> /opt/alt/phpXX/etc/php.d.all/$EXTENSION.ini </span> . You should just comment out <span class="notranslate"> "extension=" </span> directives in it.
 
-The extension will be visible in <span class="notranslate"> PHP Selector </span> interface, but selecting it in users's interface will take no effect - extension will be disabled in fact.
+The extension will be visible in <span class="notranslate">PHP Selector</span> interface, but selecting it in users's interface will take no effect - extension will be disabled in fact.
 
-Reinstalling of <span class="notranslate"> alt-php </span> packages will not reset settings (will not enable extension again).
-
+Reinstalling of <span class="notranslate">`alt-php`</span> packages will not reset settings (will not enable extension again).
 
 ### Configuration and using
 
 
-#### Setting Default Version and Modules
-
+#### Setting default version and modules
 
 Administrator can set default interpreter version and extensions for all users. All file operations are actually done by CageFS. CageFS takes settings from <span class="notranslate">  /etc/cl.selector/defaults.cfg. </span> Currently the <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> is created and handled by <span class="notranslate"> CloudLinux PHP Selector </span> scripts. It has the following format:
 <div class="notranslate">
@@ -3418,8 +3446,8 @@ modules=json,zip,fileinfo
 ```
 </div>
 
-#### Individual PHP.ini files
 
+#### Individual PHP.ini files
 
 For each customer, inside CageFS, file <span class="notranslate"> alt_php.ini is located in /etc/cl.php.d/alt-phpXX (XX </span> - version of PHP, like 52 or 53). The file contains PHP extension settings and extension directives selected by customer. This file exists for each customer, for each PHP version.
 
@@ -3443,6 +3471,27 @@ cagefsctl --rebuild-alt-php-ini
 ```
 </div>
 to propagate the change.
+
+#### How to add additional php.ini file for a user inside CageFS
+
+If you want to create additional `php.ini` file for a user inside CageFS in order to change some specific PHP options for that user, you can execute the following:
+
+<div class="notranslate">
+
+```
+# su -s /bin/bash - USER
+# cd /etc/cl.php.d/alt-php72/
+# echo "upload_tmp_dir=/tmp" >> custom.ini
+```
+</div>
+
+The commands above create `custom.ini` file that will be used for `alt-php72`. By default this approach is valid only for alt-php version selected via <span class="notranslate">PHP Selector</span>. When <span class="notranslate">`/etc/cl.selector/symlinks.rules`</span> file contains <span class="notranslate">`php.d.location = selector`</span> line, then the approach is valid for all alt-php versions regardless whether it is selected in PHP Selector or not.
+
+You can find more details [here](/php_selector/#php-extensions).
+
+But the recommended way is to modify PHP options via PHP Selector web or CLI interfaces, as described [here](/php_selector/#custom-php-ini-options).
+
+
 
 #### Substitute global php.ini for individual customer
 
@@ -3470,7 +3519,7 @@ php.ini=/etc/php.ini
 ```
 </div>
 
-3. For each user that needs custom file, create directory <span class="notranslate"> _/etc/cagefs/custom.etc/USER_NAME/php.ini_ </span>.
+3. For each user that needs custom file, create directory <span class="notranslate"> _/etc/cagefs/custom.etc/USER_NAME/php.ini_ </span> .
 
 For example if you want to create custom for <span class="notranslate"> USER1 </span> and <span class="notranslate"> USER2 </span> you would create files:  
 <span class="notranslate"> _/etc/cagefs/custom.etc/USER1/php.ini_ </span>  
@@ -3519,6 +3568,81 @@ to apply changes to CageFS for specific users.
 
 :::
 
+#### How to substitute global php.ini for individual customer on cPanel server with EasyApache4
+
+:::tip Note
+It is enough to put `php.ini` in the directory where PHP script is located in order to run the PHP script with a custom `php.ini` when using SuPHP. Also, you can use <span class="notranslate">cPanel MultiPHP Manager</span> to create user’s custom `php.ini` file, and this approach should work for CGI, FCGI, and LSAPI. Recommended ways to manage `php.ini` settings per user are to use <span class="notranslate">cPanel MultiPHP</span> or <span class="notranslate">CloudLinux PHP Selector</span> interfaces.
+:::
+
+1. For each user that needs custom file, create directory <span class="notranslate">`/etc/cagefs/custom.etc/USER_NAME/php.ini`</span>.
+    
+    For example, if you want to create a custom file for USER1 and USER2 you would create files:
+
+    <div class="notranslate">
+
+    ```
+    /etc/cagefs/custom.etc/USER1/php.ini
+    /etc/cagefs/custom.etc/USER2/php.ini
+    ```
+    </div>
+
+    Create such files for each user that should have a custom file.
+
+2. Execute the following command:
+
+    <div class="notranslate">
+
+    ```
+    $ cagefsctl --force-update
+    ```
+    </div>
+
+3. Configure `php.ini` load path for user’s domains.
+   
+* When using **suphp** handler, you should use `SuPHP_ConfigPath` directive in virtual host configuration for these domains, or use this directive in `.htaccess` files: `suPHP_ConfigPath/etc`.
+
+* When using **mod_lsapi**, you should use `lsapi_phprc` directive in virtual host configuration: `lsapi_phprc/etc/`.
+    You can find the detailed description of `mod_lsapi` directives [here](/apache_mod_lsapi/#configuration-references).
+
+* When using **FCGI** or **CGI**, you should implement custom PHP wrapper and redefine the path to `php.ini` via `-c` command line option, like below:
+    <div class="notranslate">
+
+    ```
+    #!/bin/bash
+    [ -f /etc/php.ini ] && exec /usr/bin/php -c /etc/php.ini
+    exec /usr/bin/php
+    ```
+    </div>
+
+**Notes:**
+
+1. You should restart Apache web server after modifying virtual host configuration for the domains.
+2. Custom `php.ini` may break switching PHP version via <span class="notranslate">CloudLinux PHP Selector</span> or <span class="notranslate">cPanel MultiPHP Manager</span> for the appropriate users or domains.
+3. When using cPanel ea-php for the domains, additional `php.ini` files may not be loaded, so you should load all needed PHP extensions in custom `/etc/php.ini` file:
+![](/images/custom_file_cPanel1.png)
+4. When using CloudLinux alt-php, additional `php.ini` files will be loaded:
+![](/images/custom_file_cPanel2.png)
+5. If you have modified anything in `/etc/cagefs/custom.etc` directory, you should execute one of the following:
+
+    * to apply changes to CageFS for all users, run:
+  
+    <div class="notranslate">
+
+    ```
+    $ cagefsctl --update-etc
+    ```
+    </div>
+
+    * to apply changes to CageFS for specific users, run:
+  
+    <div class="notranslate">
+
+    ```
+    $ cagefsctl --update-etc user1 user2
+    ```
+    </div>
+
+
 #### Managing interpreter version
 
 
@@ -3530,8 +3654,6 @@ Managing interpreter versions is done by means of manipulating a set of symbolic
 Next we want to know which PHP version is active for a given user (to supply a selected option in options list). We type:
 * <span class="notranslate"> `/usr/bin/selectorctl --user USERNAME --interpreter=php --user-current` </span> will retrieve PHP version set for a particular user. The script gets the path from <span class="notranslate"> `/var/cagefs/LAST_TWO_DIGITS_OF_UID/USERNAME/etc/cl.selector/php` </span> symlink, compares it with contents of <span class="notranslate"> /etc/cl.selector/selector.conf </span> file and if path is valid, prints out the current interpreter version.
 * <span class="notranslate"> `/usr/bin/selectorctl --user USERNAME --interpreter=php --set-user-current=7.2` </span> sets the current PHP version for particular user by creating symlink in <span class="notranslate"> `/var/cagefs/LAST_TWO_DIGITS_OF_UID/USERNAME/etc/cl.selector` </span> directory. All old symlinks are removed, and new symlinks are set.
-
-
 
 
 #### Including PHP Selector only with some packages (cPanel)
@@ -3548,7 +3670,8 @@ Once <span class="notranslate"> PHP Selector </span> is enabled, you can find it
 
 ![](/images/screen1-phpselector-featuremanager.png)
 
-#### PHP Extensions
+
+#### PHP extensions
 
 **Configuring Alt-PHP modules loading**
 
@@ -3560,7 +3683,6 @@ If system default PHP version selected in <span class="notranslate"> cPanel Mult
 
 When <span class="notranslate"> "php.d.location = selector" option is in effect, modules selected via PHP Selector </span> will be loaded for all alt-php versions.
 :::
-
 
 
 This behavior is implemented in CageFS-6.1-10 and later.
@@ -3592,7 +3714,6 @@ And run the command to apply changes:
 
 #### FFmpeg
 
-
 Due to possible patent issues CloudLinux does not provide <span class="notranslate"> FFmpeg </span> libraries ( [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html) ). We highly recommend researching if you can legally install <span class="notranslate"> FFmpeg </span> extension on your server. This might differ based on where you and your servers are located. More information can be found on the link: [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html)
 
 For your convenience we provide <span class="notranslate"> FFMPEG PHP </span> binding. For them to work, you need to install <span class="notranslate"> FFmpeg </span> package from the “ <span class="notranslate"> Nux Dextop </span> ” repository following the [instructions](http://li.nux.ro/repos.html).
@@ -3613,16 +3734,26 @@ selectorctl --enable-extensions=ffmpeg --user USERNAME --version X.Y
 ```
 </div>
 
-#### Native PHP Configuration
+#### Native PHP configuration
 
-
-<span class="notranslate"> PHP Selector </span> requires access to the <span class="notranslate"> native PHP </span> version for proper work. It is specified in the file <span class="notranslate"> _/etc/cl.selector/native.conf_ </span> of the following content (example):
+<span class="notranslate">PHP Selector</span> requires access to the <span class="notranslate">native PHP</span> version for proper work. It is specified in the file <span class="notranslate">`/etc/cl.selector/native.conf`</span> of the following content (example):
 <div class="notranslate">
 
 ```
 php=/usr/bin/php-cgi
 php-cli=/usr/bin/php
 php.ini=/etc/php.ini
+lsphp=/usr/local/bin/lsphp
+php-fpm=/usr/local/sbin/php-fpm
+```
+</div>
+
+
+Then execute the following command to apply changes.
+<div class="notranslate">
+
+```
+cagefsctl --setup-cl-selector
 ```
 </div>
 
@@ -3637,6 +3768,7 @@ Access permission 644 must be set:
 chmod 0644 /etc/cl.selector/native.conf
 ```
 </div>
+
 
 #### Using
 
@@ -3663,10 +3795,11 @@ All changes are saved automatically.
 
 #### Custom PHP.ini options
 
+:::tip Note
+Requires <span class="notranslate">LVE Manager</span> 0.6+
+:::
 
-**[Requires** <span class="notranslate"> **LVE Manager** </span> **0.6+]**
-
-<span class="notranslate"> PHP Selector </span> allows customer to edit php.ini settings. Admin has a full control over which settings can be modified.
+<span class="notranslate">PHP Selector</span> allows customer to edit php.ini settings. Admin has a full control over which settings can be modified.
 
 To allow settings to be modifiable, it has to be whitelisted in <span class="notranslate"> /etc/cl.selector/php.conf </span>.
 
@@ -3710,8 +3843,8 @@ Users can use web interface to modify php.ini settings:
 
 ![](/images/php_selector_options.png)
 
-#### End user files and directories
 
+#### End user files and directories
 
 The following files and directories are created inside CageFS for each customer:
 
@@ -3729,7 +3862,6 @@ like:
 
 
 #### Compiling your own extensions
-
 
 Sometimes you might want to compile your own PHP extension for your users to use. In most cases, it is better to contact our support by sending us a support [ticket](https://cloudlinux.zendesk.com/hc/requests/new) . We will try to provide such extension for you via regular updates within 5-7 days.
 
@@ -3788,7 +3920,6 @@ $ cagefsctl --setup-cl-selector
 
 #### Roll your own PHP
 
-
 To add your own PHP version in <span class="notranslate"> PHP Selector </span> :
 
 * Create directory in (like:  /opt/alt/php51), and mimic directory structure inside to be similar to the one of PHP versions bundled by <span class="notranslate"> CloudLinux </span> .
@@ -3820,12 +3951,14 @@ cagefsctl --setup-cl-selector
 ```
 </div>
 
-The new PHP version must be available now for selection in <span class="notranslate"> PHP Selector </span> .
+The new PHP version must be available now for selection in <span class="notranslate">PHP Selector</span>.
 
-#### Detect User's PHP Version
+#### Detect user's PHP version
 
 
-**[** <span class="notranslate"> **LVE Manager** </span> **0.5-63 or higher]**
+:::tip Note
+<span class="notranslate">LVE Manager</span> 0.5-63 or higher
+:::
 
 <span class="notranslate"> PHP Selector </span> provides an easy way to figure out which versions are available and selected for end user from the command line. You can get this information by running:
 
@@ -3865,7 +3998,6 @@ ERROR:User USERNAME not in CageFS
 ```
 </div>
 
-
 #### PHP Selector without CageFS
 
 
@@ -3892,7 +4024,7 @@ selectorctl --setup-without-cagefs USER
 
 ( <span class="notranslate"> USER </span> - the name of a user who is using selector. If not specified, the first available cPanel account username will be used).
 
-When executing <span class="notranslate"> `--setup-without-cagefs` </span> , the following actions are performed:
+When executing <span class="notranslate">`--setup-without-cagefs`</span>, the following actions are performed:
 
 * Creating symlinks to the user modules and options for each <span class="notranslate"> Alt-PHP </span> version:  
 <span class="notranslate"> _/opt/alt/php55/link/conf/alt_php.ini -> /home/USER/.cl.selector/alt_php55.ini_ </span>
@@ -3926,17 +4058,17 @@ Generated ini files with selected modules and options for each version:
 <span class="notranslate"> _.cl.selector/alt_php70.ini_ </span>  
 <span class="notranslate"> _.cl.selector/alt_php71.ini_ </span>  
 
-Symlinks above are being created according to the settings in <span class="notranslate"> ~/.cl.selector/defaults.cfg </span> and <span class="notranslate">`~/.cl.selector/alt_php44.cfg`</span> files (44 - corresponding PHP version), which are storing <span class="notranslate"> PHP Selector </span> settings for the user. These files are usually taken from user home directory backup or when migrating account from another server. Thus, when migrating account from server to server, <span class="notranslate"> PHP Selector </span> settings are saved.
+Symlinks above are being created according to the settings in <span class="notranslate"> ~/.cl.selector/defaults.cfg </span> and <span class="notranslate"> ~/.cl.selector/alt_php44.cfg </span> files (44 - corresponding PHP version), which are storing <span class="notranslate"> PHP Selector </span> settings for the user. These files are usually taken from user home directory backup or when migrating account from another server. Thus, when migrating account from server to server, <span class="notranslate"> PHP Selector </span> settings are saved.
 
-If no <span class="notranslate"> PHP Selector </span> settings backup files are found when running <span class="notranslate"> `selectorctl --setup-without-cagefs` </span> , then default settings from <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> global file are applied (as in selector normal mode). If the file is absent, then native PHP version will be selected for the user.
+If no <span class="notranslate"> PHP Selector </span> settings backup files are found when running <span class="notranslate">`selectorctl --setup-without-cagefs`</span>, then default settings from <span class="notranslate">`/etc/cl.selector/defaults.cfg`</span> global file are applied (as in selector normal mode). If the file is absent, then native PHP version will be selected for the user.
 
 * The following line: <span class="notranslate"> _PATH=$HOME/.cl.selector/selector.path:$HOME/.cl.selector:$PATH_ </span>
 
-is being added to the user file <span class="notranslate"> _~/.bashrc_   </span>
+is being added to the user file <span class="notranslate">`~/.bashrc` </span>
 
 <span class="notranslate"> Apache </span> PHP handlers settings are not changed.
 
-* Also <span class="notranslate"> `selectorctl --setup-without-cagefs` </span>  command does the following: 
+* Also <span class="notranslate">`selectorctl --setup-without-cagefs`</span> command does the following: 
 
   * Turns off link traversal protection (linksafe);
   * Turns off cagefs service.
@@ -3952,16 +4084,17 @@ selectorctl --revert-to-cagefs
 (CageFS should be initialized by using <span class="notranslate">`cagefsctl --init`</span> command before running the command above)
 
 This command removes symlinks:  
-<span class="notranslate"> _/opt/alt/php55/link/conf/alt_php.ini -> /home/USER/.cl.selector/alt_php55.ini,_ </span>
+<span class="notranslate">`/opt/alt/php55/link/conf/alt_php.ini` -> `/home/USER/.cl.selector/alt_php55.ini`</span>
 turns on link traversal protection (linksafe) and cagefs service.
 
 
-#### Configuring "Global” php.ini options for all Alt-PHP Versions
+#### Configuring "global” php.ini options for all Alt-PHP versions
 
+:::tip Note
+CageFS 6.0-33 or higher, <span class="notranslate">LVE Manager</span> 2.0-11.2 or higher
+:::
 
-**[CageFS 6.0-33 or higher, <span class="notranslate"> LVE Manager </span> 2.0-11.2 or higher]**
-
-There is <span class="notranslate"> _/etc/cl.selector/global_php.ini_ </span> file, where you can specify values of PHP options that should be applied for all <span class="notranslate"> Alt-PHP </span> versions that are installed on a server. These settings will also be automatically applied to the new <span class="notranslate"> Alt-PHP </span> versions that will be installed later.
+There is <span class="notranslate">`/etc/cl.selector/global_php.ini`</span> file, where you can specify values of PHP options that should be applied for all <span class="notranslate"> Alt-PHP </span> versions that are installed on a server. These settings will also be automatically applied to the new <span class="notranslate"> Alt-PHP </span> versions that will be installed later.
 
 Example:  
 <span class="notranslate"> _# cat /etc/cl.selector/global_php.ini_ </span>  
@@ -3975,8 +4108,9 @@ When an option is absent in <span class="notranslate"> _/etc/cl.selector/global_
 
 <span class="notranslate"> date.timezone </span> and <span class="notranslate"> error_log </span> options are handled differently than the others. When these options are not in <span class="notranslate"> _/etc/cl.selector/global_php.ini_ </span> file, than values for the options will be taken from <span class="notranslate"> "native" </span> php.ini file. And when the option is in php.ini for some <span class="notranslate"> Alt-PHP </span> version already (and its value is not empty), than value from <span class="notranslate"> _/etc/cl.selector/global_php.ini_ </span> will be NOT applied.
 
-
-**[CageFS version 6.1.5-1 or later]**
+:::tip Note
+CageFS version 6.1.5-1 or later
+:::
 
 The behavior above is changed for cPanel servers with EasyApache 4. The <span class="notranslate">`/usr/local/lib/php.ini`</span> file is removed for new installations of cPanel v80 and later.
 
@@ -3995,7 +4129,7 @@ To confirm changes (not affecting <span class="notranslate"> "date.timezone" </s
 ```
 </div>
 
-To confirm changes (including <span class="notranslate"> "date.timezone" </span> and <span class="notranslate"> "error_log" </span> options) please run:
+To confirm changes (including <span class="notranslate">`date.timezone`</span> and <span class="notranslate">`error_log`</span> options) please run:
 
 <div class="notranslate">
 
@@ -4013,7 +4147,7 @@ or
 </div>
 (two commands above work the same way).
 
-If you don't want to change <span class="notranslate"> error_log </span> , but want to change <span class="notranslate"> date.timezone </span> , you can execute:
+If you don't want to change <span class="notranslate">`error_log`</span>, but want to change <span class="notranslate">`date.timezone`</span>, you can execute:
 
 <div class="notranslate">
 
@@ -4024,7 +4158,7 @@ selectorctl --apply-global-php-ini date.timezone
 
 Similarly, command <span class="notranslate"> `selectorctl --apply-global-php-ini error_log` </span> applies <span class="notranslate"> error_log </span> and all other options specified in <span class="notranslate"> _/etc/cl.selector/global_php.ini_ </span> file, except <span class="notranslate"> date.timezone </span> .
 
-So, you can specify 0, 1 or 2 parameters from the list: <span class="notranslate"> error_log, date.timezone </span>.
+So, you can specify 0, 1 or 2 parameters from the list: <span class="notranslate"> error_log, date.timezone </span> .
 
 Using <span class="notranslate"> `--apply-global-php-ini` </span> without arguments applies all global PHP options including two above.
 
@@ -4039,7 +4173,7 @@ selectorctl --apply-global-php-ini date.timezone error_log
 ```
 </div>
 
-The latter command has the same effect as <span class="notranslate">`/usr/bin/selectorctl --apply-global-php-ini`</span>
+The latter command has the same effect as <span class="notranslate">`/usr/bin/selectorctl --apply-global-php-ini`</span>.
 
 
 ### Integration with control panels
@@ -4128,7 +4262,7 @@ The third column: if selected as default  ( <span class="notranslate"> d </span>
 ```
 </div>
 
-**List Extensions for a version:**
+**List extensions for a version:**
 
 <div class="notranslate">
 
@@ -4160,7 +4294,7 @@ Result:
 ~: included in php binary (cannot be disabled)  
 -: disabled
 
-**Select Default Extensions (enable comma-separated list of extensions globally for a version):**
+**Select default extensions (enable comma-separated list of extensions globally for a version):**
 
 <div class="notranslate">
 
@@ -4169,7 +4303,7 @@ Result:
 ```
 </div>
 
-**Deselect Default Extensions (disable comma-separated list of extensions globally for a version):**
+**Deselect default extensions (disable comma-separated list of extensions globally for a version):**
 
 <div class="notranslate">
 
@@ -4196,7 +4330,7 @@ Result:
 ```
 </div>
 
-**List Enabled extensions for a user:**
+**List enabled extensions for a user:**
 
 <div class="notranslate">
 
@@ -4271,169 +4405,123 @@ echo $OPTIONS
 ```
 </div>
 
+
 [cPanel](/php_selector/#cpanel)
 
-#### cPanel
+#### PHP Selector integration with cPanel’s MultiPHP Manager
 
 :::tip Note
 Requires CageFS 5.5-6.18+
 :::
 
-When using EasyApache4 in cPanel, it is possible to change PHP versions for users' domains with <span class="notranslate"> MultiPHP Manager </span> (when PHP is working under <span class="notranslate"> Apache </span> web server). Also it is possible to change system default PHP version with <span class="notranslate"> MultiPHP Manager </span> in WHM.
+#### Overview
 
-<span class="notranslate"> MultiPHP Manager </span> in WHM looks as follows:
+Earlier, when EasyApache 3 was in trend, CloudLinux with PHP Selector would work seamlessly; you would set up the EasyApache profile which is compatible with PHP Selector, and you are ready to go. However, with EasyApache 4 cPanel introduced the built-in [MultiPHP Manager](https://documentation.cpanel.net/display/68Docs/MultiPHP+Manager+for+cPanel) which changed everything.
 
-![](/images/cpanel_integration_zoom57.png)
+![](/images/MultiPHPManager.jpg)
 
-A user can change PHP version for domain in cPanel interface but can not change System default PHP version.
-
-![](/images/cpanel_integration01.png)
-
-The following <span class="notranslate"> Alt-PHP </span> packages (and higher) provide an ability to select <span class="notranslate"> Alt-PHP </span> version in <span class="notranslate"> MultiPHP Manager </span> :
-
-* alt-php44-4.4.9-71;
-* alt-php51-5.1.6-81;
-* alt-php52-5.2.17-107;
-* alt-php53-5.3.29-59;
-* alt-php54-5.4.45-42;
-* alt-php55-5.5.38-24;
-* alt-php56-5.6.31-7;
-* alt-php70-7.0.24-2;
-* alt-php71-7.1.10-2;
-* alt-php72-7.2.0-0.rc.3.2.
-
-You can remove <span class="notranslate"> Alt-PHP </span> from <span class="notranslate"> cPanel MultiPHP Manager </span> .
-To do so set '<span class="notranslate"> _yes_ </span>' or ' <span class="notranslate"> _no_ </span> ' for the <span class="notranslate"> Alt-PHP </span> versions in config file <span class="notranslate"> _/opt/alt/alt-php-config/alt-php.cfg_ </span> and run <span class="notranslate"> _/opt/alt/alt-php-config/multiphp_reconfigure.py_ . </span>
-This script manages SCL prefixes for the <span class="notranslate"> Alt-PHP </span> - removes or creates prefixes in <span class="notranslate"> _/etc/scl/prefixes_ . </span>
-
-<div class="notranslate">
-
-```
-/opt/alt/alt-php-config/alt-php.cfg
-[MultiPHP Manager]
-alt-php44 = no
-alt-php51 = no
-alt-php52 = no
-alt-php53 = no
-alt-php54 = no
-alt-php55 = yes
-alt-php56 = yes
-alt-php70 = yes
-alt-php71 = yes
-alt-php72 = yes
-```
-</div>
-
-::: tip Note
-<span class="notranslate"> PHP Selector does not work when Alt-PHP version is selected as system default in MultiPHP Manager. So, all domains will use PHP version selected via MultiPHP Manager. Settings in PHP Selector will be ignored. We recommend to disable PHP Selector </span> in such case.
-:::
-
-
-<span class="notranslate"> PHP Selector </span> works in different ways with EasyApache4 and EasyApache3. CageFS should be enabled for users who use <span class="notranslate"> PHP Selector </span> . The novation is that when using  EasyApache4, actual PHP version used depends on PHP version selected in <span class="notranslate"> MultiPHP Manager </span> . When PHP version chosen for domain in <span class="notranslate"> MultiPHP Manager </span> matches System default PHP version, then <span class="notranslate"> PHP Selector </span> is used to select actual PHP version. If PHP version chosen for domain in <span class="notranslate"> MultiPHP Manager </span> differs from System default PHP version, then PHP version from <span class="notranslate"> MultiPHP Manager </span> is used.
-
-In other words, <span class="notranslate"> PHP Selector </span> deals with changing System default PHP version.
-
-<span class="notranslate"> PHP Selector </span> algorithm for choosing PHP version for domain is as follows:
-
-1. If CageFS is disabled, then <span class="notranslate"> PHP Selector </span> is not active and <span class="notranslate"> MultiPHP Manager PHP </span> version is applied.
-
-2. If CageFS is enabled, then:
-
-2.1. If PHP version chosen in <span class="notranslate"> MultiPHP Manager </span> differs from System default PHP version, then <span class="notranslate"> MultiPHP Manager PHP </span> version is applied.
-
-2.2. If PHP version chosen in <span class="notranslate"> MultiPHP Manager </span> is the same as System default PHP version, then <span class="notranslate"> PHP Selector PHP </span> version is applied:
-
-2.2.1. If <span class="notranslate"> _Native_ </span> option is selected in <span class="notranslate"> PHP Selector </span> , then <span class="notranslate"> MultiPHP Manager PHP version is applied. </span>
-
-2.2.2. If PHP version chosen in <span class="notranslate"> PHP Selector </span> differs from <span class="notranslate"> _Native_ </span> , then <span class="notranslate"> PHP Selector PHP </span> version is applied.
-
-![](/images/cpanel_integration02.png)
-
-![](/images/cpanel_integration03.png)
-
-![](/images/cpanel_integration04.png)
-
-PHP version chosen in <span class="notranslate"> MultiPHP Manager </span> can also be applied to console commands <span class="notranslate"> _/usr/bin/php and /usr/local/bin/php_ . </span> In this case <span class="notranslate"> _.htaccess_ </span> file search is performed in current directory and in parent directories. If the file is found, then PHP version specified in it is applied, if not found, then System default PHP version is applied. System default PHP version can be changed via <span class="notranslate"> PHP Selector </span> .
-
-1. If CageFS is disabled, then <span class="notranslate"> PHP Selector </span> is not active and PHP version from <span class="notranslate"> _.htaccess_ </span> is applied.
-
-2. If CageFS is enabled, then:
-
-2.1. If PHP version specified in <span class="notranslate"> .htaccess </span> file differs from System default, then <span class="notranslate"> _.htaccess_ </span> version is applied.
-
-2.2. If System default PHP version is specified in <span class="notranslate"> _.htaccess_ </span> file, then <span class="notranslate"> PHP Selector </span> version is applied:
-
-2.2.1. If <span class="notranslate"> _Native_ </span> option is chosen in <span class="notranslate"> PHP Selector </span> , then <span class="notranslate"> _.htaccess_ </span> PHP version is applied.
-
-2.2.2. If PHP version chosen in <span class="notranslate"> PHP Selector </span> differs from <span class="notranslate"> _Native_ </span> , then <span class="notranslate">  PHP Selector </span> version is applied.
-
-::: tip Note
-cPanel prior to 11.56 does not support hooks to add processing of System default PHP version changes with <span class="notranslate"> MultiPHP Manager. That is why System default PHP version changing is handled by cron job (/etc/cron.d/cagefs_cron file), which executes the command /usr/share/cagefs/setup_multiphp_integration every ten minutes, which means that all System default PHP version changes in MultiPHP Manager </span> are applied in CageFS with 10 minutes delay.
-:::
-
-::: tip Note
-In cagefs-5.5-6.25 or later, changing of System default PHP version with <span class="notranslate"> MultiPHP Manager </span> will be processed with cPanel WHM hooks.
-:::
-
-**PHP Modules**
-
-The set of PHP modules depends on PHP version used for domain or console. If <span class="notranslate"> PHP Selector </span> is active and <span class="notranslate"> Alt-PHP </span> version is chosen, then modules chosen for this <span class="notranslate"> Alt-PHP </span> version in <span class="notranslate"> PHP Selector </span> are used. If <span class="notranslate"> PHP Selector </span> is not active, then modules for PHP version chosen in cPanel MultiPHP are used.
-
-**PHP Options**
-
-cPanel has <span class="notranslate"> MultiPHP INI Editor </span> available in WHM and in cPanel user interface.
-
-<span class="notranslate"> MultiPHP INI Editor </span> allows setting PHP options for any PHP version globally for all domains and users. At this point <span class="notranslate">`/opt/cpanel/ea-php56/root/etc/php.d/local.ini`</span> file is generated and options values are written into this file. Such options have higher priority than the options set in <span class="notranslate"> MultiPHP INI Editor </span> in cPanel user interface. <span class="notranslate"> MultiPHP INI Editor </span> allows to set PHP options in <span class="notranslate"> Basic Mode </span> (simplified interface) and in <span class="notranslate"> Editor Mode </span>.
-
-<span class="notranslate"> MultiPHP INI Editor </span> in WHM looks as follows:
-
-![](/images/cpanel_integration05_zoom67.png)
-
-![](/images/cpanel_integration06_zoom67.png)
+The main advantage of MultiPHP Manager is allowing users to select __different PHP versions for each domain__.
+With CloudLinux, you can also make use of a similar feature: PHP Selector. PHP Selector has an important advantage over MultiPHP Manager: it allows a single cPanel user to manage PHP extensions without the need to contact his/her hoster. The user can enable/disable PHP extensions as he pleases. PHP Selector also leaves the choice of PHP version to the end user, but the switch is made for the __whole user, not for a separate website__ (as with MultiPHP Manager).
 
 :::tip Note
-cPanel prior to 11.56 does not support hooks to add processing of INI options changing for PHP version with <span class="notranslate"> MultiPHP INI Editor in cPanel WHM. That is why for now the processing of PHP version changing is handled bycron job (/etc/cron.d/cagefs_cron file) which performs the command /usr/share/cagefs/ setup_multiphp_integration every 10 minutes, which means that INI options changes for PHP version in MultiPHP INI Editor </span> in cPanel WHM are being applied with up to 10 minutes delay.
+The main question a hoster should answer is which of the above features he will provide for his clients: MultiPHP Manager or PHP Selector. Using both can be confusing for the end users. You can manage which features to show to your cPanel end-users in WHM Home » Packages » Feature Manager » Feature Lists.
 :::
 
-::: tip Note
-In cagefs-5.5-6.25 or later, INI options changes for PHP version in <span class="notranslate"> MultiPHP INI Editor </span> in cPanel WHM will be processed by cPanel WHM hooks.
-:::
+If you'd like to use PHP Selector on a cPanel server, continue reading this document to understand how to integrate MultiPHP Manager and PHP Selector.
 
-MultiPHP INI Editor in cPanel user interface allows setting options for _php.ini_ files in user home directory or in domain docroot. Changes are applied immediately without delay.
+#### Prerequisites
 
-These options priority is lower than ones specified in <span class="notranslate"> MultiPHP INI Editor </span> WHM interface. <span class="notranslate"> MultiPHP INI Editor </span> in cPanel user interface looks as follows
+Before integrating PHP Selector with cPanel, make sure that you have the following components installed:
 
-![](/images/cpanel_integration07.png)
+* [LVE Manager](/lve_manager/#lve-manager)
+* [CageFS](/cagefs/#installation)
+* [CloudLinux alt-php package](/php_selector/#installation-and-update)
 
-![](/images/cpanel_integration08.png)
+#### Configuration
 
-If <span class="notranslate"> PHP Selector </span> is active, then options set in <span class="notranslate"> PHP Selector </span> are applied, and such options have higher priority than options in custom _php.ini_ file in domain docroot. If <span class="notranslate"> PHP Selector </span> is disabled, then options set in <span class="notranslate"> MultiPHP INI Editor </span> are applied.
+Once you’re done with PHP Selector [installation](/php_selector_installation.html), there are a few things that you need to check on cPanel servers. You need to make sure that MultiPHP Manager settings are correct and that CageFS is enabled for the users. Let us cover the steps in detail.
 
-**QUIRKS:** When changing System default PHP version, administrator should take into consideration the following quirk. For example, if a user has chosen PHP 5.3 for domain and System default PHP version is PHP 5.5, then <span class="notranslate"> PHP Selector </span> will not be used for user domain. In this case, if administrator switches System default PHP version from 5.5 to 5.3, then <span class="notranslate"> PHP Selector </span> will be activated for user domain and PHP version chosen in <span class="notranslate"> PHP Selector </span> will be applied for domain.
+Go to WHM -> MultiPHP Manager -> PHP Versions tab.
 
-That is why it is recommended for administrator to avoid changing System default PHP version to PHP version that is already used by users. At the same time it is recommended for users to choose inherit for domain and use <span class="notranslate"> PHP Selector </span> to choose PHP version. In this case PHP version chosen in <span class="notranslate"> PHP Selector </span> will be always applied for domain.
+![](/images/MultiPHPManager_setup.jpg)
+
+1) Make sure that the System PHP Version is set to one of the __ea-phpXX__ ones. 
+   :::warning Attention
+   Selecting the __alt-phpXX__ (as a “System PHP Version”) will break the PHP Selector. 
+   :::
+2) Switch the PHP-FPM to Off; the PHP Selector is not compatible with it.
+   :::tip Note
+   If you have PHP-FPM enabled for existing websites, you need to disable it for them.
+   :::
+3) Last but not least, make sure that the domains/accounts (where you'd like to use the PHP Selector) use the __Inherited__ version. You need to do that because MultiPHP Manager has higher priority than PHP Selector. So, if any other PHP version is set in this menu, it will overwrite the PHP version selected in PHP Selector for that domain.
+
+That’s it! You are all set. The only thing that’s left is to make sure that you use the “[Enable for all users](/cagefs/#managing-users)” mode for CageFS if you’d like to keep PHP Selector for all users.
+
+See also: [FAQ on PHP Selector integration with cPanel’s MultiPHP Manager](https://cloudlinux.zendesk.com/hc/en-us/articles/360007615820-FAQ-on-PHP-Selector-integration-with-cPanel-s-MultiPHP-Manager).
+
+#### More about PHP Selector’s configuration
+
+#### __Setting up the PHP version on customer’s end (in cPanel)__
+
+It is possible to change the current PHP Version for MultiPHP Manager on the user’s end. Here’s how the settings would look like by default:
+
+![](/images/cpanel_01.jpg)
+
+As end-user can change that and select any version, other than Inherited one. Just like with WHM’s MultiPHP Manager, the PHP Selector __won’t work correctly in this case__. We recommend leaving either PHP Selector or MultiPHP Manager enabled for the end-user. That way, your end users will have only one place where to configure PHP which will make things easier.
+
+#### __PHP directives and their priorities__
+
+Given the way cPanel handles the PHP versions, it could be quite confusing to understand which PHP.ini directive will get higher priority over another. Let's discuss it here.
+
+__Directives priority - if PHP Selector is enabled__
+
+If the PHP Selector is [configured](/php_selector/#configuration-2) properly, its options would have the highest priority. You can find them in cPanel -> Select PHP Version -> Switch to PHP Options.
+
+![](/images/PHPVersion.png)
+
+You can add custom php.ini options here too! Check [this article](/custom_php_ini_options.html) to find out how to do that.
+The lower priority would have the php.ini (or .user.ini for some of the PHP handlers) configuration file, but you could also type in the PHP values there.
+
+__Directives priority - if PHP Selector isn’t used__
+
+If you haven’t configured the PHP Selector, and you’d like to simply change PHP.ini parameters for particular __alt-phpXX__ or __ea-phpXX__ versions, you could manage them in WHM -> MultiPHP INI Editor. cPanel end-user can also customize php.ini directives in cPanel -> MultiPHP INI Editor. For more information, read the official documentation [here](https://documentation.cpanel.net/display/68Docs/MultiPHP+INI+Editor+for+WHM) and [here](https://documentation.cpanel.net/display/74Docs/MultiPHP+INI+Editor+for+cPanel).
+
+#### __PHP version in the command-line interface (CLI)__
+
+Shell commands, starting with `/usr/bin/php` and `/usr/local/bin/php` would use the same version that you select in the PHP Selector (if it’s already [set up](/php_selector/#configuration-2)). That PHP will also load PHP directives selected in PHP Selector. For example, if we have a setup like this:
+
+![](/images/command_line_01.jpg)
+
+We should get the 7.2 version in the `php -v` output if nothing was changed in the PHP Selector. This is exactly what we get:
+
+```
+/usr/local/bin/php -v
+PHP 7.2.14 (cli) (built: Feb 10 2019 18:20:08) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+    with Zend OPcache v7.2.14, Copyright (c) 1999-2018, by Zend Technologies
+```
+
+But if we change the PHP version in the PHP Selector, the `php -v` output will change as well. 
+
+![](/images/set_current.png)
+
+```
+/usr/local/bin/php -v
+PHP 7.3.2 (cli) (built: Feb  7 2019 13:36:44) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.3.2, Copyright (c) 1998-2018 Zend Technologies
+```
+
+However, PHP version chosen in MultiPHP Manager can also be applied to console commands `/usr/bin/php` and `/usr/local/bin/php`. Whether it will be applied or not depends on the current working directory. `.htaccess` file search is performed in the current directory and in parent directories. If the file is found, then the PHP version specified in it is applied, if not found, then System default PHP version is applied. System default PHP version for a specific user can be changed via PHP Selector.
 
 See also [PHP Selector CLI tools](/command-line_tools/#php-selector).
 
-### Bundled PHP Extensions
+### Bundled PHP extensions
 
+Large number of PHP extensions are bundled with each version of PHP.
 
-Large number of PHP extensions are bundled with each version of PHP:
-
-* [PHP 4.4](/php_selector/#php-4-4-extensions)
-* [PHP 5.1](/php_selector/#php-5-1-extensions)
-* [PHP 5.2](/php_selector/#php-5-2-extensions)
-* [PHP 5.3](/php_selector/#php-5-3-extensions)
-* [PHP 5.4](/php_selector/#php-5-4-extensions)
-* [PHP 5.5](/php_selector/#php-5-5-extensions)
-* [PHP 5.6](/php_selector/#php-5-6-extensions)
-* [PHP 7.0](/php_selector/#php-7-0-extensions)
-* [PHP 7.1](/php_selector/#php-7-1-extensions) 
-* [PHP 7.2](/php_selector/#php-7-2-extensions)
-* [PHP 7.3](/php_selector/#php-7-3-extensions)
-
-
-#### PHP 4.4 Extensions
+#### PHP 4.4 extensions
 
 
 <div class="notranslate">
@@ -4443,7 +4531,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 |bcmath <br>bz2 <br>calendar <br>ctype <br>curl <br>dba <br>dbase <br>dbx <br>domxml <br>exif <br>fileinfo | ftp <br>gd <br>gettext <br>gmp <br>iconv <br>imap <br>interbase <br>ioncube_loader <br>ioncube_loader_4 <br>json <br>ldap  | mbstring <br>mcrypt <br>mhash <br>mysql <br>ncurses <br>odbc <br>openssl <br>overload <br>pcntl <br>pcre <br>pgsql  | posix <br>pspell <br>readline <br>recode <br>session <br>shmop <br>snmp <br>sockets <br>sourceguardian <br>standard <br>sybase_ct <br>sysvmsg  | sysvsem <br>sysvshm <br>tokenizer <br>wddx <br>xml <br>xmlrpc <br>zlib|
 </div>
 
-#### PHP 5.1 Extensions
+#### PHP 5.1 extensions
 
 
 <div class="notranslate">
@@ -4453,7 +4541,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 |bcmath <br>big_int <br>bitset <br>bz2 <br>bz2_filter <br>calendar <br>coin_acceptor <br>crack <br>ctype <br>curl <br>date <br>dba <br>dbase <br>dom <br>doublemetaphone <br>exif <br>ftp <br>gd <br>geoip | gettext <br>gmagick <br>gmp <br>gnupg <br>haru <br>hash <br>huffman <br>iconv <br>idn <br>igbinary <br>imagick <br>imap <br>inclued <br>inotify <br>interbase <br>ioncube_loader <br>ioncube_loader_4 <br>ldap <br>libxml  | lzf <br>mbstring <br>mcrypt <br>memcache <br>msgpack <br>mysql <br>mysqli <br>ncurses <br>odbc <br>openssl <br>pcntl <br>pcre <br>pdo <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite  | pgsql <br>posix <br>pspell <br>quickhash <br>radius <br>readline <br>redis <br>reflection <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>ssh2 <br>standard <br>stats  | stem <br>sybase_ct <br>sysvmsg <br>sysvsem <br>sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>translit <br>wddx <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xsl <br>zlib |
 </div>
 
-#### PHP 5.2 Extensions
+#### PHP 5.2 extensions
 
 
 <div class="notranslate">
@@ -4463,7 +4551,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 |apc <br>apm <br>ares <br>bcmath <br>bcompiler <br>big_int <br>bitset <br>bloomy <br>bz2 <br>bz2_filter <br>calendar <br>coin_acceptor <br>crack <br>ctype <br>curl <br>date <br>dba <br>dbase <br>dbx <br>dom <br>doublemetaphone <br>eaccelerator <br>enchant <br>exif <br>ffmpeg <br>fileinfo <br>filter | ftp <br>gd <br>gender <br>geoip <br>gettext <br>gmagick <br>gmp <br>gnupg <br>haru <br>hash <br>hidef <br>htscanner <br>huffman <br>iconv <br>idn <br>igbinary <br>imagick <br>imap <br>inclued <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>ioncube_loader_4 <br>json <br>ldap <br>libxml <br>lzf  | magickwand <br>mailparse <br>mbstring <br>mcrypt <br>memcache <br>memcached <br>mhash <br>mongo <br>msgpack <br>mssql <br>mysql <br>mysqli <br>ncurses <br>oauth <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite  | pgsql <br>phar <br>posix <br>pspell <br>quickhash <br>radius <br>rar <br>readline <br>recode <br>redis <br>reflection <br>rsync <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>spl_types <br>sqlite <br>ssh2 <br>standard <br>stats <br>stem <br>stomp  | suhosin <br>sybase_ct <br>sysvmsg <br>sysvsem <br>sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>translit <br>uploadprogress <br>uuid <br>wddx <br>xcache_3 <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xrange <br>xsl <br>yaf <br>yaz <br>zend_optimizer <br>zip <br>zlib|
 </div>
 
-#### PHP 5.3 Extensions
+#### PHP 5.3 extensions
 
 
 <div class="notranslate">
@@ -4473,7 +4561,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 |apc <br>apcu <br>apm <br>ares <br>bcmath <br>bcompiler <br>big_int <br>bitset <br>bloomy <br>brotli <br>bz2 <br>bz2_filter <br>calendar <br>clamav <br>coin_acceptor <br>core <br>crack <br>ctype <br>curl <br>date <br>dba <br>dbase <br>dbx <br>dom <br>doublemetaphone <br>eaccelerator <br>eio <br>enchant <br>ereg <br>exif <br>ffmpeg <br>fileinfo| filter <br>ftp <br>functional <br>gd <br>gender <br>geoip <br>gettext <br>gmagick <br>gmp <br>gnupg <br>haru <br>hash <br>hidef <br>htscanner <br>http <br>huffman <br>iconv <br>idn <br>igbinary <br>imagick <br>imap <br>inclued <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>ioncube_loader_4 <br>jsmin <br>json <br>ldap <br>libevent <br>libxml <br>lzf | magickwand <br>mailparse <br>mbstring <br>mcrypt <br>memcache <br>memcached <br>mhash <br>mongo <br>msgpack <br>mssql <br>mysql <br>mysqli <br>mysqlnd <br>ncurses <br>nd_mysql <br>nd_mysqli <br>nd_pdo_mysql <br>oauth <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pgsql <br>phalcon <br>phar  | posix <br>propro <br>pspell <br>quickhash <br>radius <br>raphf <br>rar <br>readline <br>recode <br>redis <br>reflection <br>rsync <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>spl_types <br>sqlite <br>sqlite3 <br>ssh2 <br>standard <br>stats <br>stem <br>stomp <br>suhosin <br>sybase_ct <br>sysvmsg <br>sysvsem| sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>trader <br>translit <br>uploadprogress <br>uri_template <br>uuid <br>wddx <br>weakref <br>xcache <br>xcache_3 <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xrange <br>xsl <br>yaf <br>yaml <br>yaz <br>zend_guard_loader <br>zip <br>zlib <br>zmq|
 </div>
 
-#### PHP 5.4 Extensions
+#### PHP 5.4 extensions
 
 
 <div class="notranslate">
@@ -4483,7 +4571,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 |apc <br>apcu <br>apm <br>ares <br>bcmath <br>big_int <br>bitset <br>brotli <br>bz2 <br>bz2_filter <br>calendar <br>clamav <br>core <br>ctype <br>curl <br>date <br>dba <br>dbase <br>dbx <br>dom <br>doublemetaphone <br>eaccelerator <br>eio <br>enchant <br>ereg <br>exif <br>ffmpeg <br>fileinfo <br>filter <br>ftp <br>functional <br>gd | gender <br>geoip <br>gettext <br>gmagick <br>gmp <br>gnupg <br>haru <br>hash <br>hidef <br>htscanner <br>http <br>iconv <br>igbinary <br>imagick <br>imap <br>inclued <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>ioncube_loader_4 <br>jsmin <br>json <br>ldap <br>libevent <br>libsodium <br>libxml <br>lzf <br>magickwand <br>mailparse <br>mbstring| mcrypt <br>memcache <br>memcached <br>mhash <br>mongo <br>mongodb <br>msgpack <br>mssql <br>mysql <br>mysqli <br>mysqlnd <br>ncurses <br>nd_mysql <br>nd_mysqli <br>nd_pdo_mysql <br>oauth <br>oci8 <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pgsql <br>phalcon <br>phar  | posix <br>propro <br>pspell <br>quickhash <br>radius <br>raphf <br>rar <br>readline <br>recode <br>redis <br>reflection <br>rsync <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>spl_types <br>sqlite3 <br>ssh2 <br>standard <br>stats <br>stem <br>stomp <br>suhosin <br>sybase_ct <br>sysvmsg <br>sysvsem <br>sysvshm <br>tidy | timezonedb <br>tokenizer <br>trader <br>translit <br>uploadprogress <br>uri_template <br>uuid <br>wddx <br>weakref <br>xcache <br>xcache_3 <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xrange <br>xsl <br>yaf <br>yaml <br>yaz <br>zend_guard_loader <br>zip <br>zlib <br>zmq|
 </div>
 
-#### PHP 5.5 Extensions
+#### PHP 5.5 extensions
 
 
 <div class="notranslate">
@@ -4493,7 +4581,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 |apcu <br>apm <br>ares <br>bcmath <br>big_int <br>bitset <br>brotli <br>bz2 <br>bz2_filter <br>calendar <br>clamav <br>core <br>ctype <br>curl <br>date <br>dba <br>dbase <br>dbx <br>dom <br>doublemetaphone <br>eio <br>enchant <br>ereg <br>exif <br>ffmpeg <br>fileinfo <br>filter <br>ftp <br>gd <br>gender <br>geoip | gettext <br>gmagick <br>gmp <br>gnupg <br>gRPC <br>haru <br>hash <br>hidef <br>htscanner <br>http <br>iconv <br>igbinary <br>imagick <br>imap <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>ioncube_loader_4 <br>jsmin <br>json <br>ldap <br>libevent <br>libsodium <br>libxml <br>lzf <br>magickwand <br>mailparse <br>mbstring <br>mcrypt | memcache <br>memcached <br>mhash <br>mongo <br>mongodb <br>msgpack <br>mssql <br>mysql <br>mysqli <br>mysqlnd <br>ncurses <br>nd_mysql <br>nd_mysqli <br>nd_pdo_mysql <br>oauth <br>oci8 <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pgsql | phalcon <br>phalcon3 <br>phar <br>posix <br>propro <br>pspell <br>quickhash <br>radius <br>raphf <br>rar <br>readline <br>recode <br>redis <br>reflection <br>rsync <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>spl_types <br>sqlite3 <br>ssh2 <br>standard <br>stats <br>stem <br>stomp <br>suhosin | sybase_ct <br>sysvmsg <br>sysvsem <br>sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>trader <br>translit <br>uploadprogress <br>uri_template <br>uuid <br>wddx <br>weakref <br>xcache_3 <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xrange <br>xsl <br>yaf <br>yaml <br>yaz <br>zend_guard_loader <br>zip <br>zlib <br>zmq |
 </div>
 
-#### PHP 5.6 Extensions
+#### PHP 5.6 extensions
 
 
 <div class="notranslate">
@@ -4503,7 +4591,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 |apcu <br>apm <br>ares <br>bcmath <br>big_int <br>bitset <br>brotli <br>bz2 <br>bz2_filter <br>calendar <br>core <br>ctype <br>curl <br>date <br>dba <br>dbx <br>dom <br>doublemetaphone <br>eio <br>enchant <br>ereg <br>exif <br>ffmpeg <br>fileinfo <br>filter <br>ftp <br>gd <br>gender <br>geoip <br>gettext | gmagick <br>gmp <br>gnupg <br>gRPC <br>haru <br>hash <br>htscanner <br>http <br>iconv <br>igbinary <br>imagick <br>imap <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>ioncube_loader_4 <br>jsmin <br>json <br>ldap <br>libevent <br>libsodium <br>libxml <br>lzf <br>mailparse <br>mbstring <br>mcrypt <br>memcache <br>memcached <br>mhash | mongo <br>mongodb <br>msgpack <br>mssql <br>mysql <br>mysqli <br>mysqlnd <br>ncurses <br>nd_mysql <br>nd_mysqli <br>nd_pdo_mysql <br>oauth <br>oci8 <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pgsql <br>phalcon <br>phalcon3 | phar <br>posix <br>propro <br>pspell <br>quickhash <br>radius <br>raphf <br>rar <br>readline <br>recode <br>redis <br>reflection <br>rsync <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>spl_types <br>sqlite3 <br>ssh2 <br>standard <br>stats <br>stem <br>stomp | suhosin <br>sybase_ct <br>sysvmsg <br>sysvsem <br>sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>trader <br>translit <br>uploadprogress <br>uri_template <br>uuid <br>wddx <br>weakref <br>xcache_3 <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xrange <br>xsl <br>yaml <br>yaz <br>zend_guard_loader <br>zip <br>zlib <br>zmq|
 </div>
 
-#### PHP 7.0 Extensions
+#### PHP 7.0 extensions
 
 
 <div class="notranslate">
@@ -4517,7 +4605,7 @@ Large number of PHP extensions are bundled with each version of PHP:
 Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
 
-#### PHP 7.1 Extensions
+#### PHP 7.1 extensions
 
 
 <div class="notranslate">
@@ -4530,7 +4618,7 @@ Please find more info about <span class="notranslate"> New Relic License Key </s
 * Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
 Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
-#### PHP 7.2 Extensions
+#### PHP 7.2 extensions
 
 
 <div class="notranslate">
@@ -4544,7 +4632,7 @@ Please find more info about <span class="notranslate"> New Relic License Key </s
 Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
 
-#### PHP 7.3 Extensions
+#### PHP 7.3 extensions
 
 
 <div class="notranslate">
@@ -4554,10 +4642,13 @@ Please find more info about <span class="notranslate"> New Relic License Key </s
 |apcu <br>bcmath <br>dba <br>dbase <br>dom <br>eio <br>enchant <br>fileinfo <br>gd <br>gender <br>geoip <br>gmagick <br>gnupg <br>grpc <br>http  | igbinary <br>imagick <br>imap <br>inotify <br>interbase <br>intl <br>json <br>ldap <br>lzf <br>mailparse <br>mbstring <br>memcached <br>mongodb <br>mysqlnd <br>nd_mysqli | nd_pdo_mysql <br>_newrelic_ <br>oauth <br>oci8 <br>odbc <br>opcache <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_oci <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pdo_sqlsrv <br>pgsql | phar <br>posix <br>propro <br>pspell <br>raphf <br>redis <br>snmp <br>soap <br>sockets <br>sqlsrv <br>ssh2 <br>stats <br>sysvmsg <br>sysvsem <br>sysvshm <br>tidy | timezonedb <br>trader <br>uploadprogress <br>uuid <br>vips <br>wddx <br>xdebug <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xsl <br>yaf <br>yaml <br>zip <br>zmq|
 </div>
 
-* Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
+:::tip Note
+To use <span class="notranslate">`newrelic`</span> extension you should set your own <span class="notranslate">`New Relic License Key`</span> in your own <span class="notranslate">`/opt/alt/php7*/etc/php.ini`</span> file.
+You can find more info about <span class="notranslate">New Relic License Key</span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key)</span>.
+:::
 
 ## Python Selector
+
 :::tip Note
 This documentation is for the old version of Python Selector. You can find documentation for the new Python Selector Beta [below](/python_selector/#overview-and-requirements)
 :::
@@ -4575,7 +4666,8 @@ yum grouplist | grep alt-python
 ```
 </div>
 
-### Python Selector Installation
+
+### Installation
 
 ::: tip Note
 The instructions below are suitable only for EasyApache 3 and EasyApache 4. You should follow [this instruction](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:enable_ruby_python_selector) if you use LiteSpeed.
@@ -4624,9 +4716,9 @@ After installation, please make sure that you have unmarked appropriate checkbox
 Adding <span class="notranslate"> Python</span> modules requires executing permissions to gcc/make binaries. Please enable compilers in Compiler Access section of WHM, then run: `cagefsctl --force-update` 
 :::
 
-### End User Access
+### End user access
 
-1. In <span class="notranslate"> _Software/Services_ </span> area choose <span class="notranslate">_Select Python Environment_</span>.
+1. In <span class="notranslate">_Software/Services_</span> area choose <span class="notranslate">_Select Python Environment_</span>.
 
 ![](/images/clip000133.jpg)
 
@@ -4686,12 +4778,12 @@ The possibility to choose domain when creating an application was added to web i
 
 ![](/images/webapp001_zoom94.png)
 
-Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate"> django </span> -admin).
+Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate"> django -admin</span>).
 
 ![](/images/webapp002_zoom93.png)
 
 
-### Hide Python Selector Icon
+### Hide Python Selector icon
 
 It is possible to hide or show <span class="notranslate">Python Selector</span> icons by marking or unmarking proper checkbox in <span class="notranslate"> LVE Manager _Options_</span> tab.
 
@@ -4718,7 +4810,7 @@ This documentation is for the new version of Python Selector beta. You can find 
 :::
 
 
-### Overview and Requirements
+### General information and requirements
 
 <span class="notranslate">Python Selector</span> is a CloudLinux component that allows each user to easily deploy and manage Python applications via application server.
 
@@ -4727,7 +4819,6 @@ This documentation is for the new version of Python Selector beta. You can find 
 :::danger Important!
 Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already migrated Python applications because it will break migrated applications.
 :::
-
 
 * Python Selector supports the following Alt-Python versions:
   * <span class="notranslate">`alt-python27 2.7.16`</span>, supported by CloudLinux 6, CloudLinux 7
@@ -4741,6 +4832,7 @@ Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already mi
 * It supports cPanel and DirectAdmin servers. On DirectAdmin only on Apache. Plesk will not be supported.
 * Python Selector uses <span class="notranslate">`mod_passenger`</span> to host Python. For more details about <span class="notranslate">`mod_passenger`</span>, please read [documentation](https://www.phusionpassenger.com/).
 * Python Selector works with EasyApache 3 (note EOL at 1st September 2019), EasyApache 4 and LiteSpeed Web Server. Or Apache on DirectAdmin. 
+
 
 ### Migration to the new Python Selector 
 
@@ -4782,7 +4874,7 @@ To migrate a Python application:
 If you face any issue during the migration, please [contact our support team](https://cloudlinux.zendesk.com/hc/requests/new).
 
 
-### Installation
+### Installation and update
 
 New clients can install Python Selector using the [CloudLinux Installation Wizard](/lve_manager/#cloudlinux-installation-wizard).
 
@@ -5027,14 +5119,13 @@ To install run:
 ## Ruby Selector
 ### General information and requirements
 
-We have the ability to deploy <span class="notranslate">Ruby</span> applications via application server. <span class="notranslate">Ruby Selector</span> uses <span class="notranslate">`mod_passenger`</span> to host <span class="notranslate">Ruby</span>.
+We have the ability to deploy <span class="notranslate">Ruby</span> applications via application server. <span class="notranslate">Ruby Selector</span> uses <span class="notranslate">`mod_passenger`</span> to host <span class="notranslate"> Ruby</span>.
 
 This feature is available for CloudLinux 6 or later. It supports only cPanel servers.
 
-You can find a list of supported <span class="notranslate">alt-ruby</span> versions using the following commands.
+You can find a list of supported <span class="notranslate">`alt-ruby`</span> versions using the following commands.
 
 <div class="notranslate">
-For alt-ruby:
 
 ```
 yum grouplist | grep alt-ruby
@@ -5048,7 +5139,8 @@ yum grouplist | grep alt-ruby
 The instructions below are suitable only for EasyApache 3 and EasyApache 4. You should follow [this instruction](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:enable_ruby_python_selector) if you use LiteSpeed.
 :::
 
-To use <span class="notranslate"> Ruby Selector </span> install alternative <span class="notranslate"> Ruby </span> packages:
+To use <span class="notranslate">Ruby Selector</span> install alternative <span class="notranslate">Ruby</span> packages:
+
 <div class="notranslate">
 
 ```
@@ -5056,7 +5148,8 @@ yum groupinstall alt-ruby
 ```
 </div>
 
-To use MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package:
+To use MySQL database you should install <span class="notranslate">`alt-python27-devel`</span> package:
+
 <div class="notranslate">
 
 ```
@@ -5065,19 +5158,18 @@ yum install alt-python27-devel
 </div>
 
 ::: tip Note
-After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> LVE Manager Options </span> tab to show <span class="notranslate"> Ruby App </span> in web-interface. Find the instructions on the [link](/python_and_ruby_selector/#hide-python-and-ruby-selector-icons).
+After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> VE Manager Options</span> tab to show <span class="notranslate">Ruby App</span> in web-interface. Find the instructions on the [link](/ruby_selector/#hide-ruby-selector-icons).
 :::
 
 ::: tip Note
-Adding <span class="notranslate">Ruby modules requires executing permissions to gcc/make binaries. Please enable compilers in Compiler Access section of WHM, then run: cagefsctl --force-update </span>
+Adding Ruby modules requires executing permissions to <span class="notranslate">`gcc/make`</span> binaries. Please enable compilers in Compiler Access section of WHM, then run: <span class="notranslate">`cagefsctl --force-update`</span>
 :::
 
 ### Configuration and using
 
-#### End User Access
+#### End user access
 
-
-1. In the <span class="notranslate">Software/Services</span> area choose <span class="notranslate">Select Ruby Environment</span>.
+1. In <span class="notranslate">_Software/Services_</span> area choose <span class="notranslate">_Select Ruby Environment_</span>.
 
 ![](/images/clip000133.jpg)
 
@@ -5090,21 +5182,21 @@ After a little while a new application entry will be appended to the web-page.
 
 ![](/images/clip000255.jpg)
 
-3. You can edit path (folder name of the project in the home directory, for example, <span class="notranslate"> _/home/clman1/project_name_ </span> ), <span class="notranslate"> uri </span> for application, <span class="notranslate"> wsgi </span> handler. If you click <span class="notranslate"> Edit </span> - the value is converted to input field and thus becomes editable. When editing is complete, click <span class="notranslate"> Save </span> .
+3. You can edit path (folder name of the project in the home directory, for example, <span class="notranslate">`/home/clman1/project_name`</span>), <span class="notranslate"> uri </span> for application, <span class="notranslate"> wsgi </span> handler. If you click <span class="notranslate"> Edit </span> - the value is converted to input field and thus becomes editable. When editing is complete, click <span class="notranslate"> Save </span>.
 
 ![](/images/clip000256.jpg)
 
-4. <span class="notranslate"> Wsgi </span> entry is to specify <span class="notranslate"> python wsgi </span> application entry point. It must be specified as filename, must be callable and separated by colon. If your app is running from file <span class="notranslate"> flask/run.py </span> by calling callable app, set <span class="notranslate"> flask/run.py:app </span> .
+4. <span class="notranslate"> Wsgi </span> entry is to specify <span class="notranslate"> python wsgi </span> application entry point. It must be specified as filename, must be callable and separated by colon. If your app is running from file <span class="notranslate"> flask/run.py </span> by calling callable app, set <span class="notranslate">`flask/run.py:app`</span>.
 
 ![](/images/clip000257.jpg)
 
-5. When <span class="notranslate"> Show </span> control is clicked, <span class="notranslate"> ruby </span> extensions section will be expanded. It gives the ability to add or remove <span class="notranslate"> ruby </span> modules. When start typing in input field, appropriate hints are shown in drop-down list. Choose the entry you want from drop-down and click <span class="notranslate"> Add </span> .
+5. When <span class="notranslate"> Show </span> control is clicked, <span class="notranslate"> python </span> extensions section will be expanded. It gives the ability to add or remove <span class="notranslate"> python </span> modules. When start typing in input field, appropriate hints are shown in drop-down list. Choose the entry you want from drop-down and click <span class="notranslate"> Add </span>.
 
 ![](/images/clip000261.jpg)
 
-If you click <span class="notranslate"> Delete</span>, the corresponding module entry will disappear.
+If you click <span class="notranslate">Delete</span>, the corresponding module entry will disappear.
 
-In addition to setting <span class="notranslate"> path, uri </span> and <span class="notranslate"> wsgi </span> , the interpreter version can be changed as well by changing the value in select drop-down.
+In addition to setting <span class="notranslate"> path, uri </span> and <span class="notranslate">`wsgi`</span>, the interpreter version can be changed as well by changing the value in select drop-down.
 
 6. No changes are applied to application environment until <span class="notranslate"> Update </span> button is clicked. Before the <span class="notranslate"> Update </span> button is clicked, all changes can be reverted with <span class="notranslate"> Reset </span> button.
 
@@ -5116,36 +5208,35 @@ Click <span class="notranslate"> Remove </span> to delete the application - the 
 For <span class="notranslate"> LVE Manager </span> version 0.9-10 and higher
 :::
 
-When creating an application you can use the key <span class="notranslate"> --domain </span> , which attaches application to domain. If <span class="notranslate"> --domain </span> key is not specified, then the main users domain will be used by default.
+When creating an application you can use the key <span class="notranslate">`--domain`</span>, which attaches application to domain. If <span class="notranslate">`--domain`</span> key is not specified, then the main users domain will be used by default.
 
 To create application run:
 <div class="notranslate">
 
 ```
-/usr/bin/selectorctl --interpreter=<python|ruby> --version=VERSION[--user=USER] [--domain=DOMAIN] [--print-summary] [--json]–-create-webapp <FOLDER_NAME> <URI>
+/usr/bin/selectorctl --interpreter=<ruby> --version=VERSION[--user=USER] [--domain=DOMAIN] [--print-summary] [--json]–-create-webapp <FOLDER_NAME> <URI>
 ```
 </div>
-When changing application <span class="notranslate"> URI, --domain </span> key can be used simultaneously, in this case not only <span class="notranslate"> URI </span> will be changed, but also the application domain.
+When changing application URI, <span class="notranslate">`--domain`</span> key can be used simultaneously, in this case not only <span class="notranslate"> URI </span> will be changed, but also the application domain.
 
 To change application <span class="notranslate"> URI </span> run:
 <div class="notranslate">
 
 ```
-/usr/bin/selectorctl --interpreter=<python|ruby> [--user=USER][--domain=NEW_DOMAIN] [--print-summary] [--json] --transit-webapp<FOLDER_NAME> <NEW_URI> 
+/usr/bin/selectorctl --interpreter=<ruby> [--user=USER][--domain=NEW_DOMAIN] [--print-summary] [--json] --transit-webapp<FOLDER_NAME> <NEW_URI> 
 ```
 </div>
 The possibility to choose domain when creating an application was added to web interface as well.
 
 ![](/images/webapp001_zoom94.png)
 
-Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate"> django </span> -admin).
+Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate">django -admin</span>).
 
 ![](/images/webapp002_zoom93.png)
 
-#### Hide Ruby Selector Icon
+#### Hide Ruby Selector icon
 
-
-It is possible to hide or show <span class="notranslate">Ruby Selector</span> icon by marking or unmarking proper checkboxes in <span class="notranslate"> LVE Manager _Options_</span> tab.
+It is possible to hide or show <span class="notranslate">Ruby Selector</span> icon by marking or unmarking proper checkboxes in <span class="notranslate"> LVE Manager Options</span> tab.
 
 ![](/images/CL-hide-python-ruby.png)
 
@@ -5155,13 +5246,13 @@ The same result can be accomplished in CLI by running:
 <div class="notranslate">
 
 ```
-cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}}}'
+cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false}}}'
 ```
 </div>
  
 :::tip Note
 If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux Ruby Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
-For that, you’d need to first uncheck <span class="notranslate">`Hide Python App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists. 
+For that, you’d need to first uncheck <span class="notranslate">`Hide Ruby App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists.
 :::
 
 #### Deploying Redmine using Ruby Selector
@@ -5172,10 +5263,10 @@ Provided instructions are valid for older <span class="notranslate"> Redmine </s
 
 1. In cPanel create MySQL database and add user to it. In the example given, the databace <span class="notranslate"> _redminet_redmine_ </span> was created and user <span class="notranslate"> _redminet_redmine_ </span> was added.
 
-2. In <span class="notranslate"> **Setup Ruby App** </span> section create an application.
+2. In <span class="notranslate"> **Setup Ruby App**</span> section create an application.
 
-<span class="notranslate"> App Directory </span> is the directory where all static files will be placed ( _e.g._ <span class="notranslate"> _redmine_ </span> ).
-<span class="notranslate"> App URI </span> is web-interface URL ( _e.g._ <span class="notranslate"> _redmine_ </span> _web-interface will be located in_ <span class="notranslate"> _YOUR_DOMAIN/redmine_ </span> ).
+<span class="notranslate"> App Directory</span> is the directory where all static files will be placed ( _e.g._ <span class="notranslate">`redmine`</span>).
+<span class="notranslate"> App URI </span> is web-interface URL ( _e.g._ <span class="notranslate"> _redmine_ </span> _web-interface will be located in_ <span class="notranslate"> _YOUR_DOMAIN/redmine_ </span>).
 
 ![](/images/hmfile_hash_f8216d04.png)
 
@@ -5258,13 +5349,13 @@ RAILS_ENV=production ~/rubyvenv/redmine/2.1/bin/rake db:migrate
 
 #### EasyApache 4
 
-Since cPanel/WHM version 66 provides <span class="notranslate"> ea-ruby24-mod_passenger </span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager) ), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
+Since cPanel/WHM version 66 provides <span class="notranslate">ea-ruby24-mod_passenger</span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager)), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
 
-CloudLinux already has <span class="notranslate"> Ruby Selector</span>, which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger</span>. However, it does not allow using <span class="notranslate"> cPanel application manager</span>.
+CloudLinux already has <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selector </span> , which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger </span> . However, it does not allow using <span class="notranslate"> cPanel application manager </span> .
 
 It is not correct to install both of those packages on the server because they contain the same <span class="notranslate"> passenger </span> module for Apache web server.
 
-The new <span class="notranslate"> ea-ruby24-mod_passenger </span> is available for download from our <span class="notranslate"> updates-testing (beta) </span> repository which allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate"> Ruby Selector</span>.
+The new <span class="notranslate"> ea-ruby24-mod_passenger </span> is available for download from our <span class="notranslate"> updates-testing (beta) </span> repository which allows you to run applications via <span class="notranslate"> cPanel application manager </span> and <span class="notranslate"> Ruby Selector</span>.
 
 To install run:
 <div class="notranslate">
@@ -5274,8 +5365,6 @@ To install run:
 # yum install ea-ruby24-mod_passenger --enablerepo=cl-ea4-testing
 ```
 </div>
-
-To install <span class="notranslate"> Ruby Selector</span> follow the instructions on the [link](/python_and_ruby_selector/#python-and-ruby-selector-installation).
 
 See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 
@@ -5287,8 +5376,8 @@ See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 
 #### **Requirements**
 
-* <span class="notranslate"> Node.js Selector</span> supports Node.js versions 6.x, 8.x, 9.x and later.
-* This feature is available for CloudLinux 7, <span class="notranslate"> CloudLinux 6 hybridand CloudLinux 6. </span>
+* <span class="notranslate"> Node.js Selector </span>  supports Node.js versions 6.x, 8.x, 9.x and later.
+* This feature is available for CloudLinux 7, <span class="notranslate"> CloudLinux 6 hybrid and CloudLinux 6</span>.
 * <span class="notranslate"> Node.js Selector requires LVE Manager 4.0 </span> or later.
 * It supports cPanel and DirectAdmin servers (Plesk is not supported as it already has Node.js support.) For more details, please go to Plesk & Node.js documentation [here](https://www.plesk.com/blog/product-technology/node-js-plesk-onyx/) and [here](https://docs.plesk.com/en-US/onyx/administrator-guide/website-management/nodejs-support.76652/) .
 * For more details about <span class="notranslate"> mod_passenger </span>  and Node.js, please read documentation  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/)  and  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/ownserver/apache/oss/el7/deploy_app.html) .
@@ -5373,14 +5462,13 @@ yum install cagefs
 
 
 
-### Node.js Deployment
+### Node.js deployment
 
 
 The first approach - [remote usage of Node.js Interpreters of different versions](/node_js_selector/#remote-usage-of-node-js-interpreters).  
 The second approach - [remote usage of the ](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) <span class="notranslate"> [cloudlinux-selector utility](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) </span> .
 
-#### Remote Usage of Node.js Interpreters
-
+#### Remote usage of Node.js interpreters
 
 1. Create a Node.js project in <span class="notranslate"> IntelliJ IDEA/WebStorm </span> . You can download [this archive](http://docs.cloudlinux.com/nodejs_example.zip) and use it as a basis.
 2. Install <span class="notranslate"> alt-nodejs </span> packages on the server in use. See [installation instructions](/node_js_selector/#installation) .
@@ -5452,7 +5540,7 @@ Useful links:
 It is not required to install <span class="notranslate"> _Passenger_ </span> while working in <span class="notranslate"> IDE </span> if you are using this approach.
 :::
 
-#### Remote Usage of the cloudlinux-selector Utility
+#### Remote usage of the cloudlinux-selector utility
 
 
 1. Create an application via UI or with the command as described in the Remote Usage of Node.js Interpreters approach, [step 3 (a,b)](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) .
@@ -5465,200 +5553,12 @@ It is not required to install <span class="notranslate"> _Passenger_ </span> whi
 You can see the running app at <span class="notranslate"> http://DOMAIN/APPLICATION_URL </span>
 To apply all changes, restart the application.
 
-
-#### User Interface
-
-**Hoster**
-
-Hoster interface allows to enable and disable Node.js, and manage individual Node.js versions.
-
-Go to <span class="notranslate"> _LVE Manager → Options Tab → Node.js Section_ </span> . A list of installed Node.js versions is displayed. There are several columns in the list.
-
-* <span class="notranslate"> Version </span> — displays Node.js version.
-* <span class="notranslate"> Path </span> — Node.js package location.
-* <span class="notranslate"> Applications </span> — number of applications that use this Node.js version. Click on a digit to go to the list of applications.
-* <span class="notranslate"> Enabled </span> — displays if particular Node.js version is enabled.
-* <span class="notranslate"> Actions </span> — allows to install, delete, and make default a particular Node.js version.
-
-To display all changes immediately click <span class="notranslate"> _Refresh_ </span> link.
-
-![](/images/nodejsgeneral_zoom70.png)
-
-**How to enable/disable Node.js**
-
-* To enable Node.js move the slider to <span class="notranslate"> _Enable_ </span> .
-* To disable Node.js move the slider back to <span class="notranslate"> _Disable_ </span> . 
-
-::: tip Note
-If you disable Node.js, its version for all your applications will not be changed, but you can not add a new application to this version.
-:::
-
-![](/images/nodejsslider_zoom70.png)
-
-::: tip Note
-<span class="notranslate">Node.js Selector</span> icon in end user interface is absent when Node.js is disabled.
-:::
-
-![](/images/nodejsselectorlogo_zoom70.png)
-
-**How to manage Node.js**
-
-The list of installed Node.js versions allows to enable and disable, install and delete, and set a particular Node.js version as a default.
-
-**Enable and disable particular Node.js version**
-
-To enable particular Node.js version do the following:
-* Move a disabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
-* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
-
-![](/images/nodejsenable_zoom70.png)
-
-To disable particular Node.js version do the following:
-* Move an enabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
-* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
-
-**Install and delete particular Node.js version**
-
-To install particular Node.js version do the following:
-* Click <span class="notranslate"> _Install_ </span> button in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
-* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
-
-To delete particular Node.js version do the following:
-* Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
-* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start uninstall process.
-* Or just close a pop-up without any changes.
-
-**Note that it is impossible**:  
-* to remove default Node.js version;
-* to remove version with applications;
-* to install or remove version if another installation/uninstall process is running.
-
-![](/images/nodejsconfirmation_zoom70.png)
-
-**Make a particular Node.js version as a default**
-
-To make a particular Node.js version as a default do the following:
-* Click <span class="notranslate"> _Double-Tick_ </span> icon in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
-* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
-
-::: tip Note
-It is impossible to make a disabled version default.
-:::
-
-
-![](/images/nodejsmakedefault_zoom70.png)
-
-**Applications column**
-
-To view and operate with the list of domains with Node.js versions click on a number in the <span class="notranslate"> _Applications_ </span> column for a particular Node.js version. A section with a list of Domains for particular Node.js version will be displayed.
-
-![](/images/nodejsselectordomains_zoom70.png)
-
-Domains are displayed by three. To load more domains click on <span class="notranslate"> _Load More_ </span> button.
-
-
-To change Node.js version for a particular application do the following:
-* Click <span class="notranslate"> _Double-Arrow_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A confirmation pop-up will be displayed.
-* In the pop-up choose Node.js version from a drop-down.
-* Click <span class="notranslate"> _Change_ </span> to confirm the action or <span class="notranslate"> _Cancel_ </span> to close the pop-up.
-* To refresh state of applications in current version you can click <span class="notranslate"> _Refresh_ </span> link. 
-
-:::tip Note
-All packages of the application(s) will be re-installed.
-:::
-
-**End User**
-
-:::tip Note
-<span class="notranslate"> Node.js Selector </span> icon in end user interface is absent when Node.js is disabled.
-:::
-
-![](/images/nodejslogoenduser_zoom70.png)
-
-End User interface allows end users to setup and manage Node.js for their web applications.  
-Go to <span class="notranslate"> _cPanel → Software Section → Select Node.js Version_ </span> .
-
-<span class="notranslate"> _Web Applications_ </span> page is displayed.
-
-![](/images/nodejsusermain_zoom70.png)
-
-There are several columns in the list.
-* <span class="notranslate"> App URI </span> — application URI including the domain.
-* <span class="notranslate"> App Root Directory </span> —  application root directory relative to user's home.
-* <span class="notranslate"> Mode </span> — can be production or development.
-* <span class="notranslate"> Status </span> — started/stopped — displays if an application is running or not and version of application.
-* <span class="notranslate"> Actions </span> — allows to start, restart, stop, edit, and remove a particular application.
-
-**How to manage application**
-
-**Start application**
-
-To start a stopped application do the following:
-* Click <span class="notranslate"> _Start_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a stopped application row.
-* When an action is completed a <span class="notranslate"> _Start_ </span> icon changes to <span class="notranslate"> _Stop_ </span> icon.
-
-**Stop application**
-
-To stop a started application do the following:
-* Click <span class="notranslate"> _Stop_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row.
-* When an action is completed a <span class="notranslate"> _Stop_ </span> icon changes to <span class="notranslate"> _Start_ </span> icon.
-
-![](/images/nodejsuseruistartstop_zoom70.png)
-
-**Restart application**
-
-To restart started application do the following:
-* Click <span class="notranslate"> _Restart_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
-
-**Remove application**
-
-To remove application do the following:
-* Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row.
-* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start removing or <span class="notranslate"> _Cancel_ </span> to close pop-up.
-* When an action is completed an application will be removed from the <span class="notranslate"> _Web Applications_ </span> table and a confirmation pop-up will be displayed.
-
-![](/images/nodejsuseruirestartremove_zoom70.png)
-
-**Edit application**
-
-To edit application do the following:
-* Click <span class="notranslate"> _Pencil_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A particular application tab opens.
-
-![](/images/nodejseditapp_zoom70.png)
-
-The following actions are available:
-* Restart application — click <span class="notranslate"> _Restart_ </span> button.
-* Stop Node.js — click <span class="notranslate"> _Stop Node.js_ </span> button.
-* Run JavaScript script — click <span class="notranslate"> _Run JS Script_ </span> button to run a command specified in the <span class="notranslate"> Scripts </span> section of the <span class="notranslate"> package.json </span> file. Specify the name of the script to run plus any parameters then click <span class="notranslate"> Ok </span> .
-* Remove application — click <span class="notranslate"> _Delete_ </span> button and confirm the action in a pop-up.
-* Change Node.js version — choose Node.js version from a drop-down.
-* Change Application mode — choose application mode from a drop-down. Available modes are <span class="notranslate"> _Production_ </span> and <span class="notranslate"> _Development_ </span> .
-* Specify Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
-* Specify Application URL — specify in a field an HTTP/HTTPS link to the application.
-* Specify Application startup file — specify as <span class="notranslate"> NAME.js file </span> .
-* Run <span class="notranslate"> npm install command </span> — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
-* Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
-
-**Application error log**
-
-Since <span class="notranslate"> alt-mod-passenger </span> version 5.3.7-3 we have included support for the PassengerAppLogFile directive.
-<div class="notranslate">
-
-``` 
-Syntax: PassengerAppLogFile path
-Default: PassengerAppLogFile path-to-passenger-log-file
-Context: virtual host, htaccess
-```
-</div>
- 
-By default, <span class="notranslate"> Passenger </span> log messages are all written to the Passenger log file. With this option, you can have the app specific messages logged to a different file in addition. In <span class="notranslate"> alt-mod-passenger </span>, you can use it in the context of a virtual host or in the htaccess file.
-
-
 See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
+See also [Node.js Selector UI]().
 
 ### Troubleshooting
 
-#### Debugging Errors
+#### Debugging errors
 
 Since <span class="notranslate"> alt-mod-passenger-5.3.7-2,</span> directives such as PassengerFriendlyErrorPages and PassengerAppEnv are available for use from htaccess file. This allows end users to see errors from their application during the development process. For example, if you add one of the following lines to the htaccess file on the application page, you will see the information (if there was an error) similar to one on the picture.
 <div class="notranslate">
@@ -5735,10 +5635,7 @@ Select the control panel you are using:
 * [DirectAdmin](/apache_mod_lsapi/#directadmin)
 * [No control panel](/apache_mod_lsapi/#no-control-panel)
 
-#### cPanel
-
-
-**Installing on cPanel servers with EasyApache 4**
+#### Installing on cPanel servers with EasyApache 4
 
 Install mod_lsapi PRO and related packages through YUM package manager as follows:
 <div class="notranslate">
@@ -5767,10 +5664,7 @@ Now the lsapi handler is available for managing through cPanel MultiPHP Manager.
 For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
 
 
-#### Plesk
-
-
-**Installing on Plesk servers**
+#### Installing on Plesk servers
 
 Install mod_lsapi PRO and related packages through YUM package manager as follows:
 <div class="notranslate">
@@ -5803,10 +5697,7 @@ Now LSPHPXY alt-php PHP handlers are available for managing through Plesk PHP Se
 For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
 
 
-#### DirectAdmin
-
-
-**Installing on DirectAdmin servers**
+#### Installing on DirectAdmin servers
 
 Installation process is done with custombuild script:
 <div class="notranslate">
@@ -5828,10 +5719,7 @@ $ service httpd restart
 </div>
 Now all domains under php1_mode are using lsphp handler and no further actions are required to enable mod_lsapi PRO on DirectAdmin.
 
-#### No control panel
-
-
-**Installing on servers with no control panel**
+#### Installing on servers with no control panel
 
 Install mod_lsapi PRO and related packages through YUM package manager as follows:
 <div class="notranslate">
@@ -5880,10 +5768,11 @@ $ service httpd24 restart
 ```
 </div>
 
-For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool).
+For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
 
 
 ### Uninstalling
+
 
 Uninstall mod_lsapi PRO is performed depending on your control panel.
 
@@ -5893,10 +5782,8 @@ Select the control panel you are using:
 * [DirectAdmin](/apache_mod_lsapi/#directadmin)
 * [No control panel](/apache_mod_lsapi/#no-control-panel)
 
-#### cPanel
 
-
-**Uninstall procedure for cPanel servers with EasyApache 4**
+#### Uninstall procedure for cPanel servers with EasyApache 4
 
 To remove lsapi handler from cPanel MultiPHP Manager and uninstall mod_lsapi PRO, run a command:
 <div class="notranslate">
@@ -5922,10 +5809,7 @@ $ service httpd restart
 Now mod_lsapi PRO is fully uninstalled.
 
 
-#### Plesk
-
-
-**Uninstall procedure for Plesk servers**
+#### Uninstall procedure for Plesk servers
 
 To unregister LSPHP handlers and uninstall mod_lsapi PRO, run the command:
 <div class="notranslate">
@@ -5951,10 +5835,7 @@ $ service httpd restart
 Now LSPHPXY alt-php PHP handlers and mod_lsapi PRO are fully uninstalled.
 
 
-#### DirectAdmin
-
-
-**Uninstall procedure for DirectAdmin servers**
+#### Uninstall procedure for DirectAdmin servers
 
 Uninstall is done with custombuild script:
 <div class="notranslate">
@@ -5983,10 +5864,7 @@ $ service httpd restart
 </div>
 Now all domains under php1_mode are using the chosen handler and mod_lsapi PRO is fully uninstalled.
 
-#### No control panel
-
-
-**Uninstall procedure for servers with no control panel**
+#### Uninstall procedure for servers with no control panel
 
 To uninstall mod_lsapi PRO, run the command:
 <div class="notranslate">
@@ -6039,6 +5917,7 @@ Now mod_lsapi PRO is fully uninstalled.
 
 ### Configuration
 
+
 In order to get mod_lsapi PRO work properly, you'll need to configure Apache. To do this, we use a separate _lsapi.conf_ file.
 
 First of all, for the mod_lsapi PRO work, you need to ensure that the module is loaded. In your lsapi.conf you need to make sure the [LoadModule](http://httpd.apache.org/docs/current/mod/mod_so.html#loadmodule) directive has not been commented out. A correctly configured directive may look like this:
@@ -6090,9 +5969,10 @@ LoadModule lsapi_module modules/mod_lsapi.so
 In order to mod_lsapi PRO work lsapi.conf should be loaded to Apache through [Include](https://httpd.apache.org/docs/2.4/mod/core.html#include) directive.
 
 For more detailed description of the module directives please visit [Configuration reference](/apache_mod_lsapi/#configuration-references).  
-For installation guide mod_lsapi PRO please visit [Installation](/apache_mod_lsapi/#installation) .
+For installation guide mod_lsapi PRO please visit [Installation](/apache_mod_lsapi/#installation).
 
-#### Configuration References
+#### Configuration references
+
 
 [mod_lsapi customization](/apache_mod_lsapi/#mod-lsapi-customization):
 * [lsapi_engine](/apache_mod_lsapi/#lsapi-engine)  
@@ -7049,172 +6929,10 @@ cp /usr/share/lve/modlscapi/confs/lsapi.conf /usr/local/apache/conf/conf.d/lsapi
 ```
 </div>
 
-### FAQ on mod_lsapi
-
-
-Q: **_Is it compatible with EasyApache?_**
-
-A: Yes, it is. EasyApache works/fully integrates with mod_lsapi.
-
-Q: **_Is it compatible with <span class="notranslate"> PHP Selector </span> ?_**
-
-A: Yes.
-
-Q: **_Are .htaccess PHP directives supported? For example, mod_php like directives?_**
-
-A: Yes. mod_lsapi can read php_* and php_admin_* directives.
-
-Q: **_I have httpd.conf with SuExecUserGroup options. Do I need to add mod_lsapi related options for VirtualHost?_**
-
-A: No need to change httpd.conf. mod_lsapi can read suPHP_UserGroup, RUidGid, SuExecUserGroup, AssignUserID parameters to determine user id under which site is running. Additionally you can use lsapi_uid_gid or lsapi_user_group as a native way to specify user / group ids.
-
-Q: **_What is the difference between running mod_lsapi with lsapi_with_connection_pool mode_** <span class="notranslate"> On </span> **_and_** <span class="notranslate"> Off </span> **_?_**
-
-A: When  lsapi_with_connection_pool mode is <span class="notranslate"> Off </span> , then the new backend lsphp process has to be created for each new incoming request. At least it requires mod_lsapi to connect to backend lsphp master-process and have it perform fork which leads to a slowdown.
-
-With <span class="notranslate"> pool_mode enabled, mod_lsapi maintains persistent connections with backend which drastically increases performance (accelerates requests processing), but also increases the number of processes in LVE as well memory usage. Backend lsphp processes stays alive for lsapi_backend_max_idle time, or until lsapi_backend_max_reqs is reached (or Apache restarted).  </span>
-
-Alternatively, we have another accelerating technology - [CRIU](/apache_mod_lsapi/#criu-support) , which is faster and uses less memory. But it is in Beta so far and available for CL7 only (stable version will appear in the near future).
-
-Q: **_Your PHP installation appears to be missing the… How to manage native PHP with mod_lsapi under EasyApache 3?_**
-
-A: There are several ways to do that.
-
-1. _Using_ <span class="notranslate"> PHP Selector </span> _._
-
-To find <span class="notranslate"> PHP Selector </span> in user’s panel choose <span class="notranslate"> _Select PHP Version_ </span> icon as follows:
-
-![](/images/mod_lsapi_faq.jpg)
-
-From <span class="notranslate"> PHP Selector </span> you can manage PHP version and choose the necessary extensions to be used by PHP. Choose proper PHP version from the drop-down and click <span class="notranslate"> _Set as current_ </span> . Mark proper checkboxes to choose extensions and click <span class="notranslate"> _Save_ </span> :
-
-![](/images/mod_lsapi_faq_01.jpg)
-
-This is a simple and convenient way to configure the user's PHP.
-
-2. _Using native PHP from_ <span class="notranslate"> PHP Selector </span> _._
-
-mod_lsapi installs alt-php56 as native by default (just copy of alt-php56):
-
-![](/images/mod_lsapi_faq_02.jpg)
-
-The native version is not designed to enable or disable PHP extensions through the web interface of the <span class="notranslate"> PHP Selector </span> . This can lead to missing of the proper PHP extensions for customers applications.
-
-For example, you can get the following reply from the website that is using <span class="notranslate"> WordPress </span> and native PHP:
-
-![](/images/mod_lsapi_faq_03.jpg)
-
-There are two ways to solve this problem:
-
-Use non-native PHP with proper extensions enabled via the <span class="notranslate"> PHP Selector </span> (described above).
-Use native PHP with properly configured .ini files (described below).
-
-To configure native PHP, use an additional .ini file <span class="notranslate"> _/opt/alt/php56/link/conf/default.ini_ </span> :
-
-![](/images/mod_lsapi_faq_04.jpg)
-
-By default it is empty. To solve the issue this way, the following strings must be added:
-
-<div class="notranslate">
-
-```
-extension=/opt/alt/php56/usr/lib64/php/modules/mysqli.so
-extension=/opt/alt/php56/usr/lib64/php/modules/pdo_mysql.so
-extension=/opt/alt/php56/usr/lib64/php/modules/pdo.so
-```
-</div>
-All available extensions for alt-php56 can be seen by running the command:
-
-<div class="notranslate">
-
-```
-# ls /opt/alt/php56/usr/lib64/php/modules/
-```
-</div>
-
-**Note.** Some extensions may conflict with each other, be careful when enabling them through the <span class="notranslate"> _default.ini_ </span> file.
-
-3. _Using switch_mod_lsapi --build-native-lsphp as native._
-
-You can find additional notes on native PHP installation (EasyApache 3 only) on the link: [https://docs.cloudlinux.com/apache_mod_lsapi/#installation](/apache_mod_lsapi/#installation)
-
-To see what kind of native PHP is used, use the command:
-
-<div class="notranslate">
-
-```
-# /usr/local/bin/php -v
-```
-</div>
-
-Output example:
-<div class="notranslate">
-
-```
-PHP 5.6.30 (cli) (built: Jun 13 2017 06:23:21) Copyright (c) 1997-2016 The PHP GroupZend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
-```
-</div>
-The command <span class="notranslate">_switch_mod_lsapi --build-native-lsphp_ </span> builds the lsphp of the same version, it will be used as native via the PHP Selector, but with another .ini file to configure.
-
-![](/images/mod_lsapi_faq_05.jpg)
-
-We do not recommend to use this native PHP because it does not support [CRIU](/apache_mod_lsapi/#criu-support) .
-
-To revert alt-php56 to the native PHP, execute the following command:
-
-<div class="notranslate">
-
-```
-# cp /opt/alt/php56/usr/bin/lsphp /usr/local/bin/
-```
-</div>
-
-Q: **_Is there any difference in using lsphp binaries from alt-php or ea-php packages with Litespeed Web Server compared to lsphp [from the source](https://www.litespeedtech.com/open-source/litespeed-sapi/php) ?_**
-
-A: In this case, there is no difference. Our binaries fully correspond to the native behavior when used with Litespeed Web Server.
-
-Q: **_Is it possible to use CRIU with Litespeed Web Server?_**
-
-A: Yes, Litespeed Web Server officially supports CRIU on the servers with CloudLinux. For detailed information on setting up CRIU with a Litespeed Web Server, follow the [link](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:lsphp_criu_enable) . You can also use lsphp binaries from alt-php or ea-php packages for that purpose.
-
-
-Q: **_Is the <span class="notranslate">New Relic</span> extension compatible with the mod_lsapi PRO?_**
-
-A: Yes, it is. Follow the next guide on how to enable it with mod_lsapi PRO.
-
-#### Installation guide New Relic with mod_lsapi PRO
-
-Currently, the <span class="notranslate">[New Relic PHP Agent](https://docs.newrelic.com/docs/agents/php-agent)</span> extension is supported for <span class="notranslate">alt-php</span> version 7.0 and higher. It can be installed for <span class="notranslate">alt-php</span> with the <span class="notranslate">`alt-php**-pecl-ext`</span> package (`**` - version 70 and higher).
-
-For example:
-
-<div class="notranslate">
-
-```
-# yum install alt-php70-pecl-ext
-```
-</div>
-
-The next step is to enable the <span class="notranslate">New Relic</span> extension on the domain. You can do this through `php.ini` configuration or via <span class="notranslate">[PHP Selector](/php_selector/#using)</span>.
-
-We assume that the <span class="notranslate">mod_lsapi PRO</span> is already installed and enabled on the domain. If not, visit [mod_lsapi PRO installation guide](/apache_mod_lsapi/#installation).
-
-The next step is to specify the <span class="notranslate">New Relic</span> license and the name of your application on the domain. This can be easily done by adding the following lines to the main htaccess file of domain or to the virtual host section of the Apache configuration file:
-
-<div class="notranslate">
-
-```
-<IfModule lsapi_module>
-    php_value newrelic.appname  "My PHP Application"
-    php_value newrelic.license  "<My license key>"
-</IfModule>
-
-```
-</div>
-
-The only thing you need to make sure that the directive <span class="notranslate">[`lsapi_mod_php_behaviour`](https://docs.cloudlinux.com/apache_mod_lsapi/#lsapi-mod-php-behaviour)</span> is on. To further configure the PHP agent use the [link](https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-configuration).
+See also mod_lsapi PRO FAQ [here](https://cloudlinux.zendesk.com/hc/articles/360025828414-Apache-mod-lsapi-PRO-FAQ).
 
 ### CRIU Support
+
 
 :::tip Note
 <span class="notranslate"> CloudLinux </span> 7 only
@@ -7385,24 +7103,19 @@ cd; touch mod_lsapi_reset_me_criu.test.com
 </div>
 
 where _vhost.conf_ contains:  
-<span class="notranslate">_ServerName criu.test.com_ </span>
-
-
+<span class="notranslate">`ServerName criu.test.com`</span>
 
 This mode is enabled by default and creates a separate lsphp process for each virtual host.
 
-<span class="notranslate"> _mod_lsapi_reset_me[vhost_name]_ </span> flag will not work for a user when lsapi_per_user option is <span class="notranslate"> On </span> .
+<span class="notranslate">`mod_lsapi_reset_me[vhost_name]`</span> flag will not work for a user when lsapi_per_user option is <span class="notranslate">`On`</span>.
 
-5. There is (default <span class="notranslate"> off </span> ) option in mod_lsapi that creates only one lsphp process for a user, regardless of the number of his virtual hosts. We don't recommend to use this option with CRIU, but if you use it, make sure that your virtual hosts (under the same user) have the same environment configurations. If they are not the same, this may cause undesirable lsphp process operation.
+5. There is (default <span class="notranslate">`off`</span>) option in mod_lsapi that creates only one lsphp process for a user, regardless of the number of his virtual hosts. We don't recommend to use this option with CRIU, but if you use it, make sure that your virtual hosts (under the same user) have the same environment configurations. If they are not the same, this may cause undesirable lsphp process operation.
+
 
 
 ## Additional integration components
 
-CloudLinux uses various ways to integrate with existing system. By default we can integrate with:
-
-* PAM - using pam_lve
-* Apache - using mod_hostinglimits, apr library, patched suexec
-* LiteSpeed - built in integration
+CloudLinux uses various ways to integrate with existing system.
 
 ### LVE PAM module
 
@@ -7466,9 +7179,9 @@ grep pam_sulve.so /etc/pam.d/*
 
 should not be empty.
 
-### LVE Wrappers
+### LVE wrappers
 
-LVE Wrappers are the set of tools that allow system administrator to run various users, programs & daemons within Lightweight Virtual Environment. This allows system administrator to have control over system resources such program can have. Additionally it prevents misbehaving programs running within LVE to drain system resources and slow down or take down the whole system. The tools are provided by lve-wrappers RPM.
+LVE wrappers are the set of tools that allow system administrator to run various users, programs & daemons within Lightweight Virtual Environment. This allows system administrator to have control over system resources such program can have. Additionally it prevents misbehaving programs running within LVE to drain system resources and slow down or take down the whole system. The tools are provided by lve-wrappers RPM.
 
 You can install them by running:
 
@@ -8156,7 +7869,7 @@ LVEUse429 on
 
 Available for RPM based panels, EasyApache 4 and DirectAdmin.
 
-### Redis Support for HostingLimits
+### Redis support for HostingLimits
 
 Redis support provides a way to query Redis database for LVE id, based on domain in the HTTP request. Given a database like:
 
@@ -8386,7 +8099,7 @@ DirectAdmin:
 ```
 </div>
 
-#### How to Read mod_proctitle Information
+#### How to read mod_proctitle information
 
 **How to read information gathered by the module**
 
@@ -8443,7 +8156,7 @@ Request information can contain:
 <span class="notranslate"> _httpd_ </span> - request is active and waiting for new connection.<br>
 <span class="notranslate"> _[seconds].[tenths of second] [host] [METHOD] [URL] [PROTOCOL]_ </span>
 
-#### Tuning Parameters
+#### Tuning parameters
 
 **Module parameters for tuning**
 
@@ -8571,4 +8284,3 @@ yum install alt-suexec
 **New suexec with custom parameters**
 
 If you need suEXEC with custom parameters absent in current set of alt-suexec, please submit a ticket on [https://cloudlinux.zendesk.com](https://cloudlinux.zendesk.com/) and we will add new suEXEC with needed parameters.
-

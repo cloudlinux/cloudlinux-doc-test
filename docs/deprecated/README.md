@@ -1,11 +1,11 @@
 ﻿# Deprecated
 
+
 * [Git for cPanel](/deprecated/#git-for-cpanel)
 * [LVE-Stats 0.x](/deprecated/#lve-stats-0-x)
 * [OptimumCache](/deprecated/#optimumcache)
-* [Virtuozzo and OpenVZ](/deprecated/#virtuozzo-and-openvz)
-* [TPE Extension](/deprecated/#tpe-extension)
-* [CPU Limits](/deprecated/#cpu-limits)
+* [TPE extension](/deprecated/#tpe-extension)
+* [CPU limits](/deprecated/#cpu-limits)
 
 ## Git for cPanel
 
@@ -220,7 +220,7 @@ $ yum install MySQL-python
 </div>
 
 
-If you have MySQL 5.3+ installed on CloudLinux 5 server, and there is no  libmysqlclient_r.so.15 on the server, run:
+If you have MySQL 5.3+ installed on CloudLinux 5 server, and there is no libmysqlclient_r.so.15 on the server, run:
 
 <div class="notranslate">
 
@@ -751,7 +751,7 @@ The cache is cleaned <span class="notranslate">`/etc/cron.d/optimumcache_cron`</
 ```
 </div>
 
-### Marking Directories
+### Marking directories
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
@@ -866,7 +866,7 @@ By default, OptimumCache sets up following skip masks:
 
 This information is stored in <span class="notranslate">`/etc/container/optimumcache/ignore.d/`</span>.
 
-**Skip Mask syntax**
+**Skip mask syntax**
 
 Skip masks use following regexp syntax: [http://www.greenend.org.uk/rjk/tech/regexp.html](http://www.greenend.org.uk/rjk/tech/regexp.html)
 
@@ -883,7 +883,7 @@ For example, to disable caching all directories that contain <span class="notran
 This information is stored in <span class="notranslate">`/etc/container/optimumcache/ignore.d/`</span>
 
 
-### OptimumCache Configuration File
+### OptimumCache configuration file
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
@@ -975,7 +975,7 @@ NOIMMSYNC=1
 ```
 </div>
 
-### Command-line Interface
+### Command-line interface
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
@@ -1073,13 +1073,13 @@ Optional Arguments:
 |<span class="notranslate">`--report [Period]`</span>|Report statistics for Period (hourly|daily|weekly|monthly).|
 
 
-### cloudlinux-collect: Collect System Load Statistics
+### cloudlinux-collect: collect system load statistics
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
 :::
 
-#### cloudlinux-collectl Quick Start
+#### cloudlinux-collectl: quick start
 
 Installing this package automatically starts system load statistics collection in background. cloudlinux-collectl package has no strict dependency on OptimumCache, thus the statistics is collected regardless of whether OptimumCache is installed or not. The aim of having this package pre-installed is to compare system performance before and after installing OptimumCache, thus to measure OptimumCache effectiveness.
 
@@ -1096,7 +1096,7 @@ Installing this package automatically starts system load statistics collection i
 cloudlinux-collectl will be installed automatically on optimumcache upgrade to 0.2-23
 :::
 
-#### Measure Web Site Response Time
+#### Measure web site response time
 
 cloudlinux-collectl can monitor response time for a configurable set of URLs.
 
@@ -1132,7 +1132,7 @@ Try <span class="notranslate">`cloudlinux-collectl --help`</span> for more optio
 
 Actual logs are compressed with gzip and kept in <span class="notranslate">`/var/log/optimumcache/collectl`</span> directory.
 
-#### Statistics Being Collected in Details
+#### Statistics being collected in details
 
 To monitor what statistics are being collected, try command:
 
@@ -1175,7 +1175,7 @@ Particularly, the last column percent numbers shall match.
 
 The next goes <span class="notranslate">`URLSTATTRACKER DETAIL`</span> block with url response time in milliseconds. Negative values here may pop up unexpectedly. Negative numbers are not milliseconds, but signal about http error response code for that specific url. For instance, -403 will signal for <span class="notranslate">`Forbidden`</span> http error. As for -500 value, it signals not only for <span class="notranslate">`Internal Server Error`</span>, but can be displayed, when there is connection problem with the server, which is specified by the url.
 
-#### Statistics Manual Configuration
+#### Statistics manual configuration
 
 <span class="notranslate">`URLSTATTRACKER DETAIL`</span> is the only statistics, which requires manual configuration. Upon clean installation, it has only <span class="notranslate">`url_localhost`</span> preconfigured:
 
@@ -1240,7 +1240,7 @@ To skip URL from being tracked run command:
 ```
 </div>
 
-#### Running Statistics Daemon: collectl-cloudlinux
+#### Running statistics daemon: collectl-cloudlinux
 
 cloudlinux-collectl has got collectl package as a dependency. Initd script <span class="notranslate">`/etc/init.d/cloudlinux-collectl`</span> will automatically bring up another instance of collectl named <span class="notranslate">`collectl-optimumcache`</span> . collectl-optimumcache daemon instance has a separate config and does not interfere with other running pre-configure collectl daemon (if any).
 
@@ -1263,7 +1263,7 @@ To start /stop:
 ```
 </div>
 
-#### Analyzing the Results
+#### Analyzing the results
 
 The statistics is being collected into files named <span class="notranslate">`%hostname%-%datetime%.raw.gz`</span> under directory <span class="notranslate">`/var/log/cloudlinux-collect`</span>.
 
@@ -1460,7 +1460,7 @@ To update to version 0.2-6, run:
 ```
 </div>
 
-#### High CPU Utilization
+#### High CPU utilization
 
 Once it is detected that OptimumCache overuses <span class="notranslate">CPU</span>, it is useful to check, whether checksums reindexing process is running. When reindexing is running, high <span class="notranslate">CPU</span> usage is ok, as far it will certainly drop down after reindexing finished.
 
@@ -1526,98 +1526,7 @@ Rather rare problem, try to forcibly update `optimumcache_s` with ploop status.
 ```
 </div>
 
-## Virtuozzo and OpenVZ
-
-
-:::warning Note
-We’ll be ending support for Virtuozzo and OpenVZ on **August 1st, 2019**.
-:::
-
-:::tip Note
-* Virtuozzo 6 and OpenVZ 6 are supported.
-* Virtuozzo 7 and OpenVZ 7 are not supported.
-:::
-
-:::tip Note
-Kernel 2.6.32-042stab088.4 or later required
-:::
-
-CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only the following functionality works:
-* CageFS
-* PHP Selector
-* max entry processes
-* mod_lsapi
-* MySQL Governor
-
-No other limits work so far.
-
-### Installation
-
-VZ Node (needs to be done once for the server):
-
-:::tip Note
-Make sure all containers are stopped prior to doing this operation. Or reboot the server after the install.
-:::
-
-:::tip Note
-Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed. If no - install them with <span class="notranslate">`yum`</span>:
-:::
-
-<div class="notranslate">
-
-```
-yum install vzkernel-headers vzkernel-devel
-
-$ wget -P /etc/yum.repos.d/ http://repo.cloudlinux.com/vzlve/vzlve.repo
-$ yum install lve-kernel-module
-```
-</div>
-
-This will setup LVE module for VZ kernel, as well as DKMS to update that module each time VZ kernel is updated.
-
-After this is done, you can add LVE support for any container on a node, at any time.
-
-To make CloudLinux work inside VZ container, VZ node has to be enabled. This should be done for any container where LVE support needs to be added:
-
-<div class="notranslate">
-
-```
-$ vzctl set CT_ID --devnodes lve:rw --save
-```
-</div>
-
-To disable LVE support for Container:
-
-<div class="notranslate">
-
-```
-$ vzctl set CT_ID --devnodes lve:none --save
-```
-</div>
-
-Inside container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers)
-
-CloudLinux license is required for each VZ container.
-
-
-:::tip Note
-Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors. On a host node:
-
-1. add `fs.ve-mount-nr = 15000` to `/etc/sysctl.conf`;
-
-2. apply it with `sysctl -p` command.
-
-In very rare cases the value should be increased higher, up to 50000.
-:::
-
-## TPE Extension
-
-:::tip Note
-TPE Extension will removed in the next version of CloudLinux 5.x kernel
-:::
-
-<span class="notranslate"> CloudLinux 5.x (kernel 2.6.18) has limited support for trusted path execution extension. </span>
-<span class="notranslate"> CloudLinux 6.x (kernel 2.6.32) and  <span class="notranslate"> CloudLinux 5.x with hybrid kernel don't have  <span class="notranslate"> TPE extension </span> </span> </span>
+## TPE extension
 
 **TPE (Trusted Path Execution)**
 
@@ -1655,9 +1564,9 @@ And do:
 Once you set grsec_lock to 1, you will not be able to change TPE options without reboot.
 :::
 
- This <span class="notranslate"> Trusted Path Execution </span> feature was adopted from <span class="notranslate"> grsecurity</span>.
+ This <span class="notranslate">Trusted Path Execution</span> feature was adopted from <span class="notranslate">grsecurity</span>.
 
-## CPU Limits
+## CPU limits
 
 :::tip Note
 Deprecated
@@ -1685,4 +1594,3 @@ This limit is no longer used, and <span class="notranslate"> [SPEED](/limits/#sp
 |8 | 50% | 3 | 3 cores|
 
 When user hits <span class="notranslate"> CPU </span> limit, processes within that limit are slowed down. For example, if you set your <span class="notranslate"> CPU </span> limit to 10%, and processes inside LVE want to use more then 10% they will be throttled (put to sleep) to make sure they don't use more then 10%. In reality, processes don't get <span class="notranslate"> CPU </span> time above the limit, and it happens much more often then 1 second interval, but the end result is that processes are slowed down so that their usage is never above the <span class="notranslate"> CPU </span> limit set.
-

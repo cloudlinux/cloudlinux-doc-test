@@ -1,67 +1,67 @@
-# For CloudLinux Partners
+# For CloudLinux partners
 
-## License Portal (CLN)
+## License portal (CLN)
 
 You can find the complete documentation for the CloudLinux Network (CLN) [here](https://docs.cln.cloudlinux.com/).
 
-## CloudLinux WHMCS Plugin
+## CloudLinux WHMCS plugin
 
 [Overview](/for_cloudlinux_partners/#overview)  
-[Installation & Configuration](/for_cloudlinux_partners/#installation-configuration)  
-[Installation and Update](/for_cloudlinux_partners/#installation-and-update)  
-[Configuration of Product](/for_cloudlinux_partners/#configuration-of-product)  
-[Configuration of Add-on](/for_cloudlinux_partners/#configuration-of-add-on)  
+[Installation & configuration](/for_cloudlinux_partners/#installation-configuration)  
+[Installation and update](/for_cloudlinux_partners/#installation-and-update)  
+[Configuration of product](/for_cloudlinux_partners/#configuration-of-product)  
+[Configuration of add-on](/for_cloudlinux_partners/#configuration-of-add-on)  
 [Management](/for_cloudlinux_partners/#management)  
-[Link Via Add-on. Optional License](/for_cloudlinux_partners/#link-via-add-on-optional-license)  
-[Link Products Directly](/for_cloudlinux_partners/#link-products-directly)  
-[Link Via Configurable Options](/for_cloudlinux_partners/#link-via-configurable-options)  
-[Link Add-ons Directly](/for_cloudlinux_partners/#link-add-ons-directly) (for WHMCS 7.2.x and later)  
+[Link via add-on. Optional license](/for_cloudlinux_partners/#link-via-add-on-optional-license)  
+[Link products directly](/for_cloudlinux_partners/#link-products-directly)  
+[Link via configurable options](/for_cloudlinux_partners/#link-via-configurable-options)  
+[Link add-ons directly](/for_cloudlinux_partners/#link-add-ons-directly) (for WHMCS 7.2.x and later)  
 [Order](/for_cloudlinux_partners/#order)  
-[Admin Area](/for_cloudlinux_partners/#admin-area)  
-[Client Area](/for_cloudlinux_partners/#client-area)  
-[Licenses List](/for_cloudlinux_partners/#licenses-list)  
-[Addon Licenses List](/for_cloudlinux_partners/#add-on-licenses-list) (for WHMCS 7.2.x and later)  
-[Common Problems](/for_cloudlinux_partners/#common-problems)
+[Admin area](/for_cloudlinux_partners/#admin-area)  
+[Client area](/for_cloudlinux_partners/#client-area)  
+[Licenses list](/for_cloudlinux_partners/#licenses-list)  
+[Addon licenses list](/for_cloudlinux_partners/#add-on-licenses-list) (for WHMCS 7.2.x and later)  
+[Common problems](/for_cloudlinux_partners/#common-problems)
 
 
 ### Overview
 
 CloudLinux Licenses for WHMCS allows you to automatically provision CloudLinux, Imunify360, and KernelCare licenses along with selected products. You can provision them for free or as a paid add-on to your product. Owing to CloudLinux Licenses add-on, all module commands on your main product are automatically reproduced on the license product.
 
-**Admin Area Functionality**
-Create License
-Terminate License
-Suspend/Unsuspend License
-Change License IP Address
-View License Details
+**Admin area functionality**
+* Create license
+* Terminate license
+* Suspend/unsuspend license
+* Change license IP address
+* View license details
 
-**Client Area Functionality**
-View License Details
-Change License IP Address
+**Client area functionality**
+* View License Details
+* Change License IP Address
 
-**Add-on Functionality**
-Manage Relations Between Add-on And License Product
-Manage Relations Between Server And License Product
-Automatically Add License Product To Order When Relation Is Triggered
-View Existing Licenses
-Dependencies Between Module Actions - Every Action: Create, Terminate, Suspend Or Unsuspend Called On The Server Product Will Result With The Same Action Performed On The Licensed Products
-Flexible Filtering Of Existing Licenses
+**Add-on functionality**
+* Manage Relations Between Add-on And License Product
+* Manage Relations Between Server And License Product
+* Automatically Add License Product To Order When Relation Is Triggered
+* View Existing Licenses
+* Dependencies Between Module Actions - Every Action: Create, Terminate, Suspend Or Unsuspend Called On The Server Product Will Result With The Same Action Performed On The Licensed Products
+* Flexible Filtering Of Existing Licenses
 
 **Additionally**
-Multi-Language Support – Only Provisioning Module
-Supports CloudLinux, KernelCare, and Imunify360 Licenses
-Supports WHMCS V6 and Later
+* Multi-Language Support – Only Provisioning Module
+* Supports CloudLinux, KernelCare, and Imunify360 Licenses
+* Supports WHMCS V6 and Later
 
-### Installation & Configuration
+### Installation & configuration
 
 In this section we will show you how to set up our products.
 
-[Installation and Update](/for_cloudlinux_partners/#installation-and-update)<br>
-[Configuration of Product](/for_cloudlinux_partners/#configuration-of-product)<br>
-[Configuration of Add-on](/for_cloudlinux_partners/#configuration-of-add-on)
+* [Installation and update](/for_cloudlinux_partners/#installation-and-update)
+* [Configuration of product](/for_cloudlinux_partners/#configuration-of-product)
+* [Configuration of add-on](/for_cloudlinux_partners/#configuration-of-add-on)
 
 
-#### Installation and Update
+#### Installation and update
 
 
 Download CloudLinux Licenses For WHMCS:<br>
@@ -76,7 +76,7 @@ php <whmcs_root>/clDeploy.php --migrate
 ```
 </div>
 
-#### Configuration of Product
+#### Configuration of product
 
 
 1. Log into your WHMCS admin area and go to the <span class="notranslate">_Setup → Products/Services → Products/Services_</span>. Click <span class="notranslate">_Create a New Group_</span> .
@@ -88,10 +88,10 @@ php <whmcs_root>/clDeploy.php --migrate
 7. Fill <span class="notranslate"> _Username_ </span> and <span class="notranslate"> _Password_ </span> with your CloudLinux API access details and select **_CloudLinux_** from <span class="notranslate"> _License Type_ </span> drop-down.
 8. Click <span class="notranslate"> _Save Changes_ </span> to confirm.
 
-#### Configuration of Add-on
+#### Configuration of add-on
 
 
-1. Go to <span class="notranslate"> _Setup → Add-on Modules_ </span> , find <span class="notranslate"> _CloudLinux Licenses Add-on_ </span> and click <span class="notranslate"> _Activate_ </span> next to it.
+1. Go to <span class="notranslate">_Setup → Add-on Modules_</span> , find <span class="notranslate">_CloudLinux Licenses Add-on_</span> and click <span class="notranslate">_Activate_</span> next to it.
 2. The next step is permitting access to this module. Click <span class="notranslate"> _Configure_ </span> , select admin role and confirm by clicking <span class="notranslate"> _Save Changes_ </span> .
 
 ![](/images/provisioningmoduleconfiguration_zoom90.png)  
@@ -117,7 +117,7 @@ In this section you can find two ways of linking license product with your serve
 [Add-on Licenses List](/for_cloudlinux_partners/#add-on-licenses-list) (for WHMCS 7.2.x and later)
 
 
-#### Link Via Add-on. Optional License
+#### Link via add-on. Optional license
 
 
 In order to allow your client to decide whether he wants to order server with or without a license, we will use Product Add-on. In this way, when the client orders an add-on, the relation will be triggered and the license product will be ordered along with module.
@@ -142,7 +142,7 @@ The following steps must be performed to prepare such connection:
 ![](/images/fig4creatingrelationbetweenproductaddonandprovisioningmodule_zoom70.png)  
 _Fig 4: Creating relations between product add-on and provisioning module._
 
-#### Link Products Directly
+#### Link products directly
 
 
 If you want to offer server along with the license, perform the following steps.
@@ -156,7 +156,7 @@ If you want to offer server along with the license, perform the following steps.
 ![](/images/fig5creatingrelationdirectlybetweenserverandlicenseprovisioningmodules_zoom70.png)  
 _Fig 5: Creating relations directly between server and license provisioning modules_ .
 
-#### Link Via Configurable Options
+#### Link via configurable options
 
 
 In order to allow your client to decide whether he wants to order server with or without license we can use <span class="notranslate"> _Configurable Options_ ( [https://docs.whmcs.com/Addons_and_Configurable_Options)](https://docs.whmcs.com/Addons_and_Configurable_Options)).</span>
@@ -175,7 +175,7 @@ Below we will show you what steps to proceed to prepare such connection:
 _Fig 6: Creating relations directly between server and license provisioning modules._
 
 
-#### Link Add-ons Directly
+#### Link add-ons directly
 
 
 _[for WHMCS 7.2.x and later]_
@@ -205,7 +205,7 @@ _Fig 8: Ordering server with license add-on._
 ![](/images/orderingserverlinkeddirectly_zoom70.png)  
 _Fig 9: Ordering server linked directly with license product._
 
-#### Admin Area
+#### Admin area
 
 
 From the admin area it is possible to command such action as create, terminate, suspend/unsuspend and change IP address. Nonetheless, these actions can be ordered only on the server provisioning module and will be automatically reproduced for the license provisioning product.
@@ -217,7 +217,7 @@ You can also view the details of created license.
 ![](/images/cloudlinuxlicensesforwhmcsadminarea_zoom70.png)  
 _Fig 10: CloudLinux Licenses For WHMCS Admin Area._
 
-#### Client Area
+#### Client area
 
 
 The clients are also able to view their servers license details. And as well as you, they are able to change IP address of their licenses.
@@ -230,7 +230,7 @@ To change IP address click <span class="notranslate">_Change_</span> as shown on
 ![](/images/changinglicenseipaddress_zoom80.png)  
 _Fig 12: Changing License IP Address_.
 
-#### Licenses List
+#### Licenses list
 
 
 You can view the list of all licenses owned by your client at our addon → <span class="notranslate"> _Licenses List_ </span>.  
@@ -239,7 +239,7 @@ You can filter the list of licenses by client name, server provisioning products
  ![](/images/fig13licenseslist_zoom70.png)  
 _Fig 13: Licenses list._
 
-#### Add-on Licenses List
+#### Add-on licenses list
 
 
 _[for WHMCS 7.2.x and later]_
@@ -250,7 +250,7 @@ You can view a list of all product add-on with <span class="notranslate"> _Provi
 _Fig 14: Add-on Licenses List._
 
 
-### Common Problems
+### Common problems
 
 
 After activating the server provisioning product, license provisioning product bounded to it is still pending.  
