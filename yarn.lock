@@ -6695,9 +6695,9 @@ vuepress-plugin-container@^2.0.0:
   dependencies:
     markdown-it-container "^2.0.0"
 
-"vuepress-theme-cloudlinux@https://github.com/ybaturin/cloudlinux-doc-theme.git":
+"vuepress-theme-cloudlinux@https://github.com/tastembekov/cloudlinux-doc-theme.git":
   version "0.0.1"
-  resolved "https://github.com/ybaturin/cloudlinux-doc-theme.git#d5938e9c6ef56a685d320212b8bc07b02b131498"
+  resolved "https://github.com/tastembekov/cloudlinux-doc-theme.git#d5938e9c6ef56a685d320212b8bc07b02b131498"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
