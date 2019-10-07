@@ -17,7 +17,7 @@ At this moment we are aware of only one such case:
 
 It is easy to switch server from CentOS 6.x or 7.x to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
-* Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription]() or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html) .
+* Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
 * Download script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
 * Execute <span class="notranslate">`sh cldeploy -k <activation_key>`</span> (if you have IP based license, execute <span class="notranslate">`sh cldeploy -i`</span>).
 * Reboot.
@@ -43,19 +43,23 @@ The script automatically detects and supports the following control panels:
 * DirectAdmin
 * InterWorx.
   
-It will install CloudLinux kernel, [Apache module](/limits/#hostinglimits), [PAM module](/cagefs/#pam-configuration), [command line tools](/cloudlinux_installation/#advanced-options-for-cldeploy) as well as LVE Manager.
+It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cagefs/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
 See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
 
+:::tip Note
+We normally recommend to install `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.  
+But when you deploy CloudLinux from the ISO image, these packages will be preinstalled. You can reinstall them after installing the control panel.
+:::
 
 #### Explanation of changes
 
 CloudLinux uses the fact that it is very close to CentOS and RHEL to convert systems in place, requiring just one reboot. Our conversion script does the following actions:
 
-* Backup of original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
-* Backup of RHEL system id into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
+* Backups the original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
+* Backups RHEL system ID into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
 * Installs CL repository settings & imports CL RPM key.
 * Replaces redhat/centos-release, redhat-release-notes, redhat-logos with CL version.
 * Removes cpuspeed RPM (as it conflicts with CPU limits).
@@ -88,33 +92,13 @@ On cPanel servers, rebuild of Apache with EasyApache will complete the conversio
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
 
-## Installing new servers
+#### Common issues and troubleshooting during conversion
 
-You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
+| | |
+|-|-|
+|**Issue**|**Solution**|
+|Double registration issue with the error: <span class="notranslate">`Maximum usage count of 1 reached`</span>|If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server. You may use the following page for a reference to remove the server from CLN: [https://docs.cln.cloudlinux.com/index.html?servers.htm](https://docs.cln.cloudlinux.com/index.html?servers.htm) Please don't remove the license, remove only the server.|
 
-* **Latest stable CloudLinux 7.6 ISO**:
-
-    * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.6.iso](http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.6.iso)
-    * Last updated: November 13, 2018
-
-
-* **Latest stable CloudLinux 6.10 ISO**:
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso)
-  * Last updated: July 05, 2018
-
-
-* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
-  * Last updated: Oct 10, 2014
-
-
-:::tip Note
-Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#registering-cloudlinux-server) and then run yum update.
-:::
 
 ## Activation
 ### Getting trial license
@@ -142,7 +126,7 @@ To register your server with CloudLinux Network using activation key run:
 
 ```
 $ yum install rhn-setup --enablerepo=cloudlinux-base
-$ /usr/sbin/rhnreg_ks --activationkey=<activation key> --force
+$ /usr/sbin/rhnreg_ks --force --activationkey=<activation key>
 ```
 </div>
 
@@ -157,6 +141,41 @@ $ yum install rhn-setup --enablerepo=cloudlinux-base
 $ /usr/sbin/clnreg_ks --force
 ```
 </div>
+
+
+## Installing new servers
+
+You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
+
+* **Latest stable CloudLinux 7.7 ISO**:
+
+    * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.7.iso](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.7.iso)
+    * Last updated: August 16, 2019
+
+
+* **Latest stable CloudLinux 6.10 ISO**:
+
+  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso)
+  * i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso)
+  * Last updated: July 05, 2018
+
+
+* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
+
+  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
+  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
+  * Last updated: Oct 10, 2014
+
+
+:::tip Note
+Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
+:::
+
+:::warning Note
+We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
+:::
+
+
 
 ## CloudLinux OS images
 
@@ -221,14 +240,13 @@ Root password: <span class="notranslate">`cloudlinux`</span>
 
 To install CloudLinux over network:
 
-1. Download & boot from netboot image from: [http://repo.cloudlinux.com/cloudlinux/6.6/iso/x86_64/CloudLinux-6.6-x86_64-netboot.iso](http://repo.cloudlinux.com/cloudlinux/6.6/iso/x86_64/CloudLinux-6.6-x86_64-netboot.iso).
-It will boot into CloudLinux installer.
+1. Download & boot from netboot image from: [https://repo.cloudlinux.com/cloudlinux/6.10/iso/x86_64/CloudLinux-6.10-x86_64-netinstall.iso](https://repo.cloudlinux.com/cloudlinux/6.10/iso/x86_64/CloudLinux-6.10-x86_64-netinstall.iso). It will boot into CloudLinux installer.
 
-    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/images/pxeboot/)
+    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/images/pxeboot/)
 
-2. During the CloudLinux installation select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/) and continue with installation.
+2. During the CloudLinux installation, select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/) and continue with installation.
 
-To install CloudLinux 5.10 instead of 6.6 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/)
+To install CloudLinux 5.11 instead of 6.10 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.11/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.11/netinstall/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
@@ -237,6 +255,7 @@ Same URLs can be used to install para-virtualized Xen using either command-line 
 * [H-Sphere](/cloudlinux_installation/#h-sphere)
 * [DigitalOcean](/cloudlinux_installation/#digitalocean)
 * [Linode](/cloudlinux_installation/#linode)
+* [Virtuozzo and OpenVZ](/cloudlinux_installation/#virtuozzo-and-openvz)
 
 ### H-Sphere
 
@@ -635,6 +654,97 @@ You will need to update <span class="notranslate">`/boot/grub/menu.lst`</span> m
 
 In case if you will migrate to KVM later you will need only switch the boot settings to <span class="notranslate">`GRUB 2`</span>.
 
+
+### Virtuozzo and OpenVZ
+
+
+:::warning Note
+We’ll be ending support for Virtuozzo and OpenVZ containers on November 1st, 2019.
+If you are running Virtuozzo and OpenVZ, you will still be able to use CloudLinux OS but you will need to run hypervisors. See detail on how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
+:::
+
+:::tip Note
+* Virtuozzo 6 and OpenVZ 6 are supported.
+* Virtuozzo 7 and OpenVZ 7 are not supported.
+:::
+
+:::tip Note
+Kernel 2.6.32-042stab088.4 or later required
+:::
+
+CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only the following functionality works:
+
+* CageFS
+* PHP Selector
+* max entry processes
+* mod_lsapi
+* MySQL Governor
+
+No other limits work so far.
+
+#### Installation
+
+VZ Node (needs to be done once for the server):
+
+:::tip Note
+Make sure all containers are stopped prior to doing this operation. Or reboot the server after the install.
+:::
+
+:::tip Note
+Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed. If no - install them with `yum`
+:::
+
+<div class="notranslate">
+
+```
+yum install vzkernel-headers vzkernel-devel
+
+$ wget -P /etc/yum.repos.d/ http://repo.cloudlinux.com/vzlve/vzlve.repo
+$ yum install lve-kernel-module
+```
+
+</div>
+
+This will setup LVE module for VZ kernel, as well as DKMS to update that module each time VZ kernel is updated.
+
+After this is done, you can add LVE support for any container on a node, at any time.
+
+To make CloudLinux work inside VZ container, VZ node has to be enabled. This should be done for any container where LVE support needs to be added:
+
+<div class="notranslate">
+
+```
+$ vzctl set CT_ID --devnodes lve:rw --save
+```
+
+</div>
+
+To disable LVE support for Container:
+
+<div class="notranslate">
+
+```
+$ vzctl set CT_ID --devnodes lve:none --save
+```
+
+</div>
+
+Inside container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers).
+
+CloudLinux license is required for each VZ container.
+
+:::tip Note
+Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors.
+:::
+
+To increase `fs.ve-mount-nr`, on a host node:
+
+1. add <span class="notranslate">`fs.ve-mount-nr = 15000`</span> to <span class="notranslte">`/etc/sysctl.conf`</span>;
+
+2. apply it with <span class="notranslate">`sysctl -p`</span> command.
+
+In very rare cases the value should be increased higher, up to 50000.
+
 ## LILO boot loader
 
 CloudLinux can be deployed on servers that don't have grub installed, by installing <span class="notranslate">`хороgrub`</span> first.
@@ -808,16 +918,6 @@ cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4;
 
 (Find examples of `cloudlinux_ea3_to_ea4` script usage below).
 
-### Revert back from EasyApache 4 to EasyApache 3
-
-To migrate back to EA3 for CloudLinux run:
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4; sh cloudlinux_ea3_to_ea4 --revert
-```
-</div>
 
 ### More about cloudlinux_ea3_to_ea4 script
 
@@ -882,49 +982,4 @@ sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
 ```
 </div>
 
-### FAQ
-
-
-**1. When do we need to call the following script?**
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --convert 
-```
-</div>
-
-1.1. Migration from EasyApache 3 to EasyApache 4.
-
-The main difference between EasyApache 3 and EasyApache 4 for CloudLinux is the repositories used for <span class="notranslate">Apache RPM</span> packages. For this reason, we need to use packages from the _cl-ea4_ repository or _cl-ea4-testing_ beta for EasyApache 4. Running this script we update all native ea-* packages from CloudLinux repository. In this case, non-native packages for Apache include mod_lsapi and <span class="notranslate">alt-mod-passenger</span> (CloudLinux feature). So, if mod_lsapi or <span class="notranslate">alt-mod-passenger</span> (or both) were installed on EasyApache 3, the script should be run with the additional options as it described [here](/cloudlinux_installation/#migrating-to-easyapache-4) .
-
-Also, our script starts cPanel EasyApache 3 migration to EasyApache 4 Process. Read more about Profile changes, Apache changes, PHP changes on the link [https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process](https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process)
-
-1.2. Migration from EasyApache 4 CentOS to EasyApache 4 CloudLinux.
-
-When cPanel is installed with EasyApache 4 on a clean CloudLinux (or it was CentOS converted to CloudLinux), the installation of the ea-* packages comes from the EA4 cPanel repository. Most packages from the EA4 cPanel repository are not compatible with CloudLinux packages and this can lead to various errors. For this reason, we need to run this script to update the ea-* packages from the CloudLinux repository.
-
-If there was a need to return back EasyApache 4 packages from the EA4 cPanel repository, we need to run:
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --restore-cpanel-ea4-repo
-```
-</div>
-
-**2. When do we need to call the following script?**
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --revert
-```
-</div>
-
-2.1. Reverting back to EasyApache 3.
-
-Revert back is possible only if EasyApache 3 was previously installed, and then converted to EasyApache 4. If cPanel was originally installed with EasyApache 4, there is no way to convert to EasyApache 3.
+See also: [FAQ](https://cloudlinux.zendesk.com/hc/articles/360025827914-CloudLinux-OS-Installation-FAQ)

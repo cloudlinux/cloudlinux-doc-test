@@ -1,6 +1,6 @@
-<div class="notranslate">
-
 # User interface (LVE Manager)
+
+<div class="notranslate">
 
 </div>
 
@@ -40,7 +40,7 @@ Installation statuses of all components are duplicated inside their correspondin
 The next step is selecting required components to be installed.
 ![](/images/installationwizardstep1_zoom70.png)
 
-Click <span class="notranslate"> _Finish_and Install_ </span> to complete installation or click <span class="notranslate">_Skip Wizard_</span> to go back to the <span class="notranslate"> Dashboard</span>.
+Click <span class="notranslate">_Finish and Install_</span> to complete installation or click <span class="notranslate">_Skip Wizard_</span> to go back to the <span class="notranslate"> Dashboard</span>.
 
 You can find a complete description of the CloudLinux components below.
 
@@ -185,7 +185,35 @@ In case of a fatal error, you will see the following warning.
 
 You can contact our support team for further assistance anytime by [submitting a ticket in our helpdesk system](https://cloudlinux.zendesk.com/hc/requests/new).
 
-## Dashboard
+
+## LVE Manager
+
+<span class="notranslate">cPanel LVE Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
+
+Administrator credentials allow controlling limits for host users.
+
+![](/images/lvemanagermainmenu_zoom80.png)
+
+Log in as administrator to get access to the following functionality:
+
+* <span class="notranslate">Dashboard</span> provides a quick overview of statistics and all administrative information for server administrators.
+* <span class="notranslate">Current usage</span> tab - allows monitoring users resource usage at the moment;
+* <span class="notranslate">Users</span> tab with the list of all users allows viewing and managing all the users limits;
+* <span class="notranslate">Statistics</span> tab displays the statistics of resource usage for proper timeframe or proper users;
+* <span class="notranslate">Options</span> tab - allows setting LVE Faults email notifications for users;
+* <span class="notranslate">Packages</span> allows managing packages limits;
+* <span class="notranslate">PHP Selector</span> tab.
+* ImunifyAV allows to get access to a brand new malware scanner installed with LVE Manager. Click ImunifyAV on the main menu to go to ImunifyAV interface and use the next-generation, automated security solution that automatically scans the file system for malware injection and quarantines infected files.
+
+For more details, please go to the [ImunifyAV documentation](https://docs.imunifyav.com/).
+
+:::tip Note
+Available starting from LVE Manager Beta version 4.0-26.8.
+:::
+
+<div class="notranslate">
+
+### Dashboard
 
 </div>
 
@@ -234,7 +262,7 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
   * Reseller’s accounts with Reseller Limits/all —  the number of Reseller accounts with Reseller Limits enabled versus the total number of Reseller accounts.
   * Reseller’s End Users with enabled Reseller Limits/all — the number of end users with Reseller Limits enabled versus all End Users that belong to all resellers.
 * <span class="notranslate">[MySQL Governor](/cloudlinux_os_components/#mysql-governor)</span> block displays the following data:
-  * <span class="notranslate">MySQL Governor</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span>). To manage <span class="notranslate">MySQL Governor</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | MySQL Governor Mode of Operation</span>. Click <span class="notranslate">_Install_</span> to install <span class="notranslate">MySQL Governor</span>.
+  * <span class="notranslate">MySQL Governor</span> status (<span class="notranslate">Enabled/Disabled/Not installed/Skipped</span>). To manage <span class="notranslate">MySQL Governor</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | MySQL Governor Mode of Operation</span>. Click <span class="notranslate">_Install_</span> to install <span class="notranslate">MySQL Governor</span>.
   * <span class="notranslate">[Mode](/cloudlinux_os_components/#modes-of-operation)</span> — displays the <span class="notranslate">MySQL Governor</span> mode of operation. Click <span class="notranslate">_Manage_</span> to change the mode.
     * <span class="notranslate">Single</span> — single LVE is used for all customers that go over their DB limits (deprecated).
     * <span class="notranslate">Off</span> — monitor Only, no DB query limits are applied.
@@ -261,32 +289,6 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
 * Data for the Dashboard is collected once per day. If you want to update data manually, press <span class="notranslate">_Refresh_</span>. This process can last from 10 seconds to one hour depending on your server's performance, number of users and applications.
 :::
 
-
-## LVE Manager
-
-<span class="notranslate">cPanel LVE Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
-
-Administrator credentials allow controlling limits for host users.
-
-![](/images/lvemanagermainmenu_zoom80.png)
-
-Log in as administrator to get access to the following functionality:
-
-* <span class="notranslate">Current usage</span> tab - allows monitoring users resource usage at the moment;
-* <span class="notranslate">Users</span> tab with the list of all users allows viewing and managing all the users limits;
-* <span class="notranslate">Statistics</span> tab displays the statistics of resource usage for proper timeframe or proper users;
-* <span class="notranslate">Options</span> tab - allows setting LVE Faults email notifications for users;
-* <span class="notranslate">Packages</span> allows managing packages limits;
-* <span class="notranslate">PHP Selector</span> tab.
-* ImunifyAV allows to get access to a brand new malware scanner installed with LVE Manager. Click ImunifyAV on the main menu to go to ImunifyAV interface and use the next-generation, automated security solution that automatically scans the file system for malware injection and quarantines infected files.
-
-For more details, please go to the [ImunifyAV documentation](https://docs.imunifyav.com/).
-
-:::tip Note
-Available starting from LVE Manager Beta version 4.0-26.8.
-:::
-
-<div class="notranslate">
 
 ### Current usage
 
@@ -368,35 +370,107 @@ The following parameters are displayed in the statistics table:
 
 </div>
 
-An administrator can set email notifications for users and resellers in cases of limits faults.
+The following sections are available to set the required options:
 
-Choose <span class="notranslate">_Options_</span> tab to manage <span class="notranslate">LVE Faults</span> email notifications.
+* <span class="notranslate">[LVE Faults Email Notifications](/lve_manager/#lve-faults-email-notifications)</span> - allows to set the required type of notification
+* [Faults to include](/lve_manager/#faults-to-include) - allows to include required limits to the notifications
+* [Minimum number of Faults to notify](/lve_manager/#minimum-number-of-faults-to-notify) - allows to set a number of faults required for the notification to be sent for hoster, reseller, and user
+* [Inode limits](/lve_manager/#inode-limits) - allows to manage inode limits
+* [User interface settings](/lve_manager/#user-interface-settings) - allows to manage user interface settings
+* [CageFS](/lve_manager/#cagefs-2) - allows to manage CageFS settings
+* [Node.js](/lve_manager/#node-js) - allows to enable/disable and manage Node.js Selector
+* <span class="notranslate">[Python Selector](/lve_manager/#python-selector-section)</span> - allows to enable/disable and manage Python Selector
 
-In <span class="notranslate">_LVE Faults_</span> email notifications section check proper checkboxes to set the required type of notification:
+![](/images/options-general.png)
 
-* <span class="notranslate">Notify me on users faults</span> - to receive notifications on users LVE faults;
-* <span class="notranslate">Notify customers</span> - to allow hosts users receiving notifications on their LVE faults;
-* <span class="notranslate">Notify me when I hit my limits</span> - to receive notifications on LVE faults.
+#### LVE Faults Email Notifications
 
-In <span class="notranslate">_Faults to include_</span> section check proper checkboxes to include proper limits to the notifications:
+![](/images/lve-faults-email-notifications.png)
 
-* <span class="notranslate"> SPEED </span> - include speed limit fault to the notification;
-* <span class="notranslate"> IO </span> - include <span class="notranslate"> I/O </span> limit fault info to the notification;
-* <span class="notranslate"> IOPS </span> - include <span class="notranslate"> IOPS </span> limit fault info to the notification;
-* <span class="notranslate"> Memory </span> - include <span class="notranslate"> Memory </span> limit fault info to the notification;
-* <span class="notranslate"> Concurrent connections </span> - include <span class="notranslate"> concurrent connections </span> limit fault info to the notification.
+The following types of notification are available:
 
-In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter proper number of faults required for the notification to be sent for:
+* **<span class="notranslate">Notify Hoster</span>** - receive notifications on users and its own LVE faults
+* **<span class="notranslate">Notify Reseller</span>** - allows reseller receiving notifications on their user's LVE faults
+* **<span class="notranslate">Notify Customers</span>** - allow host's users receiving notifications on their LVE faults
+* **<span class="notranslate">Notify Reseller's customers</span>** - allows resller's users receiving notifications on their LVE faults
 
-* <span class="notranslate">Me</span> - for an administrator;
-* <span class="notranslate">User</span> - for a User;
 
-Set the frequency of email notifications sending in <span class="notranslate"> Notify me every.. hours/days</span> section.
+#### Faults to include
 
-Click <span class="notranslate">_Save_</span> to apply changes.
+![](/images/faults-to-include.png)
 
-![](/images/lveman_08.jpg)
-![](/images/lveman_09.jpg)
+Tick checkboxes to include required limits to the notifications:
+
+* **<span class="notranslate">SPEED</span>** - include <span class="notranslate">_SPEED_</span> limit fault to the notification
+* **<span class="notranslate">IO</span>** - include <span class="notranslate">_I/O_</span> limit fault info to the notification
+* **<span class="notranslate">IOPS</span>** - include <span class="notranslate">_IOPS_</span> limit fault info to the notification
+* **<span class="notranslate">Memory</span>** - include <span class="notranslate">_Memory_</span> limit fault info to the notification
+* **<span class="notranslate">Concurrent connections</span>** - include <span class="notranslate">_concurrent connections_</span> limit fault info to the notification
+* **<span class="notranslate">NPROC</span>** - include <span class="notranslate">_NPROC_</span> limit fault info to the notification.
+
+#### Minimum number of Faults to notify
+
+![](/images/minimum-number-of-faults-to-notify.png)
+
+Set a number of faults required for the notification to be sent for:
+
+* <span class="notranslate">Hoster and Reseller</span>
+* <span class="notranslate">User</span>
+
+Set the frequency of email notifications sending to: 
+
+* <span class="notranslate">Hoster and Reseller</span>
+* <span class="notranslate">User</span>
+
+#### Inode limits
+
+![](/images/inode-limits.png)
+
+Allows to reset inode limits and show/hide end-user inode usage.
+
+#### User interface settings
+
+![](/images/user-interface-settings.png)
+
+Allows to manage user interface settings:
+
+* **<span class="notranslate">Hide LVE end user usage statistic</span>** - a user will not be able to see his usage statistic in his web interface
+* **<span class="notranslate">Hide PHP extension selection</span>** - a user will not be able to select PHP extensions in his web interface
+* **<span class="notranslate">Hide Ruby App in web-interface</span>** - a user will not be able to see Ruby Selector in his web interface
+
+#### CageFS
+
+![](/images/options-cagefs.png)
+
+Allows to manage CageFS settings:
+
+* **CageFS** - enable/disable CageFS
+* **<span class="notranslate">CageFS Skeleton</span>** - click to update CageFS skeleton. See: [Updating CageFS skeleton](/control_panel_integration/#updating-cagefs-skeleton)
+* **<span class="notranslate">New users will be disabled by default in CageFS</span>** - toggle to enable/disable new users in CageFS by default.
+
+#### Node.js
+
+![](/images/options-nodejs.png)
+
+Allows to enable/disable and manage Node.js Selector.
+
+See more:
+
+* [Node.js Selector UI](/lve_manager/#node-js-selector-2)
+* [Node.js Selector](/cloudlinux_os_components/#node-js-selector)
+
+#### Python Selector section
+
+![](/images/options-python-selector.png)
+
+Allows to enable/disable and manage Python Selector.
+
+See more:
+
+* [Python Selector UI](/lve_manager/#python-selector-2)
+* [Python Selector](/cloudlinux_os_components/#python-selector)
+
+When you've done with settings, click <span class="notranslate">**Save Changes**</span> to apply changes.
 
 <div class="notranslate">
 
@@ -445,6 +519,10 @@ Choose default modules from the list for a proper PHP version or for native.
 
 ![](/images/lveman_092.jpg)
 ![](/images/lveman_093.jpg)
+
+:::tip Note
+You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
+:::
 
 
 ### Python Selector
@@ -524,13 +602,17 @@ It is impossible:
 
 #### **Make a particular Python version as a default**
 
-To make a particular Python version as a default do the following:
+:::tip Note
+You can set a particular Python version as a default version in the CloudLinux [installation wizard](/lve_manager/#cloudlinux-installation-wizard) during the first installation.
+:::
+
+To make a particular Python version as a default version, do the following:
 
 * Click <span class="notranslate">_Double-Tick_</span> icon in the Actions column for a particular Python version.
 * In the confirmation popup click <span class="notranslate">_Agree_</span> to save changes or <span class="notranslate">_Cancel_</span> to close popup.
  
 :::tip Note
-It is impossible to make default disabled version
+It is impossible to make disabled Python version as a default version
 :::
 
 ![](/images/PythonChangeDefaultVersion.png)
@@ -553,6 +635,11 @@ To change Python version for a particular application do the following:
 :::tip Note
 All packages of the application(s) will be re-installed.
 :::
+
+:::tip Note
+You can also use [Python Selector CLI](/command-line_tools/#hoster)
+:::
+
 
 #### End User
 
@@ -635,7 +722,7 @@ To edit application do the following:
 
 * Click the <span class="notranslate">_Pencil_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row. A particular application tab opens.
 
-![](/images/PythonEditApp.png)
+![](/images/PythonSelectorEditApp.png)
 
 The following actions are available:
 
@@ -648,6 +735,7 @@ The following actions are available:
 * Open Application URL — click the <span class="notranslate">_Open_</span>.
 * Change Application startup file — specify as <span class="notranslate">`NAME.py`</span> file.
 * Change Application Entry point — specify WSGI callable object for your application.
+* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector](/command-line_tools/#new-python-selector) utility).
 * Run pip install command — click <span class="notranslate">_Run pip install_</span> to install the package(s) described in the configuration file.
 * Add Configuration files — click <span class="notranslate">_Add_</span> and specify all required information.
 * Edit available configuration file — click <span class="notranslate">_Edit_</span>, the file opens in a new popup.
@@ -659,6 +747,11 @@ Click <span class="notranslate">_Save_</span> to save all changes or <span class
 **Migrate application**
 
 For details see [How to migrate an application to the new Python Selector](/cloudlinux_os_components/#how-to-migrate-an-application-to-the-new-python-selector)
+
+
+:::tip Note
+You can also use [Python Selector CLI](/command-line_tools/#end-user)
+:::
 
 
 ### Node.js Selector
@@ -762,6 +855,11 @@ To change Node.js version for a particular application do the following:
 All packages of the application(s) will be re-installed.
 :::
 
+:::tip Note
+You can also use [Node.js Selector CLI](/command-line_tools/#hoster-2)
+:::
+
+
 #### End User
 
 :::tip Note
@@ -819,7 +917,7 @@ To remove application do the following:
 To edit application do the following:
 * Click <span class="notranslate"> _Pencil_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A particular application tab opens.
 
-![](/images/nodejseditapp_zoom70.png)
+![](/images/Node.js-Selector-edit-app.png)
 
 The following actions are available:
 * Restart application — click <span class="notranslate"> _Restart_ </span> button.
@@ -828,9 +926,10 @@ The following actions are available:
 * Remove application — click <span class="notranslate"> _Delete_ </span> button and confirm the action in a pop-up.
 * Change Node.js version — choose Node.js version from a drop-down.
 * Change Application mode — choose application mode from a drop-down. Available modes are <span class="notranslate"> _Production_ </span> and <span class="notranslate"> _Development_ </span> .
-* Specify Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
-* Specify Application URL — specify in a field an HTTP/HTTPS link to the application.
-* Specify Application startup file — specify as <span class="notranslate"> NAME.js file </span> .
+* Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
+* Application URL — specify in a field an HTTP/HTTPS link to the application.
+* Application startup file — specify as <span class="notranslate"> NAME.js file </span>.
+* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Node.js applications via UI (or using [cloudlinux-selector](/command-line_tools/#node-js-selector) utility).
 * Run <span class="notranslate"> npm install command </span> — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
 * Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
 
@@ -849,6 +948,10 @@ Context: virtual host, htaccess
 By default, <span class="notranslate"> Passenger </span> log messages are all written to the Passenger log file. With this option, you can have the app specific messages logged to a different file in addition. In <span class="notranslate"> alt-mod-passenger </span>, you can use it in the context of a virtual host or in the htaccess file.
 
 See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
+
+:::tip Note
+You can also use [Node.js Selector CLI](/command-line_tools/#end-user-2)
+:::
 
 ### Reseller limits
 
@@ -1260,27 +1363,107 @@ Click pencil icon in a package row to set the following limits for a package:
 When limits are set click <span class="notranslate">_Save_</span> to apply changes.
 
 
-### LVE Manager options
+### Client plugins
 
-When you need to change <span class="notranslate">LVE Manager</span> options in cPanel config file on big amount of servers, you don't have to edit file manually, therefore there is no need to login into cPanel on each server. Just go to WHM, choose CloudLinux and click <span class="notranslate">Options</span> - and you will be able to change settings from here.
+#### Resource Usage client plugin
 
-<div class="notranslate">
+Client resource usage plugin for cPanel, Plesk, and DirectAdmin allows host’s end users to view and monitor resource usage.
 
-```
-root@toaster [~]# grep lve /var/cpanel/cpanel.config
-```
-</div>
 
-| | |
-|-|-|
-|<span class="notranslate">`lve_hideextensions`</span>| Hides (when =1) range of php extensions for user in <span class="notranslate"> Select PHP </span> version.|
-|<span class="notranslate">`lve_hideuserstat  `</span>| Hides (when =1) LVE statistics in <span class="notranslate"> cPanel Stats Bar (UI) </span> .|
-|<span class="notranslate">`lve_showinodeusage`</span>| Displays (when =1) used inodes in cPanel (UI).|
-|<span class="notranslate">`lve_hide_selector`</span>| Turns off <span class="notranslate">UI PHP Selector</span> (Select <span class="notranslate">PHP Version</span> option).|
+Go to your control panel and click _CPU and concurrent connection usage_.
 
-### Server processes snapshots
+![](/images/client_resource_usage.png)
 
-In case when a CloudLinux user hits LVE limits, appropriate faults are generated and [lvestats](/deprecated/#lve-stats-0-x) package generates Server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
+Here you can see three tabs:
+
+* **<span class="notranslate">Dashboard</span>**: displays the general condition of your site. If your site is limited, this displays on the Dashboard.
+* **<span class="notranslate">Current usage</span>**: here you can find full information on the resource usage displayed in charts and tables.
+* **<span class="notranslate">Snapshot</span>**: server snapshots with processes list and database and HTTP queries.
+
+![](/images/RU-dashboard.png)
+
+#### Dashboard
+
+Go to the <span class="notranslate">_Dashboard_</span> tab to see the general condition of your site.
+If your site is limited, you can see this on the <span class="notranslate">_Dashboard_</span> with the resource you are limited over.
+To see detailed information about resource usage, click <span class="notranslate">_Details_</span>.
+
+If your site is not limited, you will see the plain <span class="notranslate">Dashboard</span>.
+
+![](/images/RU-no-issues.png)
+
+#### Current Usage
+
+Go to the <span class="notranslate">_Current Usage_</span> tab to see the detailed information about resource usage on your server.
+
+![](/images/RU-current-usage.png)
+
+#### Current Usage table
+
+The <span class="notranslate">_Current Usage_</span> table displays resource usage.
+
+:::warning Note
+**<span class="notranslate">Inodes</span>** usage is displayed if it is enabled and **<span class="notranslate">Inodes</span>** limits are set for the user. cPanel only.
+:::
+
+![](/images/RU-current-usage-table.png)
+
+* **<span class="notranslate">Description</span>**: resource name
+* **<span class="notranslate">Usage</span>**: resource usage value
+* **<span class="notranslate">Limit</span>**: resource usage limit
+* **<span class="notranslate">Fault</span>**: number of faults
+
+#### Filters
+
+You can filter charts and the Usage table by timeframe and time unit (day, hour, minute).
+
+#### Charts
+
+The following resources are displayed in charts:
+
+* <span class="notranslate">CPU</span>
+* <span class="notranslate">Virtual Memory</span>
+* <span class="notranslate">Physical Memory</span>
+* <span class="notranslate">Input/Output</span>
+* <span class="notranslate">Io operations</span>
+* <span class="notranslate">Entry Processes</span>
+* <span class="notranslate">Processes</span>
+  
+All charts have the color legend:
+
+* Green — average resource usage
+* Red — limit set for this parameter
+* Blue — database
+* Green-cyan — faults (limit violations)
+  
+You can also see the Faults chart with all faults for all resources.
+
+![](/images/RU-faults-chart.png)
+
+#### Usage
+
+The <span class="notranslate">_Usage_</span> table displays information on each resource usage sorted by timeframe and time unit.
+
+![](/images/RU-usage-table.png)
+
+* **<span class="notranslate">From-To</span>**: period
+* **<span class="notranslate">A</span>**: average
+* **<span class="notranslate">L</span>**: limit
+* **<span class="notranslate">F</span>**: faults
+
+Use controls below the table to navigate through it.
+
+#### Snapshot
+
+Go to the <span class="notranslate">_Snapshot_</span> tab to see server snapshots with processes list and database and HTTP queries.
+
+![](/images/RU-snapshots.png)
+
+You can choose a date and a snapshot to display in the table.
+
+#### Server processes snapshots
+
+In case when a CloudLinux user hits LVE limits, appropriate faults are generated and [lvestats](/deprecated/#lve-stats-0-x) package generates server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
 
 Snapshots allow users to investigate the reason of account hitting its limits. Several snapshots are generated for each incident. An incident is a state when faults are generated in a close time period. The time period is configurable. By default, if faults are generated in 300 seconds time period, we consider them as a single incident.
 
@@ -1297,32 +1480,11 @@ The snapshot configuration options are available in
 * <span class="notranslate">`snapshots_per_minute = 2`</span> by default, maximum number of snapshots per minute
 * <span class="notranslate">`max_snapshots_per_incident = 10`</span> by default, maximum number of snapshots for an incident
 
-To access <span class="notranslate">**Snapshots**</span> on Plesk you can use [lve-read-snapshot](/command-line_tools/#lve-read-snapshot) utility.
-
-To access <span class="notranslate">**Snapshots**</span> on cPanel perform the following steps:
-
-1. Go to cPanel | <span class="notranslate">CPU and Concurrent Connection Usage</span> in <span class="notranslate"> **paper_latern**</span> theme:
-
-![](/images/snapshots.jpg)
-
-2. Click the <span class="notranslate">**Snapshots**</span> in <span class="notranslate">**paper_latern**</span> theme:
-
-![](/images/snapshots2.jpg)
-
-3. Select a date:
-
-![](/images/snapshots3.jpg)
-
-4. Select an appropriate <span class="notranslate">**Snapshot**</span> in the combobox:
-
-![](/images/snapshots4.jpg)
-![](/images/snapshots5.jpg)
-
+To access <span class="notranslate">**Snapshots**</span> you can also use [lve-read-snapshot](/command-line_tools/#lve-read-snapshot) utility.
 
 :::tip Note
 The list of processes in a snapshot is close but not similar to the real processes list when faults were generated. It happens because of delay when the faults are happened and the snapshot is taken by the system.
 :::
-
 
 The list of MySQL queries is an output of a query:
 
@@ -1332,6 +1494,73 @@ The list of MySQL queries is an output of a query:
 SELECT command, time, info FROM information_schema.processlist
 
 WHERE user = '%username';
+```
+</div>
+
+#### Process list
+
+Displays information on processes in the selected snapshot.
+
+* **<span class="notranslate">PID</span>**: process ID
+* **<span class="notranslate">CMD</span>**: what command was run
+* **<span class="notranslate">CPU</span>**: CPU usage
+* **<span class="notranslate">MEM</span>**: memory usage
+  
+#### Database queries (cPanel only)
+
+Displays information on database queries in the selected snapshot.
+
+![](/images/RU-db-queries.png)
+
+#### HTTP queries
+
+Displays information on HTTP queries in the selected snapshot.
+
+![](/images/RU-HTTP-queries.png)
+
+### LVE Manager options
+
+You can change LVE Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change LVE Manager settings for them in the config file.
+
+####  Changing settings manually
+
+* Log in to cPanel, go to WHM, choose CloudLinux and click <span class="notranslate">_Options_</span>.
+* Change settings.
+
+#### Changing settings in the config file
+
+You can modify the following options in the config file <span class="notranslate">`/var/cpanel/cpanel.config`</span> directly for example via Puppet.
+
+| | |
+|-|-|
+|<span class="notranslate">`lve_hideextensions`</span>| Hides (when =1) range of php extensions for user in <span class="notranslate"> Select PHP </span> version|
+|<span class="notranslate">`lve_hideuserstat  `</span>| Hides (when =1) LVE statistics in <span class="notranslate">cPanel Stats Bar (UI)</span>|
+|<span class="notranslate">`lve_showinodeusage`</span>| Displays (when =1) used inodes in cPanel (UI)|
+|<span class="notranslate">`lve_hide_selector`</span>| Turns off <span class="notranslate">UI PHP Selector</span> (Select <span class="notranslate">PHP Version</span> option)|
+|<span class="notranslate">`lve_enablerubyapp`</span>|Displays (when =1) Ruby Selector in user’s interface (UI)|
+
+
+:::warning Note
+It is not allowed to change <span class="notranslate">`lve_enablepythonapp`</span> option in the config file directly.
+:::
+
+You can use <span class="notranslate">`cloudlinux-selector`</span> utility to change <span class="notranslate">`lve_enablepythonapp`</span> option:
+
+<div class="notranslate">
+
+```
+cloudlinux-selector set --json --interpreter=python --selector-status=enabled
+```
+</div>
+
+Or you can change it via <span class="notranslate">WHM -> LVE Manager -> Options -> Python Selector -> Python</span>
+
+After modifying the config files directly, you should execute the following command to apply changes:
+
+<div class="notranslate">
+
+```
+/usr/share/l.v.e-manager/utils/dynamicui.py --sync-conf=all
 ```
 </div>
 
@@ -1380,23 +1609,28 @@ echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
 
 As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
 
-![](/images/screen1.1lvemanfeature_zoom74.png)
-
-_Figure 1.1_
-
-
-![](/images/screen1.2lvemanfeature_zoom76.png)
-
-_Figure 1.2_
-
-![](/images/screen2.1lvemanfeature_zoom72.png)
-
-_Figure 2.1_
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_admin.png)|
+| Figure 1.1 cPanel LVE Manager (administrator)| 
 
 
-![](/images/screen2.2lvemanfeature_zoom75.png)
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_admin.png)|
+| Figure 1.2 DirectAdmin LVE Manager (administrator)| 
 
-_Figure 2.2_
+
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_user.png)|
+| Figure 2.1 cPanel LVE Manager (user)|
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_user.png)|
+| Figure 2.2 DirectAdmin LVE Manager (user)| 
 
 :::tip Note
 *For cPanel and DirectAdmin only.
@@ -1443,283 +1677,6 @@ End users can monitor their inodes usage through cPanel only (not available on P
 ![](/images/inodescpanel.png)
 
 End user can also see the usage inside resource usage menu.
-
-#### cl-quota
-
-<span class="notranslate">**cl-quota**</span> utility is designed to control <span class="notranslate">disk quotas</span> and provides:
-
-* Setting user and package limits.
-
-* Integration with panel packages.
-
-* Limits synchronization.
-
-* Automatic inheritance of panel limits to all appropriate users.
-
-::: tip Note
-cl-quota works only with inodes soft/hard limits (soft/hard file limits in setquota/repquota utilities terminology). Block limits are not controlled by cl-quota utility in any way, they are not taken into account and do not affect the data that they issue. That is why hereinafter it is the inode limits that are implied by the word “limits”.
-:::
-
-#### General provisions
-
-
-<span class="notranslate"> cl-quota </span> utility never sets/reads limits directly in the system, it uses standard <span class="notranslate"> setquota/repquota </span> utilities included into the <span class="notranslate"> quota </span> package for this purpose.
-
-<span class="notranslate"> cl-quota </span>  **will not work** in the following cases:
-
-* <span class="notranslate"> setquota/repquota </span> are missing or working incorrectly;
-
-* the <span class="notranslate"> quotas </span> are not configured in the system.
-
-<span class="notranslate"> cl-quota </span> only **performs** the minimal diagnostics of <span class="notranslate"> quota </span> related errors:
-
-* verifies the availability of <span class="notranslate"> setquota/repquota </span> utilities on the disk;
-
-* verifies if <span class="notranslate"> quotas </span> are activated for a specified user (with a separate command), see below.
-
-<span class="notranslate"> quota </span> package which contains the required <span class="notranslate"> setquota/repquota </span> utilities, is not included in <span class="notranslate"> lvemanager </span> package dependencies by default, and <span class="notranslate"> quotas </span> activation is a long process which sometimes depends on the panel used, therefore, all the steps on <span class="notranslate"> quotas </span> configuration and activation must be carried out by yourself, <span class="notranslate"> cl-quota </span> does not perform these actions.
-
-Error messages sent back to the console are extremely rare, to receive error messages use the command:
-<div class="notranslate">
-
-```
-# cat /var/log/messages | grep clquota
-```
-</div>
-
-::: tip Note
-You should not set soft limit higher than hard limit. cl-quota does not control it in any way, but in some cases, the system can ban such limits combination and they won’t be set or will be set in some other way.
-:::
-
-#### Setting limits and integration with panel packages
-
-
-<span class="notranslate"> cl-quota </span> utility allows setting <span class="notranslate"> inodes </span> limits for users of the system.
-
-<span class="notranslate"> cl-quota </span> integrates with the panels through a standard mechanism - [Integrating LVE Limits with Packages](/lve_manager/#detecting-and-working-with-cloudlinux) .
-
-Panel users are such users whose UIDs are issued by the above panel integration mechanism. The list of panel packages and the information on the user's affiliation to a particular package is obtained from there as well.
-
-When installing/reading the limits, the following peculiarities are applied:
-
-1. When displaying <span class="notranslate"> quotas, cl-quota </span> displays information about the limits of all users - system and panel. No filter applied. The actual limit values are always displayed.
-
-2. Limit value -1 for the packages (see below) is displayed as dash (-).
-
-3. If <span class="notranslate"> cl-quota </span> is running under <span class="notranslate"> root </span> , it will display the limits returned by <span class="notranslate"> repquota </span> utility with no changes. If it is running under some other user, it will return data from a special cache file, see [Quotas cache and synchronization](/lve_manager/#caching-and-synchronizing-the-limits).
-
-4. Limits setting only works for panel users, for all other users limits are not set (the command is ignored). The only exception - <span class="notranslate"> uid=0 </span> . The limits are never set for the <span class="notranslate"> root </span> user <span class="notranslate"> (uid=0) </span> , but they are stored in <span class="notranslate"> DB </span> file and are used by inheritance mechanism. See [Limits Inheritance](/lve_manager/#limits-inheritance).
-
-5. <span class="notranslate"> Hard </span> and <span class="notranslate"> soft </span> limits are completely independent, <span class="notranslate"> сl-quota </span> does not apply any interdependencies to them. Setting only one of them (any) is acceptable, the other one will not change.
-
-<span class="notranslate"> cl-quota </span> utility also supports package limits set/read. When setting package limits, they are set for all users of a particular package except for those whose limits are set individually. See also [Limits Inheritance](/lve_manager/#limits-inheritance).
-
-If package name is <span class="notranslate"> "default" </span> , then setting limits command is ignored. If some limits are set for this package in <span class="notranslate"> DB </span> file, they will be displayed along with all the others, but will not be used. See also [Limits inheritance](/lve_manager/#limits-inheritance).
-
-Any positive numbers are allowed as limit values. <span class="notranslate"> cl-quota </span> neither controls nor changes these values except the following cases:
-
-negative values are taken modulo;
-
-fractional values are converted to integers by discarding the fractional part;
-
-if the transferred value can not be turned into a number (for example, 67wg76), it is completely ignored and the limit is not set at all.
-
-Then these values are transmitted directly to <span class="notranslate"> setquota </span> system utility for the actual setting of the limits.
-
-Thus <span class="notranslate"> cl-quota </span> has two limit values, which are processed in a special way:
-
-* 0: Means inheritance of the limit from the package where the user is located, or from <span class="notranslate"> uid=0 </span> . See also [Limits inheritance](/lve_manager/#limits-inheritance) for more detailed information.
-
-* -1: The real limits are set to 0, which means no limits, literally "unlimited". This is legit both for individual and for package limits. Limit value -1 is stored in the database as well as any other but is never displayed.
-
-You can use the words <span class="notranslate"> “default” </span> and <span class="notranslate"> “unlimited” </span> instead of 0 and -1 respectively, they are fully interchangeable. See also [DB File](/lve_manager/#quotas-db-file) and [CLI Options](/lve_manager/#cli-options-examples).
-
-Individual and package limits are always saved in DB file. Limits from there are used when synchronizing <span class="notranslate"> quotas </span> . Please find more details in [Limits Synchronization](/lve_manager/#caching-and-synchronizing-the-limits).
-
-Also, find detailed information on DB file itself in [Quotas DB File](/lve_manager/#quotas-db-file) section.
-
-Utility options are described in [CLI Options](/lve_manager/#cli-options-examples) section.
-
-#### Limits inheritance
-
-
-When setting package limits to the package users, the inheritance principle is applied. It means that:
-
-* If no individual limit is set to a user, then he inherits the limits of the package he belongs to.
-
-* If no limit is set to a package (=0), then the users inherit uid=0 limits.
-
-Limits of the package named <span class="notranslate"> “default” </span> (if found in the <span class="notranslate"> DB </span> file) will always be ignored and all the users of this package will get <span class="notranslate"> uid=0 </span> limits.
-
-
-#### Caching and synchronizing the limits
-
-
-Any user of the system (including panel users) is always created with limits equal to 0. To assign him the limits of the corresponding package, the synchronization process is used.
-
-During the synchronization, <span class="notranslate"> cl-quota </span> utility reads the database file and sets the limits from it to the users and packages specified therein.
-This mode is designed to set the correct limits for the new users and to restore them for the existing ones. When recovering, the current limits are neither read nor analyzed.
-
-Caching - is writing current limits to <span class="notranslate"> _/etc/container/cl-quotas.cache_ </span> file. If <span class="notranslate"> cl-quota </span> is not started from the <span class="notranslate"> root </span> for reading the current limits, then it returns data from this file.
-
-When installing <span class="notranslate"> LVE Manager </span> package, a special <span class="notranslate"> cron job </span> is installed, which performs synchronization and caching ( <span class="notranslate"> cl-quota -YC </span> ) every 5 minutes. Therefore, the correct limits will be set for the user within 5 minutes from the moment of its creation.
-
-Caching and synchronization can also be performed separately, see ["CLI Options"](/lve_manager/#cli-options-examples) section.
-
-To disable this feature add to the config file _/etc/sysconfig/cloudlinux_ .
-
-
-#### Quotas DB file
-
-
-All <span class="notranslate"> cl-quota </span> limits settings are stored in along with the <span class="notranslate"> UID </span> or the name of the package the limit was set for.
-
-When saving the limits to a file, the following rules are applied:
-
-* If a limit value is non-integer or non-numeric, then the rules from <span class="notranslate"> "Setting limits and integrating with panel packages" </span> section are applied. The assigned value is saved to the file.
-
-* Limits are always saved in pairs, no matter if only one limit was set or both. The pair looks as follows: <span class="notranslate"> soft_limit:hard_limit </span> .
-
-* The values 0 and -1, when having a predetermined meaning, are saved as is without any transformations.
-
-* The words <span class="notranslate"> “default” </span> and <span class="notranslate"> “unlimited” </span> are saved as 0 and -1 respectively.
-
-* If both limits for a user/package were set as 0, then such user/package is not saved in the file, and if it was previously there - it will be removed. Therefore, if a user/package is not mentioned in the file, then all its limits are inherited. See [Limits Inheritance](/lve_manager/#limits-inheritance) section.
-
-The lists of panel users, packages, and user-package correspondence are not saved anywhere, this information is always subtracted from the panel.
-
-Example:
-<div class="notranslate">
-
-```
-/etc/container/cl-quotas.dat
-[users]
-0 = 1000:2000
-500 = -1:-1
-958 = 0:20000
-[packages]
-pack1 = 5000:-1
-```
-</div>
-It follows that:
-
-* uid=0 limits are set to 1000:2000 - all users in the default package will obtain these limits.
-
-* Both limits are set as unlimited for a user with uid=500, which means that its real limits will always be 0:0. The package limits do not affect this user.
-
-* <span class="notranslate"> Soft </span> limit of the user with uid=958 is inherited (0 means inheritance), his <span class="notranslate"> hard </span> limit is set to 20000 and it will not depend on the package limits or uid=0 limits.
-
-* Limits 5000:-1 are set for pack1 package, therefore its real limits are: <span class="notranslate"> soft_limit=5000 </span> and <span class="notranslate"> hard_limit=0 </span> (unlimited).
-
-* The users of <span class="notranslate"> pack1 </span> package will get <span class="notranslate"> pack1 </span> limits (5000:-1), the users of all the rest of the packages will get the limits of uid=0 because no limits are set for them. Exceptions: uid=500 and 958. uid=500 has both limits set individually, and uid=958 inherits only <span class="notranslate"> soft </span> limits.
-
-#### CLI options/examples
-
-
-<span class="notranslate"> cl-quotа </span> utility has the following command line options:
-<div class="notranslate">
-
-```
--u | --user                  : specifies the user
--U | --user-id              : specifies the user ID
--S | --soft-limit            : sets the soft limit for a user. Pass 0 or 'default' to set package default limit. Pass -1 or 'unlimited' to cancel limit
--H | --hard-limit            : sets the hard limit for a user. Pass 0 or 'default' to set package default limit. Pass -1 or 'unlimited' to cancel limit
--V | --csv                  : returns data as comma separated values
--p | --package              : specifies a package to set or get limits
--P | --package-limits        : prints package limits
--a | --all-package-limits : prints all package limits (including packages without limits)
--Y | --sync                  : synchronizes packages and users limits with the database
--C | --cache-content        : cache quota data to a file the database
--F | --force                : save user quotas even when they are equal to defaults
-       --check                : check if quotas is enabled/activated/suported; if disabled show diagnostic information; using with --user or --user-id options
-```
-</div>
-
-<span class="notranslate"> **--user** </span> and <span class="notranslate"> **--user-id** </span> options are designed to specify user whose limits are required to be set or displayed. <span class="notranslate"> --user </span> specifies user name, <span class="notranslate"> --user-id - uid </span> . It is acceptable to specify one or another.
-
-<span class="notranslate"> **--package** </span> - specifies package name.
-
-<span class="notranslate"> **--soft-limit** ,  **--hard-limit** </span> - specify <span class="notranslate"> soft </span> and <span class="notranslate"> hard </span> limits values respectively. It is acceptable to use words <span class="notranslate"> “default” </span> or <span class="notranslate"> “unlimited” </span> as limit value.
-
-<span class="notranslate"> **--csv** </span> - displays limits in <span class="notranslate"> csv </span> format (instead of data formatted in the table).
-
-<span class="notranslate"> **--package-limits** </span> - displaying the limits of the packages created by the panel admin.
-
-<span class="notranslate"> **--all-package-limits**   </span> - displaying the limits of all the packages, including the ones created by the resellers and packages with no users.
-
-<span class="notranslate"> **--sync** </span> - synchronizes users <span class="notranslate"> quotas </span> and packages with the database.
-
-<span class="notranslate"> **--cache-contents** </span> - performs <span class="notranslate"> quotas </span> caching.
-
-<span class="notranslate"> **--force** </span> - saving user <span class="notranslate"> quotas </span> even if they are equal to the current.
-
-<span class="notranslate"> **--check**   </span> - performs diagnostics for a specified user. Can be used only when a user is specified (along with <span class="notranslate"> --user / --user-id </span> ).
-
-_Examples:_
-
-1. Reading current user limits:
-
-<div class="notranslate">
-
-```
-# cl-quota
-# cl-quota --csv
-```
-</div>
-
-2. Reading current package limits:
-
-<div class="notranslate">
-
-```
-# cl-quota --package-limits
-# cl-quota --all-package-limits
-# cl-quota --package-limits --csv
-# cl-quota --all-package-limits --csv
-```
-</div>
-
-3. Specifying limits for a user:
-
-<div class="notranslate">
-
-```
-# cl-quota --user-id=500 --soft-limit=0 --hard-limit=0
-# cl-quota --user-id=500 --soft-limit=unlimited
-# cl-quota --user-id=500 --soft-limit=0 --hard-limit=-1
-# cl-quota --user-id=958 --hard-limit=20000 --soft-limit=0 --force
-```
-</div>
-
-4. Specifying limits for a package:
-
-<div class="notranslate">
-
-```
-# cl-quota --package pack1 --hard-limit=-1 --soft-limit=5000
-# cl-quota --package pack1 --hard-limit=10000
-# cl-quota --package pack1 --soft-limit=default
-```
-</div>
-
-5. User diagnostics (with example output):
-
-<div class="notranslate">
-
-```
-# cl-quota --user-id=500 --check
-Quota disabled for user id 500 (home directory /home/cltest1); quotaon: Mountpoint (or device) / not found or has no quota enabled.
-```
-</div>
-
-6. Synchronizing <span class="notranslate"> quotas with caching (executed in cron): </span>
-
-<div class="notranslate">
-
-```
-# cl-quota -YC
-```
-</div>
 
 ## Control panel integration guide
 

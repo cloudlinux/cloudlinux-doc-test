@@ -3,7 +3,7 @@
 ## Hybrid Kernels
 
 
-<span class="notranslate"> **CloudLinux 6 Hybrid kernel** </span>
+<span class="notranslate">**CloudLinux 6 Hybrid kernel**</span>
 
 <span class="notranslate"> CloudLinux </span> 6 Hybrid Kernel is <span class="notranslate"> CloudLinux </span> 7 (3.10.0) kernel compiled for CloudLinux 6 OS. New 3.10 kernel features a set of performance and scalability improvements related to  <span class="notranslate"> IO </span> , networking and memory management, available in  <span class="notranslate"> CloudLinux 7 OS </span> . It also features improved  <span class="notranslate"> CPU </span>  scheduler for better overall system throughput and latency.
 
@@ -59,7 +59,7 @@ The system must be registered in CLN.
 <div class="notranslate">
 
 ```
-yum update rhn-client-tools rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+yum update rhn-client-tools rhn-check rhn-setup
 normal-to-hybrid
 reboot
 ```
@@ -84,9 +84,9 @@ reboot
 ```
 </div>
 
-**Known limitations and issues of CloudLinux 6 Hybrid kernel** :
+**Known limitations and issues of CloudLinux 6 Hybrid kernel**
 
-1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux </span> 6 does not allow to remove the package of currently running kernel. Proper removal procedure will be implemented, but for now, we should warn users _not to boot Hybrid kernel if they have migrated to normal channel_ .
+1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux </span> 6 does not allow to remove the package of currently running kernel. Proper removal procedure will be implemented, but for now, we should warn users _not to boot Hybrid kernel if they have migrated to normal channel_.
 
 2. Kernel module signature isn't checking for now, as 3.10 kernel is using x509 certificates to generate keys and CL6 cannot detect signatures created in such way. The solution will be implemented.
 
@@ -94,20 +94,14 @@ reboot
 
 Features that are absent in the current kernel build:
 
-1. CPU boost
-2. CRIU support for mod_lsapi PRO
-3. Per LVE traffic accounting
+* Per LVE traffic accounting
 
-Limitations of the current kernel build:
-
-1. Standard OOM killer is used
-2. The _/etc/sysctl.conf_ parameter <span class="notranslate"> `proc_can_see_other_uid` </span> is supported but its behavior is more restrictive than [documented](/kernel_settings/#virtualized-proc-filesystem). This will be improved in the next beta release.
-3. Symlink Owner Match Protection is disabled by default. To enable it, use `sysctl` utility:
+Note that Symlink Owner Match Protection is enabled by default in CL7 Hybrid kernel. To disable it, use `sysctl` utility:
 
 <div class="notranslate">
 
 ```
-sysctl -w fs.enforce_symlinksifowner=1
+sysctl -w fs.enforce_symlinksifowner=0
 ```
 </div>
 
@@ -202,7 +196,7 @@ Starting from lve-utils 3.0-21.2, fs.symlinkown_gid parameter values for httpd s
 ### Link traversal protection 
 
 
-<span class="notranslate"> [CageFS](/cagefs/) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
+<span class="notranslate"> [CageFS](/cloudlinux_os_components/#cagefs) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
 
 Yet, <span class="notranslate"> CageFS </span> does not work in each and every situation. For example, on <span class="notranslate"> cPanel </span> servers, it is not enabled in <span class="notranslate"> WebDAV </span> server, <span class="notranslate"> cPanel </span> file manager and webmail, as well as some FTP servers don’t include proper change rooting.
 
@@ -691,7 +685,7 @@ If fs.proc_can_see_other_uid is set to 0, users will not be able to see special 
 
 fs.proc_super_gid=XX
 
-The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/limits/#cldetect) can configure few most commonly used monitoring software automatically.
+The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/command-line_tools/#cldetect) can configure few most commonly used monitoring software automatically.
 
 Virtualized /proc filesystem will only display following files (as well as directories for PIDs for the user) to unprivileged users:
 <div class="notranslate">

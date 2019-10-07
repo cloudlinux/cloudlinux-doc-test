@@ -108,7 +108,7 @@ Use the detailed instruction below:
     </div>
 
 
-#### How to enable and disable Reseller limits
+### How to enable and disable Reseller limits
 
 To start using a new feature <span class="notranslate">**Reseller limits**</span> you would have to enable reseller limits for a particular reseller first.
 
@@ -137,7 +137,7 @@ When the checkbox is selected, user <span class="notranslate">**Reseller**</span
 Resellers’ end users can use as much resources in total as it is provided for that particular reseller by a hoster. The summary usage of all end users that belong to that particular reseller will not exceed the amount of resources provided to reseller by a hoster. If no Reseller Limits are set, reseller’s end user will be limited by default limits set by a hoster.
 :::
 
-#### How to disable Reseller limits
+### How to disable Reseller limits
 
 To disable Reseller limits, please do the following:
 
@@ -205,6 +205,10 @@ SQLite database file is located in <span class="notranslate">`/var/lve/lvestats2
 
 Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux.
 
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
+:::
+
 #### Downgrade
 
 If you have any problems after update, downgrade <span class="notranslate">lve-stats2</span> to the previous stable version by running:
@@ -220,6 +224,10 @@ and contact CloudLinux support at [https://cloudlinux.zendesk.com/hc/requests/ne
 
 :::tip Note
 You may need to rename `*.rpmsave` files to original ones in order to restore settings for old <span class="notranslate">lve-stats (`/etc/sysconfig/lvestats`, `/etc/sysconfig/cloudlinux-notify`</span>).
+:::
+
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
 :::
 
 ### Configuration
@@ -291,7 +299,7 @@ Templates of notifications are located here:
 * <span class="notranslate">`/usr/share/lve/emails/en_US/reseller_notify.html`</span>
 
 :::tip Note
-Notifications about LVE faults are implemented for CPanel only.
+Notifications about LVE faults are implemented for CPanel, Plesk, and DirectAdmin.
 :::
 
 After changing any options above, please restart <span class="notranslate">lvestats</span> service:
@@ -304,6 +312,10 @@ service lvestats restart
 </div>
 
 <span class="notranslate">`/etc/logrotate.d/lvestats`</span> - configuration file for <span class="notranslate">`/var/log/lve-stats.log rotation`</span>
+
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
+:::
 
 ### LVE-stats2 and DB servers compatible work setup
 
@@ -1513,6 +1525,10 @@ LVE_VERSION >=8
 ```
 </div>
 
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
+:::
+
 ### Troubleshooting
 
 <span class="notranslate"> lvestats </span> service and utilities write fatal errors to system log.
@@ -1549,33 +1565,29 @@ CageFS is not supported for H-Sphere.
 
 See also [Compatibility Matrix](/limits/#compatibility-matrix).
 
-#### Minimum requirements
+#### Minimum Requirements:
 
 * kernel: CL6 with lve1.2.17.1 or later, CL7.
 * 7GB of disk space.
 
 Depending on your setup, and number of users, you might also need:
-* Up to 8MB per customer in _/var_ directory (to store custom _/etc_ directory)
-* 5GB to 20GB in _/usr/share_ directory (to store safe skeleton of a filesystem)
-
-::: danger Warning
-If at any time you decide to uninstall CageFS, please make sure you follow [uninstall instructions](/cagefs/#uninstalling-cagefs)
-:::
-
-
-
-#### Minimum Requirements:
-
-* kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
-* 7GB of disk space.
-
-Depending on your setup, and number of users, you might also need:
 * Up to 8MB per customer in `/var` directory (to store custom `/etc` directory)
-* 5GB to 20GB in `/usr/share`directory (to store safe skeleton of a filesystem)
+* 5GB to 20GB in `/usr/share` directory (to store safe skeleton of a filesystem)
 
 ::: danger Warning
-If at any time you decide to uninstall CageFS, please make sure you follow [uninstall instructions](/cagefs/#uninstalling-cagefs)
+If at any time you decide to uninstall CageFS, please make sure you follow [uninstall instructions](/cloudlinux_os_components/#uninstalling)
 :::
+
+#### CageFS quirks
+
+
+Due to the nature of CageFS, some options will not work as before or will require some changes:
+
+* lastlog will not work (<span class="notranslate">`/var/log/lastlog`</span>).
+* PHP will load `php.ini` from <span class="notranslate">`/usr/selector/php.ini`</span>. That file is actually a link to the real `php.ini` file from your system. So the same `php.ini` will be loaded in the end.
+* You have to run <span class="notranslate">`cagefsctl --update`</span> any time you have modified `php.ini`, or you want to get new/updated software inside CageFS.
+* CageFS installation changes <span class="notranslate">`jailshell`</span> to regular bash on cPanel - [read why](https://cloudlinux.zendesk.com/hc/articles/115004517685-Why-CageFS-installation-changes-jailshell-to-regular-bash-on-cPanel-).
+
 
 ### Installation and update
 
@@ -1622,6 +1634,10 @@ It is strongly advised against setting this variable in `90-cloudlinux.conf`. De
 
 You can find more information on <span class="notranslate">`fs.proc_can_see_other_uid`</span> automatic migration in [Kernel Config Variables](/cloudlinux_os_kernel/#kernel-config-variables).
 
+
+:::tip Note
+You can also use [CageFS CLI](/command-line_tools/#cagefs)
+:::
 
 ### Uninstalling
 
@@ -1716,6 +1732,10 @@ $ /usr/sbin/cagefsctl --display-user-mode
 </div>
 
 
+:::tip Note
+You can also use [CageFS CLI](/command-line_tools/#cagefs)
+:::
+
 ### Configuration
 
 * [File system templates](/cloudlinux_os_components/#file-system-templates)
@@ -1738,6 +1758,8 @@ $ /usr/sbin/cagefsctl --display-user-mode
 
 * [PAM configuration](/cloudlinux_os_components/#pam-configuration)
 
+* [Filtering options for commands executed by proxyexec](/cloudlinux_os_components/#filtering-options-for-commands-executed-by-proxyexec)
+
 * [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
 
 * [Custom /etc files per customer](/cloudlinux_os_components/#custom-etc-files-per-customer)
@@ -1751,6 +1773,8 @@ $ /usr/sbin/cagefsctl --display-user-mode
 * [Syslog](/cloudlinux_os_components/#syslog)
 
 * [Excluding mount points](/cloudlinux_os_components/#excluding-mount-points)
+
+* [Shared memory (/dev/shm) isolation in CageFS](/cloudlinux_os_components/#shared-memory-dev-shm-isolation-in-cagefs)
 
 
 #### File system templates
@@ -1871,7 +1895,7 @@ And check that the command shows <span class="notranslate">`Disabled`</span>.
 CageFS creates individual namespace for each user, making it impossible for users to see each other's files and creating high level of isolation. The way namespace is organized:
 
 1. <span class="notranslate"> /usr/share/cagefs-skeleton </span> with safe files is created
-2. Any directory from the server that needs to be shared across all users is mounted into <span class="notranslate"> /usr/share/cagefs-skeleton </span>
+2. Any directory from the server that needs to be shared across all users is mounted into <span class="notranslate">`/usr/share/cagefs-skeleton`</span>
 (a list of such directories is defined in /etc/cagefs/cagefs.mp)
 3. <span class="notranslate"> /var/cagefs/[prefix]/username </span> directory for each user. Prefix is defined as last two digits of user id. User id is taken from <span class="notranslate"> /etc/passwd </span> file.
 4. Separate /etc directory is created and populated for each user inside <span class="notranslate"> /var/cagefs/[prefix]/username </span>
@@ -1881,7 +1905,7 @@ CageFS creates individual namespace for each user, making it impossible for user
 
 To define individual custom directories in /etc/cagefs/cagefs.mp following format is used:
 
-<span class="notranslate"> `@/full/path/to/directory,permission notation` </span>
+<span class="notranslate">`@/full/path/to/directory,permission notation`</span>
 
 
 This is useful when you need to give each user its own copy of a particular system directory, like:
@@ -2178,7 +2202,6 @@ flags=-umcl
 
 to prevent symlink from being removed.
 
-
 #### PAM configuration
 
 
@@ -2188,20 +2211,97 @@ CageFS depends on <span class="notranslate"> **pam_lve** </span> module tor PAM 
 * crond
 * su
 
-The following line is added to corresponding file in _/etc/pam.d/_:
+The following line is added to corresponding file in `/etc/pam.d/`:
 <div class="notranslate">
 ```
 session    required     pam_lve.so      100     1
 ```
 </div>
 
-Where 100 stands for minimum <span class="notranslate"> UID </span> to put into <span class="notranslate"> CageFS & LVE </span> , and 1 stands for CageFS enabled.
+Where 100 stands for minimum <span class="notranslate"> UID </span> to put into <span class="notranslate">CageFS & LVE</span> , and 1 stands for CageFS enabled.
+
+
+#### Filtering options for commands executed by proxyexec
+
+You can disallow a user in CageFS to execute specific commands with some specific *dangerous* options via proxyexec.
+
+To do so, you should create <span class="notranslate">`<command>.json`</span> file in the <span class="notranslate">`/etc/cagefs/filters`</span> directory and specify the names of options you want to disable.
+
+For example, to disable some options of <span class="notranslate">`sendmail`</span> command, <span class="notranslate">`/etc/cagefs/filters/sendmail.json`</span> is created with the following content:
+
+<div class="notranslate">
+
+```
+{
+  "default": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/usr/sbin/sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/var/qmail/bin/sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/usr/sbin/sendmail.sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/usr/local/cpanel/bin/sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  }
+}
+```
+</div>
+
+You can specify options for different paths separately (for example, <span class="notranslate">`/usr/sbin/sendmail`</span> or <span class="notranslate">`/var/qmail/bin/sendmail`</span>).
+
+If the path to the program being executed does not match any path specified in the config file, then default parameters are used.
+
+* <span class="notranslate">`deny`</span> list should contain options that should be disallowed for use by users (the black list of options, all other options will be allowed).
+* You can specify the white list of options in the <span class="notranslate">`allow`</span> list (all other options will be denied).
+* You cannot specify both white and black list (<span class="notranslate">`allow`</span> and <span class="notranslate">`deny`</span>).
+
+It is possible to verify that a path specified as a parameter for an option does not refer outside of the user’s home directory. This check is performed for options specified in the <span class="notranslate">`restrict_path`</span> list. All issues are reported in <span class="notranslate">`/var/log/secure`</span> log file.
 
 
 #### Executing by proxy
 
 
-Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate"> **passwd, sendmail** ,  </span> etc.
+Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate">**passwd, sendmail**</span>, etc.
 
 CloudLinux uses <span class="notranslate"> proxyexec </span> technology to accomplish this goal. You can define any program to run outside CageFS, by specifying it in <span class="notranslate"> _/etc/cagefs/custom.proxy.commands_ </span> file. Do not edit existing <span class="notranslate"> _/etc/cagefs/proxy.commands_ </span> as it will be overwritten with next CageFS update.
 
@@ -2550,6 +2650,119 @@ After that, all new created <span class="notranslate"> LVEs </span> will be with
 You should recreate all LVEs only once after creating <span class="notranslate"> _/etc/container/exclude_mounts.conf_ </span> file. After that the configuration changes will be applied to all new LVEs automatically.
 :::
 
+#### Shared memory (/dev/shm) isolation in CageFS
+
+:::tip Note
+Requires `cagefs-6.2.1-1` or later
+:::
+
+The `/dev/shm` in a real file system directory is “world-writable”. This directory from the real file system is mounted to CageFS by default, so `/dev/shm` directory is common for all users by default. However, it is possible to improve security and isolate `/dev/shm` (shared memory) for each user in CageFS.
+
+To enable `/dev/shm` isolation, do the following steps:
+
+1. Delete `/dev/shm` line from the `/etc/cagefs/cagefs.mp` file
+
+  <div class="notranslate">
+
+  ```
+  sed -i -e '/^\/dev\/shm/d' /etc/cagefs/cagefs.mp
+  ```
+  </div>
+
+2. Create a configuration file with mount options for shared memory
+   
+  <div class="notranslate">
+
+  ```
+  echo 'mode=0777' > /etc/cagefs/dev.shm.options
+  ```
+  </div>
+
+3. Remount CageFS to apply changes
+   
+  <div class="notranslate">
+
+  ```
+  cagefsctl --remount-all
+  ```
+  </div>
+
+You can also specify additional mount options.
+
+For example, you can specify the size of shared memory in megabytes:
+
+<div class="notranslate">
+
+```
+echo 'mode=0777,size=1m' > /etc/cagefs/dev.shm.options
+cagefsctl --remount-all
+```
+</div>
+
+Or you can specify the size of user’s physical memory limit (PMEM) in percentage:
+
+<div class="notranslate">
+
+```
+echo 'mode=0777,size=50%' > /etc/cagefs/dev.shm.options
+cagefsctl --remount-all
+```
+</div>
+
+To disable `/dev/shm` isolation, do the following steps:
+
+1. Delete configuration file
+
+  <div class="notranslate">
+
+  ```
+  rm -f /etc/cagefs/dev.shm.options
+  ```
+  </div>
+
+2. Validate `/etc/cagefs/cagefs.mp` file
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --check-mp
+  ```
+  </div>
+
+3. Add `/dev/shm` line to `/etc/cagefs/cagefs.mp` file
+
+  <div class="notranslate">
+
+  ```
+  echo '/dev/shm' >> /etc/cagefs/cagefs.mp
+  ```
+  </div>
+
+4. Remount CageFS to apply changes
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --remount-all
+  ```
+  </div>
+
+:::tip Note
+you should specify `mode=0777`. It is required for the proper operation of shared memory inside CageFS. This is not a security issue because the `/dev/shm` directory is isolated for each user and visible inside a user’s CageFS only.
+:::
+
+:::tip Note
+`/dev/shm` is mounted with `nosuid,nodev,noexec` mount options always (both in “isolated `/dev/shm`” mode and not). You cannot change this behavior.
+:::
+
+:::tip Note
+“isolated `/dev/shm`” mode will become the default in the future CageFS releases.
+:::
+
+:::tip Note
+when the size of the `/dev/shm` is specified in percentage of user’s physical memory limit (PMEM), you should remount CageFS after changing PMEM limit in order to change the size of shared memory allocated for the `/dev/shm` in user’s CageFS. To do so, execute `cagefsctl --remount-all`
+:::
+
 ### Integration with control panels
 
 CageFS comes with a plugin for various control panels.
@@ -2639,7 +2852,7 @@ When customer is restricted, the customer will be placed into special LVE with I
 #### Installation
 
 ::: danger IMPORTANT
-Please make full database backup (including system tables) before you upgrade MySQL or switch to MariaDB. This action will prevent data losing in case if something goes wrong.
+Please make full database backup (including system tables) before you upgrade MySQL or switch to MariaDB. This action will prevent data loss in case if something goes wrong.
 :::
 
 **_MySQL Governor is compatible only with MySQL 5.x, 8.0; MariaDB & Percona Server 5.6._**
@@ -2759,6 +2972,10 @@ Please note that restore of previous packages in case of failed installation wou
 
 ::: danger IMPORTANT
 Use <span class="notranslate"> --yes </span> flag on your own risk, because it confirms installation in any case - even in case if there are troubles during installation (for example, network problems causing incomplete download of packages), everything would be confirmed.
+:::
+
+:::tip Note
+See also [MySQL Governor CLI](/command-line_tools/#mysql-governor)
 :::
 
 #### Upgrading database server
@@ -2907,10 +3124,10 @@ These values can also be set using [cloudlinux-config](/command-line_tools/#clou
 
 <span class="notranslate"> MySQL Governor </span> has multiple modes of operation. Some of them are experimental at this moment.  
 Mode:  
-<span class="notranslate"> **off -- Monitor Only** :  </span> In this mode <span class="notranslate"> MySQL Governor </span> will not throttle customer's queries, instead it will let you monitor the MySQL usage to see the abusers at any given moment of time (and historically). This mode is good when you are just starting and want to see what is going on  
-<span class="notranslate"> **single -- Single restricted's LVE for all restricted customers (deprecated)** :  </span> In that mode once customer reaches the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available  
-<span class="notranslate"> **abusers - Use LVE for a user to restrict queries (default mode)** :  </span> In that mode, once user goes over the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing less of a new queries being sent to MySQL. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_  
-<span class="notranslate"> **all - Always run queries inside user's LVE** :  </span> This way there are no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating <span class="notranslate"> MySQL Governor </span> . The benefits of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes what so ever. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_
+<span class="notranslate"> **off -- Monitor Only** :  </span> In this mode <span class="notranslate"> MySQL Governor </span> will not throttle customer's queries, instead it will let you monitor the MySQL usage to see the abusers at any given moment in time (and historically). This mode is good when you are just starting and want to see what is going on  
+<span class="notranslate"> **single -- Single restricted's LVE for all restricted customers (deprecated)** :  </span> In that mode once customer reaches the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing the same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available  
+<span class="notranslate"> **abusers - Use LVE for a user to restrict queries (default mode)** :  </span> In that mode, once user goes over the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing fewer new queries being sent to MySQL. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_  
+<span class="notranslate"> **all - Always run queries inside user's LVE** :  </span> This way there is no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating <span class="notranslate"> MySQL Governor </span> . The benefit of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes whatsoever. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_
 
 If <span class="notranslate"> dbuser-map </span> file is absent on the server, " <span class="notranslate"> abusers </span> " mode emulates " <span class="notranslate"> single </span> ".
 
@@ -3073,6 +3290,10 @@ Starting from cPanel & WHM version 78, cPanel supports MariaDB 10.3: https://doc
 cPanel does not officially support MySQL 8.0, that is why we don’t recommend to use it on cPanel servers. Use on your own risk for <span class="notranslate"> DirectAdmin and Plesk </span> servers, because downgrade can corrupt your databases.
 :::
 
+:::tip Note
+See also MySQL Governor [CLI](/command-line_tools/#mysql-governor)
+:::
+
 ### Backing up MySQL
 
 
@@ -3190,14 +3411,17 @@ After applying the command MySQL <span class="notranslate">Governor</span> succe
 
 ## PHP Selector
 
-
 ### General information and requirements
+
+:::warning Note
+To PHP Selector proper operation, make sure you have installed and configured `mod_suexec` package. You can find installation instruction [here](/cloudlinux_os_components/#apache-suexec-module).
+:::
 
 <span class="notranslate"> PHP Selector </span> is a CloudLinux component that sits on top of CageFS. It allows each user to select PHP version and module based on their needs. <span class="notranslate"> PHP Selector </span> requires account to have CageFS enabled to work.
 
 <span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate"> _suPHP, mod_fcgid, CGI (suexec), LiteSpeed_ </span> .
 
-It is **not compatible** with <span class="notranslate"> _mod_php/DSO_ </span> , including <span class="notranslate"> _mod_ruid2_ </span> and <span class="notranslate"> _MPM ITK_ . </span>
+It is **not compatible** with <span class="notranslate">`mod_php/DSO`</span>, including <span class="notranslate"> _mod_ruid2_ </span> and <span class="notranslate">`MPM ITK`</span>
 
 ::: tip Note
 PHP Selector is not supported for H-Sphere.
@@ -3207,7 +3431,7 @@ See also [Compatibility Matrix](/limits/#compatibility-matrix).
 
 ### Installation and update
 
-The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cagefs/) & <span class="notranslate">[LVE Manager](/lve_manager/) installed.</span>
+The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cloudlinux_os_components/#cagefs) & <span class="notranslate">[LVE Manager](/lve_manager/) installed.</span>
 
 Use [compatibility matrix](/limits/#compatibility-matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
 
@@ -3273,7 +3497,11 @@ yum groupupdate alt-php
 
 This command allows to install newly released versions in <span class="notranslate"> PHP Selector. </span>
 
-#### LiteSpeed support
+:::tip Note
+See also PHP Selector [CLI](/command-line_tools/#php-selector)
+:::
+
+### LiteSpeed support
 
 ::: tip Note
 LiteSpeed detects CloudLinux OS and applies all settings out-of-the-box.
@@ -3283,7 +3511,7 @@ If the settings were not applied, you can use the following steps to set up Lite
 
 **How to set up LiteSpeed version lower than 5.3 to use PHP Selector**
 
-To enable <span class="notranslate"> PHP Selector </span> with <span class="notranslate"> LiteSpeed Web Server </span> follow <span class="notranslate"> PHP Selector  </span> [installation guide](/php_selector/#installation-and-update) , and then adjust following settings in <span class="notranslate"> LiteSpeed </span> :
+To enable <span class="notranslate"> PHP Selector </span> with <span class="notranslate"> LiteSpeed Web Server </span> follow <span class="notranslate"> PHP Selector  </span> [installation guide](/cloudlinux_os_components/#installation-and-update-4) , and then adjust following settings in <span class="notranslate"> LiteSpeed </span> :
 
 1. <span class="notranslate">CloudLinux (Admin Console | Configuration | Server | General): CageFS </span>
 2. Enable <span class="notranslate">SuExec: Server | General | PHP SuEXEC | Yes </span>
@@ -3299,7 +3527,7 @@ You can select any other application or create a custom one.
 
 <span class="notranslate"> _Run On Start Up_ </span> line must contain <span class="notranslate"> **Yes** </span> or <span class="notranslate"> **No** </span>.
 
-For <span class="notranslate"> Plesk </span> :
+For <span class="notranslate">Plesk</span>:
 
 ![](/images/litespeed3_zoom70.png)
 
@@ -3307,7 +3535,36 @@ For other control panels:
 
 ![](/images/litespeed2_zoom70.png)
 
-5. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
+Settings in text format:
+
+| | |
+|-|-|
+|<span class="notranslate">Name</span>|<span class="notranslate">`lsphp_selector`</span>|
+|<span class="notranslate">Address</span>|<span class="notranslate">`uds://tmp/lshttpd/lsphp_selector.sock`</span>|
+|<span class="notranslate">Notes</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">Max Connections</span>|`35`|
+|<span class="notranslate">Environment</span>|<span class="notranslate">`PHP_LSAPI_MAX_REQUESTS=5000`</span><br><span class="notranslate">`PHP_LSAPI_CHILDREN=35`</span>|
+|<span class="notranslate">Initial Request Timeout (secs)</span>|`60`|
+|<span class="notranslate">Retry Timeout (secs)</span>|`0`|
+|<span class="notranslate">Persistent Connection</span>|<span class="notranslate">`Yes`</span>|
+|<span class="notranslate">Connection Keepalive Timeout</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">Response Buffering</span>|<span class="notranslate">`No`</span>|
+|<span class="notranslate">Auto Start</span>|<span class="notranslate">`Through CGI Daemon (Async)`</span>|
+|<span class="notranslate">Command</span>|* For Plesk <span class="notranslate">`/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper`</span><br>* For other control panels <span class="notranslate">`/usr/local/bin/lsphp`</span>|
+|<span class="notranslate">Back Log</span>|`100`|
+|<span class="notranslate">Instances</span>|`1`|
+|<span class="notranslate">suEXEC User</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">suEXEC Group</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">umask</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">Run On Start Up</span>|<span class="notranslate">`Yes`</span>|
+|<span class="notranslate">Max Idle Time</span>|`70`|
+|<span class="notranslate">Priority</span>|`0`|
+|<span class="notranslate">Memory Soft Limit (bytes)</span>|`2047M`|
+|<span class="notranslate">Memory Hard Limit (bytes)</span>|`2047M`|
+|<span class="notranslate">Process Soft Limit</span>|`400`|
+|<span class="notranslate">Process Hard Limit</span>|`500`|
+
+1. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
 
 ![](/images/litespeed4_zoom70.png)
 
@@ -3335,7 +3592,7 @@ Some PHP configurations require more memory for SuExec to work properly. If you 
 If you have LiteSpeed installed not in standard location path, please create a symlink: <span class="notranslate"> 'ln -s /path/to/custom/lsws /usr/local/lsws' then run 'cagefsctl --setup-cl-selector'. </span>
 :::
 
-#### ISPmanager support
+### ISPmanager support
 
 
 As of July 2013, <span class="notranslate"> PHP Selector </span> support for <span class="notranslate"> ISPmanager </span> is limited to command line utilities. You should still be able to use it.
@@ -3487,9 +3744,9 @@ If you want to create additional `php.ini` file for a user inside CageFS in orde
 
 The commands above create `custom.ini` file that will be used for `alt-php72`. By default this approach is valid only for alt-php version selected via <span class="notranslate">PHP Selector</span>. When <span class="notranslate">`/etc/cl.selector/symlinks.rules`</span> file contains <span class="notranslate">`php.d.location = selector`</span> line, then the approach is valid for all alt-php versions regardless whether it is selected in PHP Selector or not.
 
-You can find more details [here](/php_selector/#php-extensions).
+You can find more details [here](/cloudlinux_os_components/#bundled-php-extensions).
 
-But the recommended way is to modify PHP options via PHP Selector web or CLI interfaces, as described [here](/php_selector/#custom-php-ini-options).
+But the recommended way is to modify PHP options via PHP Selector web or CLI interfaces, as described [here](/cloudlinux_os_components/#custom-php-ini-options).
 
 
 
@@ -3498,7 +3755,7 @@ But the recommended way is to modify PHP options via PHP Selector web or CLI int
 
 Sometimes you might want to have a single customer with a different php.ini, than the rest of your customers.
 
-To do that, you will use <span class="notranslate"> [custom.etc directory functionality](/cagefs/#custom-etc-files-per-customer) </span>
+To do that, you will use <span class="notranslate"> [custom.etc directory functionality](/cloudlinux_os_components/#custom-etc-files-per-customer) </span>
 
 1. Move default php.ini into <span class="notranslate"> _/etc_ </span> directory and create a symlink to it:
 
@@ -3602,7 +3859,7 @@ It is enough to put `php.ini` in the directory where PHP script is located in or
 * When using **suphp** handler, you should use `SuPHP_ConfigPath` directive in virtual host configuration for these domains, or use this directive in `.htaccess` files: `suPHP_ConfigPath/etc`.
 
 * When using **mod_lsapi**, you should use `lsapi_phprc` directive in virtual host configuration: `lsapi_phprc/etc/`.
-    You can find the detailed description of `mod_lsapi` directives [here](/apache_mod_lsapi/#configuration-references).
+    You can find the detailed description of `mod_lsapi` directives [here](/cloudlinux_os_components/#configuration-references).
 
 * When using **FCGI** or **CGI**, you should implement custom PHP wrapper and redefine the path to `php.ini` via `-c` command line option, like below:
     <div class="notranslate">
@@ -3770,6 +4027,111 @@ chmod 0644 /etc/cl.selector/native.conf
 </div>
 
 
+#### How to configure alt-php72-zts to use with PHP Selector
+
+**Requirements**
+
+To use `alt-php72-zts` with PHP Selector you need the following:
+
+* `cagefs-6.1.8-1` or later
+* `alt-php72-zts-7.2.21-4` or later
+
+**Using zts PHP**
+
+1. Install `alt-php72-zts` with the following command:
+  
+  <div class="notranslate">
+
+  ```
+  yum install alt-php72-zts
+  ```
+  </div>
+
+2. Make sure that <span class="notranslate">`/etc/cl.selector/selector.conf`</span> file contains correct paths to the PHP `zts` binaries.
+
+  You should remove the old lines:
+
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/php
+  ```
+  </div>
+
+  And replace them with the lines with the new paths:
+
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php
+  ```
+  </div>
+
+3. Make sure that <span class="notranslate">`/opt/alt/php72/etc/php.d.all`</span> path refers to the directory containing `ini` files for `zts` PHP extensions:
+
+  <div class="notranslate">
+
+  ```
+  cd /opt/alt/php72/etc
+  ln -fsn php.d.all.zts php.d.all
+  ```
+  </div>
+
+4. Execute the following command:
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --setup-cl-selector
+  ```
+  </div>
+
+
+**Using non-zts PHP**
+
+1. Make sure that <span class="notranslate">`/etc/cl.selector/selector.conf`</span> file contains correct paths to the `non-zts` PHP binaries.
+   
+  You should remove the old lines:
+  
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php
+  ```
+  </div>
+
+And replace them with the lines with the new paths:
+
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/php
+  ```
+  </div>
+  
+2. Make sure that <span class="notranslate">`/opt/alt/php72/etc/php.d.all`</span> path refers to the directory containing `ini` files for `non-zts` PHP extensions:
+
+  <div class="notranslate">
+
+  ```
+  cd /opt/alt/php72/etc
+  ln -fsn php.d.all.def php.d.all
+  ```
+  </div>
+
+3. Execute the following command:
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --setup-cl-selector
+  ```
+  </div>
+
 #### Using
 
 Once <span class="notranslate">PHP Selector</span> is installed, you will see the <span class="notranslate">**Selector**</span> tab in the <span class="notranslate">**LVE Manager**</span>.
@@ -3837,7 +4199,7 @@ Default values, that are shown in <span class="notranslate"> PHP Selector </span
 directive is not there, it will use ' <span class="notranslate"> default </span> ' value that was set in <span class="notranslate"> php.conf </span> . So, if you wish to change default value of any option for
 "alternative" php version, please modify <span class="notranslate"> /opt/alt/phpXX/etc/php.ini </span> files (where XX = 55, 54, 53, etc according to php version).
 
-Admin can modify the settings using <span class="notranslate"> [selectorctl](/php_selector/#selectorctl) </span> command.
+Admin can modify the settings using <span class="notranslate"> [selectorctl](/command-line_tools/#selectorctl) </span> command.
 
 Users can use web interface to modify php.ini settings:
 
@@ -4087,6 +4449,9 @@ This command removes symlinks:
 <span class="notranslate">`/opt/alt/php55/link/conf/alt_php.ini` -> `/home/USER/.cl.selector/alt_php55.ini`</span>
 turns on link traversal protection (linksafe) and cagefs service.
 
+:::tip Note
+See also PHP Selector [CLI](/command-line_tools/#php-selector)
+:::
 
 #### Configuring "global” php.ini options for all Alt-PHP versions
 
@@ -4174,6 +4539,10 @@ selectorctl --apply-global-php-ini date.timezone error_log
 </div>
 
 The latter command has the same effect as <span class="notranslate">`/usr/bin/selectorctl --apply-global-php-ini`</span>.
+
+:::tip Note
+See also PHP Selector [CLI](/command-line_tools/#php-selector)
+:::
 
 
 ### Integration with control panels
@@ -4406,8 +4775,6 @@ echo $OPTIONS
 </div>
 
 
-[cPanel](/php_selector/#cpanel)
-
 #### PHP Selector integration with cPanel’s MultiPHP Manager
 
 :::tip Note
@@ -4433,13 +4800,13 @@ If you'd like to use PHP Selector on a cPanel server, continue reading this docu
 
 Before integrating PHP Selector with cPanel, make sure that you have the following components installed:
 
-* [LVE Manager](/lve_manager/#lve-manager)
-* [CageFS](/cagefs/#installation)
-* [CloudLinux alt-php package](/php_selector/#installation-and-update)
+* LVE Manager
+* CageFS
+* CloudLinux alt-php package
 
 #### Configuration
 
-Once you’re done with PHP Selector [installation](/php_selector_installation.html), there are a few things that you need to check on cPanel servers. You need to make sure that MultiPHP Manager settings are correct and that CageFS is enabled for the users. Let us cover the steps in detail.
+Once you’re done with PHP Selector [installation](/cloudlinux_os_components/#installation-and-update-4), there are a few things that you need to check on cPanel servers. You need to make sure that MultiPHP Manager settings are correct and that CageFS is enabled for the users. Let us cover the steps in detail.
 
 Go to WHM -> MultiPHP Manager -> PHP Versions tab.
 
@@ -4455,7 +4822,7 @@ Go to WHM -> MultiPHP Manager -> PHP Versions tab.
    :::
 3) Last but not least, make sure that the domains/accounts (where you'd like to use the PHP Selector) use the __Inherited__ version. You need to do that because MultiPHP Manager has higher priority than PHP Selector. So, if any other PHP version is set in this menu, it will overwrite the PHP version selected in PHP Selector for that domain.
 
-That’s it! You are all set. The only thing that’s left is to make sure that you use the “[Enable for all users](/cagefs/#managing-users)” mode for CageFS if you’d like to keep PHP Selector for all users.
+That’s it! You are all set. The only thing that’s left is to make sure that you use the “[Enable for all users](/cloudlinux_os_components/#managing-users)” mode for CageFS if you’d like to keep PHP Selector for all users.
 
 See also: [FAQ on PHP Selector integration with cPanel’s MultiPHP Manager](https://cloudlinux.zendesk.com/hc/en-us/articles/360007615820-FAQ-on-PHP-Selector-integration-with-cPanel-s-MultiPHP-Manager).
 
@@ -4475,11 +4842,11 @@ Given the way cPanel handles the PHP versions, it could be quite confusing to un
 
 __Directives priority - if PHP Selector is enabled__
 
-If the PHP Selector is [configured](/php_selector/#configuration-2) properly, its options would have the highest priority. You can find them in cPanel -> Select PHP Version -> Switch to PHP Options.
+If the PHP Selector is configured properly, its options would have the highest priority. You can find them in cPanel -> Select PHP Version -> Switch to PHP Options.
 
 ![](/images/PHPVersion.png)
 
-You can add custom php.ini options here too! Check [this article](/custom_php_ini_options.html) to find out how to do that.
+You can add custom php.ini options here too! Check [this article](/cloudlinux_os_components/#custom-php-ini-options) to find out how to do that.
 The lower priority would have the php.ini (or .user.ini for some of the PHP handlers) configuration file, but you could also type in the PHP values there.
 
 __Directives priority - if PHP Selector isn’t used__
@@ -4488,7 +4855,7 @@ If you haven’t configured the PHP Selector, and you’d like to simply change 
 
 #### __PHP version in the command-line interface (CLI)__
 
-Shell commands, starting with `/usr/bin/php` and `/usr/local/bin/php` would use the same version that you select in the PHP Selector (if it’s already [set up](/php_selector/#configuration-2)). That PHP will also load PHP directives selected in PHP Selector. For example, if we have a setup like this:
+Shell commands, starting with `/usr/bin/php` and `/usr/local/bin/php` would use the same version that you select in the PHP Selector (if it’s already [set up](/cloudlinux_os_components/#configuration-and-using)). That PHP will also load PHP directives selected in PHP Selector. For example, if we have a setup like this:
 
 ![](/images/command_line_01.jpg)
 
@@ -4650,163 +5017,7 @@ You can find more info about <span class="notranslate">New Relic License Key</sp
 ## Python Selector
 
 :::tip Note
-This documentation is for the old version of Python Selector. You can find documentation for the new Python Selector Beta [below](/python_selector/#overview-and-requirements)
-:::
-
-We have the ability to deploy <span class="notranslate"> Python </span> applications via application server. <span class="notranslate"> Python Selector </span> uses <span class="notranslate"> mod_passenger </span> to host <span class="notranslate">Python</span>.
-
-This feature is available for CloudLinux 6 or later. It supports only cPanel servers.
-
-You can find a list of supported <span class="notranslate"> alt-python</span> versions using the following command.
-
-<div class="notranslate">
-
-```
-yum grouplist | grep alt-python
-```
-</div>
-
-
-### Installation
-
-::: tip Note
-The instructions below are suitable only for EasyApache 3 and EasyApache 4. You should follow [this instruction](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:enable_ruby_python_selector) if you use LiteSpeed.
-:::
-Install tools to create isolated <span class="notranslate"> Python </span> environments and <span class="notranslate"> Passenger Apache </span> module. For servers with EasyApache3:
-
-<div class="notranslate">
-
-```
-yum install lvemanager alt-python-virtualenv alt-mod-passenger
-```
-</div>
-
-for EasyApache4:
-
-<div class="notranslate">
-
-```
-yum install lvemanager alt-python-virtualenv ea-apache24-mod-alt-passenger
-```
-</div>
-
-To use <span class="notranslate"> Python Selector </span> you should install alternative <span class="notranslate"> Python </span> packages:
-
-<div class="notranslate">
-
-```
-yum groupinstall alt-python
-```
-</div>
-
-To use MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package:
-
-<div class="notranslate">
-
-```
-yum install alt-python27-devel
-```
-</div>
-
-::: tip Note
-After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> LVE Manager Options </span> tab to show <span class="notranslate">Python App</span> in web-interface.
-:::
-
-::: tip Note
-Adding <span class="notranslate"> Python</span> modules requires executing permissions to gcc/make binaries. Please enable compilers in Compiler Access section of WHM, then run: `cagefsctl --force-update` 
-:::
-
-### End user access
-
-1. In <span class="notranslate">_Software/Services_</span> area choose <span class="notranslate">_Select Python Environment_</span>.
-
-![](/images/clip000133.jpg)
-
-2. Create project form will appear. Choose interpreter version for your application, application folder name (project path) and <span class="notranslate"> URI </span> for accessing your application. Click <span class="notranslate"> “Create project” </span> to create an application.
-
-![](/images/clip000233.jpg)
-
-After a little while a new application entry will be appended to the web-page.
-
-![](/images/clip000255.jpg)
-
-3. You can edit path (folder name of the project in the home directory, for example, <span class="notranslate"> _/home/clman1/project_name_ </span> ), <span class="notranslate"> uri </span> for application, <span class="notranslate"> wsgi </span> handler. If you click <span class="notranslate"> Edit </span> - the value is converted to input field and thus becomes editable. When editing is complete, click <span class="notranslate"> Save </span>.
-
-![](/images/clip000256.jpg)
-
-4. <span class="notranslate"> Wsgi </span> entry is to specify <span class="notranslate"> python wsgi </span> application entry point. It must be specified as filename, must be callable and separated by colon. If your app is running from file <span class="notranslate"> flask/run.py </span> by calling callable app, set <span class="notranslate"> flask/run.py:app </span>.
-
-![](/images/clip000257.jpg)
-
-5. When <span class="notranslate"> Show </span> control is clicked, <span class="notranslate"> python </span> extensions section will be expanded. It gives the ability to add or remove <span class="notranslate"> python </span> modules. When start typing in input field, appropriate hints are shown in drop-down list. Choose the entry you want from drop-down and click <span class="notranslate"> Add </span>.
-
-![](/images/clip000261.jpg)
-
-If you click <span class="notranslate"> Delete </span>, the corresponding module entry will disappear.
-In addition to setting <span class="notranslate"> path, uri </span> and <span class="notranslate"> wsgi </span> , the interpreter version can be changed as well by changing the value in select drop-down.
-
-6. No changes are applied to application environment until <span class="notranslate"> Update </span> button is clicked. Before the <span class="notranslate"> Update </span> button is clicked, all changes can be reverted with <span class="notranslate"> Reset </span> button.
-
-The newly created application will be supplied with <span class="notranslate"> stub </span> only. A real application ought to be put into application folder. After application is placed into application folder, the <span class="notranslate"> wsgi </span> parameter can be set.
-
-Click <span class="notranslate"> Remove </span> to delete the application - the application folder itself will remain unmoved.
-
-_Note. For <span class="notranslate"> LVE Manager </span> version 0.9-10 and higher:_
-
-When creating an application you can use the key <span class="notranslate"> --domain </span> , which attaches application to domain. If <span class="notranslate"> --domain </span> key is not specified, then the main users domain will be used by default.
-To create application run:
-
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=python --version=VERSION[--user=USER] [--domain=DOMAIN] [--print-summary] [--json]–-create-webapp <FOLDER_NAME> <URI>
-```
-</div>
-
-When changing application <span class="notranslate"> URI, --domain </span> key can be used simultaneously, in this case not only <span class="notranslate"> URI </span> will be changed, but also the application domain.
-
-To change application <span class="notranslate"> URI </span> run:
-
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=python [--user=USER][--domain=NEW_DOMAIN] [--print-summary] [--json] --transit-webapp<FOLDER_NAME> <NEW_URI> 
-```
-</div>
-
-The possibility to choose domain when creating an application was added to web interface as well.
-
-![](/images/webapp001_zoom94.png)
-
-Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate"> django -admin</span>).
-
-![](/images/webapp002_zoom93.png)
-
-
-### Hide Python Selector icon
-
-It is possible to hide or show <span class="notranslate">Python Selector</span> icons by marking or unmarking proper checkbox in <span class="notranslate"> LVE Manager _Options_</span> tab.
-
-![](/images/CL-hide-python-ruby.png)
-
-The same result can be accomplished in CLI by running:
-
-<div class="notranslate">
-
-```
-cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}}}'
-```
-</div>
- 
-:::tip Note
-If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux Python Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
-For that, you’d need to first uncheck <span class="notranslate">`Hide Python App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists. 
-:::
-
-## Python Selector (Beta)
-
-:::tip Note
-This documentation is for the new version of Python Selector beta. You can find documentation for the old Python Selector [here](/python_selector/#python-selector-installation)
+This documentation is for the new version of Python Selector. You can find documentation for the old Python Selector [here](/cloudlinux_os_components/#python-selector-old)
 :::
 
 
@@ -4907,7 +5118,7 @@ yum install lve-utils lvemanager alt-python-virtualenv alt-mod-passenger
 ```
 </div>
 
-* CageFS for better security. See [CageFS documentation for details](/cagefs/).
+* CageFS for better security. See [CageFS documentation for details](/cloudlinux_os_components/#cagefs).
 
 
 #### DirectAdmin
@@ -4932,7 +5143,7 @@ To use Python Selector, it is required to install the following:
     ```
     </div>
 
-* CageFS for better security. See [CageFS documentation for details](/cagefs/).
+* CageFS for better security. See [CageFS documentation for details](/cloudlinux_os_components/#cagefs).
 
 :::tip Note
 After installation, please make sure that you have unmarked appropriate checkboxes in LVE Manager Options tab to show Python App in the web-interface.
@@ -4950,8 +5161,8 @@ cagefsctl --force-update
 :::
 
 
-See also [Python Selector UI](/lve_manager/#python-selector-ui).
-See also [Python Selector CLI tool](/command-line_tools/#python-selector).
+* See also [Python Selector UI](/lve_manager/#python-selector-2).
+* See also [Python Selector CLI](/command-line_tools/#python-selector).
 
 ### Deploying Trac using Python Selector
 
@@ -5116,6 +5327,162 @@ To install run:
 ```
 </div>
 
+## Python Selector (Old)
+
+:::tip Note
+This documentation is for the old version of Python Selector. You can find documentation for the new Python Selector [here](/cloudlinux_os_components/#python-selector)
+:::
+
+We have the ability to deploy <span class="notranslate"> Python </span> applications via application server. <span class="notranslate"> Python Selector </span> uses <span class="notranslate"> mod_passenger </span> to host <span class="notranslate">Python</span>.
+
+This feature is available for CloudLinux 6 or later. It supports only cPanel servers.
+
+You can find a list of supported <span class="notranslate"> alt-python</span> versions using the following command.
+
+<div class="notranslate">
+
+```
+yum grouplist | grep alt-python
+```
+</div>
+
+
+### Installation
+
+::: tip Note
+The instructions below are suitable only for EasyApache 3 and EasyApache 4. You should follow [this instruction](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:enable_ruby_python_selector) if you use LiteSpeed.
+:::
+Install tools to create isolated <span class="notranslate"> Python </span> environments and <span class="notranslate"> Passenger Apache </span> module. For servers with EasyApache3:
+
+<div class="notranslate">
+
+```
+yum install lvemanager alt-python-virtualenv alt-mod-passenger
+```
+</div>
+
+for EasyApache4:
+
+<div class="notranslate">
+
+```
+yum install lvemanager alt-python-virtualenv ea-apache24-mod-alt-passenger
+```
+</div>
+
+To use <span class="notranslate"> Python Selector </span> you should install alternative <span class="notranslate"> Python </span> packages:
+
+<div class="notranslate">
+
+```
+yum groupinstall alt-python
+```
+</div>
+
+To use MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package:
+
+<div class="notranslate">
+
+```
+yum install alt-python27-devel
+```
+</div>
+
+::: tip Note
+After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> LVE Manager Options </span> tab to show <span class="notranslate">Python App</span> in web-interface.
+:::
+
+::: tip Note
+Adding <span class="notranslate"> Python</span> modules requires executing permissions to gcc/make binaries. Please enable compilers in Compiler Access section of WHM, then run: `cagefsctl --force-update` 
+:::
+
+### End user access
+
+1. In <span class="notranslate">_Software/Services_</span> area choose <span class="notranslate">_Select Python Environment_</span>.
+
+![](/images/clip000133.jpg)
+
+2. Create project form will appear. Choose interpreter version for your application, application folder name (project path) and <span class="notranslate"> URI </span> for accessing your application. Click <span class="notranslate"> “Create project” </span> to create an application.
+
+![](/images/clip000233.jpg)
+
+After a little while a new application entry will be appended to the web-page.
+
+![](/images/clip000255.jpg)
+
+3. You can edit path (folder name of the project in the home directory, for example, <span class="notranslate"> _/home/clman1/project_name_ </span> ), <span class="notranslate"> uri </span> for application, <span class="notranslate"> wsgi </span> handler. If you click <span class="notranslate"> Edit </span> - the value is converted to input field and thus becomes editable. When editing is complete, click <span class="notranslate"> Save </span>.
+
+![](/images/clip000256.jpg)
+
+4. <span class="notranslate"> Wsgi </span> entry is to specify <span class="notranslate"> python wsgi </span> application entry point. It must be specified as filename, must be callable and separated by colon. If your app is running from file <span class="notranslate"> flask/run.py </span> by calling callable app, set <span class="notranslate"> flask/run.py:app </span>.
+
+![](/images/clip000257.jpg)
+
+5. When <span class="notranslate"> Show </span> control is clicked, <span class="notranslate"> python </span> extensions section will be expanded. It gives the ability to add or remove <span class="notranslate"> python </span> modules. When start typing in input field, appropriate hints are shown in drop-down list. Choose the entry you want from drop-down and click <span class="notranslate"> Add </span>.
+
+![](/images/clip000261.jpg)
+
+If you click <span class="notranslate"> Delete </span>, the corresponding module entry will disappear.
+In addition to setting <span class="notranslate"> path, uri </span> and <span class="notranslate"> wsgi </span> , the interpreter version can be changed as well by changing the value in select drop-down.
+
+6. No changes are applied to application environment until <span class="notranslate"> Update </span> button is clicked. Before the <span class="notranslate"> Update </span> button is clicked, all changes can be reverted with <span class="notranslate"> Reset </span> button.
+
+The newly created application will be supplied with <span class="notranslate"> stub </span> only. A real application ought to be put into application folder. After application is placed into application folder, the <span class="notranslate"> wsgi </span> parameter can be set.
+
+Click <span class="notranslate"> Remove </span> to delete the application - the application folder itself will remain unmoved.
+
+_Note. For <span class="notranslate"> LVE Manager </span> version 0.9-10 and higher:_
+
+When creating an application you can use the key <span class="notranslate"> --domain </span> , which attaches application to domain. If <span class="notranslate"> --domain </span> key is not specified, then the main users domain will be used by default.
+To create application run:
+
+<div class="notranslate">
+
+```
+/usr/bin/selectorctl --interpreter=python --version=VERSION[--user=USER] [--domain=DOMAIN] [--print-summary] [--json]–-create-webapp <FOLDER_NAME> <URI>
+```
+</div>
+
+When changing application <span class="notranslate"> URI, --domain </span> key can be used simultaneously, in this case not only <span class="notranslate"> URI </span> will be changed, but also the application domain.
+
+To change application <span class="notranslate"> URI </span> run:
+
+<div class="notranslate">
+
+```
+/usr/bin/selectorctl --interpreter=python [--user=USER][--domain=NEW_DOMAIN] [--print-summary] [--json] --transit-webapp<FOLDER_NAME> <NEW_URI> 
+```
+</div>
+
+The possibility to choose domain when creating an application was added to web interface as well.
+
+![](/images/webapp001_zoom94.png)
+
+Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate"> django -admin</span>).
+
+![](/images/webapp002_zoom93.png)
+
+
+### Hide Python Selector icon
+
+It is possible to hide or show <span class="notranslate">Python Selector</span> icons by marking or unmarking proper checkbox in <span class="notranslate"> LVE Manager _Options_</span> tab.
+
+![](/images/CL-hide-python-ruby.png)
+
+The same result can be accomplished in CLI by running:
+
+<div class="notranslate">
+
+```
+cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}}}'
+```
+</div>
+ 
+:::tip Note
+If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux Python Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
+For that, you’d need to first uncheck <span class="notranslate">`Hide Python App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists. 
+:::
+
 ## Ruby Selector
 ### General information and requirements
 
@@ -5163,6 +5530,10 @@ After installation, please make sure that you have unmarked appropriate checkbox
 
 ::: tip Note
 Adding Ruby modules requires executing permissions to <span class="notranslate">`gcc/make`</span> binaries. Please enable compilers in Compiler Access section of WHM, then run: <span class="notranslate">`cagefsctl --force-update`</span>
+:::
+
+:::tip Note
+See also Ruby Selector [CLI](/command-line_tools/#ruby-selector)
 :::
 
 ### Configuration and using
@@ -5233,6 +5604,10 @@ The possibility to choose domain when creating an application was added to web i
 Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate">django -admin</span>).
 
 ![](/images/webapp002_zoom93.png)
+
+:::tip Note
+See also Ruby Selector [CLI](/command-line_tools/#ruby-selector)
+:::
 
 #### Hide Ruby Selector icon
 
@@ -5385,9 +5760,13 @@ See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 
 ### Installation and update
 
+:::tip Note
+Node.js Selector support is added to LiteSpeed Web Server starting from the 5.3RC1 release. See details [here](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:node.js_selector).
+:::
+
 **cPanel**
 
-To use <span class="notranslate"> Node.js Selector </span>, please install <span class="notranslate"> Node.js </span> packages by running the following command:
+To use <span class="notranslate">Node.js Selector</span>, install <span class="notranslate">Node.js</span> packages by running the following command:
 <div class="notranslate">
 
 ```
@@ -5465,13 +5844,13 @@ yum install cagefs
 ### Node.js deployment
 
 
-The first approach - [remote usage of Node.js Interpreters of different versions](/node_js_selector/#remote-usage-of-node-js-interpreters).  
-The second approach - [remote usage of the ](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) <span class="notranslate"> [cloudlinux-selector utility](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) </span> .
+* The first approach - remote usage of Node.js Interpreters of different versions
+* The second approach - remote usage of the cloudlinux-selector utility.
 
 #### Remote usage of Node.js interpreters
 
 1. Create a Node.js project in <span class="notranslate"> IntelliJ IDEA/WebStorm </span> . You can download [this archive](http://docs.cloudlinux.com/nodejs_example.zip) and use it as a basis.
-2. Install <span class="notranslate"> alt-nodejs </span> packages on the server in use. See [installation instructions](/node_js_selector/#installation) .
+2. Install <span class="notranslate"> alt-nodejs </span> packages on the server in use. See [installation instructions](/cloudlinux_os_components/#installation-and-update-7).
 3. Create an application on the server. You can do it by three ways:
   * Via UI of the Node.js plugin.
   * Using the following command to create an application:
@@ -5507,7 +5886,7 @@ In the <span class="notranslate"> IntelliJ IDEA </span> you can create and run a
 
 5. Synchronize the project directories on the local and the remote machine as per <span class="notranslate"> _Path Mappings_ </span> specified.
 6. Deploy the modules on the remote and the local machine with the <span class="notranslate"> **_npm install_** </span> command (if there are dependent modules). In the UI you can click the <span class="notranslate"> _Run NPM Install_ </span> button.
-7. Run Node.js application with the configuration set at the [4th step](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility)  <span class="notranslate"> _(Main menu → Run → Run… → Select configuration)_ </span> .
+7. Run Node.js application with the configuration set at the 4th step <span class="notranslate"> _(Main menu → Run → Run… → Select configuration)_ </span> .
 
 ![](/images/runapp_zoom60.png)
 
@@ -5543,7 +5922,7 @@ It is not required to install <span class="notranslate"> _Passenger_ </span> whi
 #### Remote usage of the cloudlinux-selector utility
 
 
-1. Create an application via UI or with the command as described in the Remote Usage of Node.js Interpreters approach, [step 3 (a,b)](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) .
+1. Create an application via UI or with the command as described in the Remote Usage of Node.js Interpreters approach, step 3 (a,b).
 2. Set up project mapping on the local machine with the created remote application <span class="notranslate"> _/home/<USER_NAME>/<APP_NAME> (Preferences → Deployments → Add)_ </span>.
 3. Set up the remote commands of <span class="notranslate"> cloudlinux-selector _(Preferences → Remote SSH External Tools → Add)_ </span> for the following actions:
   * Restart application;
@@ -5553,8 +5932,8 @@ It is not required to install <span class="notranslate"> _Passenger_ </span> whi
 You can see the running app at <span class="notranslate"> http://DOMAIN/APPLICATION_URL </span>
 To apply all changes, restart the application.
 
-See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
-See also [Node.js Selector UI]().
+* See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
+* See also [Node.js Selector UI](/lve_manager/#node-js-selector-2).
 
 ### Troubleshooting
 
@@ -5618,11 +5997,11 @@ Currently, the mod_lsapi is not compatible with:
 
 **Optional requirements**
 
-* Configured [LVE](/limits/#understanding-lve) containers for end-users ( **recommended - higher security level** );
-* Installed and configured [mod_hostinglimits](/limits/#hostinglimits) for Apache ( **recommended - higher security level** );
+* Configured LVE containers for end-users ( **recommended - higher security level** );
+* Installed and configured mod_hostinglimitsfor Apache ( **recommended - higher security level** );
 * Installed mod_suexec for Apache and configured [SuExecUserGroup](https://httpd.apache.org/docs/2.4/mod/mod_suexec.html#page-header) directive for each virtual host ( **recommended - higher security level** );
-* Enabled [CageFS](/cagefs/) for end-users ( **recommended - higher security level** );
-* [PHP Selector](/php_selector/) with alt-php - an easy way to select different PHP versions for each end-user provided by CloudLinux;
+* Enabled CageFS for end-users ( **recommended - higher security level** );
+* PHP Selector with alt-php - an easy way to select different PHP versions for each end-user provided by CloudLinux;
 * ea-php - alternative to alt-php provided by cPanel (for cPanel only).
 
 ### Installation
@@ -5630,10 +6009,15 @@ Currently, the mod_lsapi is not compatible with:
 mod_lsapi PRO can be installed through YUM package manager, however, the installation process varies depending on the control panel.
 
 Select the control panel you are using:
-* [cPanel](/apache_mod_lsapi/#cpanel)
-* [Plesk](/apache_mod_lsapi/#plesk)
-* [DirectAdmin](/apache_mod_lsapi/#directadmin)
-* [No control panel](/apache_mod_lsapi/#no-control-panel)
+* [cPanel](/cloudlinux_os_components/#installing-on-cpanel-servers-with-easyapache-4)
+* [Plesk](/cloudlinux_os_components/#installing-on-plesk-servers)
+* [DirectAdmin](/cloudlinux_os_components/#installing-on-directadmin-servers)
+* [No control panel](/cloudlinux_os_components/#installing-on-servers-with-no-control-panel)
+
+
+:::tip Note
+See also [mod_lsapi PRO](/command-line_tools/#apache-mod-lsapi-pro).
+:::
 
 #### Installing on cPanel servers with EasyApache 4
 
@@ -5661,7 +6045,7 @@ $ service httpd restart
 </div>
 Now the lsapi handler is available for managing through cPanel MultiPHP Manager.
 
-For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
+For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/command-line_tools/#apache-mod-lsapi-pro).
 
 
 #### Installing on Plesk servers
@@ -5694,7 +6078,7 @@ Now LSPHPXY alt-php PHP handlers are available for managing through Plesk PHP Se
 
 ![](/images/plesk-php-settings.png)
 
-For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
+For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/command-line_tools/#apache-mod-lsapi-pro).
 
 
 #### Installing on DirectAdmin servers
@@ -5768,7 +6152,7 @@ $ service httpd24 restart
 ```
 </div>
 
-For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
+For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/command-line_tools/#apache-mod-lsapi-pro).
 
 
 ### Uninstalling
@@ -5777,10 +6161,10 @@ For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/ap
 Uninstall mod_lsapi PRO is performed depending on your control panel.
 
 Select the control panel you are using:
-* [cPanel](/apache_mod_lsapi/#cpanel)
-* [Plesk](/apache_mod_lsapi/#plesk)
-* [DirectAdmin](/apache_mod_lsapi/#directadmin)
-* [No control panel](/apache_mod_lsapi/#no-control-panel)
+* [cPanel](/cloudlinux_os_components/#uninstall-procedure-for-cpanel-servers-with-easyapache-4)
+* [Plesk](/cloudlinux_os_components/#uninstall-procedure-for-plesk-servers)
+* [DirectAdmin](/cloudlinux_os_components/#uninstall-procedure-for-directadmin-servers)
+* [No control panel](/cloudlinux_os_components/#uninstall-procedure-for-servers-with-no-control-panel)
 
 
 #### Uninstall procedure for cPanel servers with EasyApache 4
@@ -5889,7 +6273,7 @@ $ service httpd restart
 ```
 </div>
 
-If you are using an alternative Apache: - [httpd24](https://www.cloudlinux.com/cloudlinux-os-blog/entry/httpd24-updated-for-cloudlinux-6) , then uninstall mod_lsapi PRO as follows:
+If you are using an alternative Apache: - [httpd24](https://www.cloudlinux.com/cloudlinux-os-blog/entry/httpd24-updated-for-cloudlinux-6), then uninstall mod_lsapi PRO as follows:
 
 <div class="notranslate">
 
@@ -5968,72 +6352,72 @@ LoadModule lsapi_module modules/mod_lsapi.so
 
 In order to mod_lsapi PRO work lsapi.conf should be loaded to Apache through [Include](https://httpd.apache.org/docs/2.4/mod/core.html#include) directive.
 
-For more detailed description of the module directives please visit [Configuration reference](/apache_mod_lsapi/#configuration-references).  
-For installation guide mod_lsapi PRO please visit [Installation](/apache_mod_lsapi/#installation).
+For more detailed description of the module directives please visit [Configuration reference](/cloudlinux_os_components/#configuration-references).  
+For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_components/#installation-3).
 
 #### Configuration references
 
 
-[mod_lsapi customization](/apache_mod_lsapi/#mod-lsapi-customization):
-* [lsapi_engine](/apache_mod_lsapi/#lsapi-engine)  
-* [lsapi_socket_path](/apache_mod_lsapi/#lsapi-socket-path)  
-* [lsapi_poll_timeout](/apache_mod_lsapi/#lsapi-poll-timeout)  
-* [lsapi_per_user](/apache_mod_lsapi/#lsapi-per-user)  
-* [lsapi_output_buffering](/apache_mod_lsapi/#lsapi-output-buffering)  
-* [lsapi_disable_reject_mode](/apache_mod_lsapi/#lsapi-disable-reject-mode)  
-* [lsapi_terminate_backends_on_exit](/apache_mod_lsapi/#lsapi-terminate-backends-on-exit)  
-* [lsapi_avoid_zombies](/apache_mod_lsapi/#lsapi-avoid-zombies)  
-* [lsapi_use_req_hostname](/apache_mod_lsapi/#lsapi-use-req-hostname)  
-* [lsapi_debug](/apache_mod_lsapi/#lsapi-debug)
+[mod_lsapi customization](/cloudlinux_os_components/#mod-lsapi-customization):
+* [lsapi_engine](/cloudlinux_os_components/#lsapi-engine)  
+* [lsapi_socket_path](/cloudlinux_os_components/#lsapi-socket-path)  
+* [lsapi_poll_timeout](/cloudlinux_os_components/#lsapi-poll-timeout)  
+* [lsapi_per_user](/cloudlinux_os_components/#lsapi-per-user)  
+* [lsapi_output_buffering](/cloudlinux_os_components/#lsapi-output-buffering)  
+* [lsapi_disable_reject_mode](/cloudlinux_os_components/#lsapi-disable-reject-mode)  
+* [lsapi_terminate_backends_on_exit](/cloudlinux_os_components/#lsapi-terminate-backends-on-exit)  
+* [lsapi_avoid_zombies](/cloudlinux_os_components/#lsapi-avoid-zombies)  
+* [lsapi_use_req_hostname](/cloudlinux_os_components/#lsapi-use-req-hostname)  
+* [lsapi_debug](/cloudlinux_os_components/#lsapi-debug)
 
-[Tuning LSPHP backend](/apache_mod_lsapi/#tuning-lsphp-backend):
-* [lsapi_set_env](/apache_mod_lsapi/#lsapi-set-env)
-* [lsapi_set_env_path](/apache_mod_lsapi/#lsapi-set-env-path)
-* [lsapi_backend_children](/apache_mod_lsapi/#lsapi-backend-children)
-* [lsapi_backend_connect_tries](/apache_mod_lsapi/#lsapi-backend-connect-tries)
-* [lsapi_backend_connect_timeout](/apache_mod_lsapi/#lsapi-backend-connect-timeout)
-* [lsapi_backend_max_process_time](/apache_mod_lsapi/#lsapi-backend-max-process-time)
-* [lsapi_backend_pgrp_max_idle](/apache_mod_lsapi/#lsapi-backend-pgrp-max-idle)
-* [lsapi_backend_use_own_log](/apache_mod_lsapi/#lsapi-backend-use-own-log)
-* [lsapi_backend_common_own_log](/apache_mod_lsapi/#lsapi-backend-common-own-log)
-* [lsapi_backend_coredump](/apache_mod_lsapi/#lsapi-backend-coredump)
-* [lsapi_backend_accept_notify](/apache_mod_lsapi/#lsapi-backend-accept-notify)
+[Tuning LSPHP backend](/cloudlinux_os_components/#tuning-lsphp-backend):
+* [lsapi_set_env](/cloudlinux_os_components/#lsapi-set-env)
+* [lsapi_set_env_path](/cloudlinux_os_components/#lsapi-set-env-path)
+* [lsapi_backend_children](/cloudlinux_os_components/#lsapi-backend-children)
+* [lsapi_backend_connect_tries](/cloudlinux_os_components/#lsapi-backend-connect-tries)
+* [lsapi_backend_connect_timeout](/cloudlinux_os_components/#lsapi-backend-connect-timeout)
+* [lsapi_backend_max_process_time](/cloudlinux_os_components/#lsapi-backend-max-process-time)
+* [lsapi_backend_pgrp_max_idle](/cloudlinux_os_components/#lsapi-backend-pgrp-max-idle)
+* [lsapi_backend_use_own_log](/cloudlinux_os_components/#lsapi-backend-use-own-log)
+* [lsapi_backend_common_own_log](/cloudlinux_os_components/#lsapi-backend-common-own-log)
+* [lsapi_backend_coredump](/cloudlinux_os_components/#lsapi-backend-coredump)
+* [lsapi_backend_accept_notify](/cloudlinux_os_components/#lsapi-backend-accept-notify)
  
-[Connection pool mode](/apache_mod_lsapi/#connection-pool-mode):
-* [lsapi_with_connection_pool](/apache_mod_lsapi/#lsapi-with-connection-pool)
-* [lsapi_backend_max_idle](/apache_mod_lsapi/#lsapi-backend-max-idle)
-* [lsapi_backend_max_reqs](/apache_mod_lsapi/#lsapi-backend-max-reqs)
+[Connection pool mode](/cloudlinux_os_components/#connection-pool-mode):
+* [lsapi_with_connection_pool](/cloudlinux_os_components/#lsapi-with-connection-pool)
+* [lsapi_backend_max_idle](/cloudlinux_os_components/#lsapi-backend-max-idle)
+* [lsapi_backend_max_reqs](/cloudlinux_os_components/#lsapi-backend-max-reqs)
 
-[CRIU support (CloudLinux 7 only)](/apache_mod_lsapi/#criu-support-cloudlinux7-only):
-* [lsapi_criu](/apache_mod_lsapi/#lsapi-criu)
-* [lsapi_criu_socket_path](/apache_mod_lsapi/#lsapi-criu-socket-path)
-* [lsapi_criu_imgs_dir_path](/apache_mod_lsapi/#lsapi-criu-imgs-dir-path)
-* [lsapi_backend_initial_start](/apache_mod_lsapi/#lsapi-backend-initial-start)
-* [lsapi_criu_use_shm](/apache_mod_lsapi/#lsapi-criu-use-shm)
-* [lsapi_backend_semtimedwait](/apache_mod_lsapi/#lsapi-backend-semtimedwait)
-* [lsapi_reset_criu_on_apache_restart](/apache_mod_lsapi/#lsapi-reset-criu-on-apache-restart)
+[CRIU support (CloudLinux 7 only)](/cloudlinux_os_components/#criu-support-cloudlinux7-only):
+* [lsapi_criu](/cloudlinux_os_components/#lsapi-criu)
+* [lsapi_criu_socket_path](/cloudlinux_os_components/#lsapi-criu-socket-path)
+* [lsapi_criu_imgs_dir_path](/cloudlinux_os_components/#lsapi-criu-imgs-dir-path)
+* [lsapi_backend_initial_start](/cloudlinux_os_components/#lsapi-backend-initial-start)
+* [lsapi_criu_use_shm](/cloudlinux_os_components/#lsapi-criu-use-shm)
+* [lsapi_backend_semtimedwait](/cloudlinux_os_components/#lsapi-backend-semtimedwait)
+* [lsapi_reset_criu_on_apache_restart](/cloudlinux_os_components/#lsapi-reset-criu-on-apache-restart)
 
-[PHP configuration management](/apache_mod_lsapi/#php-configuration-management):
-* [lsapi_process_phpini](/apache_mod_lsapi/#lsapi-process-phpini)
-* [lsapi_phpini](/apache_mod_lsapi/#lsapi-phpini)
-* [lsapi_phprc](/apache_mod_lsapi/#lsapi-phprc)
-* [lsapi_tmpdir](/apache_mod_lsapi/#lsapi-tmpdir)
-* [lsapi_enable_user_ini](/apache_mod_lsapi/#lsapi-enable-user-ini)
-* [lsapi_user_ini_homedir](/apache_mod_lsapi/#lsapi-user-ini-homedir)
-* [lsapi_keep_http200](/apache_mod_lsapi/#lsapi-keep-http200)
-* [lsapi_mod_php_behaviour](/apache_mod_lsapi/#lsapi-mod-php-behaviour)
-* [php_value, php_admin_value, php_flag, php_admin_flag](/apache_mod_lsapi/#php-valuephp-admin-valuephp-flagphp-admin-flag)
+[PHP configuration management](/cloudlinux_os_components/#php-configuration-management):
+* [lsapi_process_phpini](/cloudlinux_os_components/#lsapi-process-phpini)
+* [lsapi_phpini](/cloudlinux_os_components/#lsapi-phpini)
+* [lsapi_phprc](/cloudlinux_os_components/#lsapi-phprc)
+* [lsapi_tmpdir](/cloudlinux_os_components/#lsapi-tmpdir)
+* [lsapi_enable_user_ini](/cloudlinux_os_components/#lsapi-enable-user-ini)
+* [lsapi_user_ini_homedir](/cloudlinux_os_components/#lsapi-user-ini-homedir)
+* [lsapi_keep_http200](/cloudlinux_os_components/#lsapi-keep-http200)
+* [lsapi_mod_php_behaviour](/cloudlinux_os_components/#lsapi-mod-php-behaviour)
+* [php_value, php_admin_value, php_flag, php_admin_flag](/cloudlinux_os_components/#php-valuephp-admin-valuephp-flagphp-admin-flag)
 
-[Security](/apache_mod_lsapi/#security):
-* [lsapi_use_suexec](/apache_mod_lsapi/#lsapi-use-suexec)
-* [lsapi_user_group](/apache_mod_lsapi/#lsapi-user-group)
-* [lsapi_uid_gid](/apache_mod_lsapi/#lsapi-uid-gid)
-* [lsapi_use_default_uid](/apache_mod_lsapi/#lsapi-use-default-uid)
-* [lsapi_target_perm](/apache_mod_lsapi/#lsapi-target-perm)
-* [lsapi_paranoid](/apache_mod_lsapi/#lsapi-paranoid)
-* [lsapi_check_document_root](/apache_mod_lsapi/#lsapi-check-document-root)
-* [lsapi_disable_forced_pwd_var](/apache_mod_lsapi/#lsapi-disable-forced-pwd-var)
-* [lsapi_max_resend_buffer](/apache_mod_lsapi/#lsapi-max-resend-buffer)
+[Security](/cloudlinux_os_components/#security):
+* [lsapi_use_suexec](/cloudlinux_os_components/#lsapi-use-suexec)
+* [lsapi_user_group](/cloudlinux_os_components/#lsapi-user-group)
+* [lsapi_uid_gid](/cloudlinux_os_components/#lsapi-uid-gid)
+* [lsapi_use_default_uid](/cloudlinux_os_components/#lsapi-use-default-uid)
+* [lsapi_target_perm](/cloudlinux_os_components/#lsapi-target-perm)
+* [lsapi_paranoid](/cloudlinux_os_components/#lsapi-paranoid)
+* [lsapi_check_document_root](/cloudlinux_os_components/#lsapi-check-document-root)
+* [lsapi_disable_forced_pwd_var](/cloudlinux_os_components/#lsapi-disable-forced-pwd-var)
+* [lsapi_max_resend_buffer](/cloudlinux_os_components/#lsapi-max-resend-buffer)
 
 #### **mod_lsapi customization**
 
@@ -6654,7 +7038,7 @@ See next table for more details:
 |Child process with pid: XXXXXX was killed by signal: 9, core dump: 0<br><br>Backend error on sending request(GET /XXXX HTTP/1.1); uri(/XXXX) content-length(0) (lsphp is killed?): ReceiveAckHdr: nothing to read from backend socket (LVE ID XXXX |uid: (xxx/xxxxxxxx) gid: (xxx/xxxxxxxxxx) cmd: /usr/local/bin/lsphp  | These errors occurs when the amount of PMEM limits is incommensurable with the number of EP. Increase PMEM limits or decrease EP number for the user UID.|
 |totBytesRead (X) != bodyLen (X), referer: XXXX<br><br>Backend error on sending request(POST /XXXX HTTP/1.1); uri(/XXXX) content-length(X) (lsphp is killed?): ReceiveAckHdr: nothing to read from backend socket (LVE ID XXXX)<br><br>lsphp(XXXX): Child process with pid: XXXX was killed by signal: 15, core dump: 0 |No need to check this log.  | Increase LimitRequestBody (Apache) or/and SecRequestBodyNoFilesLimit (mod_security) configuration limits|
 |Connect to backend failed: connect to lsphp failed: 13 |No need to check this log.  | Check that `mod_ruid2` is disabled|
-|Connect to backend rejected on sending request(POST /XXXXX HTTP/1.1); uri(/XXXXX) |No need to check this log.|Set <span class="notranslate">`lsapi_disable_reject_mode On`</span> in your <span class="notranslate">`lsapi.conf`</span> and reload Apache. This way LSPHP daemon will put requests that cannot be served by LSPHP daemon right away into infinite queue, until one or more LSPHP daemon becomes free. Visit [Configuration Reference](/apache_mod_lsapi/#configuration-references) for more info.|
+|Connect to backend rejected on sending request(POST /XXXXX HTTP/1.1); uri(/XXXXX) |No need to check this log.|Set <span class="notranslate">`lsapi_disable_reject_mode On`</span> in your <span class="notranslate">`lsapi.conf`</span> and reload Apache. This way LSPHP daemon will put requests that cannot be served by LSPHP daemon right away into infinite queue, until one or more LSPHP daemon becomes free. Visit [Configuration Reference](/cloudlinux_os_components/#configuration-references) for more info.|
 
 
 **Non-standard apache user**
@@ -8108,26 +8492,25 @@ For reading information saved by module use the following script (the script is 
 <div class="notranslate">
 
 ```
-# CAT PROCTITLES_INFO.SH
-#!/BIN/BASH
+#!/bin/bash
 
-HTTPD=HTTPD 
+httpd=httpd 
 
-FOR PID IN `/USR/BIN/PGREP $HTTPD`; DO
-    FOR TID IN `LS /PROC/$PID/TASK`; DO
-		FOUND=NO
-		FOR SHM IN `LS /DEV/SHM/APACHE_TITLE_SHM_${PID}_${TID}_* 2>/DEV/NULL`; DO
-			FOUND=YES
-			TITLE=`/USR/BIN/TR -D '\0' < $SHM`
-			THREAD_ID=`/BIN/BASENAME "${SHM}" | SED "S/APACHE_TITLE_SHM_${PID}_${TID}_//"`
-			ECHO "$PID.$TID - $THREAD_ID - $TITLE"
-		BREAK
-		DONE
-	IF [ "$FOUND" = "NO" ]; THEN
-		ECHO "$PID.$TID NOT FOUND"
-	FI
-    DONE
-DONE
+for pid in `/usr/bin/pgrep $httpd`; do
+    for tid in `ls /proc/$pid/task`; do
+		found=no
+		for shm in `ls /dev/shm/apache_title_shm_${pid}_${tid}_* 2>/dev/null`; do
+			found=yes
+			title=`/usr/bin/tr -d '\0' < $shm`
+			thread_id=`/bin/basename "${shm}" | sed "s/apache_title_shm_${pid}_${tid}_//"`
+			echo "$pid.$tid - $thread_id - $title"
+		break
+		done
+	if [ "$found" = "no" ]; then
+		echo "$pid.$tid not found"
+	fi
+    done
+done
 ```
 </div>
 Here are the examples of saved by module:
@@ -8284,3 +8667,98 @@ yum install alt-suexec
 **New suexec with custom parameters**
 
 If you need suEXEC with custom parameters absent in current set of alt-suexec, please submit a ticket on [https://cloudlinux.zendesk.com](https://cloudlinux.zendesk.com/) and we will add new suEXEC with needed parameters.
+
+### cPanel Nginx and application selectors
+
+Recently, cPanel added support for the [Nginx](https://documentation.cpanel.net/display/CKB/Nginx) web server and for [Python](https://documentation.cpanel.net/display/CKB/How+to+Install+a+Python+WSGI+Application) and [Node.js](https://documentation.cpanel.net/display/CKB/How+to+Install+a+Node.js+Application) applications. 
+
+We have checked the compatibility of ea-nginx and cPanel application Selectors with CloudLinux LVE and CageFS.
+All tests passed successfully and all processes started by ea-nginx and cPanel selectors are launched inside LVE and CageFS.
+
+
+Don’t forget, you can use Ruby/Python/Node.js Selectors from CloudLinux. Here you can find a large number of supported versions for Ruby/Python/Node.js applications.
+
+* [CloudLinux Python Selector](/cloudlinux_os_components/#python-selector)
+* [CloudLinux Ruby Selector](/cloudlinux_os_components/#ruby-selector)
+* [CloudLinux NodeJS Selector](/cloudlinux_os_components/#node-js-selector)
+
+:::tip Note
+Nginx support is currently experimental.
+:::
+
+## Apache suexec module
+
+### General information and requirements
+
+This module is used by the Apache HTTP Server to switch to another user before executing CGI programs. The suEXEC feature provides users of the Apache HTTP Server with the ability to run CGI and SSI programs under user IDs different from the user ID of the calling web server (<span class="notranslate">apache/nobody</span>). Normally, when a CGI or SSI program executes, it runs as the same user who is running the web server.
+
+If we are talking about shared hosting where different accounts are launched on the same server, the installation of this module is necessary to ensure security.
+
+#### How does it work with CloudLinux?
+
+The DirectAdmin and CloudLinux (for httpd, httpd24-httpd and cPanel EasyApache 4) both provide a patched version of suexec. For other distributions you can use patches available here:
+[http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+
+1. Besides the ability to run CGI programs under user IDs, suexec with CloudLinux patch adds the ability to run that script under CageFS. 
+  :::tip NOTE
+  Therefore, this module is necessary for the proper work of PHP Selector.
+  :::
+2. This module is also necessary for the proper work of mod_hostinglimits. The <span class="notranslate">`SuexecUserGroup`</span> directive indicates for `mod_hostinglimits` in which LVE the user process should be put in.
+
+
+### Configuration
+
+**SuexecUserGroup Directive**
+
+**Syntax**: <span class="notranslate">SuexecUserGroup User Group</span>
+
+**Context**: `httpd.conf`, `virtualhost`
+
+**Description**: The SuexecUserGroup directive allows you to specify a user and a group for CGI programs to run as. Startup will fail if this directive is specified but the suEXEC feature is disabled.
+
+::: warning Note
+Control panels such as cPanel, Plesk, and DirectAdmin add this directive to the Apache configuration automatically when creating a domain. If you use the server without a control panel, make sure this directive is added for each virtual host.
+:::
+
+
+### Installation
+
+The installation process varies depending on the control panel and Apache.
+
+#### Installing on cPanel servers with EasyApache 4
+
+1. Install `mod_suexec` through YUM package manager as follows:
+
+  <div class="notranslate">
+  
+  ```
+  $ yum install ea-apache24-mod_suexec
+  ```
+  </div>
+
+  :::warning NOTE
+  `ea-apache24-mod_suexec` conflicts with the `mod_ruid2` therefore, before installing the module, remove `ea-apache24-mod_ruid2` as follows: <span class="notranslate">`$ yum remove ea-apache24-mod_ruid2`</span>
+  :::
+
+2. Now, when the module is installed, restart Apache:
+
+  <div class="notranslate">
+  
+  ``` 
+  $ service httpd restart
+  ```
+  </div>
+
+#### Installing on Plesk servers
+
+This module is integrated into Apache for Plesk control panel by default.
+
+#### Installing on DirectAdmin servers
+
+This module is integrated into Apache for DirectAdmin control panel by default.
+
+#### Installing on servers with no control panel
+
+This module is integrated into httpd Apache rpm provided by Cloudlinux by default.
+
+If you are using an alternative Apache - [httpd24](https://www.cloudlinux.com/cloudlinux-os-blog/entry/httpd24-updated-for-cloudlinux-6), nothing has to be done as this module is also integrated into httpd24-httpd Apache rpm provided by Cloudlinux by default.
