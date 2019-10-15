@@ -22,4 +22,14 @@ resources:
      linkTitle: View video tutorials
      icon: /svg/video-blue-icon.svg
      route: /ru/vt
+   - header: Forum
+     description: "Everything you need to start"
+     linkTitle: View forum
+     icon: /svg/forum-blue-icon.svg
+     route: /ru/forum
+   - header: Blog
+     description: "FAQs, known issues,\ntroubleshooting guides"
+     linkTitle: View blog
+     icon: /svg/blog-blue-icon.svg
+     route: /ru/blog
 ---
