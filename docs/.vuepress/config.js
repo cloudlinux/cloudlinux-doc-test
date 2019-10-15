@@ -150,8 +150,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "/introduction" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/forum/categories/group2" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://cloudlinux.com/cloudlinux-os-blog" },
                 ]
               },
               {
@@ -161,8 +161,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.kernelcare.com/" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.kernelcare.com/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.kernelcare.com/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.kernelcare.com/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.kernelcare.com/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/forum/categories/kernelcare-live-patching" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://blog.kernelcare.com/" },
                 ]
               },
               {
@@ -172,8 +172,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunify360.com/" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunify360.com/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunify360.com/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunify360.com/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunify360.com/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/forum/categories/imunify360" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: " https://blog.imunify360.com" },
                 ]
               },
               {
@@ -183,8 +183,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunifyav.com/" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunifyav.com/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunifyav.com/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunifyav.com/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunifyav.com/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/forum/categories/imunify360" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://blog.imunify360.com" },
                 ]
               },
             ]
@@ -318,8 +318,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "/ru/introduction" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/ru/forum/categories/group2" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://cloudlinux.com/ru/cloudlinux-os-blog" },
                 ]
               },
               {
@@ -329,8 +329,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.kernelcare.com/" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.kernelcare.com/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.kernelcare.com/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.kernelcare.com/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.kernelcare.com/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/ru/forum/categories/kernelcare-live-patching" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://blog.kernelcare.com/" },
                 ]
               },
               {
@@ -340,8 +340,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunify360.com/" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunify360.com/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunify360.com/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunify360.com/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunify360.com/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/ru/forum/categories/imunify360" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://blog.imunify360.com" },
                 ]
               },
               {
@@ -351,8 +351,8 @@ module.exports = {
                   { name: "Documentation", icon: "/svg/doc-blue-icon.svg", url: "https://docs.imunifyav.com/" },
                   { name: "Knowledge base", icon: "/svg/kb-blue-icon.svg", url: "https://docs.imunifyav.com/kb" },
                   { name: "Video tutorials", icon: "/svg/video-blue-icon.svg", url: "https://docs.imunifyav.com/vt" },
-                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://docs.imunifyav.com/forum" },
-                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://docs.imunifyav.com/blog" },
+                  { name: "Forum", icon: "/svg/forum-blue-icon.svg", url: "https://www.cloudlinux.com/ru/forum/categories/imunify360" },
+                  { name: "Blog", icon: "/svg/blog-blue-icon.svg", url: "https://blog.imunify360.com" },
                 ]
               },
             ]

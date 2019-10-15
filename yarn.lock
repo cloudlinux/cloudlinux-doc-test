@@ -6697,7 +6697,7 @@ vuepress-plugin-container@^2.0.0:
 
 "vuepress-theme-cloudlinux@https://github.com/tastembekov/cloudlinux-doc-theme.git":
   version "0.0.1"
-  resolved "https://github.com/tastembekov/cloudlinux-doc-theme.git#aecf84842be2d016d62439c9d3294a48869f79df"
+  resolved "https://github.com/tastembekov/cloudlinux-doc-theme.git#21937083233ef565a1f108402a35a59abffc9a05"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
