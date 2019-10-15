@@ -67,7 +67,6 @@ module.exports = {
     sidebarDepth: 2,
     logo: "/logo.svg",
     logoShort: "/logo-short.svg",
-    try_free: "https://cloudlinux.com/trial",
 
     social: [
       { url: "https://www.facebook.com/cloudlinux/", logo: "/fb.png" },
@@ -81,6 +80,7 @@ module.exports = {
     cloudlinuxSite: "https://cloudlinux.com",
     locales: {
       "/": {
+        try_free: "https://cloudlinux.com/trial",
         layouts: {
           product: {
             siteTitle: "Cloudlinux OS"
@@ -235,6 +235,7 @@ module.exports = {
         },
       },
       "/ru/": {
+        try_free: "https://cloudlinux.com/ru/trial",
         layouts: {
           product: {
             siteTitle: "Cloudlinux OS"
