@@ -139,7 +139,7 @@ module.exports = {
           products: "Products",
 
           productsMenu: {
-            product: 'Product',
+            product: 'Products',
             resources: 'Resources',
             list: [
               {
@@ -306,7 +306,7 @@ module.exports = {
           submitRequest: "Отправить запрос",
           products: "Продукты",
           productsMenu: {
-            product: 'Product',
+            product: 'Продукты',
             resources: 'Resources',
             list: [
               {
