@@ -112,7 +112,7 @@ module.exports = {
               title: "Content",
               collapsable: false,
               children: [
-                "/kb/test1/",
+                "/kb/FAQ/",
                 "/kb/test2/",
               ],
             }],
