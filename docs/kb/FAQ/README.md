@@ -64,6 +64,68 @@ A. Make sure to check our Compatibility Matrix. It contains additional informati
 
 ## Apache mod_lsapi PRO FAQ
 
+Q: **Is it compatible with EasyApache?**
+
+A: Yes, it is. EasyApache works/fully integrates with mod_lsapi.
+
+Q: **Is it compatible with PHP Selector?**
+
+A: Yes.
+
+Q: **Are .htaccess PHP directives supported? For example, mod_php like directives?**
+
+A: Yes. mod_lsapi can read php_* and php_admin_* directives.
+
+Q: **I have httpd.conf with SuExecUserGroup options. Do I need to add mod_lsapi related options for VirtualHost?**
+
+A: No need to change httpd.conf. mod_lsapi can read suPHP_UserGroup, RUidGid, SuExecUserGroup, AssignUserID parameters to determine user-id under which site is running. Additionally, you can use lsapi_uid_gid or lsapi_user_group as a native way to specify user/group ids.
+
+Q: **What is the difference between running mod_lsapi with lsapi_with_connection_pool mode _On_ and _Off_?**
+
+A: When lsapi_with_connection_pool mode is Off, then the new backend lsphp process has to be created for each new incoming request. At least it requires mod_lsapi to connect to backend lsphp master-process and have it perform fork which leads to a slowdown.
+
+With pool_mode enabled, mod_lsapi maintains persistent connections with backend which drastically increases performance (accelerates requests processing) but also increases the number of processes in LVE as well as memory usage. Backend lsphp processes stay alive for lsapi_backend_max_idle time, or until lsapi_backend_max_reqs is reached (or Apache restarted).
+
+Alternatively, we have another accelerating technology - [CRIU](/apache_mod_lsapi/#criu-support), which is faster and uses less memory. But it is available only for CL7.
+
+Q: **Is there any difference in using lsphp binaries from alt-php or ea-php packages with Litespeed Web Server compared to lsphp [from the source](https://www.litespeedtech.com/open-source/litespeed-sapi/php)?**
+
+A: In this case, there is no difference. Our binaries fully correspond to the native behavior when used with Litespeed Web Server.
+
+Q: **Is it possible to use CRIU with Litespeed Web Server?**
+
+A: Yes, Litespeed Web Server officially supports CRIU on the servers with CloudLinux. For detailed information on setting up CRIU with a Litespeed Web Server, follow the [link](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:lsphp_criu_enable). You can also use lsphp binaries from alt-php or ea-php packages for that purpose.
+
+Q: **Is the New Relic extension compatible with the mod_lsapi PRO?**
+
+A: Yes, it is. Currently, the [New Relic PHP Agent](https://docs.newrelic.com/docs/agents/php-agent) extension is supported for alt-php version 7.0 and higher. It can be installed for alt-php with the `alt-php**-pecl-ext` package (`**` - version 70 and higher).
+
+For example:
+
+<div class="notranslate">
+
+```
+# yum install alt-php70-pecl-ext
+```
+</div>
+The next step is to enable the New Relic extension on the domain. You can do this through `php.ini` configuration or via [PHP Selector](/php_selector/#using).
+
+We assume that the mod_lsapi PRO is already installed and enabled on the domain. If not, visit [mod_lsapi PRO installation guide](/apache_mod_lsapi/#installation).
+
+The next step is to specify the New Relic license and the name of your application on the domain. This can be easily done by adding the following lines to the main .htaccess file of a domain or the virtual host section of the Apache configuration file:
+
+<div class="notranslate">
+
+```
+<IfModule lsapi_module>
+    php_value newrelic.appname  "My PHP Application"
+    php_value newrelic.license  "<My license key>"
+</IfModule>
+```
+</div>
+
+The only thing you need to make sure that the directive [`lsapi_mod_php_behaviour`](/cloudlinux_os_components/#lsapi-mod-php-behaviour) is on. To further configure the PHP agent use the [link](https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-configuration).
+
 ## CloudLinux OS Installation FAQ
 
 ## How to delete the scan results in Imunify360’s database
