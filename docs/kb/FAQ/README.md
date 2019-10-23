@@ -126,9 +126,133 @@ The next step is to specify the New Relic license and the name of your applicati
 
 The only thing you need to make sure that the directive [`lsapi_mod_php_behaviour`](/cloudlinux_os_components/#lsapi-mod-php-behaviour) is on. To further configure the PHP agent use the [link](https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-configuration).
 
-## CloudLinux OS Installation FAQ
+## CloudLinux OS and EasyApache 4 FAQ
+
+Q: **When do we need to call the EA4 migration script?**
+
+<div class="notranslate">
+
+```
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
+sh cloudlinux_ea3_to_ea4 --convert
+```
+</div>
+
+### Migration from EasyApache 3 to EasyApache 4.
+
+The main difference between EasyApache 3 and EasyApache 4 for CloudLinux OS is the repositories used for Apache RPM packages. For this reason, we need to use packages from the _cl-ea4_ repository or _cl-ea4-testing_ beta for EasyApache 4. Running this script we update all native ea-* packages from CloudLinux repository. In this case, non-native packages for Apache include mod_lsapi and alt-mod-passenger (CloudLinux OS feature). So, if mod_lsapi or alt-mod-passenger (or both) were installed on EasyApache 3, the script should be run with the additional options as described here.
+
+Also, our script starts cPanel EasyApache 3 migration to EasyApache 4 Process. Read more about Profile changes, Apache changes, PHP changes on the link [https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process](https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process)
+
+### Conversion from EasyApache 4 CentOS to EasyApache 4 CloudLinux OS.
+
+When cPanel is installed with EasyApache 4 on a clean CloudLinux OS (or it was CentOS converted to CloudLinux OS), the installation of the ea-* packages comes from the EA4 cPanel repository. Most packages from the EA4 cPanel repository are not compatible with CloudLinux OS packages and this can lead to various errors. For this reason, we need to run this script to update the ea-* packages from the CloudLinux repository.
+
+If there was a need to return to EasyApache 4 packages from the EA4 cPanel repository, we need to run:
+
+<div class="notranslate">
+
+```
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
+sh cloudlinux_ea3_to_ea4 --restore-cpanel-ea4-repo
+```
+</div>
+
+Q: **When do we need to revert changes made by EA4 migration script?**
+
+<div class="notranslate">
+
+```
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
+sh cloudlinux_ea3_to_ea4 --revert
+```
+</div> 
+
+### Reverting to EasyApache 3.
+
+Reverting is possible only if EasyApache 3 was previously installed, and then converted to EasyApache 4. If cPanel was originally installed with EasyApache 4, there is no way to convert to EasyApache 3.
 
 ## How to delete the scan results in Imunify360’s database
+
+Sometimes, you may need to delete all users’ scan results from the server. This should not be common practice, and we do not recommend doing it on a regular basis. But, if you do need to erase the results of all Imunify360 scans, you can find the instructions below.
+
+1) First, you need to stop the agent:
+
+<div class="notranslate">
+
+```
+systemctl stop imunify360
+```
+</div>
+
+(on CentOS 7)
+
+<div class="notranslate">
+
+```
+service imunify360 stop
+```
+</div>
+
+(on CentOS 6, Ubuntu)
+
+2) connect to the Imunify360 database by running this command:
+
+<div class="notranslate">
+
+```
+sqlite3 /var/imunify360/imunify360.db
+```
+</div>
+
+3) execute the following SQL commands:
+
+::: danger IMPORTANT
+This removes all scan results from Imunify360!
+:::
+
+<div class="notranslate">
+
+```
+DELETE FROM malware_history;
+DELETE FROM malware_hits;
+DELETE FROM malware_scans;
+DELETE FROM malware_user_infected;
+```
+</div>
+
+4) Lastly, start the agent:
+
+<div class="notranslate">
+
+```
+systemctl start imunify360
+```
+</div>
+
+(on CentOS 7)
+
+<div class="notranslate">
+
+```
+service imunify360 start
+```
+</div>
+
+(on CentOS 6, Ubuntu)
+
+We don’t recommend cleaning the scan results for specific users, as it may cause inconsistencies in the _malware_scans_ table. But, in emergencies, you can do it with these SQL commands:
+
+<div class="notranslate">
+
+``` 
+DELETE FROM malware_history WHERE file_onwer = <user>;
+DELETE FROM malware_hits WHERE user = <user>;
+DELETE FROM malware_user_infected WHERE user = <user>;
+```
+</div>
+
+Unfortunately, there’s no easy way to delete records in the _malware_scans_ table for a specific user, so the table should be either truncated with the other tables shown in step 2 above, or the records should just be ignored.
 
 ## Imunify360/AV+ Hooks FAQ
 
