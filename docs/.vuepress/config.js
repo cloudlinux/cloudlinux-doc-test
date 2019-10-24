@@ -113,7 +113,7 @@ module.exports = {
               collapsable: false,
               children: [
                 "/kb/FAQ/",
-                "/kb/test2/",
+                "/kb/Technology/",
               ],
             }],
           },

@@ -172,6 +172,145 @@ sh cloudlinux_ea3_to_ea4 --revert
 
 Reverting is possible only if EasyApache 3 was previously installed, and then converted to EasyApache 4. If cPanel was originally installed with EasyApache 4, there is no way to convert to EasyApache 3.
 
+## CloudLinux OS Installation Wizard FAQ
+
+- **Why do I need to install CageFS if I want to enable PHP Selector?**
+
+CageFS is a requirement to use PHP Selector.
+
+- **How dependencies between packages are taken into account?**
+
+All dependencies are automatically installed - even if you do not choose them explicitly.
+
+- **How do I select Symlink Owner Match Protection to be enabled?**
+
+It is enabled by default. Symlink Owner Match Protection protects against symlink attack where attacker tricks Apache web server to read some other user’s PHP config files. You can adjust its settings as described in [https://docs.cloudlinux.com/cloudlinux_os_kernel/#symlink-owner-match-protection](/cloudlinux_os_kernel/#symlink-owner-match-protection)
+
+- **Can I enable Installation Wizard in case I’ve abandoned it by mistake?**
+
+A single CLI command is required: 
+
+<div class="notranslate">
+
+```
+touch /var/lve/wizard/is_first_installation.flag
+```
+</div>
+
+Next time you start LVE Manager UI, you will see Installation Wizard starting page - you will only be able to add modules, not remove them. You can also install CloudLinux OS components using Dashboard in LVE Manager.
+
+- **Can I perform any other actions in LVE manager while packages are being installed?**
+
+Yes. The installation process will run in the background.
+
+- **What do I do if some module failed to install?**
+
+It is possible to review the installation logs to find the reason of failure. You can try to install the module once again when the issue causing the problem is resolved. In any case, you can submit a ticket with CloudLinux tech support at [https://cloudlinux.zendesk.com](https://cloudlinux.zendesk.com) so they can help you with the issue.
+
+- **Where can I find Installation Wizard logs?**
+
+The logs can be found at _/var/log/cloudlinux/wizard/_. Each module has its unique entry in this directory.
+
+## CloudLinux OS Dashboard
+
+- **Which limits are considered when calculating the number of users hitting limits?**
+
+All limits that are configured for a user are taken into account
+
+- **Can I manage CloudLinux OS components from CL Dashboard?**
+
+CloudLinux Dashboard will redirect you to a corresponding section of LVE Manager UI upon your action with any component available (provided there is Manage button in the top right of the component box)
+
+- **Can I track my users’ resource consumption from CL Dashboard?**
+
+No. Use Current Usage tab of LVE Manager.
+
+- **Can I set limits for my users using CL Dashboard?**
+
+No. Use Users tab of LVE Manager for that.
+
+- **Can I update CloudLinux OS packages or other system packages from CL Dashboard?**
+
+No. This can be done either from CLI or by control panel periodic update scripts.
+
+- **Can I remove boxes that I don’t need form CL Dashboard?**
+
+No, it is not possible to remove/rearrange CL Dashboard boxes in the initial release of CL Dashboard. This feature might be added in the future.
+
+- **Where can I find the active PHP handler information?**
+
+As of the initial CL Dashboard release, this information will be available only if mod_lsapi is active (see LSAPI box for more information)
+
+- **Can I switch MySQL Governor modes from CL Dashboard?**
+
+Clicking on Manage button in MySQL Governor tab will redirect you to Options tab of LVE Manager plug-in/extension where you can adjust the settings.
+
+- **Can I setup several DB versions from CL Dashboard?**
+
+No, only one DB version can be set up in MySQL Governor of CloudLinux OS.
+
+- **Does information in CL Dashboard automatically update?**
+
+The information presented reflects the latest cached statistics available at the time of loading CL Dashboard. You can press Refresh button anytime to update it.
+
+- **Why can’t I manage Ruby from CL Dashboard?**
+
+This is because there are no controls available for Ruby in LVE Manager extension.
+
+## CloudLinux — Node.js Selector FAQ
+
+- **What Node.js versions are supported with Node.js Selector?**
+
+The supported versions are 6.x, 8.x, 9.x and 10.x.
+
+- **Can I move applications from one Node.js version to another?**
+
+You can move them one by one. In further releases we will add a group-move option.
+
+- **Can I delete Node.js version that is not in use?**
+
+Yes, you can. This can be done from both LVE Manager UI or CLI.
+
+- **Can I delete Node.js version if some applications use it?**
+
+No, you can’t. You should move all existing applications to another Node.js version available first.
+
+- **Can I set a disabled Node.js version as a default?**
+
+No, you can’t. You should enable it first.
+
+- **Can I install/uninstall more than one version at the same time?**
+
+No, you can’t. You must wait until the previous process is finished (spinner in the last row of version’s table will be in processing mode).
+
+- **What do I have to do if I don’t see some version which I want install in the UI, although they are available in the repository?**
+
+Click Refresh and wait until the version is added. (Refresh for repodata is not implemented yet).
+
+- **Can Node.js Selector be used in CLI-only mode?**
+
+Sure. Please find the list of CLI commands at [https://docs.cloudlinux.com/command-line_tools/#node-js-selector](/command-line_tools/#node-js-selector)
+
+- **I would like to install Node.js Selector on a system with LiteSpeed Web Server and CloudLinux OS. Can I install it that way?**
+
+Please find all requirements at [https://docs.cloudlinux.com/cloudlinux_os_components/#requirements-3](https://docs.cloudlinux.com/cloudlinux_os_components/#requirements-3).
+
+- **Does Node.js Selector require CageFS installed (or active) to operate? Will it work inside CageFS?**
+
+Users’ applications work inside CageFS if the latter is installed and enabled. Otherwise, they work in a “real” file system. Installing CageFS is not mandatory but is recommended as it makes your system more secure.
+
+- **Can Node.js resources be limited by LVE like PHP scripts?**
+
+Sure. Please find more information on resource limits at [https://docs.cloudlinux.com/limits/](https://docs.cloudlinux.com/limits/).
+
+- **Is it possible to use Node.js Selector with Nginx?**
+
+No, it isn’t.
+
+## CloudLinux - Reseller Limits FAQ
+
+
+
 ## How to delete the scan results in Imunify360’s database
 
 Sometimes, you may need to delete all users’ scan results from the server. This should not be common practice, and we do not recommend doing it on a regular basis. But, if you do need to erase the results of all Imunify360 scans, you can find the instructions below.
@@ -256,23 +395,178 @@ Unfortunately, there’s no easy way to delete records in the _malware_scans_ ta
 
 ## Imunify360/AV+ Hooks FAQ
 
+- **What is the purpose of Imunify Hooks?**
+
+Imunify360 / AV / AV+ notifies subscribers when a particular event/action occurs in the app, for example, when malware is detected after scanning or when the license expires (starting ver. 4.3). It also passes some parameters and data specific for the event. Events could be handled in the scripts (hook/event handlers) and some further actions could be applied like, for example, a ticket might be submitted or email might be sent out to the user upon malware-detection event.
+
+- **How do I enable Imunify Hooks?**
+
+You have to connect event handler (i.e. script) to every event you want to handle - you can find more information on how to do it in our [online docs](https://docs.imunify360.com/hooks/)
+
+- **What scripting languages can I use to handle events?**
+
+Any scripting languages supported by your system can be used. The script gets a json-encoded string with a list of parameters depending on the type of event. The data shall be read from STDIN.
+
+If you use Python 3.5, it is possible to use so-called native hooks. Refer to the [Imunify documentation](https://docs.imunify360.com/hooks/#cli) for more details on native hooks requirements.
+
+- **Is it possible to have multiple handlers for a single event type? If so, what would be the priority of connected handlers (subscribers)?**
+
+Yes, it is possible. All handlers will be called one by one sequentially as soon as the event fires.
+
+- **How do I know if an error occurs during event handler invocation?**
+
+Each handler invocation is logged into the _/var/log/imunify360/hook.log_ file
+
+- **Is it possible that a hook handler can crash Imunify360 agent?**
+
+This is possible only in case of using native hooks which are essentially Python modules. Thus, special care should be taken when using native hooks.
+
 ## How to Clone Imunify360 Installation
+
+Sometimes you may need to install Imunify360 on several servers with identical configurations or copy existing configs to other servers. Here you can find the list of steps on how to clone the installation of Imunify360 for several servers with identical configuration.
+
+**Installation**
+
+Firstly, Imunify360 usual installation comes. All necessary changes including integration with 3rd party components will be applied during installation & agent startup.
+
+([see manual for details](https://docs.imunify360.com/installation/#installation-instructions))
+
+**Config files**
+
+Secondly, copy the following files from the existing installation.
+
+1) /etc/sysconfig/imunify360/imunify360.config
+2) /usr/share/i360-php-opts/module.ini
+3) /usr/share/i360-php-opts/rules_whitelist (if it exists)
+ 
+
+All required settings will be picked up and applied automatically.
+
+**Whitelists / Blacklists / Blocked Ports**
+
+Whitelist and blacklist entries that are distributed as files can be found at _/etc/imunify360/whitelist/*.txt_ and _/etc/imunify360/blacklist/*.txt_  
+
+([see manual for details](https://docs.imunify360.com/dashboard/#how-to-use-external-files-with-the-list-of-black-white-ips))
+
+Finally, if you want to export local Imunify360 firewall entries and then import them into a new Imunify360 instance, use the following CLI command
+
+<div class="notranslate">
+
+```
+imunify360-agent blacklist [subject] [command] <value> [--option]
+```
+</div>
+
+([see manual for details](https://docs.imunify360.com/command_line_interface/#blacklist))
+
+<div class="notranslate">
+
+```
+imunify360-agent blocked-port [command] <value> [--option]
+```
+</div>
+
+([see manual for details](https://docs.imunify360.com/command_line_interface/#blocked-ports))
+
+<div class="notranslate">
+
+```
+imunify360-agent whitelist [subject] [command] <value> [--option]
+```
+</div>
+
+([see manual for details](https://docs.imunify360.com/command_line_interface/#whitelist))
 
 ## Imunify360 Dashboard FAQ
 
+- **What kind of data is available in Imunify360 4.0 Dashboard?**
+
+The following data is available:
+
+- Alerts (security incidents) total
+- CAPTCHA events
+- WAF alerts (security incidents)
+- Web-based Bruteforce Attacks
+- OSSEC: Network Level Attacks
+- Denied Requests from Bad Bots
+ 
+- **How is the data represented in the Dashboard?**
+
+You can choose either histogram or heatmap for any type of data except OSSEC alerts.
+
+- **What are the time periods available in the Dashboard?**
+
+The periods available are 1, 7 and 30 days. No custom periods are available as of the initial release.
+
+- **Is it possible to monitor multiple systems from a single Imunify360 dashboard?**
+
+Yes, this is possible in case you have access to all systems you need to monitor. You can copy the target server key to the clipboard by clicking on the key symbol button.
+Alternatively, find your server key in the id field of the _/var/imunify360/license.json_ file.
+
 ## WHM/cPanel Native feature management FAQ
 
-## CloudLinux OS Installation Wizard FAQ
+- **What is the difference between Feature Management in Imunify360 UI and WHM/cPanel Native FM?**
 
-## Imunify360 CDN support FAQ (3.8.6 and newer)
+You can perform the same actions with cPanel Native FM. The main benefit of cPanel Feature Management support is that admin can manage features on per package basis for the users that belong to those packages. Thus admin can apply changes to the whole group of users on the same package.
 
-## CloudLinux OS Dashboard
+- **Which Imunify360 features are governed by WHM/cPanel Native Features Management?**
 
-## ImunifyAV/AV+ FAQ
+As of Imunify360 4.0, it supports Proactive Defense and Malware Scanning/Cleanup.
 
-## CLN User Interface FAQ
+- **Can I use standard and cPanel Native FM at the same time?**
 
-## CLN Billing FAQ
+No. Once you switch to Native FM, Features Management tab in Imunify360 UI will inform that you have to use the Native one from WHM instead. You can switch back to Imunify360 UI FM at any time using CLI command:
+
+<div class="notranslate">
+
+```
+feature-management native disable
+```
+</div>
+
+## Imunify360 CDN support FAQ
+
+- **Does Cloudflare firewall replace Imunify360 Firewall?**
+
+Cloudflare would work as an additional firewall layer, in front of Imunify360 firewall. Imunify360 will still filter all the traffic coming from Cloudflare, like it would for any other IP.
+
+- **If an IP is blocked in Cloudflare, will it also be blocked in Imunify360?**
+
+Imunify360 doesn't see which IPs are blocked in Cloudflare. The two keep their blocked IPs separate.
+
+- **Can I blacklist a visitor’s IP if the visitor comes in through CDN, or only greylisting work?**
+
+You can blacklist any visitor for supported CDNs. Use standard interface for blacklisting to do that. For CDN visitors, blacklisted IPs will result in 403 HTTP error. Greylisted IPs will be served captcha.
+
+- **What happens if an IP first visits the web server from Cloudflare and then tries to visit some server ports like SSH?**
+
+If original customer IP (coming through Cloudflare) passes Captcha, and than directly visits the server on SSH or similar port, the IP will be whitelisted for 24 hours, and will be able to connect to the SSH port.
+
+- **Is Cloudflare Spectrum proxying supported? [https://developers.cloudflare.com/spectrum/getting-started/getting-started/](https://developers.cloudflare.com/spectrum/getting-started/getting-started/)**
+ 
+No, Cloudflare IPs will be blocked on all none-HTTP(S) protocol ports
+
+- **Is it possible to go for the FREE Cloudflare plan and activate Imunify360 CDN support to see IPs which come from Cloudflare?**
+
+Yes, for IPs coming from CloudFlare you can use this Imunify360 feature for clients' IPs detection.
+
+## Imunify360 custom white/black lists FAQ
+
+- **What are the target directories for Imunify360 custom white/blacklist files?**
+
+Add IPs into *.txt files to /etc/imunify360/whitelist/ and /etc/imunify360/blacklist/ directories
+
+- **What is the format of custom Imunify360 white/blacklist files?**
+
+The format is X.Y.Z.A/mask, one entry per line
+
+- **What is the precedence of existing Imunify360 lists and custom ones?**
+ 
+As with standard entries, a whitelist has precedence over a blacklist
+
+- **Will the white/blacklist files persist Imunify360 agent upgrade?**
+ 
+Yes, the custom list files persist agent upgrade and uninstall
 
 ## Imunify360 Malware Cleanup FAQ (Admin Part)
 
@@ -280,14 +574,12 @@ Unfortunately, there’s no easy way to delete records in the _malware_scans_ ta
 
 ## Imunify360 Proactive Defense FAQ
 
-## CloudLinux Backup On-Premises FAQ
-
-## CloudLinux — Node.js Selector FAQ
-
-## SELinux support
-
 ## Imunify360 - CloudLinux Backup FAQ
 
-## MySQL_ND (native driver) vs MySQL PHP extensions
+## CloudLinux Backup On-Premises FAQ
 
-## CloudLinux - Reseller Limits FAQ
+## ImunifyAV/AV+ FAQ
+
+## CLN User Interface FAQ
+
+## CLN Billing FAQ
