@@ -293,7 +293,7 @@ Sure. Please find the list of CLI commands at [https://docs.cloudlinux.com/comma
 
 - **I would like to install Node.js Selector on a system with LiteSpeed Web Server and CloudLinux OS. Can I install it that way?**
 
-Please find all requirements at [https://docs.cloudlinux.com/cloudlinux_os_components/#requirements-3](https://docs.cloudlinux.com/cloudlinux_os_components/#requirements-3).
+Please find all requirements at [https://docs.cloudlinux.com/cloudlinux_os_components/#requirements-3](/cloudlinux_os_components/#requirements-3).
 
 - **Does Node.js Selector require CageFS installed (or active) to operate? Will it work inside CageFS?**
 
@@ -301,7 +301,7 @@ Users’ applications work inside CageFS if the latter is installed and enabled.
 
 - **Can Node.js resources be limited by LVE like PHP scripts?**
 
-Sure. Please find more information on resource limits at [https://docs.cloudlinux.com/limits/](https://docs.cloudlinux.com/limits/).
+Sure. Please find more information on resource limits at [https://docs.cloudlinux.com/limits/](/limits/).
 
 - **Is it possible to use Node.js Selector with Nginx?**
 
@@ -309,7 +309,349 @@ No, it isn’t.
 
 ## CloudLinux - Reseller Limits FAQ
 
+- **Will all my resellers have Reseller Limits automatically after installing LVE Manager version 3.0-18?**
 
+No, they won't. To start using two level limits you’d first have to enable them for a particular reseller on _Users_ tab where you normally set limits. From that moment reseller will be able to set up limits for its end users. Please find more details in [CloudLinux documentation](/cloudlinux_os_components/#installation-enabling-and-disabling).
+
+- **What happens to existing resellers? Will they have Reseller Limits right away?**
+
+Existing resellers with its limits will keep working same as before until hoster allows Reseller Limits. Find more details in [Reseller Limits documentation](/cloudlinux_os_components/#reseller-limits).
+
+- **If I enable Reseller Limits will my resellers be limited?**
+
+Total resource usage of all users that belong to the reseller will be limited according to the reseller limit (including reseller personal usage).
+
+- **How do I start using Reseller Limits?**
+
+To start using two-level limits you’d first have to enable them for a particular reseller on _Users_ tab where you normally set limits. From that moment reseller will be able to set up limits for his end users.
+
+- **How do I enable Reseller Limits?**
+
+To start using two-level limits you’d first have to enable them for a particular reseller on _Users_ Tab where you normally set limits. From that moment reseller will be able to set up limits for its end users. Please find more details in the [Reseller Limits documentation](/cloudlinux_os_components/#installation-enabling-and-disabling).
+
+- **How do I set Reseller Limits?**
+
+First, you need to enable Reseller Limits. For more details go to [Reseller Limits documentation](/cloudlinux_os_components/#installation-enabling-and-disabling). Then, go to _Users_ tab and click a _pencil_ icon for a particular reseller. In the pop-up window you can enable and set limits for the reseller. See also [Users tab documentation](/lve_manager/#reseller-limits).
+
+- **How do I disable Reseller Limits?**
+
+You can do it the same way as you enable Reseller Limits - by switching off _Manage Limits_ slider. If you are not keen on this feature at all, the best way for you then do not enable Reseller Limits. In this case, everything will work the same as before as Reseller Limits are disabled by default.
+
+If you have already enabled Reseller Limits for your resellers and now want to bulk disable these limits, you should run
+
+<div class="notranslate">
+
+```
+# lvectl remove-reseller RESELLERNAME
+```
+</div>
+
+for each reseller.
+
+- **Can I have some resellers with Reseller Limits and some without?**
+
+Surely, you can. Resellers for who you have not enabled Reseller Limits will not have them. At the same time, you can have other resellers with Reseller Limits enabled.
+
+- **How do I disable Reseller Limits for the particular reseller?**
+
+Go to WHM -> CloudLinux LVE Manager -> Users tab, then click _pencil_ icon in order to change parameters for the desired reseller, then disable _Manage Limits_ option. For more details, please go to [Reseller Limits documentation](/cloudlinux_os_components/#installation-enabling-and-disabling).
+
+- **What happens to resellers’ end users when I enable Reseller Limits?**
+
+Those end users will no longer be limited by Hoster Limits but Reseller Limits will be applied.
+
+- **Do Reseller Limits affect all end users?**
+
+No, they do not. They only affect users that belong to a reseller that has Reseller Limits enabled.
+
+- **What limits should reseller set for his users?**
+
+Recommend your resellers to set limits in a similar pattern as you would for your end users. Yet, we recommend that no reseller set limits below:
+
+
+  - SPEED 50; 
+  - PMEM 128 MB; 
+  - IO 256 KB/sec; 
+  - IOPS 256; 
+  - EP/NPROC 10.
+
+- **What kernels support Reseller Limits?**
+
+Only CloudLinux 7 and CloudLinux 6 Hybrid kernel versions 3.10.0-714.10.2.lve1.5.3 and later support Reseller Limits.
+
+To be able to use Reseller Limits you should have the latest CloudLinux 7 kernel installed. Installation command:
+
+<div class="notranslate">
+
+```
+yum install kernel --enablerepo=cloudlinux-updates-testing
+```
+</div>
+
+Users with CloudLinux 6 kernel should migrate to CloudLinux 6 Hybrid.
+
+For more details, please go to [Reseller Limits documentation](/cloudlinux_os_components/#installation-enabling-and-disabling).
+
+- **How to upgrade to the kernel with Reseller Limits support?**
+
+To upgrade, please run the command:
+
+<div class="notranslate">
+
+```
+yum install kernel --enablerepo=cloudlinux-updates-testing
+```
+</div>
+
+And reboot a server.
+
+- **Do I need to install new kernel if I want to enable Reseller Limits, if I have already run KernelCare?**
+
+KernelCare doesn't deliver functionality needed by Reseller Limits, as it is too big of a change. Reboot is required.
+
+- **Can hoster manage reseller’s end user limits?**
+
+If Reseller Limits are disabled, a hoster is able to manage limits for resellers’ end users.
+
+If Reseller Limits are enabled, a hoster has to log in as a reseller to manage limits for resellers’ end users.
+
+- **What is the difference between End User and Reseller's End User?**
+
+**End User** does not buy his resources from a reseller but from a hoster directly.
+
+**Reseller's End User** buys his resources from a reseller, who buys them from a hoster.
+
+- **Can I use the packages on a server with control panels other than cPanel?**
+
+Reseller limits are available for DirectAdmin and Plesk panels as well.
+
+- **Is it possible to integrate Reseller Limits with custom control panel?**
+
+No, it isn't. At the moment Reseller Limits are only available for the cPanel, DirectAdmin and Plesk panels.
+
+- **Can I use Reseller Limits on CloudLinux 6?**
+
+You can use Reseller Limits on CloudLinux 6 by using CloudLinux 6 hybrid kernel. Please find more details in [Cloud Linux documentation](/cloudlinux_os_kernel/#hybrid-kernels).
+
+- **Can resellers manage CageFS?**
+
+No, they can't. That would be a security issue.
+
+- **Can reseller manage MySQL Governor?**
+
+If MySQL Governor is set to ALL mode, a reseller will be able to manage MySQL limits by managing LVE limits for the end user (as they are the same). For all other modes, default MySQL Governor limits will be applied.
+
+- **How can I migrate to hybrid kernel? Will my data still be the same as before?**
+
+Please use this instruction to migrate to CloudLinux 6 Hybrid kernel.
+
+- **What are the minimum requirements for Reseller Limits?**
+
+Reseller Limits are only supported in kernel starting with the version 3.10.0-714.10.2.lve1.5.3.el7 for CloudLinux 7 kernel and 3.10.0-714.10.2.lve1.5.3.el6h for CloudLinux 6 Hybrid kernel.
+
+Please find more details in [Reseller Limits documentation](/cloudlinux_os_components/#installation-enabling-and-disabling).
+
+- **What happens when reseller hits the limit?**
+
+Reseller is a virtual entity. He cannot hit the limit. There is reseller's end user with the same name as a reseller. This end user is limited as any other reseller's end user.
+
+Reseller's end user can hit reseller limit when end user's limit is bigger than reseller's limit. In such case, end user will be limited by reseller limit.
+
+Or reseller limit can be hit when all resellers’ end users in total use as much resources as reseller limit.
+
+- **What happens when reseller's end user hits his limit?**
+
+Reseller's end user can hit his limit when end user limit is lower than reseller limit. In such case end user will be limited by his limit.
+
+- **Does reseller get notifications when his end users hit the limit?**
+
+Yes, he does. Reseller gets a notification on his users' faults. Reseller can configure notifications in WHM -> Plugins -> LVE Manager -> Options.
+
+- **Does reseller's end user get notification when he hits reseller limit?**
+
+No, he doesn't. End user gets a notification about his own limits/faults only.
+
+- **How do Reseller Limits work?**
+
+Reseller Limits limit the total amount of resources resellers’ end users can consume altogether. They also provide reseller with an ability to set limits for his end users.
+
+More details can be found [here](/cloudlinux_os_components/#reseller-limits).
+
+- **Can sum of resellers’ end users limits be bigger than reseller limit?**
+
+Sure, it can. Reseller Limits limit actual total usage of resellers’ end users, but not values of their limits. Resellers’ end users can have limit bigger than reseller limit.
+
+- **Can I set end user limit to be bigger than reseller limit?**
+
+Yes, a reseller can set user limit bigger than reseller limit. But our system will automatically trim exceeded user limit.
+
+- **Is overselling allowed?**
+
+Sure thing!
+
+- **What limits can I set for reseller?**
+
+Hoster can set and manage the following limits for reseller:
+
+  - SPEED
+  - PMEM
+  - IO
+  - IOPS
+  - EP
+  - NPROC
+  - Inodes (default for all users)
+  - MySQL limits (ALL mode only)
+  
+Please find more details in the [documentation]((/cloudlinux_os_components/#reseller-limits)).
+
+- **Which limits can reseller set for his users?**
+
+Reseller can set and manage the following limits for end user:
+
+  - SPEED
+  - PMEM
+  - IO
+  - IOPS
+  - EP
+  - NPROC
+  - MySQL limits (ALL mode only)
+  
+Please find more details in the [documentation]((/cloudlinux_os_components/#reseller-limits)).
+
+- **What does reseller's end user see in his control panel?**
+
+Reseller's end user can see the same charts as for regular end users.
+
+- **Can resellers see which users use most resources?**
+
+Yes, they can.
+
+Go to WHM -> Plugins -> LVE Manager -> Historical Usage.
+
+Here you can find resellers’ end users with high usage (top 5 users). More detailed statistics can be found in WHM -> Plugins -> LVE Manager -> Statistics.
+
+Please find more details in the [documentation](/lve_manager/#statistics-tab).
+
+- **Can hosters see how much each reseller uses?**
+
+Yes, they can. Go to WHM -> Server Configuration -> CloudLinux LVE Manager -> Statistics.
+
+Please find more details in the [documentation](/lve_manager/#statistics-tab).
+
+- **Can hosters see which reseller uses most of the resources now?**
+
+Yes, they can.
+
+Go to WHM -> Server Configuration -> CloudLinux LVE Manager -> Current Usage.
+
+Please find more details in the [documentation](/lve_manager/#statistics-tab).
+
+- **Can reseller set limits for his individual end user?**
+
+Sure, Reseller can set limits for his users via WHM -> Plugins -> LVE Manager -> Users.
+
+Please find more details in the [documentation](/lve_manager/#users-tab).
+
+- **Can reseller set limits for his packages?**
+
+Sure, reseller can set limits for his packages via WHM -> Plugins -> LVE Manager -> Packages.
+
+Please find more details in the [documentation](/lve_manager/#packages-tab).
+
+- **What kernels support Reseller Limits?**
+
+CloudLinux 7 kernel starting with the version 3.10.0-714.10.2.lve1.5.3.el7.
+
+CloudLinux 6 Hybrid kernel starting with the version 3.10.0-714.10.2.lve1.5.3.el6h.
+
+- **What are the recommended values for the Reseller Limits?**
+
+At the moment we do not have any strict recommendations in regards to the values of Reseller Limits. We need to accumulate more usage information and review a lot of use cases to come up with such suggestion. For now, if you are not sure what values to set, please use as high values as possible in your consideration.
+
+See also: _Which limits should reseller set for his users?_ above 
+
+- **How can I downgrade to the previous kernel?**
+
+To downgrade please do the following:
+
+**For Cloud Linux OS 7**
+
+  - Go to _/etc/default/grub_ and replace the value of variable GRUB_DEFAULT to 1;  
+  - Run: `grub2-mkconfig -o /boot/grub2/grub.cfg`  
+  - Reboot the system;  
+  - Run the commands:
+
+<div class="notranslate">
+
+```
+rpm -e --nodeps kernel-3.10.0-714.10.2.lve1.5.3.el7.x86_64
+yum install kmod-lve
+yum downgrade lvemanager lve-utils lve-stats alt-python27-cllib
+```
+</div>
+
+**For CloudLinux OS 6 Hybrid**
+
+  - Go to _/etc/grub.conf_ and replace the value of default variable to 1;
+  - Reboot the system;
+  - Run the commands:
+
+<div class="notranslate">
+
+```
+rpm -e --nodeps kernel-3.10.0-714.10.2.lve1.5.3.el6h.x86_64
+yum install kmod-lve
+yum downgrade lvemanager lve-utils lve-stats alt-python27-cllib
+```
+</div>
+
+- **What are my resellers will be limited to when I enable Reseller Limits?**
+
+Total resource usage of all users that belong to the reseller will be limited according to the reseller limit (including reseller personal usage).
+
+- **Can Reseller Limits be enabled automatically for all new Resellers created on the server?**
+
+There is no such feature available out of the box, but all supported control panels have a possibility to setup custom hooks when a new account is created. So you can use these hooks in combination with these commands:
+
+<div class="notranslate">
+
+```
+# lvectl set-reseller res1 --speed=N% --pmem=N --nproc=N --vmem=N --maxEntryProcs=N --iops=N --io=N
+```
+</div>
+
+Check the corresponding hooks documentation here:
+
+for cPanel: [https://documentation.cpanel.net/display/DD/Guide+to+Standardized+Hooks](https://documentation.cpanel.net/display/DD/Guide+to+Standardized+Hooks)
+
+for DirectAdmin: [https://help.directadmin.com/item.php?id=294](https://help.directadmin.com/item.php?id=294) 
+
+for Plesk: [https://docs.plesk.com/en-US/onyx/administrator-guide/59205/](https://docs.plesk.com/en-US/onyx/administrator-guide/59205/)
+
+- **What are the default limits applied to a Reseller when I enable Reseller limits for them?**
+
+The default limits are applied to a reseller when you first press Enable Reseller Limits in UI or when you simply fire _lvectl set-reseller_ without specifying the limits. Those limits are hard-coded and cannot be changed.
+
+<div class="notranslate">
+
+```
+# Default parameters for lvp
+LVP_DEFAULT = {
+ 'cpu': 100,
+ 'ncpu': 1,
+ 'io': 0,
+ 'ep': 0,
+ 'mem': 0,
+ 'pmem': 0,
+ 'nproc': 0,
+ 'iops': 0
+}
+```
+</div>
+
+- **Can I create  package for my resellers and apply that package as a reseller limit for different resellers?**
+
+No, you cannot, Reseller limits have no connection with packages, these limits should be applied manually, limits from Packages cannot be assigned to a reseller.
 
 ## How to delete the scan results in Imunify360’s database
 
@@ -570,11 +912,72 @@ Yes, the custom list files persist agent upgrade and uninstall
 
 ## Imunify360 Malware Cleanup FAQ (Admin Part)
 
+- **How does Imunify360 Malware Cleanup work? What are the benefits of Imunify360 Malware Cleanup?**
+
+Malware Cleanup can remove malicious code from users' files or remove them completely if they cannot be cured. It works in a user-assisted way - i.e. a user has to choose the files to be cleaned up.
+
+- **Is it possible Malware Cleanup can break my websites’ operation?**
+
+Malware Cleanup is designed to decrease the possibility of data loss and website malfunction after cleanup. It backs up an infected file before cleanup and trims a file instead of removing it.
+The backup of an infected file let a user restore the file in a state, it had before cleanup.
+File backups are stored in special folders outside user home directories and shouldn’t be managed manually. Names of these files are not altered.
+
+- **How does Malware Cleanup module decide on when to remove a file or trim it?**
+
+This is a configurable option that can be set in Malware settings. Trimming is the default.
+
+- **What does _Cleanup all_ button actually perform?**
+
+It will try to remove harmful content from all files, detected as infected or quarantined.
+
+- **Can Malware Cleanup clean files that were detected by any of anti-malware engines of Imunify360?**
+
+Yes, all the files marked as _Infected_ or _Quarantined_ can be cleaned up or trimmed.
+
+- **How can I clean/rotate the list of malicious files in Malware Scanner → Dashboard tab of Imunify360 UI?**
+
+Older entries are automatically removed as soon as the backup file of the cleaned file is removed (14 days by default).
+
+- **What kind of malicious code/content can Malware Cleanup remove?**
+
+The cleanup engine detects and performs a cleanup for all content that might be considered as malicious: web-shells, backdoors, phishing pages, virus injections, doorways, droppers, miners, uploaders, etc.
+
+- **Malware Cleanup did not clean up some of malicious files. What to do next?**
+
+There might be the following causes:
+
+  - Infected file or its folder is write-protected so Malware Cleanup could not write or delete it. Contact your server administrator for clarification.
+  - Infected file was missing or not readable at the time of the cleanup attempt. Check if the file is in place and if its permissions are correct.
+
 ## Imunify360 Ubuntu Support FAQ
+
+- **Which Ubuntu versions are supported by Imunify360?**
+
+Imunify360 supports Ubuntu 16.04 and 18.04 LTS.
+
+- **Which control panels are supported in Ubuntu version of Imunify360?**
+
+Plesk and DirectAdmin.
+
+- **Is Imunify360 for Ubuntu available without a control panel?**
+
+Support for servers without control panel will be added in Imunify360 version 4.5 for CentOS, CloudLinux OS and Ubuntu.
+
+- **Which Imunify360 features are available in Ubuntu?**
+
+All Imunify360 features are available in Ubuntu version.
+
+- **What is the difference between Ubuntu and CentOS Imunify360 versions?**
+
+Nothing, Imunify360 works the same way as on all supported Linux operating systems.
+
+- **Where can I find an installation guide and requirements?**
+
+Please find the information in Imunify360 online documentation at [https://docs.imunify360.com/installation/](https://docs.imunify360.com/installation/).
 
 ## Imunify360 Proactive Defense FAQ
 
-## Imunify360 - CloudLinux Backup FAQ
+## Imunify360 CloudLinux Backup FAQ
 
 ## CloudLinux Backup On-Premises FAQ
 
