@@ -1228,3 +1228,121 @@ No, a file will stay in the _Ignore_ list as long as its filename is the same.
 
 ## CloudLinux Backup On-Premises FAQ
 
+- **Where can I find documentation for CloudLinux Backup On-Premises?**
+
+CloudLinux Backup is powered by Acronis. You can find complete documentation [here](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#32952.html).
+
+- **Where can I find documentation for my users?**
+
+You can find all necessary documentation and guides to help your users manage their backups [here](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#32952.html).
+
+- **Can I migrate from CloudLinux Backup to CloudLinux Backup On-Premises in Imunify360?**
+
+You cannot migrate actual backups, but you can switch to CloudLinux Backup On-Premises at any time. This means that your old backups will not work for CloudLinux Backup On-Premises and new backups will be created.
+To switch from CloudLinux Backup to CloudLinux Backup On-Premises, follow these steps:
+
+1) Contact our Sales Team at [sales@cloudlinux.com](sales@cloudlinux.com) for the price quote.
+2) Contact our Support Team at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/requests/new) to setup CloudLinux Backup On-Premises.
+3) Using [these](https://www.acronis.com/en-us/support/documentation/ManagementPortal/index.html#40064.html) instructions, create a user for the Imunify360 server to which you will switch CloudLinux Backup On-Premises. Next, you need to configure Imunify360.
+4) In Imunify360 plugin, go to _Settings → Backups_, and disable CloudLinux Backup by clicking a radio button _Enabled_.
+5) Choose backup provider → _CloudLinux Backup On-Premises_. Enter username/password of the user created in Management Portal and click _Connect Backup_.
+6) Using Acronis Web Console, create a Backup Schedule for this server. 
+
+You might want to deactivate CloudLinux Backup. To do so, login to CloudLinux Network (CLN). Go to _Servers → CloudLinux Backup_ and remove this server from the list.
+
+- **How does CloudLinux Backup On-Premises work?**
+
+CloudLinux Backup On-Premises consists of three parts: Management Portal, Storage, and Agent.
+
+The Management Portal is a web interface that allows you to manage the backup cluster (servers and drives), as well as to check the cluster’s health and status.
+
+The Storage is a set of servers with disks used for storing backups. The Storage can be resized at your discretion.
+
+The Agent is software that needs to be installed on the server which you plan to backup.
+
+After successful installation, the Agent starts the first initial backup of the server and sends it to the Storage (or part of the server, depends on schedule configuration) where it is installed. After that, the Agent initiates incremental backups according to the schedule configuration.
+
+With backups, you are able to restore specific files, folders, or the whole server from the ISO image. You will have access to all backups and the files in them within the Management Portal.
+
+- **How to configure Imunify360 to work with CloudLinux Backup On-Premises?**
+
+1) In Imunify360 plugin, go to _Settings → Backups_, and disable CloudLinux Backup by clicking a radio button _Enabled_.
+2) Choose the backup provider → _CloudLinux Backup On-Premises_. Enter username/password of the user created in Management Portal and click _Connect Backup_.
+3) Using Acronis Web Console of a created user, create a backup schedule for this server using [this](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#33507.html) documentation.
+4) Make the initial backup (optional).
+
+- **What are the differences between CloudLinux Backup and CloudLinux Backup On-Premises?**
+
+CloudLinux Backup On-Premises can be installed within your infrastructure and operated on your own hardware, whereas CloudLinux Backup operates in the CloudLinux cloud. It means that you will be able to manage hardware on your own — add/remove servers and disks, and increase/decrease their size according to your own needs.
+
+- **What are minimum hardware requirements for CloudLinux Backup On-Premises?**
+
+CloudLinux Backup On-Premises **minimum** hardware requirements:
+One physical node or virtual machine with:
+
+  - 2 CPU cores;
+  - 2GB RAM;
+  - 3 HDDs with 100 GB minimum on each;
+  - 1 Gbit Ethernet.
+
+CloudLinux Backup On-Premises recommended hardware requirements:
+Five nodes with:
+
+  - 4 CPU cores;
+  - 16GB RAM + 0.5 GB per HDD;
+  - 0.25 CPU core per HDD;
+  - 12+ disks per server;
+  - 10 Gbit Ethernet.
+
+For more details, please follow the [link](https://dl.acronis.com/u/storage2/html/AcronisStorage_2_installation_guide_en-US/planning-acronis-storage-infrastructure/planning-node-hardware-configurations.html#hardware-requirements).
+
+- **What are software requirements for CloudLinux Backup On-Premises?**
+
+CloudLinux Backup On-Premises needs a clean server — the software will be installed from the ISO image. Thus, nothing should be pre-installed on your servers.
+
+- **How many physical disks should I have?**
+
+We recommend to have at least 6 physical disks at 2 nodes. For more details, please follow the [link](https://dl.acronis.com/u/storage2/html/AcronisStorage_2_installation_guide_en-US/planning-acronis-storage-infrastructure/planning-node-hardware-configurations.html#recommended-configuration).
+
+- **How much space do I need to backup my servers?**
+
+The amount of required space is determined by the size of your servers and how often their content changes. If the content of your servers changes on a daily basis, we recommend to get actual server disks size*2.4 GB of disk space to be used for backups. Otherwise, we recommend to get actual disk size*1.4 GB of disk space. These coefficients include all incremental backups for the six-month scheduled backups.
+
+- **Can CloudLinux Backup On-Premises be installed on cloud virtual servers?**
+
+Yes, it can. However, physical servers are recommended (unless you use IaaS-based setup like S3-driven storage for back up your AWS instances).
+
+- **How to buy CloudLinux Backup On-Premises?**
+
+Contact our sales team at [sales@cloudlinux.com](sales@cloudlinux.com) for the price quote.
+
+- **Is there a trial option?**
+
+Please contact us at [sales@cloudlinux.com](sales@cloudlinux.com) and our team will help you to get setup with the trial.
+
+- **How to cancel CloudLinux Backup On-Premises license?**
+
+To cancel CloudLinux Backup On-Premises, please send a cancellation request to our support team at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/requests/new) and choose Imunify as a department.
+
+- **I cannot see CloudLinux Backup On-Premises licenses in my CLN (CloudLinux Network) account. Why is that?**
+
+CloudLinux Backup On-Premises is not yet available in CLN, but it will be in the future.
+
+- **How to setup the backup schedule?**
+
+Each server connected to CloudLinux Backup On-Premises has its own Web Console to manage backups. Login to Web Console [http://cloud.acronis.com](http://cloud.acronis.com) with your credentials (or click _Manage Backups_ button in _Settings_ tab of Imunify360 user interface) and use [this documentation](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#33507.html) to schedule backups.
+
+- **How to add a system/server to the CloudLinux Backup On-Premises so that the server will be backed up?**
+
+Login to Web Console at [http://cloud.acronis.com](http://cloud.acronis.com/) with user credentials and click _Add_ button at the top of the page. Then choose appropriate Operating System and follow the installation instructions. Using login and password to the Web Console, activate the downloaded software.
+
+- **How to create CloudLinux Backup On-Premises user with its own access level and limits, settings, and schedule limits?**
+
+Login to Management Console [http://cloud.acronis.com/](http://cloud.acronis.com) as Admin with the credentials provided by CloudLinux and follow [these instructions](https://www.acronis.com/en-us/support/documentation/ManagementPortal/index.html#40064.html).
+
+- **How to backup the whole server with CloudLinux Backup On-Premises?**
+
+As soon as the server is connected to CloudLinux Backup On-Premises, the backup of the whole server will be created. All the following backups will be incremental, which means that only modified files and folders will be backed up.
+
+- **How to scale CloudLinux Backup On-Premises?**
+You can scale the CloudLinux Backup On-Premises at any time by adding more physical discs and nodes to your backup cluster.
