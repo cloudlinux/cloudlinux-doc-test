@@ -1,6 +1,6 @@
 # FAQ
 
-## FAQ on PHP Selector integration with cPanel’s MultiPHP Manager
+## PHP Selector integration with cPanel’s MultiPHP Manager
 
 Q. **How could I set the Inherited option for all new accounts/websites by default?**
 
@@ -62,7 +62,7 @@ Q. **I followed the guide, but the PHP version is still not fetched for my websi
 
 A. Make sure to check our Compatibility Matrix. It contains additional information on components that are incompatible with PHP Selector. You may need to remove mod_ruid2.
 
-## Apache mod_lsapi PRO FAQ
+## Apache mod_lsapi PRO
 
 Q: **Is it compatible with EasyApache?**
 
@@ -126,7 +126,7 @@ The next step is to specify the New Relic license and the name of your applicati
 
 The only thing you need to make sure that the directive [`lsapi_mod_php_behaviour`](/cloudlinux_os_components/#lsapi-mod-php-behaviour) is on. To further configure the PHP agent use the [link](https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-configuration).
 
-## CloudLinux OS and EasyApache 4 FAQ
+## CloudLinux OS and EasyApache 4
 
 Q: **When do we need to call the EA4 migration script?**
 
@@ -172,7 +172,7 @@ sh cloudlinux_ea3_to_ea4 --revert
 
 Reverting is possible only if EasyApache 3 was previously installed, and then converted to EasyApache 4. If cPanel was originally installed with EasyApache 4, there is no way to convert to EasyApache 3.
 
-## CloudLinux OS Installation Wizard FAQ
+## CloudLinux OS Installation Wizard
 
 - **Why do I need to install CageFS if I want to enable PHP Selector?**
 
@@ -257,7 +257,7 @@ The information presented reflects the latest cached statistics available at the
 
 This is because there are no controls available for Ruby in LVE Manager extension.
 
-## CloudLinux — Node.js Selector FAQ
+## CloudLinux — Node.js Selector
 
 - **What Node.js versions are supported with Node.js Selector?**
 
@@ -307,7 +307,7 @@ Sure. Please find more information on resource limits at [https://docs.cloudlinu
 
 No, it isn’t.
 
-## CloudLinux - Reseller Limits FAQ
+## CloudLinux - Reseller Limits
 
 - **Will all my resellers have Reseller Limits automatically after installing LVE Manager version 3.0-18?**
 
@@ -735,7 +735,7 @@ DELETE FROM malware_user_infected WHERE user = <user>;
 
 Unfortunately, there’s no easy way to delete records in the _malware_scans_ table for a specific user, so the table should be either truncated with the other tables shown in step 2 above, or the records should just be ignored.
 
-## Imunify360/AV+ Hooks FAQ
+## Imunify360/AV+ Hooks
 
 - **What is the purpose of Imunify Hooks?**
 
@@ -819,7 +819,7 @@ imunify360-agent whitelist [subject] [command] <value> [--option]
 
 ([see manual for details](https://docs.imunify360.com/command_line_interface/#whitelist))
 
-## Imunify360 Dashboard FAQ
+## Imunify360 Dashboard
 
 - **What kind of data is available in Imunify360 4.0 Dashboard?**
 
@@ -845,7 +845,7 @@ The periods available are 1, 7 and 30 days. No custom periods are available as o
 Yes, this is possible in case you have access to all systems you need to monitor. You can copy the target server key to the clipboard by clicking on the key symbol button.
 Alternatively, find your server key in the id field of the _/var/imunify360/license.json_ file.
 
-## WHM/cPanel Native feature management FAQ
+## WHM/cPanel Native feature management
 
 - **What is the difference between Feature Management in Imunify360 UI and WHM/cPanel Native FM?**
 
@@ -866,7 +866,7 @@ feature-management native disable
 ```
 </div>
 
-## Imunify360 CDN support FAQ
+## Imunify360 CDN support
 
 - **Does Cloudflare firewall replace Imunify360 Firewall?**
 
@@ -892,7 +892,7 @@ No, Cloudflare IPs will be blocked on all none-HTTP(S) protocol ports
 
 Yes, for IPs coming from CloudFlare you can use this Imunify360 feature for clients' IPs detection.
 
-## Imunify360 custom white/black lists FAQ
+## Imunify360 custom white/black lists
 
 - **What are the target directories for Imunify360 custom white/blacklist files?**
 
@@ -910,7 +910,7 @@ As with standard entries, a whitelist has precedence over a blacklist
  
 Yes, the custom list files persist agent upgrade and uninstall
 
-## Imunify360 Malware Cleanup FAQ (Admin Part)
+## Imunify360 Malware Cleanup (Admin Part)
 
 - **How does Imunify360 Malware Cleanup work? What are the benefits of Imunify360 Malware Cleanup?**
 
@@ -949,7 +949,7 @@ There might be the following causes:
   - Infected file or its folder is write-protected so Malware Cleanup could not write or delete it. Contact your server administrator for clarification.
   - Infected file was missing or not readable at the time of the cleanup attempt. Check if the file is in place and if its permissions are correct.
 
-## Imunify360 Ubuntu Support FAQ
+## Imunify360 Ubuntu Support
 
 - **Which Ubuntu versions are supported by Imunify360?**
 
@@ -975,7 +975,7 @@ Nothing, Imunify360 works the same way as on all supported Linux operating syste
 
 Please find the information in Imunify360 online documentation at [https://docs.imunify360.com/installation/](https://docs.imunify360.com/installation/).
 
-## Imunify360 Proactive Defense FAQ
+## Imunify360 Proactive Defense
 
 - **What are the use cases for Proactive Defense?**
 
