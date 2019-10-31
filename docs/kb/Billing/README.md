@@ -27,7 +27,22 @@ We provide 30 days refund policy.
 
 If within thirty (30) days of your payment for CloudLinux Programs (I) you do not agree to the terms of the CloudLinux License Agreement, or (II) you become entitled to a refund of Program license fees pursuant to the exclusive remedy set forth in the CloudLinux License Agreement, and you paid for CloudLinux Programs by credit card, then CloudLinux will credit your credit card account upon certification that all CloudLinux Programs have been removed from your computer system. Contact billing@cloudlinux.com if you are entitled to a refund.
 
+- **Can I use your products on systems behind NAT?**
+
+You can use our products with a public IP-address or 1:1 NAT. IP-address can be checked with the following command:
+
+<div class="notranslate">
+
+```
+curl https://cloudlinux.com/showip.php
+```
+</div>
+
 ## CLN User Interface
+
+- **How do I start a trial?**
+
+A trial can be started only once for each product in an account. The trial period is 30 days. You can register one server for CloudLinux OS and Imunify360 trials and unlimited number of servers for KernelCare licenses. A trial can be started from _Dashboard_ tab which is the default tab in CLN UI.
 
 - **Where can I find my server licenses?**
 
@@ -40,10 +55,6 @@ Servers can be found in _Servers_ left sidebar menu of the _Dashboard_ tab. This
 - **Which payment methods are available? Where can I add/update payment methods?**
 
 PayPal and credit card are the payment methods available. They can be set in _Payment methods_ left sidebar menu of the _Billing_ tab.
-
-- **Where can I update my personal and company info?**
-
-This can be done on _Account details_ page. You can get to this page by clicking your account name at the top right of CLN UI and choosing _Settings_ in the pop-up menu.
 
 - **Where can I update my CLN password?**
 
@@ -81,13 +92,81 @@ You can create/manage activation keys only for products that have purchased lice
 
 Those are the default activation keys for each product.
 
-- **How do I start a trial?**
-
-A trial can be started only once for each product in an account. The trial period is 30 days. You can register one server for CloudLinux OS and Imunify360 trials and unlimited number of servers for KernelCare licenses. A trial can be started from _Dashboard_ tab which is the default tab in CLN UI.
-
 - **What is a default activation key?**
 
 A default activation key is generated automatically on server license purchase for each product.
+
+- **Is it possible to have Paypal and Credit Card payment methods set up at the same time?**
+
+No, you have to choose one payment method to be active in a single CLN account.
+
+- **How to add another product to my CLN account?**
+
+All the purchases are done the same way — adding a product to a cart and proceeding with the checkout. Each subscription type will have its own invoice generated every month/year. For example, KernelCare, CloudLinux OS, Imunify360 single-user and Imunify360 unlimited user will all have separate invoices generated every billing period.
+
+- **Where can I update my personal and company information?**
+
+Personal information and Password can be set in _Personal Information_ tab of _Account details_ left sidebar menu (see _Your Login → Settings_ at the top right). Company Information can be set in _Account details_ menu as well.
+
+- **How do I cancel a license?**
+
+If you wish to continue using XX license(s) only, you need to cancel the unused one(s). To cancel the subscription for unused license(s), do the following, please:
+
+1. Login to your CLN account
+2. Click on _Dashboard -> CloudLinux OS/KernelCare OS/Imunify360 OS_
+3. Click on _Manage servers_ -> select the server that is no longer needed
+4. Click on _CloudLinux OS/KernelCare OS/Imunify360 OS_ -> _Remove unused server licenses_
+
+Please, note that **step 4** results in removing the unused license and stopping the billing for that license. **If step 4 is not performed, the license will remain active and must be paid for regardless it's in use or not.**
+
+- **Where can I get API username and password for WHMCS plugin?**
+
+To setup WHMCS plugin you need to enter your API username and password, which can be done in:
+
+WHMCS Module Settings > CloudLinux Licenses.
+
+Please note, the access to the CloudLinux API is available to the reseller level accounts only.
+
+The "username" here is your cln.cloudlinux.com login.
+
+The "password" is the IP secret key from _Personal Information_ tab at [https://cln.cloudlinux.com/console/profile/details](https://cln.cloudlinux.com/console/profile/details)
+
+CloudLinux WHMCS plugin documentation PDF file is available at [http://repo.cloudlinux.com/plugins/whmcs-cl-docs-latest.pdf](http://repo.cloudlinux.com/plugins/whmcs-cl-docs-latest.pdf)
+
+- **How can I add CloudLinux OS activation keys when I became a reseller?**
+
+As an IP partner, you cannot create activation keys.
+
+You need to add server IP into the partner interface, and then use:
+
+```
+# sh cldeploy.sh -i
+```
+
+to convert the server to CloudLinux OS;
+
+or
+
+```
+# clnreg_ks --force
+```
+
+to register an existing server.
+
+::: tip Note
+This works only with servers with public IP address or 1:1 NAT.
+:::
+
+### - **How do I move a license from one server to another?**
+
+To move a license from one server to another, do the following:
+
+1) Log in to https://cln.cloudlinux.com;
+2) Choose _Dashboard_ at the top menu and click on _Servers_ on the left hand side;
+3) Delete an old server;
+4) Click on the product name at the top menu;
+5) Pick a key with 'Usage' like 0/1 or any other key where usage is smaller than the total (the syntax is usage/total);
+6) Use that key to register a new server according to the product documentation.
 
 ## Troubleshooting
 
@@ -119,14 +198,39 @@ If you have more than one outstanding invoice and only one of them has been paid
 
 If your account has been blocked due to non-payment, you will receive a billing notification with instructions on how to settle the debt and unlock the account via email. The billing notification will also contain the alternative payment link that you can use for a quick payment. If the problem persists, please contact the Billing department at [https://cloudlinux.zendesk.com](https://cloudlinux.zendesk.com) for further assistance and investigation.
 
-- **Is it possible to have Paypal and Credit Card payment methods set up at the same time?**
+- **CloudLinux Network Status Report: Systems Not Checking In (for CloudLinux OS)**
 
-No, you have to choose one payment method to be active in a single CLN account.
+If you receive an email saying that your system failed to check in, like:
 
-- **How to add one another product in my CLN account?**
+<div class="notranslate">
 
-All the purchases are done the same way — adding a product to a cart and proceeding with the checkout. Each subscription type will have its own invoice generated every month/year. For example, KernelCare, CloudLinux OS, Imunify360 single-user and Imunify360 unlimited user will all have separate invoices generated every billing period.
+```
+Systems Not Checking In:
+-------------------------
+The following systems recently stopped checking in with CloudLinux Network:
 
-- **Where can I update my personal and company information?**
+System Id System Name Last Checkin
+11111111 server1.hostcompany.com 2011-05-10 20:39:20.0
+```
+</div>
 
-Personal information and Password can be set in _Personal Information_ tab of _Account details_ left sidebar menu (see _Your Login → Settings_ at the top right). Company Information can be set in _Account details_ menu as well.
+It means that for some reason, system server1.hostcompany.com hasn't checked in to CLN. If that server is still in use, try running:
+
+<div class="notranslate">
+
+```
+/usr/sbin/rhn_check
+```
+</div>
+
+If you don't get any output - everything is good and you can ignore it.  If you get some message, it most probably means that system cannot connect to CLN. Create a trouble ticket and our support will check the reason from inside.
+
+- **An error when registering the server: Maximum usage count of 1 reached**
+
+If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server.
+
+You may use [the following](/kb/Billing/#cln-user-interface) as a reference to remove the server from CLN.
+
+::: tip Note
+Don't remove the license, remove only the server.
+:::
