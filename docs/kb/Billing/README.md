@@ -117,7 +117,11 @@ If you wish to continue using XX license(s) only, you need to cancel the unused 
 3. Click on _Manage servers_ -> select the server that is no longer needed
 4. Click on _CloudLinux OS/KernelCare OS/Imunify360 OS_ -> _Remove unused server licenses_
 
-Please, note that **step 4** results in removing the unused license and stopping the billing for that license. **If step 4 is not performed, the license will remain active and must be paid for regardless it's in use or not.**
+Please, note that **step 4** results in removing the unused license and stopping the billing for that license. 
+
+::: danger
+If step 4 is not performed, the license will remain active and must be paid for regardless it's in use or not.
+:::
 
 - **Where can I get API username and password for WHMCS plugin?**
 
@@ -157,11 +161,11 @@ to register an existing server.
 This works only with servers with public IP address or 1:1 NAT.
 :::
 
-### - **How do I move a license from one server to another?**
+### **How do I move a license from one server to another?**
 
 To move a license from one server to another, do the following:
 
-1) Log in to https://cln.cloudlinux.com;
+1) Log in to [https://cln.cloudlinux.com](https://cln.cloudlinux.com);
 2) Choose _Dashboard_ at the top menu and click on _Servers_ on the left hand side;
 3) Delete an old server;
 4) Click on the product name at the top menu;
@@ -229,7 +233,7 @@ If you don't get any output - everything is good and you can ignore it.  If you 
 
 If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server.
 
-You may use [the following](/kb/Billing/#cln-user-interface) as a reference to remove the server from CLN.
+You may use [the following](/kb/Billing/#how-do-i-move-a-license-from-one-server-to-another) as a reference to remove the server from CLN.
 
 ::: tip Note
 Don't remove the license, remove only the server.
