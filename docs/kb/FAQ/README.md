@@ -2,6 +2,10 @@
 
 ## PHP Selector integration with cPanel’s MultiPHP Manager
 
+- **What is CloudLinux OS?**
+
+CloudLinux OS is a commercially supported Linux operating system interchangeable with CentOS. It includes kernel level technology called LVE that allows you to control CPU and memory on per tenant basis. It is a basis for application level virtualization. CloudLinux OS delivers advanced resource management, better security and performance optimizations specifically targeted to the multi-tenant hosting environment. This improved performance helps hosting service providers and datacenters provide better support to their customers, reduce churn and save money.
+
 Q. **How could I set the Inherited option for all new accounts/websites by default?**
 
 A. You won’t have to; cPanel already sets the Inherited by default for all newly created accounts. You can find more information about the way PHP Inheritance works [on this page](https://documentation.cpanel.net/display/EA4/PHP+Inheritance#PHPInheritance-Howinheritanceworks).
