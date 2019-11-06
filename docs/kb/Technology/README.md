@@ -435,8 +435,389 @@ Generally yes, it does support most of the features. However, in some cases, you
 
 For more information and compatibility matrix, please see the following [article](/limits/#compatibility-matrix)
 
+## CloudLinux OS Hybrid Kernels
+
+Find the most recent information on this topic in our online [docs](/cloudlinux_os_kernel/#hybrid-kernels)
+
+## What happens when a site reaches its resource limit?
+
+Once a website reaches the limit of resources which has been set, the site will begin to slow down. Once the number of entry processes (Apache/HTTP requests is reached), a user will get a 503 error message. The website that is consuming too many resources will stop working but the other tenants on the server will continue to run normally.
+
+## Plesk and PHP Selector
+
+Plesk has its own PHP selection functionality since version 11.
+
+It is fully compatible with our PHP Selector and CageFS. What happens is that Plesk selector switches 'native' PHP version, while CloudLinux OS PHP Selector switches sites to alternate PHP versions.
+
+If you install different PHP versions from the link above to activate it for the customer you are required to run:
+
+<div class="notranslate">
+
+```
+# cagefsctl --force-update
+```
+</div>
+
+Resellers have no control over PHP-Selector, and shouldn't have any. Only admin & end customers have control over PHP-Selector.
+
+## How to fix the issue with non-UTF symbols in packages names
+
+Short issue description: if you see errors in console when runnning:  
+
+<div class="notranslate">
+
+```
+lvectl paneluserslimits --json 
+```
+</div>
+
+and some other commands, or in WHM - LVE Manager like this:
+
+<div class="notranslate">
+
+```
+Traceback (most recent call last):
+  File "/usr/sbin/lvectl", line 707, in <module>
+    main()
+  File "/usr/sbin/lvectl", line 598, in main
+    lve_commands.paneluserslimits()
+  File "/opt/alt/python27/lib/python2.7/site-packages/lvectllib.py", line 830, in paneluserslimits
+    result += formatter(user)
+  File "/opt/alt/python27/lib/python2.7/site-packages/lvectllib.py", line 774, in wrapper
+    lve_apply(user, plan_id=package, reseller=reseller, result=True)
+  File "/opt/alt/python27/lib/python2.7/site-packages/lvectllib.py", line 603, in lve_apply
+    reseller = guess_reseller_by_package (plan_id)[0]
+  File "/opt/alt/python27/lib/python2.7/site-packages/lvectllib.py", line 1828, in guess_reseller_by_package
+    package = package.decode('utf-8')
+  File "/opt/alt/python27/lib64/python2.7/encodings/utf_8.py", line 16, in decode
+    return codecs.utf_8_decode(input, errors, True)
+UnicodeDecodeError: 'utf8' codec can't decode byte 0xf1 in position 13: unexpected end of data
+```
+</div>
+
+This means that your browser encoding was not set to UTF-8 during the package creation, and it was saved with gibberish symbols. Next, when the package is assigned to one or more users, you will see the error listed above. For example:
+
+1. Your browser has ISO-8859-6 encoding set, and you create a package with some non-ASCII symbols (cyrillic in this case):
+ 
+2. Next, you create a new user and assign the package to that user:
+
+If you look at such user in the console, it usually looks as follows:
+
+<div class="notranslate">
+
+```
+# cat /var/cpanel/users/username
+
+BACKUP=1
+
+BWLIMIT=unlimited
+
+CONTACTEMAIL=
+
+…..
+
+OWNER=root
+
+PLAN=п�&amp;#65533;�&amp;#65533;�&amp;#65533;т�&amp;#65533;щ�&amp;#65533;
+```
+</div>
+
+The last line “PLAN=...” means which package is assigned to the user, and as you can see in the example above, the line contains gibberish symbols.
+
+cPanel only supports UTF-8 encodings and they have no plans to change that, so the PLAN= line with gibberish symbols must be manually changed to the corresponding plan, i.e. it should look like this: PLAN=пакетище
+
+Further recommendations:
+
+Fix the browser encoding to use one compatible with UTF-8. Since UTF-8 became the standard for all data on the Internet in 2009 the primary browsers (Internet Explorer/Edge, Firefox, Chrome, Safari) provide language encodings compatible with UTF-8. 
+
+## Different PHP versions per directories using mod_lsapi
+
+Here is an easy instruction of how to setup different PHP versions per directories when using [mod_lsapi](/cloudlinux_os_components/#apache-mod-lsapi-pro/).
+
+Assuming that you already have CageFS, PHP Selector and mod_lsapi installed, perform the following steps:
+
+1. Setup mod_lsapi (either globally or per domain).
+
+2. If EasyApache 4 is used - you should already have a _/etc/container/php.handler_ file with content inside:
+
+<div class="notranslate">
+
+```
+application/x-httpd-ea-php44-lsphp /opt/cpanel/ea-php44/root/usr/bin/lsphp
+application/x-httpd-ea-php51-lsphp /opt/cpanel/ea-php51/root/usr/bin/lsphp
+application/x-httpd-ea-php52-lsphp /opt/cpanel/ea-php52/root/usr/bin/lsphp
+application/x-httpd-ea-php53-lsphp /opt/cpanel/ea-php53/root/usr/bin/lsphp
+application/x-httpd-ea-php54-lsphp /opt/cpanel/ea-php54/root/usr/bin/lsphp
+application/x-httpd-ea-php55-lsphp /opt/cpanel/ea-php55/root/usr/bin/lsphp
+application/x-httpd-ea-php56-lsphp /opt/cpanel/ea-php56/root/usr/bin/lsphp
+application/x-httpd-ea-php70-lsphp /opt/cpanel/ea-php70/root/usr/bin/lsphp
+application/x-httpd-ea-php71-lsphp /opt/cpanel/ea-php71/root/usr/bin/lsphp 
+```
+</div>
+
+For other panels or no panel - create a _/etc/container/php.handler_ file with handlers for different PHP versions:
+
+<div class="notranslate">
+
+```
+application/x-lsphp52 /opt/alt/php52/usr/bin/lsphp
+application/x-lsphp53 /opt/alt/php53/usr/bin/lsphp
+application/x-lsphp54 /opt/alt/php54/usr/bin/lsphp
+application/x-lsphp55 /opt/alt/php55/usr/bin/lsphp
+application/x-lsphp56 /opt/alt/php56/usr/bin/lsphp
+application/x-lsphp71 /opt/alt/php71/usr/bin/lsphp 
+```
+</div>
+
+Restart Apache.
+ 
+3. Create _.htaccess_ file in the directory where you need to have a PHP version different from default with the right handler. 
+
+For cPanel with EasyApache4:
+
+<div class="notranslate">
+
+```
+<FilesMatch "\.(php4|php5|php3|php2|php|phtml)$">
+SetHandler application/x-httpd-ea-php71-lsphp
+</FilesMatch>
+```
+</div>
+
+For other panels or no panel:
+
+<div class="notranslate">
+
+```
+<FilesMatch "\.(php4|php5|php3|php2|php|phtml)$">
+SetHandler application/x-lsphp71
+</FilesMatch>
+```
+</div>
+
+As a result, subdirectories will use the same PHP version as the parent unless you overwrite it with another _.htaccess_ entry in that subdirectory.
+
+To match PHP extensions selection with extensions selected by the end user for that PHP version in PHP Selector you have to follow [this docs article](https://docs.cloudlinux.com/cloudlinux_os_components/#php-extensions).
+
+This way, the main website can use native PHP handler (suphp/fcgi) while subdirectory is using lsapi with necessary PHP version.
+
+::: tip Note 
+There is one little trick that can be confusing. It applies only if you have PHP Selector enabled and you have non-native version selected there for a user. In that case, if the version that you assign through .htaccess is the same as ea-php version selected as system default version in WHM -> MultiPHP Manager -> System Default version, that version will not be applies, the version that you'll actually get will be the same as selected in PHP Selector.
+:::
 
 
+## Integrating LVE limits with packages for unsupported control panels
+
+The following [documentation](https://docs.cloudlinux.com/lve_manager/#control-panel-integration-guide) should be used to integrate LVE limits with packages for all unsupported panels or even for servers without panels.
+
+Here is an example script and the basic steps.
+
+Before we start:
+
+- the script is simplified as much as possible for better understanding;
+
+- the script works only with one-word package names, without any spaces;
+
+- _user_package_ file logic is not good enough to handle a large amount of users/packages (but this is just an example).  
+
+1. Create the necessary directory and files:
+
+<div class="notranslate">
+
+```
+mkdir /etc/clpackages
+touch /etc/clpackages/user_package
+touch /etc/clpackages/custompkg.sh
+chmod 755 /etc/clpackages/custompkg.sh
+```
+</div>
+
+2. The _user_package_ file is just a relation between users and packages, add the following content:
+
+_501 Package1 502 BusinessPackage 503 Package1 504 Package1 505 BusinessPackage_
+
+3. The _custompkg.sh_ is the main script which will handle all the management. Add the following code to it:
+
+<div class="notranslate">
+
+```
+#!/bin/bash
+
+PDIR="/etc/clpackages"
+cd $PDIR
+
+case "$1" in
+        --list-all)
+
+                cat user_package
+
+        ;;
+        --userid=*)
+                uid=${1#*=}
+                cat user_package | grep $uid | awk '{ print $2 }'
+        ;;
+        --package=*)
+                pack=${1#*=}
+                cat user_package | grep $pack | awk '{ print $1 }'
+        ;;
+        --list-packages)
+                cat user_package | awk '{ print $2 }' | sort | uniq
+        ;;
+        *)
+                echo "Usage:
+--help               show this message
+--list-all           prints <userid package> pairs (accepts no parameters);
+--userid=id          prints package for a user specified
+--package=package    prints users for a package specified
+--list-packages      prints packages list"
+        ;;
+esac
+```
+</div>
+
+4. Configure LVE to use the custom script: open /etc/sysconfig/cloudlinux and add there:
+
+<div class="notranslate">
+
+```
+CUSTOM_GETPACKAGE_SCRIPT=/etc/clpackages/custompkg.sh
+```
+</div>
+
+5. Set some limits for the packages:
+
+<div class="notranslate">
+
+```
+lvectl package-set Package1 --speed=100% --pmem=1G
+lvectl package-set BusinessPackage --speed=200% --pmem=2G
+```
+</div>
+
+Check if they have been properly set:
+
+<div class="notranslate">
+
+```
+lvectl package-list
+```
+</div> 
+
+_ID   SPEED    NCPU    PMEM    VMEM      EP   NPROC      IO VE_DEFAULT     200       0      0M      0M      20      20       0 BusinessPackage     200       0   2048M      0M      20      20       0 Package1     100       0   1024M      0M      20      20       0_
+
+6. Check users assignment (is already done by our script):
+
+<div class="notranslate">
+
+```
+# getcontrolpaneluserspackages --list-all
+```
+</div>
+
+_501 Package1 502 BusinessPackage 503 Package1 504 Package1 505 BusinessPackage_
+
+7. Apply limits for all accounts:
+
+<div class="notranslate">
+
+```
+lvectl apply all
+lvectl list | grep 501
+```
+</div>
+
+_501     100       1    1.0G      0K      20      20       0_
+	 
+## Why CageFS installation changes jailshell to regular bash on cPanel?
+
+During CageFS package installation or update, all users with jailshell enabled will have it changed to regular /bin/bash in _/etc/passwd_ .
+
+This is done to avoid possible conflict with virtfs when non-cagefs user enters virtfs, jailshell copies all mountpoints from cagefs-skeleton to _/home/virtfs/$USER_. Those mount points are duplicated for each user (approx 54 mount point per user).
+
+<div class="notranslate">
+
+```
+/dev/sda1 /home/virtfs/korvin/usr/share/cagefs-skeleton/opt/alt ext4 ro,nosuid,relatime,barrier=1,data=ordered,jqfmt=vfsv0,usrjquota=quota.user 0 0
+/dev/sda1 /home/virtfs/korvin/usr/share/cagefs-skeleton/usr/lib ext4 ro,nosuid,relatime,barrier=1,data=ordered,jqfmt=vfsv0,usrjquota=quota.user 0 0
+/dev/sda1 /home/virtfs/korvin/usr/share/cagefs-skeleton/usr/lib64 ext4 ro,nosuid,relatime,barrier=1,data=ordered,jqfmt=vfsv0,usrjquota=quota.user 0 0
+/dev/sda1 /home/virtfs/korvin/usr/share/cagefs-skeleton/usr/include ext4 ro,nosuid,relatime,barrier=1,data=ordered,jqfmt=vfsv0,usrjquota=quota.user 0 0
+/dev/sda1 /home/virtfs/korvin/usr/local/cpanel/3rdparty/mailman/logs ext4 rw,relatime,barrier=1,data=ordered,jqfmt=vfsv0,usrjquota=quota.user 0 0
+/proc/bus/usb /home/virtfs/korvin/usr/share/cagefs-skeleton/proc/bus/usb usbfs ro,nosuid,relatime 0 0
+```
+</div>
+
+This could result in a really large number of mount points which could lead to slow system performance. It is secure to provide bash access to users as long as you have CageFS enabled.
+
+## EP and NPROC limits - a look from inside
+
+The main purpose of this article is to describe EP and NPROC limits in more details for better understanding of their operation.
+
+So, **EP limits** purpose is to define the **maximum amount of active connections** to the web server inside LVE (1 user account = 1 LVE). When we set EP limits for an account, then we strictly limit the number of concurrent Apache connections to be served by a specific website. Each time a website request enters LVE, the EP counter is being incremented.
+
+Note that the EP counter value wouldn't be incremented in case of a PHP process inside LVE is calling some external process (like cron, Sendmail, Exim, MySQL etc.), all of them would be considered as a single LVE entry - single connection, because EP counter doesn't include the child processes created inside LVE.
+
+**NPROC limits** purpose is to define the **maximum number of processes inside LVE**. Such as ssh/cron/php/pop3/imap etc. They don't increment the value of the EP counter due to being executed with the LVE_NO_MAXENTER flag.
+
+It's important to note, that the NPROC limits should always be higher than the EP. Sometimes you could see that there is only 1 EP connection, but the PNO value is much higher (using the "lvetop" utility). There are two possible reasons for such behavior:
+
+1. The invoked PHP script has made a call to some external application from inside the user LVE (like cron, Sendmail, Exim, MySQL etc.)
+2. In case you use any of the following handlers: PHP-LiteSpeed, FastCGI or PHP-FPM, there is a chance that additional child processes (like lsphp/fastcgi/php-fpm) could be spawned and stay inside LVE for some time.
+
+It's also important to note that such behavior is only actual for the mentioned handlers. As suPHP for example, terminates the process upon the PHP request completion, and in this case, NPROC value most probably will be equal to EP value.
+
+## Mod_lsapi, Number of Processes (NPROC) and EP explained
+
+Apache [mod_lsapi](/cloudlinux_os_components/#apache-mod-lsapi-pro) is a great replacement for suPHP/FCGI engines. This article uncovers more about how lsphp works on a server by means of processes.   The scheme is that each time a process 'enters' into LVE, we increment the EP counter. Each time a process exits LVE, we decrement the counter. We don't count processes that are created inside LVE itself. When we talk about **lsapi**, the following image can explain more:
+![lsapi](/images/mod_lsapidiagrammnew.jpg)
+
+For the real request we have several processes: 
+- Apache process that accepts a connection, it is actually one that increases **EP**, it performs **lve_enter**. 
+- **lsphp** parent process (one per VirtualHost), which starts **lsphp** backends. 
+- **lsphp** backend process that actually processes requested PHP file. 
+
+Please review the results with a simple sleep.php script with sleep(30); inside presented below. The processes for single opening are:
+
+<div class="notranslate">
+
+```
+# lveps -p
+ID EP PNO COM TNO TID CPU MEM DT DO
+bogdan1 1 3 --- 3 --- 0 15 39340 1865
+--- --- lsphp:/home/bogdan1/publ --- 271509 0 4 N/A N/A
+--- --- lsphp --- 271508 0 4 N/A N/A
+--- --- /usr/sbin/httpd -k start --- 271024 0 4 N/A N/A
+```
+</div>
+
+We have one **EP** and three **NPROC** here.  Where Apache creates **lsapi** master process and it creates **lsphp** workers like on a screenshot above. When opening the same URL twice simultaneously you can see the following:
+
+<div class="notranslate">
+
+```
+# lveps -p
+ID EP PNO COM TNO TID CPU MEM DT DO
+bogdan1 2 5 --- 5 --- 0 20 39340 1865
+--- --- lsphp:/home/bogdan1/publ --- 271518 0 4 N/A N/A
+--- --- lsphp:/home/bogdan1/publ --- 271509 0 4 N/A N/A
+--- --- lsphp --- 271508 0 4 N/A N/A
+--- --- /usr/sbin/httpd -k start --- 271043 0 4 N/A N/A
+--- --- /usr/sbin/httpd -k start --- 271024 0 4 N/A N/A
+```
+</div>
+
+This time we have two **EPs** and five **NPROCs**, which is normal as parent lsphp is one per VirtualHost. If, for example, our PHP script creates another process (sending mail, etc.) the **EP** will remain the same as PHP script is already executed inside LVE. However, the number of processes for this LVE will increase. That is why **NPROC** should be greater than **EP**. There is no way to limit the number of parent PHP processes, it is only one per VirtualHost (not per account!). To keep users within limits you have to combine `lsapi_backend_children` with LVE NPROC/EP limits. Each lsphp worker process ends after the request is processed. Turning `"connection_pool_mode On"`  in lsapi config makes **lsphp** workers never finish - they stay alive for `lsapi_backend_max_idle` time, or until `lsapi_backend_max_reqs` is reached (or Apache restarted). All requests for every virtual host are spread across Apache worker almost equally. Connection pool grants faster processing mode, however, it will cause a higher number of processes per LVE (NPROC) and a bit higher memory usage.
+
+## Why uname is showing the old kernel version after KernelCare patches applied?
+
+The **uname** command always shows the same kernel version as before installing KernelCare. The reason we don't change the output of the uname command is due to the fact that we don't change original kernel signature or ABI with KernelCare. Yet, many install scripts depend on uname output to decide which modules to install or which header files to use for compilation.
+
+As such, changing the output of uname will create a lot of issues.
+
+You can get 'effective' kernel uname info by running:
+
+```
+kcare-uname
+```
 
 ## We found that SELinux is disabled. Could you help us to enable it?
 
