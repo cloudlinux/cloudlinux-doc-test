@@ -114,7 +114,8 @@ module.exports = {
               children: [
                 "/kb/FAQ/",
                 "/kb/Technology/",
-                "/kb/Billing/"
+                "/kb/Billing/",
+                "/kb/HowDoI/"
               ],
             }],
           },
