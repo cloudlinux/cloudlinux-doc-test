@@ -1410,59 +1410,392 @@ You can specify any number as LVE_ID, just make it large enough so it would not 
 
 ## How do I configure CloudLinux kernel on Xen PV?
 
-1. In /etc/sysconfig/kernel should be the following lines:
+1. In _/etc/sysconfig/kernel_ should be the following lines:
 
-UPDATEDEFAULT=yes DEFAULTKERNEL=kernel-xen
+_`UPDATEDEFAULT=yes DEFAULTKERNEL=kernel-xen`_
+
 If the file does not exist, you should create it. 
 
 2. Install grub if it is not installed:
 
+<div class="notranslate">
+
+```
 yum install grub
+```
+</div>
 
-3. Check /etc/modprobe.conf It usually contains the following:
+3. Check _/etc/modprobe.conf_, it usually contains the following:
 
+<div class="notranslate">
+
+```
 cat /etc/modprobe.conf
-alias eth0 xennet
+```
+</div>
 
-alias scsi_hostadapter xenblk
+_`alias eth0 xennet
+alias scsi_hostadapter xenblk`_
 
-If the file does not exist - create it, and then, in case you have not installed kernel yet - proceed to step 4.
+If the file does not exist - create it, and then, in case you have not installed kernel yet - proceed to step **4**.
 
-In case you have already installed kernel: rebuild initrd image:
+In case you have already installed kernel, rebuild initrd image:
 
+<div class="notranslate">
+
+```
 mkinitrd -f /boot/initrd-2.6.xxxx.img 2.6.xxxx
-where 'xxxx' should be the same as you newly installed kernel-xen version and move to step 5.
+```
+</div>
+
+where `xxxx` should be the same as you newly installed `kernel-xen` version and move to step **5**.
 
 4. Run
 
+<div class="notranslate">
+
+```
 yum install kernel-xen
+```
+</div>
 
 5. Run
 
+<div class="notranslate">
+
+```
 ln -s /boot/grub/grub.conf /boot/grub/menu.lst
 ln -s /boot/grub/grub.conf /etc/grub.conf
-If /boot/grub/grub.conf does not exist, create it using the template in step 5, and repeat step 3. 5.
+```
+</div>
 
-Run
+If _/boot/grub/grub.conf_ does not exist, create it using the template in step 5, and repeat step 3.
 
+6. Run
+
+<div class="notranslate">
+
+```
 rpm -qa|grep kernel
+```
+</div>
+
 You should remove all kernels except Xen kernel. For example, if the output looks like this:
 
-kernel-2.6.18-338.5.1.el5.lve0.8.25 kernel-xen-2.6.18-374.3.1.el5.lve0.8.44 kernel-headers-2.6.18-374.3.1.el5.lve0.8.44
+_`kernel-2.6.18-338.5.1.el5.lve0.8.25 kernel-xen-2.6.18-374.3.1.el5.lve0.8.44 kernel-headers-2.6.18-374.3.1.el5.lve0.8.44`_ 
 then you should run
 
+<div class="notranslate">
+
+```
 rpm -e --nodeps kernel-2.6.18-338.5.1.el5.lve0.8.25
+```
+</div>
 
-6. Make sure your /etc/grub.conf looks like this:
+7. Make sure your _/etc/grub.conf_ looks like this:
 
-default=0 timeout=10 title CloudLinux Server (2.6.18-374.3.1.el5.lve0.8.44xen) root (hd0,0) kernel /boot/vmlinuz-2.6.18-374.3.1.el5.lve0.8.44xen console=xvc0 root=/dev/sda1 ro initrd /boot/initrd-2.6.18-374.3.1.el5.lve0.8.44xen.img
+_`default=0 timeout=10 title CloudLinux Server (2.6.18-374.3.1.el5.lve0.8.44xen) root (hd0,0) kernel /boot/vmlinuz-2.6.18-374.3.1.el5.lve0.8.44xen console=xvc0 root=/dev/sda1 ro initrd /boot/initrd-2.6.18-374.3.1.el5.lve0.8.44xen.img`_
 
 ::: tip Note
 Mind the kernel version on vmlinuz and initrd, they should match the version of currently installed kernel.
 :::
 
-7. Switch to pygrub mode, and reboot the server. If you don't know how to switch in pygrub mode, contact your service provider, as they should be able to do it for you.
+8. Switch to pygrub mode, and reboot the server. If you don't know how to switch in pygrub mode, contact your service provider, as they should be able to do it for you.
 
-bootloader = '/usr/bin/pygrub'
+_`bootloader = '/usr/bin/pygrub'`_
 
-##
+## How do I install Hyper-V integrated components?
+
+Hyper-V integrated components are included in the latest version of CloudLinux OS 6.
+
+No additional actions required to install them.
+
+## How do I move /usr/share/cagefs-skeleton to other place because of low disk space?
+
+::: tip Note
+If you are placing skeleton in /home directory on cPanel servers, you must configure the following option in cPanel WHM:
+WHM -> Server Configuration -> Basic cPanel/WHM Setup -> Basic Config -> Additional home directories 
+Change the value to blank (not to default "Home").
+Without changing this option, cPanel will create new accounts in incorrect places.
+:::
+
+<div class="notranslate">
+
+```
+cagefsctl --disable-cagefs
+cagefsctl --unmount-all
+```
+</div>
+
+Verify that the following command gives empty output:
+
+<div class="notranslate">
+
+```
+cat /proc/mounts | grep cagefs-skeleton
+```
+</div>
+
+Verify that the directory `cagefs-skeleton.bak` does not exist (if it does exist - change the name `cagefs-skeleton.bak` to something else):
+
+<div class="notranslate">
+
+```
+ls -d /usr/share/cagefs-skeleton.bak
+
+mv /usr/share/cagefs-skeleton /usr/share/cagefs-skeleton.bak
+
+mkdir -m 0755 /home/cagefs-skeleton
+ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
+cagefsctl --init
+cagefsctl --enable-cagefs
+cagefsctl --remount-all
+```
+</div>
+
+Verify that the following command gives empty output:
+
+<div class="notranslate">
+
+```
+cat /proc/mounts | grep cagefs-skeleton.bak
+```
+</div>
+
+Now you can safely remove `cagefs-skeleton.bak` directory:
+
+<div class="notranslate">
+
+```
+rm -rf /usr/share/cagefs-skeleton.bak
+```
+</div>
+
+## How do I move user's home folder to another location if I have CageFS installed?
+
+You can move home directories of the users in the following way:
+
+<div class="notranslate">
+
+```
+cagefsctl --disable username1 username2
+cagefsctl --unmount username1 username2
+```
+</div>
+
+Move home directories to a new location, edit _/etc/passwd_ to reflect new path then enable CageFS:
+
+<div class="notranslate">
+
+```
+cagefsctl --update-etc username1 username2
+cagefsctl --enable username1 username2
+```
+</div>
+
+## How to install Xen tools (guest utilities) on Citrix Xenserver 6.1 or Xen Cloud Platform 6.1?
+
+To install guest utilities, mount as usually CD ROM with tools to _/mnt/cdrom/_. Then do the following:
+
+1. Enter cdrom mounted location:
+
+<div class="notranslate">
+
+```
+cd  /mnt/cdrom/Linux
+```
+</div>
+
+Install needed software, use '-m 6' for CloudLinux OS 6:
+
+<div class="notranslate">
+
+```
+./install.sh -d rhel -m 6
+```
+</div>
+
+## How do I calculate reasonable inode limit?
+
+Inode limit can be considered as a number of files and directories one customer can own. Default WordPress installation has approximately 1,100 files/directories, default Magento install is 10,000, you would need to consider at least 30,000 to be an inode limit for a minimal package for your customers. You can calculate limits basing on current usage of your customers by running the following command. It will list top 50 entries that use inodes the most:
+
+<div class="notranslate">
+
+```
+repquota -a | grep -v root | awk '{print $6" "$1 }' | sort -g | tail -50
+```
+</div>
+
+Do not forget - temporary files and session files are also counted towards the inode limit.
+
+## How do I create local CloudLinux repository mirror?
+
+CloudLinux mirror requires a bit more than a typical repository mirror setup. We set up CLN proxy software to accommodate for authentication done by `yum-rhn-plugin` plugin.
+
+::: danger Important 
+To qualify as a CLN mirror, you need to have more than 50 servers in your datacenters.
+:::
+
+To host a mirror, please setup:
+
+- a VM with 4GB of RAM and 200GB of disk space running CentOS 7;
+- "firewalld" service should be running with sshd enabled;
+- domain name pointed to that mirror, like cl-mirror.yourdomain.com;
+
+Then create a support ticket and send us:
+
+- your CLN login name;
+- access to VM;
+- domain name pointed to that VM.
+
+We will setup a software that would act as a caching proxy allowing licensing to work. When done, your mirror will be added to the [mirror list](http://repo.cloudlinux.com/cloudlinux/mirrorlists/cln-mirrors)
+
+ETA is about 2-3 business days.
+
+## How do I install CloudLinux from scratch or convert existing server?
+
+To install CloudLinux OS on a new server you have to download and use provided .iso files. The files themselves and all the necessary information you can find [here](/cloudlinux_installation/#installing-new-servers).
+
+To convert existing server you need to download and run our script, which you can find [here](/cloudlinux_installation/#converting-existing-servers) with all the necessary instructions.
+
+Also, we provide a variety of different images for most common virtual machines, more information [here](/cloudlinux_installation/#cloudlinux-os-images).
+
+## How do I install VMware-Tools/Improving server performance when on VMware?
+
+If you notice some server slowing down (IO/memory) and this server is running on VMware, then we strongly recommend you to install [VMware-Tools](https://kb.vmware.com/s/article/340) - a suite of utilities that enhance the performance of VM guest operating system and improves its management.
+
+Check if they are installed and kernel modules are loaded, where `vmci` is the main one:
+
+<div class="notranslate">
+
+```
+# lsmod | grep vm
+```
+</div>
+
+_`vmci                   80373  1 vsock`_
+
+If you see no `vmci` in the output, then most probably they are not installed.
+
+We do recommend installing them from source code using this [article](https://kb.vmware.com/s/article/1018414)
+
+Installation process:
+
+Click in _VM menu > Guest > Install/Upgrade VMware tools_ (at least). After that, the cdrom will be attached as _/dev/cdrom_. Mount it:
+
+<div class="notranslate">
+
+```
+mkdir /mnt/cdrom
+mount /dev/cdrom /mnt/cdrom
+```
+</div>
+
+Then install kernel headers and VMware-Tools:
+
+<div class="notranslate">
+
+```
+yum install kernel-headers
+cd /mnt/cdrom/vmware-tools-distrib
+./vmware-install.pl
+```
+</div>
+
+Follow the wizard (pressing enter in most cases), make them enabled on startup.
+
+Check if `vmci` exists in lsmod.
+
+If you see tools installed but no module loaded - run the configuration from the command line:
+
+<div class="notranslate">
+
+```
+vmware-config-tools.pl
+```
+</div>
+
+## How do I convert Linode CentOS VPS to CloudLinux?
+
+For CentOS 6, please do the following steps:
+
+1. Install packages:
+
+<div class="notranslate">
+
+```
+yum install kernel grub
+```
+</div>
+
+2. Make sure that your _/boot/grub/grub.conf_ looks like this (if it does not exist, you should create it):
+
+<div class="notranslate">
+
+```
+default=0
+timeout=10
+title CentOS Server (2.6.32-279.5.2)
+root (hd0)
+kernel /boot/vmlinuz-2.6.32-279.5.2.el6.i686 root=/dev/xvda ro
+initrd /boot/initramfs-2.6.32-279.5.2.el6.i686.img
+```
+</div>
+
+3. Create symlinks:
+
+<div class="notranslate">
+
+```
+ln -s /boot/grub/grub.conf /boot/grub/menu.lst; ln -s /boot/grub/grub.conf /etc/grub.conf
+```
+</div>
+
+Once you are done, in the Linode Manager, edit your Linode configuration profile to use `pv-grub-x86_64` (or 32-bit one if you use 32-bit arch) as the Kernel.
+
+Make sure the root device is specified as `xvda`. Save your changes by clicking _Save Profile_ at the bottom of the page, and reboot your Linode from the _Dashboard_ tab.
+
+## How do I view lveinfo for more than 10 users?
+
+By default when you run `lveinfo`, it assumes `--limit=10`, and shows only top 10 results. So, if you want to see more, just add `--limit 1000` like:
+
+<div class="notranslate">
+
+```
+# lveinfo --period=1d --limit 1000
+```
+</div>
+
+Also, it is possible to create a graphical chart for the particular user. You can use this command:
+
+<div class="notranslate">
+
+```
+# lvechart -u USERNAME --period=1d --width=12 -o chart-USERNAME.png
+```
+</div>
+
+## How do I enable pygrub in HyperVM?
+
+To enable `pygrub`, please go to _Advanced --> Append To Xen Config_ and enter the line:
+
+<div class="notranslate">
+
+```
+bootloader = "/usr/bin/pygrub"
+```
+</div>
+
+Then click _Update_ and reboot the VM. Also, change one line in VM _/boot/grub/grub.conf_ file: `root (hd0,0)` to `root (hd0)`
+
+::: tip Note 
+This is only for HyperVM ver2.0, pygrub is officially supported in ver2.2.x
+:::
+
+## How do I set/resize my AWS instance storage size?
+
+Before starting your instance, you can choose storage size in the _Storage_ section.
+
+If your instance is already running, please refer to Amazon's [official instruction](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html)
+
+## How to install and configure kdump to obtain vmcore?
