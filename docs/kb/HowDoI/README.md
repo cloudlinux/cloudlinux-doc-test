@@ -2012,4 +2012,366 @@ The `lvetop` utility, as well as `lveps -d`, show dynamic CPU (and other) usage,
 
 Without '-d' key it shows static processes/threads that are running 'now'. The values in CPU column (yellow square in this example) are the number of seconds LVE/process/thread has been running. This is an increasing counter and is reset with a reboot or with `lvectl destroy UID/all`. Overall, it is not a trivial task to show all the processes that generate CPU usage for any LVE, and process accounting is not cheap for the system. To summarize - there is no way to prove CPU usage shown in `lveinfo`/`lvetop`, like for example [memory usage](/kb/HowDoI/#checking-personal-users-disk-cache-if-lveinfo-show-memory-usage-but-no-processes-there/):
 
-##
+## High iowait and/or load average when APC enabled in PHP Selector
+
+If you are experiencing high iowait or high IO usage by single LVE or load average jumps after enabling APC, the most probable reason is due to the following directive in _/opt/alt/php5*/etc/php.d.all/apc.ini_:
+
+<div class="notranslate">
+
+```
+apc.mmap_file_mask = /tmp/apc.shm.XXXXXX
+```
+</div>
+
+There are internet articles related to the same subject, like [this]( http://serverfault.com/questions/361032/high-disk-i-o-when-cache-is-used). We decided to change it to _/dev/zero_ by default, the same will be applied to all new installations. For existing installs you have to edit each _/opt/alt/php5*/etc/php.d.all/apc.ini_ and then execute:
+
+<div class="notranslate">
+
+```
+cagefsctl --rebuild-alt-php-ini
+```
+</div>
+
+## Why alt-php.ini files become overwritten after Alt-PHP updates?
+
+During Alt-PHP packages update, we don't rewrite _*ini_ files at all. Only two PHP variables are reset to the values from the native _php.ini_ file, they are `error_log` and `date.timezone`.
+
+To prevent this situation, you should define `error_log` and `date.timezone` values in _/etc/cl.selector/global_php.ini_ file and run the following command to apply changes:
+
+<div class="notranslate">
+
+```
+cagefsctl --setup-cl-selector
+```
+</div>
+
+As a result, all settings from the files above will be taken for _*ini_ files for all versions inside PHP-Selector.  
+
+The current incarnation of PHP Selector is that it will not overwrite Alt-PHP ini files if values in them are different from defaults as that could break websites functionality. You have to run a command with a key to overwrite them. Please find more information [here](/cloudlinux_os_components/#configuring-global-php-ini-options-for-all-alt-php-versions)
+
+## How to patch PHP-FPM binary file?
+
+This article describes how to apply our patches for PHP-FPM. First of all, you should download "PHP" archive (Note that this link will be different for each PHP version). In this case we will use PHP 5.4.45 version:
+
+<div class="notranslate">
+
+```
+wget http://nl3.php.net/get/php-5.4.45.tar.gz/from/this/mirror
+```
+</div>
+
+When download completed, rename, unpack and change its directory:
+
+<div class="notranslate">
+
+```
+mv mirror.1 php-5.4.45.tar.gz
+tar -zxvf php-5.4.45.tar.gz
+cd php-5.4.45/
+```
+</div>
+
+Then download the following package which contains all the necessary files to apply patches:
+
+<div class="notranslate">
+
+```
+wget http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz
+tar -zxvf cl-apache-patches.tar.gz
+```
+</div>
+
+Before applying CloudLinux patches, please make sure that `liblve-devel` has already been installed into the system:
+
+<div class="notranslate">
+
+```
+rpm -qa | grep liblve-devel
+```
+</div>
+
+`liblve-devel-1.3-1.10.el6.cloudlinux.x86_64`
+
+If not, please run:
+
+<div class="notranslate">
+
+```
+yum install liblve-devel -y
+```
+</div>
+
+On CloudLinux OS 7 server - install `systemd-devel`:
+
+<div class="notranslate">
+
+```
+yum install systemd-devel
+```
+</div>
+
+Apply patch:
+
+<div class="notranslate">
+
+```
+patch -p1 < fpm-lve-php5.4.patch
+```
+</div>
+
+If everything looks fine, please run the following commands to build it (CloudLinux OS 6):
+
+<div class="notranslate">
+
+```
+autoconf 
+./configure --enable-fpm
+make
+```
+</div>
+
+CloudLinux OS 7 requires `systemd` support:
+
+<div class="notranslate">
+
+```
+autoconf
+./configure --enable-fpm --with-fpm-systemd
+make
+```
+</div>
+
+When rebuild completed, find a new PHP-FPM binary file:
+
+<div class="notranslate">
+
+```
+find . | grep php-fpm
+```
+</div>
+
+`./sapi/fpm/php-fpm`
+
+To make sure that it contains all our patches run:
+
+<div class="notranslate">
+
+```
+strings ./sapi/fpm/php-fpm | egrep "jail|lve"
+```
+</div>
+
+`liblve.so.0 lve_exit init_lve lve_jail_uid destroy_lve lve_enter_flags fpm_lve_enter fpm_lve_leave`
+
+If everything looks fine, please rename the current PHP-FPM file:
+
+<div class="notranslate">
+
+```
+which php-fpm
+```
+</div>
+
+`/usr/local/sbin/php-fpm`
+
+<div class="notranslate">
+
+```
+mv /usr/local/sbin/php-fpm /usr/local/sbin/php-fpm.old
+```
+</div>
+
+And copy the new one:
+
+<div class="notranslate">
+
+```
+cp /root/php-5.4.45/sapi/fpm/php-fpm /usr/local/sbin/
+```
+</div>
+
+Then you need to restart PHP-FPM service to apply changes and check PHP info page.
+
+## Different PHP versions per directories using suPHP
+
+We had few requests to support different PHP versions per directory. While this is not available using PHP Selector UI, it is fairly simple to do manually. The important requirement is that PHP must be set to run in suPHP mode. Tested with cPanel, however it will work on any other server.
+
+Here is quick how-to:
+
+1. Configure handlers for different versions and point them to already provided `php-cgi` binaries, they all are visible from inside CageFS.
+
+Add the following section to `handlers` section in _/opt/suphp/etc/suphp.conf_:
+
+<div class="notranslate">
+
+```
+application/x-httpd-php52="php:/opt/alt/php52/usr/bin/php-cgi"
+application/x-httpd-php53="php:/opt/alt/php53/usr/bin/php-cgi"
+application/x-httpd-php54="php:/opt/alt/php54/usr/bin/php-cgi"
+application/x-httpd-php55="php:/opt/alt/php55/usr/bin/php-cgi"
+application/x-httpd-php56="php:/opt/alt/php56/usr/bin/php-cgi"
+application/x-httpd-php70="php:/opt/alt/php70/usr/bin/php-cgi"
+application/x-httpd-php71="php:/opt/alt/php71/usr/bin/php-cgi"
+```
+</div>
+
+for EasyApache 4 you need to add handlers into _/etc/suphp.conf_ file.
+
+2. Add suPHP handlers for each version, this should be done before other configs. On cPanel server, edit _/usr/local/apache/conf/includes/pre_virtualhost_global.conf_ and add the following section:
+
+<div class="notranslate">
+
+```
+<IfModule mod_suphp.c>
+<Directory />
+suPHP_AddHandler application/x-httpd-php52
+suPHP_AddHandler application/x-httpd-php53
+suPHP_AddHandler application/x-httpd-php54
+suPHP_AddHandler application/x-httpd-php55
+suPHP_AddHandler application/x-httpd-php56
+suPHP_AddHandler application/x-httpd-php70
+suPHP_AddHandler application/x-httpd-php71
+</Directory>
+</IfModule>
+```
+</div>
+
+3. Restart Apache:
+
+<div class="notranslate">
+
+```
+# service httpd restart
+```
+</div>
+
+That’s it, now Apache understands what binary should be used for different mime types. To use the desired version in a particular directory, just add a line to .htaccess in that directory (or create .htaccess file with that line, if it is not there). For example, for php5.4, add the following line:
+
+<div class="notranslate">
+
+```
+AddHandler application/x-httpd-php54 .php .php5
+```
+</div>
+
+Subdirectories will use the same PHP version as the parent unless you override it with another .htaccess entry in that subdirectory. To match PHP extensions selection with extensions selected by an end user for that PHP version in PHP Selector you have to follow [this article](/cloudlinux_os_components/#php-extensions). This is not an officially supported way to run multiple PHP per account, but it is a safe hack that will work for anyone using suPHP.
+
+::: tip Note
+There is one little trick that can be confusing. It applies only if you have PHP Selector enabled and you have non-native version selected there for a user. In that case, if the version that you assign through .htaccess is the same as ea-php version selected as system default version in WHM -> MultiPHP Manager -> System Default version, that version will not be applies, the version that you'll actually get will be the same as selected in PHP Selector.
+:::
+
+## Integrating LDAP users with CageFS
+
+When using LDAP to store user data it requires additional configuration to work properly with CageFS. By default CageFS does not see LDAP user, like this:
+
+<div class="notranslate">
+
+```
+# id adam
+uid=16859(adam) gid=100(users) groups=100(users)
+# cagefsctl --enable adam
+Error: user adam does not exist
+```
+</div>
+
+The problem is that in LDAP `pwd.getpwall()` function doesn't work by default:
+
+<div class="notranslate">
+
+```
+# python -c 'import pwd; print pwd.getpwall()' | grep adam
+#
+# python -c 'import pwd; print pwd.getpwnam("adam")'
+pwd.struct_passwd(pw_name='adam', pw_passwd='*', pw_uid=16859, pw_gid=100, pw_gecos='adam', pw_dir='/home/adam', pw_shell='/bin/bash')
+```
+</div>
+
+To fix it you should set `enumerate=true` in _sssd.conf_ file:
+
+`enumerate (bool) Determines if the domain can be enumerated. This parameter can have one of the following values: TRUE = Users and groups are enumerated FALSE = No enumerations for this domain Default: FALSE`
+
+## How to activate inode usage displaying in cPanel?
+
+::: warning
+cPanel only
+:::
+
+LVE Manager inodes Limits extension allows you to set inodes limits for your customers. An inode is a data structure on a file system used to keep information about a file or a folder. The number of inodes indicates the number of files and folders an account has. inodes limits work on the level of system disk quota.
+
+To display inode usage in user's panel the following should correspond:
+
+1. System quotas enabled and working.
+
+2. cPanel inode count is turned off in _WHM > Tweak settings_. 
+
+3. `Show end-user inodes usage` option is enabled in _WHM > CloudLinux LVE Manager > Options_.
+
+## How to fix cPanel mailing list archiving functionality when link traversal protection is enabled?
+
+If [link traversal protection](/cloudlinux_os_kernel/#link-traversal-protection) is enabled on cPanel server, the mailman archiving feature stops working as it creates some internal symlinks in _/usr/local/cpanel/3rdparty/mailman/archives/private/listname_domain.com/_. You may notice the following error in _/usr/local/cpanel/3rdparty/mailman/logs/error_ file:
+
+`Oct 19 23:49:21 2015 (532564) Uncaught runner exception: [Errno 2] No such file or directory Oct 19 23:49:21 2015 (532564) Traceback (most recent call last): File "/usr/local/cpanel/3rdparty/mailman/Mailman/Queue/Runner.py", line 119, in _oneloop self._onefile(msg, msgdata) File "/usr/local/cpanel/3rdparty/mailman/Mailman/Queue/Runner.py", line 190, in _onefile keepqueued = self._dispose(mlist, msg, msgdata) File "/usr/local/cpanel/3rdparty/mailman/Mailman/Queue/ArchRunner.py", line 73, in _dispose mlist.ArchiveMail(msg) File "/usr/local/cpanel/3rdparty/mailman/Mailman/Archiver/Archiver.py", line 216, in ArchiveMail h.processUnixMailbox(f) File "/usr/local/cpanel/3rdparty/mailman/Mailman/Archiver/pipermail.py", line 586, in processUnixMailbox self.add_article(a) File "/usr/local/cpanel/3rdparty/mailman/Mailman/Archiver/pipermail.py", line 623, in add_article self.new_archive(arch, archivedir) File "/usr/local/cpanel/3rdparty/mailman/Mailman/Archiver/pipermail.py", line 608, in new_archive self.open_new_archive(archive, archivedir) File "/usr/local/cpanel/3rdparty/mailman/Mailman/Archiver/HyperArch.py", line 1047, in open_new_archive os.symlink(self.DEFAULTINDEX+'.html',index_html) OSError: [Errno 2] No such file or directory`
+
+To fix the issue you should add `mailman` user to `linksafe` group, so it could manage symlinks as needed:
+
+<div class="notranslate">
+
+```
+usermod -a -G linksafe mailman
+```
+</div>
+
+## How to mount a directory inside CageFS for particular users only?
+
+The easiest way is to use [split](/cloudlinux_os_components/#split-by-username) approach. But it will work only if you add a username inside the directory you want to share:
+
+<div class="notranslate">
+
+```
+$ mkdir /sharedir
+$ ln -s /share_dir /sharedir/username
+$ ln -s /sharedir/username /usr/share/cagefs-skeleton/share_dir
+$ echo "%/sharedir" >> /etc/cagefs/cagefs.mp
+$ cagefsctl --remount-all
+```
+</div>
+
+Please note that first you create empty `sharedir` directory, and the actual content is located in `share_dir`
+
+## How to add own comments to PHP versions in PHP Selector?
+
+CloudLInux OS provides an opportunity to add custom comments to PHP versions, chosen with PHP Selector by users. Usually, they are used to notify users about outdated or recommended versions.
+
+Upon forming a list of available versions `selectorctl` tool is looking for _/opt/alt/phpXX/name_modifier_ file to append it as a comment to a version.
+
+To add your own comments - create a file for desired PHP version and write a text inside:
+
+<div class="notranslate">
+
+```
+$ vi /opt/alt/php54/name_modifier
+```
+</div>
+
+Do the same for other PHP versions. The changes are applied instantly. Make sure to add just a few words not to break dropdown list. The text will be shown in brackets in the LVEmanager UI:
+
+<div class="notranslate">
+
+```
+$ selectorctl -i php --summary
+```
+
+```
+4.4 e - Totally unsupported version  
+5.1 - - Totally unsupported version  
+5.2 - - Totally unsupported version  
+5.3 e - Outdated version  
+5.4 e - Outdated version  
+5.5 e - Safe to use  
+5.6 e d Supported version  
+7.0 e - Recommended version  
+native e -
+```
+</div>
+
+## 
