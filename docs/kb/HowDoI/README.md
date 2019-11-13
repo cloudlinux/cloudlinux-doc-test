@@ -1799,3 +1799,217 @@ Before starting your instance, you can choose storage size in the _Storage_ sect
 If your instance is already running, please refer to Amazon's [official instruction](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html)
 
 ## How to install and configure kdump to obtain vmcore?
+
+If you have a non-responding server and no useful errors are shown in _/var/log/messages_, the way to find the reason is to install and configure `kdump`, so it will create a core dump file when the server hangs. In some cases `kdump` could not help on XEN PV machines, however, in any case, you should try it as on regular servers it is really doing a good job. Here are the steps to install and configure kdump:
+
+1. Install kexec-tools:
+
+<div class="notranslate">
+
+```
+yum install kexec-tools
+```
+</div>
+
+Edit _/etc/kdump.conf_, and set the path variable to point to a directory with enough space to hold kernel dump file (default location is _/var/crash/_). File size will be about the size of the server RAM + 1GB.
+
+2. Edit /etc/grub.conf.
+
+For CloudLinux OS 6 add to the kernel line as another boot parameter or modify existing one:
+
+<div class="notranslate">
+
+```
+crashkernel=160M (or crashkernel=auto)
+```
+</div>
+
+For CloudLinux OS 7 edit _/etc/default/grub_ and add `crashkernel=auto` to `GRUB_CMDLINE_LINUX` parameter (or modify existing one) so it should look like this:
+
+_`GRUB_CMDLINE_LINUX="crashkernel=auto rhgb quiet"`_
+
+Here is the link to the official RHEL recommendation regarding the crashkernel value: [https://access.redhat.com/solutions/916043](https://access.redhat.com/solutions/916043)
+
+Rebuild grub config file with the following command:
+
+<div class="notranslate">
+
+```
+grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+</div>
+
+3. For CloudLinux OS 6 - add `kdump` to `chkconfig` and turn it **On** during boot:
+
+<div class="notranslate">
+
+```
+chkconfig --add kdump
+chkconfig kdump on
+```
+</div>
+
+4. Modify _/etc/sysctl.conf_ file and add the following block to catch all possible panic states:
+
+<div class="notranslate">
+
+```
+# Enable reboots on panic to allow kdump make dumps
+kernel.sysrq=1
+kernel.hung_task_panic = 1
+kernel.panic = 1
+kernel.panic_on_io_nmi = 1
+kernel.panic_on_oops = 1
+kernel.panic_on_stackoverflow = 1
+kernel.panic_on_unrecovered_nmi = 1
+kernel.softlockup_panic = 1
+kernel.unknown_nmi_panic = 1
+```
+</div>
+
+5. Reboot.
+After the server boot check if kdump is running with:
+
+<div class="notranslate">
+
+```
+service kdump status
+```
+</div>
+
+Obtaining coredump if server hangs is described [here](/kb/HowDoI/#how-to-obtain-kdump-if-server-hangs).
+
+## How To Obtain Vmcore When the Server is Unresponsive?
+
+Assuming you already have kdump configured and functioning.
+
+If you need to generate a coredump from a server without physical access to it, you may want to allow the kernel to call the panic routine when it receives an unknown non-maskable interrupt (NMI). In order to allow it, you have to edit _/etc/sysctl.conf_ and add the following line:
+
+<div class="notranslate">
+
+```
+kernel.unknown_nmi_panic = 1
+```
+</div>
+
+Apply changes with:
+
+<div class="notranslate">
+
+```
+sysctl -p
+```
+</div>
+
+To generate a core you may use some web-based 'KVM' services, most of them have the ability to send NMI to host. Another possible way in case of IPMI has been configured is to send unknown NMI with the `impitool` command:
+
+<div class="notranslate">
+
+```
+ipmitool -I lan -H <hostname> chassis power diag
+```
+</div>
+
+In the case of _`"BUG: soft lockup - CPU#7 stuck for 67s"`_ messages in _/var/log/message_, you need to switch `kernel.softlockup_panic` to `1` to have the core file created automatically. To achieve that, edit _/etc/sysctl.conf_ and insert the following line:
+
+<div class="notranslate">
+
+```
+kernel.softlockup_panic = 1
+```
+</div>
+
+Apply changes with:
+
+<div class="notranslate">
+
+```
+sysctl -p
+```
+</div>
+
+## How to upgrade CloudLinux OS 6 to CloudLinux OS 7?
+
+There is no direct upgrade path from CloudLinux OS 6 to CloudLinux OS 7, therefore the only way is to move accounts to a new server with CloudLinux OS 7 installed.
+
+This is due to the fact that a large number of 3rd party components (such as control panels) are installed on a typical CloudLinux OS 7 server, which makes it impossible to gracefully upgrade the OS without breaking control panels.
+
+We will work to improving the situation in the future, yet it depends on the collaboration of control panel providers.
+
+## How do I choose which kernel to boot on CloudLinux OS 7?
+
+CloudLinux OS 7 brings GRUB2 with the totally new scheme of booting the kernels, the old edit file is not applicable anymore. The correct way to boot needed kernel (use an older kernel, CentOS kernel one or debug kernel) is with `grub2-set-default` command.
+
+1. Take a needed kernel with :
+
+<div class="notranslate">
+
+```
+$ awk -F\' '$1=="menuentry " {print i++ " =  "$2}' /etc/grub2.cfg
+```
+
+```
+0 =  CloudLinux (3.10.0-427.18.2.lve1.4.27.el7.x86_64) 7.3 (Yury Malyshev)
+1 =  CloudLinux (3.10.0-427.36.1.lve1.4.26.el7.x86_64) 7.3 (Yury Malyshev)
+2 =  CloudLinux (3.10.0-427.18.2.lve1.4.24.el7.x86_64) 7.2 (Valeri Kubasov)
+3 =  CloudLinux (0-rescue-1d7e5b9aa3bd48e99e108700e5458d82) 7.2 (Valeri Kubasov)
+```
+</div>
+
+::: tip Note
+The position of a menu entry in the list is denoted by a number starting with zero, so we are numbering it especially in a correct way.
+:::
+
+2. Set to boot needed kernel with command line:
+
+<div class="notranslate">
+
+```
+$ grub2-set-default 1
+```
+</div>
+
+Use the following command to check currently selected kernel to be booted:
+
+<div class="notranslate">
+
+```
+$ grub2-editenv list
+```
+
+`saved_entry=1`
+
+</div>
+
+More information about customizing GRUB2 could be found in the [official RedHat guide](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sec-Customizing_the_GRUB_2_Configuration_File.html).
+
+## Sharing more directories with single user account over CageFS
+
+Due to a design CageFS mounts user homes as _/home/username_, no matter in which _/home2/ .. /homeN/_ user reside on a real system.
+
+This could cause some PHP scripts to work incorrectly, however, CageFS has a mechanism to make any additional location with users content available from inside. This is also a quite useful way to share needed backup directories for users if you are giving FTP/SSH access to them. Also, you can use this feature to provide access to _/homeabc/username_ when _/home/username_ is a symlink to it.
+
+To enable this feature the following line should be added to _/etc/cagefs/cagefs.mp_ file:
+
+`%/homeabc`
+
+Then remount all with:
+
+<div class="notranslate">
+
+```
+cagefsctl --remount-all
+```
+</div>
+
+After that, a user can see both his _/home/username_ and _/homeabc/username_ from CageFS inside. Other directories in _/homeabc_ as well as in _/home_ will be still hidden for him.
+
+## How CPU usage is calculated?
+
+How to prove CPU usage is correct and it shows real data with `lveinfo`? Let us explain how `lvetop` works before answering this question.
+
+The `lvetop` utility, as well as `lveps -d`, show dynamic CPU (and other) usage, collected during 3 seconds period. Before iteration, the process gets running PIDs/threads (let's call them list1), and after iteration, it gets them again (list2). If the thread is in both list1 and list2 it will show some CPU%. If the thread is only in list1 but is not in list2, then it is shown as NA. All newly created threads that exist in list2 but are absent in list1 will not be shown.
+
+Without '-d' key it shows static processes/threads that are running 'now'. The values in CPU column (yellow square in this example) are the number of seconds LVE/process/thread has been running. This is an increasing counter and is reset with a reboot or with `lvectl destroy UID/all`. Overall, it is not a trivial task to show all the processes that generate CPU usage for any LVE, and process accounting is not cheap for the system. To summarize - there is no way to prove CPU usage shown in `lveinfo`/`lvetop`, like for example [memory usage](/kb/HowDoI/#checking-personal-users-disk-cache-if-lveinfo-show-memory-usage-but-no-processes-there/):
+
+##
