@@ -307,7 +307,7 @@ For PHP-Selector - move the _/etc/cl.selector_ directory and run:
 ```
 </div>
 
-To restore user's settings from PHP Selector, please refer to the following KnowledgeBase entry.
+To restore user's settings from PHP Selector, please refer to the [following](/kb/HowDoI/#how-to-restore-php-selector-options-after-restore-or-migration) KnowledgeBase entry.
 
 Basically, the custom PHP settings migration plan is:
 
@@ -2374,4 +2374,441 @@ native e -
 ```
 </div>
 
-## 
+## Running CloudLinux OS 7 with OVH server
+
+Servers from OVH can require additional configurations after converting to CloudLinux OS 7. Also, use this KB article if you are getting the following warning with cldeploy:
+
+`Invalid /etc/mdadm.conf file detected`
+
+Complete checklist to successfully run CloudLinux OS 7 kernel.
+
+1. Check for proper UUIDs and correct _mdadm.conf_ file formatting
+
+Obtain UUIDs for RAID devices with `mdadm` utility:
+
+<div class="notranslate">
+
+```
+$ mdadm --detail --scan
+```
+
+```
+ARRAY /dev/md2 metadata=0.90 UUID=70160d35:1398d208:a4d2adc2:26fd5302
+ARRAY /dev/md3 metadata=0.90 UUID=5ccb84a1:516cc4d3:a4d2adc2:26fd5302
+ARRAY /dev/md5 metadata=0.90 UUID=ae269fab:c345c72d:a4d2adc2:26fd5302
+```
+</div>
+
+Modify _/etc/mdadm.conf_ file to make it look like in the example below. Note that AUTO command is required.
+
+<div class="notranslate">
+
+```
+$ vi /etc/mdadm.conf
+```
+
+```
+MAILADDR root
+AUTO +imsm +1.x -all
+ARRAY /dev/md2 level=raid1 num-devices=2 UUID=70160d35:1398d208:a4d2adc2:26fd5302
+ARRAY /dev/md3 level=raid1 num-devices=2 UUID=5ccb84a1:516cc4d3:a4d2adc2:26fd5302
+ARRAY /dev/md5 level=raid1 num-devices=2 UUID=ae269fab:c345c72d:a4d2adc2:26fd5302
+```
+</div>
+
+
+::: tip Note
+It is only an example, you need to use ARRAY entries from output of mdadm --detail --scan command.
+:::
+
+2. Check for the proper command line in _grub.cfg_ file
+
+Check if `net.ifnames=0 rd.auto=1` are present in _grub.cfg_ file:
+
+<div class="notranslate">
+
+```
+$ grep "net.ifnames=0 rd.auto=1" /boot/grub2/grub.cfg
+```
+</div>
+
+If no output returned, you have to edit default grub:
+
+<div class="notranslate">
+
+```
+$ vi /etc/default/grub
+```
+</div>
+
+And add those options to `cmdline`:
+
+<div class="notranslate">
+
+```
+GRUB_CMDLINE_LINUX="net.ifnames=0 rd.auto=1"
+```
+</div>
+
+Rebuild _grub.cfg_:
+
+<div class="notranslate">
+
+```
+$ grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+</div>
+
+3. Check if RAID drivers added
+
+Make sure _raid.conf_ contains all the required options. In most cases `$add_drivers` is missing:
+
+<div class="notranslate">
+
+```
+$ vi /etc/dracut.conf.d/raid.conf
+```
+</div>
+
+It should look as follows:
+
+<div class="notranslate">
+
+```
+add_drivers="$add_drivers raid1 raid0"
+```
+</div>
+
+Rebuild _initramfs_ file, change kernel version in the example above to the latest one installed on your server:
+
+<div class="notranslate">
+
+```
+$ dracut -f /boot/initramfs-3.10.0-427.18.2.lve1.4.24.el7.x86_64.img 3.10.0-427.18.2.lve1.4.24.el7.x86_64
+```
+</div>
+
+3. Check if RAID drivers added
+
+Make sure _raid.conf_ contains all the required options. In most cases `$add_drivers` is missing:
+
+<div class="notranslate">
+
+```
+$ vi /etc/dracut.conf.d/raid.conf
+```
+</div>
+
+It should look as follows:
+
+<div class="notranslate">
+
+```
+add_drivers="$add_drivers raid1 raid0"
+```
+</div>
+
+Rebuild _initramfs_ file, change kernel version in the example above to the latest one installed on your server:
+
+<div class="notranslate">
+
+```
+$ dracut -f /boot/initramfs-3.10.0-427.18.2.lve1.4.24.el7.x86_64.img 3.10.0-427.18.2.lve1.4.24.el7.x86_64
+```
+</div>
+
+4. Optional, switch to UUIDs in _/etc/fstab_
+Obtain block IDs for `md` devices:
+
+<div class="notranslate">
+
+```
+$ blkid | grep md
+```
+
+```
+/dev/md2: LABEL="/boot" UUID="d154fcbd-7802-47a6-8d49-4be2688eee73" TYPE="ext4"
+/dev/md3: LABEL="/tmp" UUID="ea5e8258-7be3-42ea-984f-3e1fc83f35d1" TYPE="ext4"
+/dev/md5: LABEL="/" UUID="7936780f-36cc-4c13-a59e-3e599ba847d2" TYPE="ext4"
+```
+</div>
+
+Open _/etc/fstab_ and replace `md*` with UUIDs:
+
+<div class="notranslate">
+
+```
+$ vi /etc/fstab
+```
+
+```
+# <file system> <mount point> <type> <options> <dump> <pass>
+UUID=7936780f-36cc-4c13-a59e-3e599ba847d2 / ext4 errors=remount-ro,usrquota 0 1
+UUID=d154fcbd-7802-47a6-8d49-4be2688eee73 /boot ext4 errors=remount-ro 0 1
+UUID=ea5e8258-7be3-42ea-984f-3e1fc83f35d1 /tmp ext4 defaults 1 2
+
+proc /proc proc defaults 0 0
+sysfs /sys sysfs defaults 0 0
+tmpfs /dev/shm tmpfs defaults 0 0
+devpts /dev/pts devpts defaults 0 0
+```
+</div>
+
+5. Check if CloudLinux OS kernel is going to be booted with grub
+
+If needed - choose CloudLinux OS kernel. Please follow [this article ](#how-do-I-choose-which-kernel-to-boot-on-CloudLinux-os-7). If you experience any issues during server boot with CloudLinux OS 7 kernel - reboot the server into rescue console and create a ticket at [https://cloudlinux.zendesk.com/hc/en-us/requests/new](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
+
+## Managing MySQL packages on cPanel server for MySQL Governor installed
+
+If you have MySQL Governor installed, all MySQL upgrades and version changes should be changed using MySQL Governor tools, e.g. [https://docs.cloudlinux.com/cloudlinux_os_components/#change-mysql-version](/cloudlinux_os_components/#change-mysql-version)
+ 
+On cPanel servers, when `mysqlgovernor.py --install` is executed, we create _/var/cpanel/rpm.versions.d/cloudlinux.versions_
+ 
+The file is required to disable management of MySQL related packages provided by cPanel and allow MySQL Governor to manage them.
+ 
+**Note**. When you have an own definition for MySQL* in _local.versions_ or _cloudlinux.version_ file does not exist you have to run the following commands to ensure cPanel is no longer managing MySQL:
+
+<div class="notranslate">
+
+```
+/usr/local/cpanel/scripts/update_local_rpm_versions --edit target_settings.MySQL50 unmanaged
+/usr/local/cpanel/scripts/update_local_rpm_versions --edit target_settings.MySQL51 unmanaged
+/usr/local/cpanel/scripts/update_local_rpm_versions --edit target_settings.MySQL55 unmanaged
+/usr/local/cpanel/scripts/update_local_rpm_versions --edit target_settings.MySQL56 unmanaged
+/usr/local/cpanel/scripts/update_local_rpm_versions --edit target_settings.MariaDB100 unmanaged
+```
+</div>
+
+If you want to restore the original cPanel-provided MySQL packages after removing MySQL Governor, please run the following commands:
+
+<div class="notranslate">
+
+```
+/usr/local/cpanel/scripts/update_local_rpm_versions --del target_settings.MySQL50
+/usr/local/cpanel/scripts/update_local_rpm_versions --del target_settings.MySQL51
+/usr/local/cpanel/scripts/update_local_rpm_versions --del target_settings.MySQL55
+/usr/local/cpanel/scripts/update_local_rpm_versions --del target_settings.MySQL56
+/usr/local/cpanel/scripts/update_local_rpm_versions --del target_settings.MariaDB100
+```
+</div>
+
+and then run:
+
+<div class="notranslate">
+
+```
+/scripts/upcp --force
+```
+</div>
+
+## How to run Redmine with Ruby Selector?
+
+**Preface**
+
+Redmine is a flexible project management web application written using Ruby on Rails framework. It is easy to install it using CloudLinux [Ruby Selector](https://www.cloudlinux.com/ruby-selector]. Follow [this guide](/cloudlinux_os_components/#installation-and-update-6) to install Ruby Selector. It works with CageFS, so make sure to enable it for the account. Redmine version described in installation instructions is different from Redmine version used. The example given describes the process for version 3.3.1. For other versions please refer to _doc/INSTALL_ file provided with downloaded Redmine archive or to the official [Installation Guide](http://www.redmine.org/projects/redmine/wiki/RedmineInstall).
+
+**Setting up a working environment**
+
+1. In cPanel (as a user) create MySQL database, create MySQL user and Add user to Database granting all privileges.
+
+![create DB](/images/mceclip0.png)
+
+![add user](/images/mceclip1.png)
+
+![add privileges](/images/mceclip2.png)
+
+2. Create a new application with 'Setup Ruby Application' menu, use Ruby version 2.3. Domain root or any subdirectory can be used.
+
+![setup Ruby app](/images/mceclip3.png)
+
+3. (**if you'd like to use GUI**) After the application created, add the following modules with the proper version for each.
+
+`bundle, bundler#1.9.0, rails#4.2.7.1, bigdecimal#1.4.4, rake#12.3.2, mysql2#0.3.21`
+
+![add GUI modules](/images/mceclip4.png)
+
+Click _Update_. It will take about 2 minutes to have them and dependent modules installed.
+
+(**if you'd like to use CLI**) Log in as a cPanel user (`redmine` in this example):
+
+<div class="notranslate">
+
+```
+su -l -s /bin/bash redmine
+selectorctl --interpreter=ruby --version 2.3 --user redmine --create-webapp redmine /
+```
+</div>
+
+This will create a web app in _document_root/redmine_ (example : _/home/redmine/redmine_) under the primary domain URI (Example: http://redmine.com/). Next, you'll need to install extensions:
+
+<div class="notranslate">
+
+```
+selectorctl --interpreter=ruby --enable-user-extensions=bundle,bundler#1.9.0,rails#4.2.7.1,bigdecimal#1.4.4,rake#12.3.2,mysql2#0.3.21 redmine
+TITLE:bigdecimal#1.4.4
+STATUS:OK
+TITLE:bundle
+STATUS:OK
+TITLE:bundler#1.9.0
+STATUS:OK
+TITLE:rails#4.2.7.1
+STATUS:OK
+TITLE:rake#12.3.2
+STATUS:OK
+```
+</div>
+
+This will enable all necessary modules required by redmine (here _redmine_ is your app folder)
+
+::: warning IMPORTANT 
+Rails gem will update bundler to 2.0.1 version, which is not compatible with the current installation, so it is important to remove this version and leave 1.9.0 in place.
+:::
+
+<div class="notranslate">
+
+```
+selectorctl --interpreter=ruby --disable-user-extensions=bundler#2.0.1 redmine
+```
+</div>
+
+::: tip Note
+In case mysql2 installation results in error, install it as root:
+:::
+
+<div class="notranslate">
+
+```
+[root@192-168-245-55 redmine]# source /home/redmine/rubyvenv/redmine/2.3/bin/activate
+(redmine:2.4)[root@192-168-245-55 redmine]# gem install mysql2 -v 0.3.21
+Building native extensions.  This could take a while...
+Successfully installed mysql2-0.3.21
+Parsing documentation for mysql2-0.3.21
+Installing ri documentation for mysql2-0.3.21
+Done installing documentation for mysql2 after 0 seconds
+1 gem installed
+```
+</div>
+
+4. Install `ImageMagick-devel` for `rmagick` gem:
+
+<div class="notranslate">
+
+```
+$ yum install ImageMagick-devel
+```
+</div>
+
+**Deploying Redmine**
+
+1. Log in to the server as a user (ssh or su -):
+
+<div class="notranslate">
+
+```
+$ su -l -s /bin/bash redmine
+```
+</div>
+
+2. Download the latest Redmine:
+
+<div class="notranslate">
+
+```
+$ wget http://www.redmine.org/releases/redmine-3.3.1.tar.gz
+```
+</div>
+
+3. Unpack it and move to the chosen application directory (_redmine_ in this example):
+
+<div class="notranslate">
+
+```
+$ tar xfz redmine-3.3.1.tar.gz
+$ cp -rp redmine-3.3.1/* redmine/
+```
+</div>
+
+4. Fill out database credentials that we have created with cPanel:
+
+<div class="notranslate">
+
+```
+$ cd redmine
+$ cp config/database.yml.example config/database.yml
+$ vi config/database.yml
+```
+
+```
+production:
+ adapter: mysql2
+ database: redtest_db
+ host: localhost
+ username: redtest_user
+ password: "my1passwd"
+ encoding: utf8
+```
+</div>
+ 
+5. Activate the Ruby environment:
+
+<div class="notranslate">
+
+```
+$ source ~/rubyvenv/redmine/2.3/bin/activate
+```
+</div>
+
+6. Make sure that you are in the app directory. Add the `bigdecimal` gem into _Gemfile_:
+
+<div class="notranslate">
+
+```
+$ cd redmine
+$ pwd
+/home/redmine/redmine
+nano Gemfile
+```
+</div>
+
+Install the modules required by Redmine:
+
+<div class="notranslate">
+
+```
+$ bundle install --without development test
+```
+</div>
+
+Redmine stores session data in cookies by default, which requires a secret token to be generated. Do it and create database structure:
+
+<div class="notranslate">
+
+```
+$ bundle exec rake generate_secret_token
+$ bundle exec rake db:migrate RAILS_ENV="production"
+```
+</div>
+
+**First login**
+
+1. Open Redmine location URL in the browser. Use the default administrator account to log in: login: **admin** password: **admin**
+2. Change your password to a new one with the proposed form.
+3. Go to _Administration_ on the top, choose a preferred language and load the default configuration.
+
+::: tip Note
+After adding some other modules to an Application with cPanel interface you may need to restart the application, which can be done on the same Ruby Selector page.
+:::
+
+## What IPs to whitelist for the proper KernelCare work?
+
+Generally, KernelCare requires http(s) connection to two servers for the proper work:
+
+`cln.cloudlinux.com`
+
+`patches.kernelcare.com`  
+
+As of November 2019, their IPs are:
+
+69.175.3.9
+
+69.175.106.203
