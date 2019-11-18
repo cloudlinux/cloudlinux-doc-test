@@ -996,37 +996,37 @@ Yes, the custom list files persist agent upgrade and uninstall
 
 ## Imunify360 Malware Cleanup (Admin Part)
 
-- **How does Imunify360 Malware Cleanup work? What are the benefits of Imunify360 Malware Cleanup?**
+#### How does Imunify360 Malware Cleanup work? What are the benefits of Imunify360 Malware Cleanup?
 
 Malware Cleanup can remove malicious code from users' files or remove them completely if they cannot be cured. It works in a user-assisted way - i.e. a user has to choose the files to be cleaned up.
 
-- **Is it possible Malware Cleanup can break my websites’ operation?**
+#### Is it possible Malware Cleanup can break my websites’ operation?
 
 Malware Cleanup is designed to decrease the possibility of data loss and website malfunction after cleanup. It backs up an infected file before cleanup and trims a file instead of removing it.
 The backup of an infected file let a user restore the file in a state, it had before cleanup.
 File backups are stored in special folders outside user home directories and shouldn’t be managed manually. Names of these files are not altered.
 
-- **How does Malware Cleanup module decide on when to remove a file or trim it?**
+#### How does Malware Cleanup module decide on when to remove a file or trim it?
 
 This is a configurable option that can be set in Malware settings. Trimming is the default.
 
-- **What does _Cleanup all_ button actually perform?**
+#### What does _Cleanup all_ button actually perform?
 
 It will try to remove harmful content from all files, detected as infected or quarantined.
 
-- **Can Malware Cleanup clean files that were detected by any of anti-malware engines of Imunify360?**
+#### Can Malware Cleanup clean files that were detected by any of anti-malware engines of Imunify360?
 
 Yes, all the files marked as _Infected_ or _Quarantined_ can be cleaned up or trimmed.
 
-- **How can I clean/rotate the list of malicious files in Malware Scanner → Dashboard tab of Imunify360 UI?**
+#### How can I clean/rotate the list of malicious files in Malware Scanner → Dashboard tab of Imunify360 UI?
 
 Older entries are automatically removed as soon as the backup file of the cleaned file is removed (14 days by default).
 
-- **What kind of malicious code/content can Malware Cleanup remove?**
+#### What kind of malicious code/content can Malware Cleanup remove?
 
 The cleanup engine detects and performs a cleanup for all content that might be considered as malicious: web-shells, backdoors, phishing pages, virus injections, doorways, droppers, miners, uploaders, etc.
 
-- **Malware Cleanup did not clean up some of malicious files. What to do next?**
+#### Malware Cleanup did not clean up some of malicious files. What to do next?
 
 There might be the following causes:
 
@@ -1035,37 +1035,37 @@ There might be the following causes:
 
 ## Imunify360 Ubuntu Support
 
-- **Which Ubuntu versions are supported by Imunify360?**
+#### Which Ubuntu versions are supported by Imunify360?
 
 Imunify360 supports Ubuntu 16.04 and 18.04 LTS.
 
-- **Which control panels are supported in Ubuntu version of Imunify360?**
+#### Which control panels are supported in Ubuntu version of Imunify360?
 
 Plesk and DirectAdmin.
 
-- **Is Imunify360 for Ubuntu available without a control panel?**
+#### Is Imunify360 for Ubuntu available without a control panel?
 
 Support for servers without control panel will be added in Imunify360 version 4.5 for CentOS, CloudLinux OS and Ubuntu.
 
-- **Which Imunify360 features are available in Ubuntu?**
+#### Which Imunify360 features are available in Ubuntu?
 
 All Imunify360 features are available in Ubuntu version.
 
-- **What is the difference between Ubuntu and CentOS Imunify360 versions?**
+#### What is the difference between Ubuntu and CentOS Imunify360 versions?
 
 Nothing, Imunify360 works the same way as on all supported Linux operating systems.
 
-- **Where can I find an installation guide and requirements?**
+#### Where can I find an installation guide and requirements?
 
 Please find the information in Imunify360 online documentation at [https://docs.imunify360.com/installation/](https://docs.imunify360.com/installation/).
 
 ## Imunify360 Proactive Defense
 
-- **What are the use cases for Proactive Defense?**
+#### What are the use cases for Proactive Defense?
 
 Proactive Defense can help make PHP-based websites more secure by terminating PHP scripts with malicious activity, including insecure WordPress plugins and any other outdated and unpatched web applications that can be easily compromised.
 
-- **What do IPs colors mean?**
+#### What do IPs colors mean?
 
 Colors mean the same as in the Incidents tab in the Imunify360 UI:
 
@@ -1074,75 +1074,75 @@ Colors mean the same as in the Incidents tab in the Imunify360 UI:
   
 The color corresponds to the time of the list viewing, not the time when the incident occurred.
 
-- **Why there are several records for the same script in the table?**
+#### Why there are several records for the same script in the table?
 
 Incidents are grouped with one-minute intervals, so if some script is invoked multiple times during the longer time span, it will produce several records.
 
-- **What is the default mode of operation for Proactive Defense?**
+#### What is the default mode of operation for Proactive Defense?
 
 DISABLED is the default mode. If, for example, the KILL mode is enabled in the admin UI, this mode will be default for all hosting accounts to be added in the future.
 
-- **Can a user override the default mode of operation set by admin?**
+#### Can a user override the default mode of operation set by admin?
 
 A user can disable Proactive Defense anytime. Any mode that is not disabled (for user’s hosting account) by admin can be activated by a user.
 
-- **Can KILL mode break my website operation?**
+#### Can KILL mode break my website operation?
 
 While we are extensively testing Proactive Defense on a large number of different software, it is possible that we will have a false positive, and PHP script will be prevented from executing, causing page not to load. In the production version you will have a possibility to whitelist such scripts, and more granularly — for particular execution path. In the current Beta version you can only disable Proactive Defense for the whole account to mitigate the issue.
 
-- **Does Proactive Defense require CloudLinux OS?**
+#### Does Proactive Defense require CloudLinux OS?
 
 No, it works with any OS supported by Imunify360.
 
-- **Does Proactive Defense support web servers other than Apache?**
+#### Does Proactive Defense support web servers other than Apache?
 
-Proactive Defense supports Apache, nginx, and Litespeed with cPanel and Plesk.
+Proactive Defense supports Apache, nginx, and Litespeed.
 
-- **Can Proactive Defense prevent malicious activity of cron jobs? Can cron job execute in a way so Proactive Defense module is not loaded?**
+#### Can Proactive Defense prevent malicious activity of cron jobs? Can cron job execute in a way so Proactive Defense module is not loaded?
 
 Proactive Defense is a PHP module that should execute any time PHP script is executed including running PHP using a cron job. Note that hackers can create a cron job with PHP script started from custom php.ini to skip loading Proactive Defense. To prevent this from happening, we recommend using exclusively HardenedPHP where Proactive Defense component cannot be skipped by using custom php.ini.
 
-- **Are there any restrictions for use with different PHP handlers?**
+#### Are there any restrictions for use with different PHP handlers?
 
 Proactive Defense can work with any PHP handler provided the PHP version 5.4 or higher.
 
-- **Can I benefit from Proactive Defense if I have Cloudflare WAF enabled for my website?**
+#### Can I benefit from Proactive Defense if I have Cloudflare WAF enabled for my website?
 
 Cloudflare WAF and other WAF check only HTTP requests and not the actual PHP execution. As a result, Proactive Defense adds another layer of protection to your site.
 
-- **What is the difference between Proactive Defense and other services like Wordfence?**
+#### What is the difference between Proactive Defense and other services like Wordfence?
 
 Most security tools like Wordfence are tailored for a single CMS (e.g. WordPress) and work only for hosting accounts they are installed for. In addition, they are signature-based, so they cannot block PHP script execution proactively.
 
-- **Will Proactive Defense affect my website’s performance?**
+#### Will Proactive Defense affect my website performance?
 
 It slows down PHP script execution by approximately 3-5%. This means that if the script was loading in 0.2 seconds before, it will now take around 0.206 seconds.
 
-- **Do I need an additional license to use Proactive Defense?**
+#### Do I need an additional license to use Proactive Defense?
 
 No, the module is included in Imunify360 license price.
 
-- **Where is Proactive Defense configuration file located?**
+#### Where is Proactive Defense configuration file located?**
 
   - System settings: _/etc/sysconfig/imunify360/imunify360.config: PROACTIVE.mode_
   - User settings: _/etc/imunify360/user_config/imunify360.config: PROACTIVE.mode_
 
-- **What is PD Blamer and how can it help me make my system secure?**
+#### What is PD Blamer and how can it help me make my system secure?
 
 Blamer records malicious PHP invocation that allows to detect the way malware was injected. It is a part of PD extension and requires PD PHP module to be installed. This feature is added to make Imunify360 more effective in detecting PHP vulnerabilities.
 
 ## Imunify360 CloudLinux Backup FAQ
 
-- **How does CloudLinux Backup work?**
+#### How does CloudLinux Backup work?
 
 CloudLinux Backup provides a customer with the most integrated with Imunify360 backup solution. It is powered by the Acronis technology. When a feature is enabled for the first time, Imunify360 performs an initial backup of a server. In the event, a file is detected as infected it can be restored from the backup (Imunify360 can do it automatically depending on the configuration). Imunify360 will search for a clean version of the file and as soon as clean copy will be found, restore will be processed. If there is no clean version in backup then Imunify360 will be unable to restore file. In such case we recommend to clean up the file manually. You can learn more about the CloudLinux Backup for Imunify360 [here](http://cloudlinuxbackup.com/).
 Note that as CloudLinux Backup performs a backup of the whole server it can be used to restore the whole server in case of server fault.
 
-- **Why do I need CloudLinux Backup feature?**
+#### Why do I need CloudLinux Backup feature?
 
 Starting from the version 2.7.0, Imunify360 provides customers with an ability to backup files via CloudLinux Backup, powered by Acronis. The CloudLinux Backup for Imunify360 can be used to automatically backup and restore files if they have become infected. The data is stored in a Cloud. We have several locations, so a user can choose where data should be stored. To learn more, [visit the CloudLinux Backup for Imunify360 page](https://www.imunify360.com/cloudlinux-backup).
 
-- **How does Imunify360 use backups?**
+#### How does Imunify360 use backups?
 
 Imunify360 can use backups to restore malicious files in two ways: automatic or manual.
 
@@ -1159,7 +1159,7 @@ In case of manual restore, please go to _Imunify360 → Malware Scanner → Dash
 
 More details you can find in the [documentation](http://docs.imunify360.com/index.html?malware_scanner.htm).
 
-- **How can I disable Backup feature?**
+#### How can I disable Backup feature?
 
 To disable Backup feature, please go to _Imunify360 → Settings → BACKUPS_. On this page move _Backup and restore_ slider and confirm your action in a pop-up.
 
@@ -1167,13 +1167,13 @@ Note that this feature allows Imunify360 to restore a clean version of malicious
 
 More details you can find in the [documentation](http://docs.imunify360.com/index.html?user_interface.htm).
 
-- **How can I manage CloudLinux Backup?**
+#### How can I manage CloudLinux Backup?
 
 To manage CloudLinux Backups go to _Imunify360 → Settings → BACKUPS_ tab and click on _Manage Backups_ button. The Backup Management Console opens. Here a user can manage backups: manage scheduler, observe files in the backup, download files and perform other actions.
 
 More details you can find in the [documentation](http://docs.imunify360.com/index.html?user_interface.htm).
 
-- **I have cPanel/Plesk/Acronis/custom backup. Can I use it with Imunify360?**
+#### I have cPanel/Plesk/Acronis/custom backup. Can I use it with Imunify360?
 
   - If you have Plesk\cPanel backups you could use them as usual because Imunify360 is compatible with them. To do that, please go to _Imunify360 → Settings → Backups_ tab and enable Backup and restore feature by selecting cPanel/Plesk as backup provider. Or you could switch to CloudLinux Backup and get 10GB of storage space for free.
  See also - [How can I switch to CloudLinux Backup] below.
@@ -1182,7 +1182,7 @@ More details you can find in the [documentation](http://docs.imunify360.com/inde
   - If you have custom hosting panel backup you could switch to CloudLinux Backup and get 10GB of storage space for free as we do not support custom panel backups.
  See also - [How can I switch to CloudLinux Backup] below.
 
-- **How can I switch from cPanel/Plesk/Acronis backup to CloudLinux Backup?**
+#### How can I switch from cPanel/Plesk/Acronis backup to CloudLinux Backup?
 
 To switch from cPanel/Plesk/Acronis backup you need to disable current backup system both on your hosting panel and on the Imunify360 (if you have enabled it before). And then activate CloudLinux Backup.
 
@@ -1190,19 +1190,19 @@ To switch from cPanel/Plesk/Acronis backup you need to disable current backup sy
   - When Backup and restore status becomes _Disabled_, choose CloudLinux Backup as a backup provider from a drop-down.
   - Click on _Connect Backup_ button. You will be redirected to the CloudLinux Network page where you can choose and purchase required size of backup space. Note that CloudLinux Backup provides 10GB of backup space for free. More details you can find in the [documentation](http://docs.imunify360.com/index.html?user_interface.htm).
 
-- **Should I drop the old backups in CloudLinux Backup or they will be removed automatically?**
+#### Should I drop the old backups in CloudLinux Backup or they will be removed automatically?
 
 There is no need to delete backups manually, old backups are deleted regularly.
 
-- **What happens if I buy less CloudLinux Backup space than I need for initial backup?**
+#### What happens if I buy less CloudLinux Backup space than I need for initial backup?
 
 If there is not enough space for initial backup, Imunify360 will return a warning message and prompt to resize the disk space for CloudLinux Backup. Note that initial backup takes about 60% of the real storage size, so a user needs to have more than just 60% of the actual storage size, because incremental backup needs space too.
 
-- **Are there any special offers?**
+#### Are there any special offers?
 
 When purchasing CloudLinux Backup you get 10GB of backup space provided for free per server with Imunify360 installed!
 
-- **What happens if CloudLinux Backup fails?**
+#### What happens if CloudLinux Backup fails?
 
 If you see an error message during the backup process, the backup fails. There are some cases.
 
@@ -1227,30 +1227,30 @@ See also [How much space do I need for CloudLinux Backup] below.
 
 More details you can find in the [documentation](http://docs.imunify360.com/index.html?user_interface.htm).
 
-- **Which files on mу server does Imunify360 backup?**
+#### Which files on mу server does Imunify360 backup?
 
 For CloudLinux Backup and Acronis, it creates a backup for the “Entire machine” (if it was not created yet) during the first initial backup process. The further backup process will make incremental snapshots of changes.
 
-- **How much space do I need for CloudLinux Backup?**
+#### How much space do I need for CloudLinux Backup?
 
 The amount of required space is determined by the size of your server and how often its content changes. If the content of your server changes on a daily basis, we recommend to get actual disk size*2.4 GB of disk space to be used for backups. Otherwise, we recommend to get actual disk size*1.4 GB of disk space. These coefficients include all incremental backups for the six-month scheduled backups.
 Note that you can buy more disk space at any time.
 
-- **Is it possible to do backup of all servers in one go?**
+#### Is it possible to do backup of all servers in one go?
 
 No, it isn't. Backup is currently performed separately for each server.
 
-- **What happens with my old cPanel/Plesk/Acronis backup if I switch to CloudLinux Backup?**
+#### What happens with my old cPanel/Plesk/Acronis backup if I switch to CloudLinux Backup?
 
 Your old backups are stored by your old provider but you will be unable to use them with CloudLinux Backup as CloudLinux Backup creates a new backup of your server and will use it to restore files.
 We do not recommend to use two backup providers simultaneously.
 
-- **How does Imunify360 calculate the amount of space needed for CloudLinux Backup?**
+#### How does Imunify360 calculate the amount of space needed for CloudLinux Backup?
 
 The amount of required space is determined by the size of your server and how often its content changes. If the content of your server changes on a daily basis, we recommend to get actual disk size*2.4 GB of disk space to be used for backups. Otherwise, we recommend to get actual disk size*1.4 GB of disk space. These coefficients include all incremental backups for the six-month scheduled backups.
 Note that you can buy more disk space at any time.
 
-- **How can I enable Backup feature?**
+#### How can I enable Backup feature?
 
 To enable Backup feature, please do the following:
 
@@ -1260,67 +1260,67 @@ To enable Backup feature, please do the following:
 According to a chosen backup provider, the system prompts you to do particular actions.
 More details you can find in the [documentation](http://docs.imunify360.com/index.html?user_interface.htm).
 
-- **What if I have no space anymore for the next incremental backup?**
+#### What if I have no space anymore for the next incremental backup?
 
 If there is no space for the next incremental backup you can resize the backup space. To do that go to _Imunify360 → Settings → BACKUPS_ tab and click on the _resize_ link. You will be redirected to the CloudLinux Network page where you can choose and purchase additional backup space. The previous backups are securely saved. You can still restore files from them.
 
-- **What would happen to my backups if the Imunify360 license expires?**
+#### What would happen to my backups if the Imunify360 license expires?
 
 If your Imunify360 license expires your account will be locked for 30 days but your backups will be still available except new incremental backups will not be processed. If you haven’t paid for a license during this time, after these 30 days your account will be canceled but backups will be still available during 48 hours after cancellation. After this time, your backups will be deleted.
 
-- **Will I have access to my backups when I migrate from trial to paid Imunify360 license?**
+#### Will I have access to my backups when I migrate from trial to paid Imunify360 license?
 
 Of course, you will. Learn more about the CloudLinux Backup for Imunify360 [here](http://cloudlinuxbackup.com/).
 
 ## ImunifyAV/AV+ FAQ
 
-- **What is the difference between ImunifyAV, ImunifyAV+ and Imunify360?**
+#### What is the difference between ImunifyAV, ImunifyAV+ and Imunify360?
  
 ImunifyAV provides only malware scanning. ImunifyAV+ provides both malware scanning and cleanup. Starting from ImunifyAV+ ver 4.4 it also provides Reputation Management. Imunify360 provides complete web server protection that includes all ImunifyAV+ features as well as firewall, WAF, Proactive Defense, Reputation Management, KernelCare and Backup integration.
 
-- **I have ImunifyAV found some malware in users directories. What should I do to clean them?**
+#### I have ImunifyAV found some malware in users directories. What should I do to clean them?
 
 If you have ImunifyAV, then you need to upgrade to ImunifyAV+. If you already have ImunifyAV+ or Imunify360, just click _Cleanup All) button in _Users_ or _Files_ tab.
 
-- **My website/server got infected. What should I do to clean up and protect it?**
+#### My website/server got infected. What should I do to clean up and protect it?
 
 ImunifyAV can only inform you about infected files. ImunifyAV+ can also perform reputation monitoring and malware cleanup. However, if you need protection from new infections in addition to malware cleanup, you have to use Imunify360. If you are not a system owner/admin, ask your hosting provider for available options.
 
-- **I’d like to cleanup some of my files that I believe are infected. What should I do?**
+#### I’d like to cleanup some of my files that I believe are infected. What should I do?
 
 Install either ImunifyAV+ or Imunify360 and perform cleanup from the _Files_ tab.
 
-- **Will Restore link in the Users tab restore a clean copy of a file from backup?**
+#### Will Restore link in the Users tab restore a clean copy of a file from backup?
 
 No, it will restore the version that existed prior to malware cleanup.
 
-- **Can I view the latest scan/cleanup report for users that have scanning/cleanup queued?**
+#### Can I view the latest scan/cleanup report for users that have scanning/cleanup queued?
 
 Yes, this is available in the _Users_ tab.
 
-- **How can I remove cleaned up entries from the Files tab?**
+#### How can I remove cleaned up entries from the Files tab?
 
 They are automatically removed as soon as backups of cleaned files are purged. Backup file retention period can be set up in Settings tab. Default retention time is 14 days.
 
-- **Are old entries removed from the History tab?**
+#### Are old entries removed from the History tab?
 
 No, but this can be done manually. Refer to this [link](/kb/FAQ/#how-to-delete-the-scan-results-in-imunify360%E2%80%99s-database).
 
-- **Are files automatically removed from the Ignore list when their checksums get changed?**
+#### Are files automatically removed from the Ignore list when their checksums get changed?
 
 No, a file will stay in the _Ignore_ list as long as its filename is the same.
 
 ## CloudLinux Backup On-Premises FAQ
 
-- **Where can I find documentation for CloudLinux Backup On-Premises?**
+#### Where can I find documentation for CloudLinux Backup On-Premises?
 
 CloudLinux Backup is powered by Acronis. You can find complete documentation [here](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#32952.html).
 
-- **Where can I find documentation for my users?**
+#### Where can I find documentation for my users?
 
 You can find all necessary documentation and guides to help your users manage their backups [here](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#32952.html).
 
-- **Can I migrate from CloudLinux Backup to CloudLinux Backup On-Premises in Imunify360?**
+#### Can I migrate from CloudLinux Backup to CloudLinux Backup On-Premises in Imunify360?
 
 You cannot migrate actual backups, but you can switch to CloudLinux Backup On-Premises at any time. This means that your old backups will not work for CloudLinux Backup On-Premises and new backups will be created.
 To switch from CloudLinux Backup to CloudLinux Backup On-Premises, follow these steps:
@@ -1334,7 +1334,7 @@ To switch from CloudLinux Backup to CloudLinux Backup On-Premises, follow these 
 
 You might want to deactivate CloudLinux Backup. To do so, login to CloudLinux Network (CLN). Go to _Servers → CloudLinux Backup_ and remove this server from the list.
 
-- **How does CloudLinux Backup On-Premises work?**
+#### How does CloudLinux Backup On-Premises work?
 
 CloudLinux Backup On-Premises consists of three parts: Management Portal, Storage, and Agent.
 
@@ -1348,18 +1348,18 @@ After successful installation, the Agent starts the first initial backup of the 
 
 With backups, you are able to restore specific files, folders, or the whole server from the ISO image. You will have access to all backups and the files in them within the Management Portal.
 
-- **How to configure Imunify360 to work with CloudLinux Backup On-Premises?**
+#### How to configure Imunify360 to work with CloudLinux Backup On-Premises?
 
 1) In Imunify360 plugin, go to _Settings → Backups_, and disable CloudLinux Backup by clicking a radio button _Enabled_.
 2) Choose the backup provider → _CloudLinux Backup On-Premises_. Enter username/password of the user created in Management Portal and click _Connect Backup_.
 3) Using Acronis Web Console of a created user, create a backup schedule for this server using [this](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#33507.html) documentation.
 4) Make the initial backup (optional).
 
-- **What are the differences between CloudLinux Backup and CloudLinux Backup On-Premises?**
+#### What are the differences between CloudLinux Backup and CloudLinux Backup On-Premises?
 
 CloudLinux Backup On-Premises can be installed within your infrastructure and operated on your own hardware, whereas CloudLinux Backup operates in the CloudLinux cloud. It means that you will be able to manage hardware on your own — add/remove servers and disks, and increase/decrease their size according to your own needs.
 
-- **What are minimum hardware requirements for CloudLinux Backup On-Premises?**
+#### What are minimum hardware requirements for CloudLinux Backup On-Premises?
 
 CloudLinux Backup On-Premises **minimum** hardware requirements:
 One physical node or virtual machine with:
@@ -1380,53 +1380,53 @@ Five nodes with:
 
 For more details, please follow the [link](https://dl.acronis.com/u/storage2/html/AcronisStorage_2_installation_guide_en-US/planning-acronis-storage-infrastructure/planning-node-hardware-configurations.html#hardware-requirements).
 
-- **What are software requirements for CloudLinux Backup On-Premises?**
+#### What are software requirements for CloudLinux Backup On-Premises?
 
 CloudLinux Backup On-Premises needs a clean server — the software will be installed from the ISO image. Thus, nothing should be pre-installed on your servers.
 
-- **How many physical disks should I have?**
+#### How many physical disks should I have?
 
 We recommend to have at least 6 physical disks at 2 nodes. For more details, please follow the [link](https://dl.acronis.com/u/storage2/html/AcronisStorage_2_installation_guide_en-US/planning-acronis-storage-infrastructure/planning-node-hardware-configurations.html#recommended-configuration).
 
-- **How much space do I need to backup my servers?**
+#### How much space do I need to backup my servers?
 
 The amount of required space is determined by the size of your servers and how often their content changes. If the content of your servers changes on a daily basis, we recommend to get actual server disks size*2.4 GB of disk space to be used for backups. Otherwise, we recommend to get actual disk size*1.4 GB of disk space. These coefficients include all incremental backups for the six-month scheduled backups.
 
-- **Can CloudLinux Backup On-Premises be installed on cloud virtual servers?**
+#### Can CloudLinux Backup On-Premises be installed on cloud virtual servers?
 
 Yes, it can. However, physical servers are recommended (unless you use IaaS-based setup like S3-driven storage for back up your AWS instances).
 
-- **How to buy CloudLinux Backup On-Premises?**
+#### How to buy CloudLinux Backup On-Premises?
 
 Contact our sales team at [sales@cloudlinux.com](sales@cloudlinux.com) for the price quote.
 
-- **Is there a trial option?**
+#### Is there a trial option?
 
 Please contact us at [sales@cloudlinux.com](sales@cloudlinux.com) and our team will help you to get setup with the trial.
 
-- **How to cancel CloudLinux Backup On-Premises license?**
+#### How to cancel CloudLinux Backup On-Premises license?
 
 To cancel CloudLinux Backup On-Premises, please send a cancellation request to our support team at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/requests/new) and choose Imunify as a department.
 
-- **I cannot see CloudLinux Backup On-Premises licenses in my CLN (CloudLinux Network) account. Why is that?**
+#### I cannot see CloudLinux Backup On-Premises licenses in my CLN (CloudLinux Network) account. Why is that?
 
 CloudLinux Backup On-Premises is not yet available in CLN, but it will be in the future.
 
-- **How to setup the backup schedule?**
+#### How to setup the backup schedule?
 
 Each server connected to CloudLinux Backup On-Premises has its own Web Console to manage backups. Login to Web Console [http://cloud.acronis.com](http://cloud.acronis.com) with your credentials (or click _Manage Backups_ button in _Settings_ tab of Imunify360 user interface) and use [this documentation](https://www.acronis.com/en-us/support/documentation/BackupService/index.html#33507.html) to schedule backups.
 
-- **How to add a system/server to the CloudLinux Backup On-Premises so that the server will be backed up?**
+#### How to add a system/server to the CloudLinux Backup On-Premises so that the server will be backed up?
 
 Login to Web Console at [http://cloud.acronis.com](http://cloud.acronis.com/) with user credentials and click _Add_ button at the top of the page. Then choose appropriate Operating System and follow the installation instructions. Using login and password to the Web Console, activate the downloaded software.
 
-- **How to create CloudLinux Backup On-Premises user with its own access level and limits, settings, and schedule limits?**
+#### How to create CloudLinux Backup On-Premises user with its own access level and limits, settings, and schedule limits?
 
 Login to Management Console [http://cloud.acronis.com/](http://cloud.acronis.com) as Admin with the credentials provided by CloudLinux and follow [these instructions](https://www.acronis.com/en-us/support/documentation/ManagementPortal/index.html#40064.html).
 
-- **How to backup the whole server with CloudLinux Backup On-Premises?**
+#### How to backup the whole server with CloudLinux Backup On-Premises?
 
 As soon as the server is connected to CloudLinux Backup On-Premises, the backup of the whole server will be created. All the following backups will be incremental, which means that only modified files and folders will be backed up.
 
-- **How to scale CloudLinux Backup On-Premises?**
+#### How to scale CloudLinux Backup On-Premises?
 You can scale the CloudLinux Backup On-Premises at any time by adding more physical discs and nodes to your backup cluster.
