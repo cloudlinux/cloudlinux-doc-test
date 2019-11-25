@@ -89,31 +89,6 @@ Click the “Upload Image” button and wait until the image is successfully upl
 5. Now, use your preferred SSH client software to connect to your Droplet. You can find more information on SSH client setup [here](https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/).  
 ![SSH Client](/images/unnamed-8.png)
 
-## How do I submit a false positive result for malware scanner?
-
-We do our best to create the most effective malware scanner for websites: continuously update the malware database, refine it and make accurate. But there might be a small chance that you face with so-called “false-positives” while scanning the websites for malware i.e. when antivirus software marks a legitimate file as malicious because the file may contain some specific piece of code previously noticed in malware.
-
-False positives can be sent to Imunify team for analysis via a command line:  
-(via SSH, on your server console, as a ROOT user)
-
-**For ImunifyAV product**:
-
-<div class="notranslate">
-
-```
-imunify-antivirus submit false-positive --scanner ai-bolit --reason <reason> <path_to_file>
-``` 
-</div>
-
-**For Imunify360 product**:
-
-<div class="notranslate">
-
-```
-imunify360-agent submit false-positive --scanner ai-bolit --reason <reason> <path_to_file>
-```
-</div>
-
 ## How can I switch CloudLinux usage statistics off?
 
 Starting with lve-utils 3.0-21.12 Beta, it is possible to permanently disable statistics gathering by adding `cl_statistics_enabled=0` parameter to _/etc/sysconfig/cloudlinux_.
