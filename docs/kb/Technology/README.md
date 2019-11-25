@@ -201,69 +201,6 @@ We do not collect any sensitive or personal information from your server, like p
 
 All the collected information is used for diagnosis and troubleshooting purposes only.
 
-## KernelCare installation, management and uninstall
-
-KernelCare installation instructions are straightforward and are summarized on the following page: [https://www.kernelcare.com/install-kernelcare/](https://www.kernelcare.com/install-kernelcare/)
-
-To uninstall KernelCare just execute:
-
-<div class="notranslate">
-
-```
-yum remove kernelcare
-```
-</div>
-
-KernelCare is set to check for updates, and update the kernel every 4 hours. If you want to run the update manually, execute as root:
-
-<div class="notranslate">
-
-```
-/usr/bin/kcarectl --update
-```
-</div>
-
-- **How Can I disable automatic updates?**
-
-Edit file _/etc/sysconfig/kcare/kcare.conf_
-
-<div class="notranslate">
-
-```
-Set AUTO_UPDATE=False
-```
-</div>
-
-- **How can I see the 'updated' version of the kernel?**
-
-Run:
-
-<div class="notranslate">
-
-```
-/usr/bin/kcarectl --uname
-```
-</div>
-
-We provide convenience script _/usr/bin/kcare-uname_ that has the same syntax as uname.
-
-- **How can I see which patches were applied to my kernel?**
-
-Execute as root:
-
-<div class="notranslate">
-
-```
-/usr/bin/kcarectl --patch-info
-```
-</div>
-
-- **Is KernelCare software released under open source?**
-
-The kernel module is released under GPL2, and you can download it here: [http://downloads.kernelcare.com/kmod_kcare.tar.gz](http://downloads.kernelcare.com/kmod_kcare.tar.gz) 
-
-Other components are distributed in binary format only under KernelCare License
-
 ## Can CloudLinux work in a virtual machine?
 
 CloudLinux OS is fully compatible with all hypervisor based virtualization. This includes 32-bit and 64-bit Xen, KVM, Hyper-V, VMware, Parallels Baremetal.
@@ -806,18 +743,6 @@ bogdan1 2 5 --- 5 --- 0 20 39340 1865
 </div>
 
 This time we have two **EPs** and five **NPROCs**, which is normal as parent lsphp is one per VirtualHost. If, for example, our PHP script creates another process (sending mail, etc.) the **EP** will remain the same as PHP script is already executed inside LVE. However, the number of processes for this LVE will increase. That is why **NPROC** should be greater than **EP**. There is no way to limit the number of parent PHP processes, it is only one per VirtualHost (not per account!). To keep users within limits you have to combine `lsapi_backend_children` with LVE NPROC/EP limits. Each lsphp worker process ends after the request is processed. Turning `"connection_pool_mode On"`  in lsapi config makes **lsphp** workers never finish - they stay alive for `lsapi_backend_max_idle` time, or until `lsapi_backend_max_reqs` is reached (or Apache restarted). All requests for every virtual host are spread across Apache worker almost equally. Connection pool grants faster processing mode, however, it will cause a higher number of processes per LVE (NPROC) and a bit higher memory usage.
-
-## Why uname is showing the old kernel version after KernelCare patches applied?
-
-The **uname** command always shows the same kernel version as before installing KernelCare. The reason we don't change the output of the uname command is due to the fact that we don't change original kernel signature or ABI with KernelCare. Yet, many install scripts depend on uname output to decide which modules to install or which header files to use for compilation.
-
-As such, changing the output of uname will create a lot of issues.
-
-You can get 'effective' kernel uname info by running:
-
-```
-kcare-uname
-```
 
 ## We found that SELinux is disabled. Could you help us to enable it?
 

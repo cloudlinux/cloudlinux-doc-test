@@ -2798,17 +2798,3 @@ $ bundle exec rake db:migrate RAILS_ENV="production"
 ::: tip Note
 After adding some other modules to an Application with cPanel interface you may need to restart the application, which can be done on the same Ruby Selector page.
 :::
-
-## What IPs to whitelist for the proper KernelCare work?
-
-Generally, KernelCare requires http(s) connection to two servers for the proper work:
-
-`cln.cloudlinux.com`
-
-`patches.kernelcare.com`  
-
-As of November 2019, their IPs are:
-
-69.175.3.9
-
-69.175.106.203
