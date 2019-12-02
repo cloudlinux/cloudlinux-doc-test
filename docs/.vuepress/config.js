@@ -113,11 +113,12 @@ module.exports = {
               collapsable: false,
               children: [
                 "/kb/Billing/",
+                "/kb/KernelCare/",
+                "/kb/Imunify/",
                 "/kb/FAQ/",
                 "/kb/Technology/",
                 "/kb/HowDoI/",
-                "/kb/KernelCare/",
-                "/kb/Imunify/"
+                "/kb/Troubleshooting/"
               ],
             }],
           },
