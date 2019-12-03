@@ -238,3 +238,11 @@ You may use [the following](/kb/Billing/#how-do-i-move-a-license-from-one-server
 ::: tip Note
 Don't remove the license, remove only the server.
 :::
+
+- **Invalid credentials or locked when login to CLN**
+
+If you are getting 'Invalid credentials or locked' when you log in to _cln.cloudlinux.com_, the first thing to check is your login/password.
+
+Try to reset your credentials from the login screen.
+
+However, if the issue persists, please do not hesitate to create a support ticket and we will check it from our side.
