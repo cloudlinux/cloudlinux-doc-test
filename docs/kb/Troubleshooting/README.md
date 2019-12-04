@@ -1,5 +1,7 @@
 # Troubleshooting
 
+Start from interactive decision tree based troubleshooting entries located at [CloudLinux ZenDesk](https://cloudlinux.zendesk.com/hc/en-us/sections/115001345089-Troubleshooting)
+
 ### How To Deal With "Boot Partition is Full" Message
 
 _This article is suitable for both CL6 and CL7 systems._
