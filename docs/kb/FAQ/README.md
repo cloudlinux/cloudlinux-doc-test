@@ -1,5 +1,49 @@
 # FAQ
 
+## CloudLinux OS 8 FAQ
+
+#### What is the difference in user experience between CL7 and CL8?
+
+All CloudLinux OS features will be added and fully supported in CL8, so there should not be any difference.
+
+#### Which kernel will be used for CL8 operation?
+
+CL8 will follow the upstream (RHEL) 4.18 kernel mainline. All CloudLinux OS specific features will be added as a separate module (lve-kmod)
+
+#### How do I install CL8?
+
+You will be able to convert your existing CentOS/RHEL server or install CL8 from an ISO image.
+
+#### What are the kernel-related features and improvements of CL8 kernel?
+
+**Memory**
+
+- Memory management supports 5-level page tables, increasing the physical memory upper limit to 64 TB.
+
+- Non-Uniform Memory Access (NUMA) node count has been increased from 4 NUMA nodes to 8 NUMA nodes, for even bigger servers.
+
+**Security**
+
+- Code implementing the ext4 file system has been cleaned up, making it better at preventing malicious file system images.
+
+- The TCP listener handling is now completely lockless, making TCP servers faster and more scalable, and improving protection against DDoS attacks.
+
+**Performance**
+
+- Spectre V2 mitigation default changed from IBRS to Retpolines for better performance.
+
+- Intel Omni-Path Architecture (OPA) provides Host Fabric Interface (HFI) hardware with initialization and setup for high-performance data transfers. This gives you high bandwidth, high message rates, and low latency between compute and I/O nodes in clustered environments.
+
+- IOMMU passthrough is now enabled by default. This is beneficial for customers who want to pass-through hardware devices to virtual machines.
+
+- A new writecache module has been implemented for the Device Mapper, allowing SSD drives or other persistent memory to be used as a cache for block write operations. (Note, Caching of read operations is not implemented, since such operations are cached in the RAM pages cache.)
+
+- A flexible process flow control mode (cgroup.type threaded) was added to the cgroup mode to allow process threads to be managed as a single entity. With this mode, threads in the same process don’t have to belong to the same group. They can be separated into different groups, but they must be threaded and placed in the same cgroup hierarchy.
+
+- Improvements were made to on-the-fly resizing of file systems that use bigalloc.
+
+- On ext4 file systems, inode generation scalability on SMP systems is improved.
+
 ## PHP Selector integration with cPanel’s MultiPHP Manager
 
 #### What is CloudLinux OS?
