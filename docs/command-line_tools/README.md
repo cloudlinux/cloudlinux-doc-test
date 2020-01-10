@@ -2585,6 +2585,7 @@ The following table presents which `[OPTIONS]` are supported for various panels:
 * [cldiag](/command-line_tools/#cldiag)
 * [cloudlinux-config](/command-line_tools/#cloudlinux-config)
 * [cl-quota](/command-line_tools/#cl-quota)
+* [cloudlinux-limits](/command-line_tools/#cloudlinux-limits)
 
 
 ### cldeploy
@@ -2612,7 +2613,11 @@ The script will install the following to the server:
 1. Register server with CLN.
 2. Install CloudLinux kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
 3. It will attempt to detect control panel and do the following actions:
-*  _For cPanel & DirectAdmin_:
+*  _For cPanel_:
+   * install mod_hostinglimits;
+   * install LVE Manager.
+
+*  _For DirectAdmin_:
    * recompile Apache to install mod_hostinglimits;
    * install LVE Manager.
 
@@ -3035,15 +3040,12 @@ The following checkers are available in <span class="notranslate">**lve-utils >=
 Checks the validity of LVE limits on the server.
 
 [See this page for detailed description](/limits/#limits-validation).
- 
 
 13. <span class="notranslate">`--check-rpmdb`</span>
 
-Checks the RPM database integrity.
-
-Check that rpm database is operable and utils using it (e.g. yum) can work properly.
-
-To start all available checkers at once, the keys <span class="notranslate">`-a | --all`</span> are used. This does not include Check compatibility for PHP Selector, it must be started separately with <span class="notranslate">`--check-phpselector`</span> key.
+:::warning Warning
+This checker was removed from the cldiag utility as `cldiag --check-rpmdb` can in some cases hang up during `rpmdb` check, which can brake access to the database for `rpm/yum` utilities.
+:::
 
 
 ### cloudlinux-config
@@ -3452,5 +3454,90 @@ Quota disabled for user id 500 (home directory /home/cltest1); quotaon: Mountpoi
 
 ```
 # cl-quota -YC
+```
+</div>
+
+
+### cloudlinux-limits
+
+<span class="notranslate">`cloudlinux-limits`</span> is an alternative to `lvectl` CLI tool for LVE management. <span class="notranslate">`cloudlinux-limits`</span> utility allows you to get/set any CloudLinux limits.
+
+#### Usage:
+
+<div class="notranslate">
+
+```
+cloudlinux-limits command [options] [options]
+```
+</div>
+
+#### Commands
+
+| | |
+|-|-|
+|<span class="notranslate">`set`</span>|set parameters for <span class="notranslate">LVE/username/reseller</span>|
+|<span class="notranslate">`get`</span> |get parameters for <span class="notranslate">LVE/username/reseller</span>|
+|<span class="notranslate">`disable-reseller-limits`</span> |enable <span class="notranslate">Reseller Limits</span> for a reseller/all resellers|
+|<span class="notranslate">`enable-reseller-limits`</span> |disable <span class="notranslate">Reseller Limits</span> for a reseller/all resellers|
+
+#### Options
+
+| | |
+|-|-|
+|<span class="notranslate">`--json`</span>|return data in JSON format|
+|<span class="notranslate">`--lve-id <int>`</span>|Display record only for that LVE ID|
+|<span class="notranslate">`--username <str>`</span>|Execute command only for that specific user|
+|<span class="notranslate">`--reseller-name <str>`</span>|Execute command only for that specific reseller|
+|<span class="notranslate">`--reseller-id <int>`</span>|Execute command only for that specific reseller ID|
+|<span class="notranslate">`--all`</span>|Execute command for all resellers|
+|<span class="notranslate">`--for-reseller <str>`</span>|Use a supplied reseller for get/set data|
+|<span class="notranslate">`--domain <str>`</span>|Show data only for that specific domain|
+|<span class="notranslate">`--limits <keys>`</span>|Available keys: <span class="notranslate">`speed`</span>, <span class="notranslate">`nproc`</span>, <span class="notranslate">`pmem`</span>, <span class="notranslate">`vmem`</span>, <span class="notranslate">`maxEntryProcs`</span>, <span class="notranslate">`io`</span>, <span class="notranslate">`iops`</span>, <span class="notranslate">`mysql-gov`</span>, <span class="notranslate">`mysql-cpu`</span>, <span class="notranslate">`mysql-io`</span>, <span class="notranslate">`cagefs`</span>, <span class="notranslate">`inodes`</span>|
+|<span class="notranslate">`--human-readable-numbers`</span>|Return <span class="notranslate">`PMEM`</span> and <span class="notranslate">`VMEM`</span> limits in KBytes, MBytes or GBytes|
+|<span class="notranslate">`--unlimited`</span>|Set all limits to unlimited|
+|<span class="notranslate">`--default [limits]`</span>|Reset limits to the Package defaults. List of comma-separated limits to reset them to default or <span class="notranslate">`all`</span>|
+|<span class="notranslate">`--mysql-gov <ignored|watched>`</span>|Monitor or ignore by MySQL Governor|
+|<span class="notranslate">`--cagefs <enabled|disabled>`</span>|Enable or disable CageFS for a user|
+|<span class="notranslate">`--mysql-restrict <[un]restricted>`</span>|Set user restrict status with dbctl (<span class="notranslate">`restricted`</span> or <span class="notranslate">`unrestricted`</span>)|
+|<span class="notranslate">`--mysql-unrestrict-all`</span>|Unrestrict all restricted users with dbctl|
+|<span class="notranslate">`--speed <str>`</span>|Limit CPU usage for LVE | LVP|
+|<span class="notranslate">`--pmem <str>`</span>|Limit physical memory usage for applications inside LVE | LVP|
+|<span class="notranslate">`--vmem <str>`</span>|Limit virtual memory for applications inside LVE|
+|<span class="notranslate">`--nproc <str>`</span>|Limit number of processes for LVE | LVP|
+|<span class="notranslate">`--io <str>`</span>|Define IO limits for LVE | LVP (KB/s)|
+|<span class="notranslate">`--iops <str>`</span>|Limit IO per second for LVE | LVP|
+|<span class="notranslate">`--maxEntryProcs <str>`</span>|Limit number of entry processes for LVE | LVP|
+|<span class="notranslate">`--mysql-cpu <int>`</span>|Set MySQL Governor CPU limit (pct)|
+|<span class="notranslate">`--mysql-io <int>`</span>|Set MySQL Governor IO limit (read + write MB/s)|
+|<span class="notranslate">`--inodes <N,M>`</span>|Set inode limits. `N` - soft, `M` - hard|
+|<span class="notranslate">`--save-all-parameters`</span>|Save all parameters even if they match with default settings|
+|<span class="notranslate">`-h`</span>, <span class="notranslate">`--help`</span>|Show this help message and exit|
+
+#### Examples
+
+1. Get IO, IOPS, and inodes limits for LVE ID 501:
+
+<div class="notranslate">
+
+```
+cloudlinux-limits get --lve-id 501 --limits=io, iops, inodes
+```
+</div>
+
+2. Set IO, IOPS, and soft inodes limits for LVE ID 501:
+
+<div class="notranslate">
+
+```
+cloudlinux-limits set --lve-id 501 --io 200 --iops 100 --inodes N
+```
+</div>
+
+3. Enable <span class="notranslate">Reseller Limits</span> feature for all resellers:
+
+<div class="notranslate">
+
+```
+cloudlinux-limits enable-reseller-limits --all
 ```
 </div>
