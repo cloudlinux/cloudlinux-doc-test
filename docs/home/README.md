@@ -26,10 +26,10 @@ resources:
      description: "Everything you need to start"
      linkTitle: View forum
      icon: /svg/forum-blue-icon.svg
-     route: https://www.cloudlinux.com/forum/
+     route: https://www.cloudlinux.com/forum
    - header: Blog
      description: "FAQs, known issues,\ntroubleshooting guides"
      linkTitle: View blog
      icon: /svg/blog-blue-icon.svg
-     route: https://blog.cloudlinux.com/
+     route: https://blog.cloudlinux.com
 ---
