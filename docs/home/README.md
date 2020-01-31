@@ -11,7 +11,7 @@ resources:
      description: "FAQs, known issues,\ntroubleshooting guides"
      linkTitle: View knowledge base
      icon: /svg/kb-blue-icon.svg
-     route: /kb
+     route: https://cloudlinux.zendesk.com/hc/en-us
    - header: Documentation
      description: Wide product documentation
      linkTitle: View documentation
@@ -26,10 +26,10 @@ resources:
      description: "Everything you need to start"
      linkTitle: View forum
      icon: /svg/forum-blue-icon.svg
-     route: https://www.cloudlinux.com/forum/categories/group2
+     route: https://www.cloudlinux.com/forum/
    - header: Blog
      description: "FAQs, known issues,\ntroubleshooting guides"
      linkTitle: View blog
      icon: /svg/blog-blue-icon.svg
-     route: https://cloudlinux.com/cloudlinux-os-blog
+     route: https://blog.cloudlinux.com/
 ---
