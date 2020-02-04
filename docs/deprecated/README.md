@@ -611,11 +611,11 @@ Default: <span class="notranslate">`single`</span> – should be used when lve-s
 
 * [Installation](/deprecated/#installation)
   * [Requirements](/deprecated/#requirements)
-  * {Installation](/deprecated/#installation-2)
+  * [Installation](/deprecated/#installation-2)
 * [Using without ploop](/deprecated/#using-without-ploop)
 * [Marking directories](/deprecated/#marking-directories)
 * [OptimumCache configuration file](/deprecated/#optimumcache-configuration-file)
-* [Command-line interface}(/deprecated/#command-line-interface)
+* [Command-line interface](/deprecated/#command-line-interface)
 * [cloudlinux-collect: collect system load statistics](/deprecated/#cloudlinux-collect-collect-system-load-statistics)
   * [cloudlinux-collectl: quick start](/deprecated/#cloudlinux-collectl-quick-start)
   * [Install](/deprecated/#install)
