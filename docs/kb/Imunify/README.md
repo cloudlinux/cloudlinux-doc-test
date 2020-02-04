@@ -539,6 +539,9 @@ No, but this can be done manually. Refer to this [link](/kb/FAQ/#how-to-delete-t
 
 No, a file will stay in the _Ignore_ list as long as its filename is the same.
 
+#### Is it possible to upgrade ImunifyAV(+) to Imunify360 without uninstalling it?
+
+Unfortunately, this is not possible. You need to remove ImunifyAV(+) and then install Imunify360 as described in [https://docs.imunifyav.com/imunifyav/#how-to-uninstall-imunifyav] and [https://docs.imunify360.com/installation/](https://docs.imunify360.com/installation/)
 
 ## Imunify360 CloudLinux Backup FAQ
 
