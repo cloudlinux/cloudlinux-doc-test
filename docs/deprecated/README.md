@@ -36,6 +36,10 @@ $ yum install git-cpanel
 
 ## LVE-Stats 0.x
 
+* [Storing statistics in MySQL](/deprecated/#storing-statistics-in-mysql)
+* [Storing statistics in PostgreSQL](/deprecated/#storing-statistics-in-postgresql)
+* [Compacting in multi-server settings](/deprecated/#compacting-in-multi-server-settings)
+
 :::tip Note
 LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
 :::
@@ -604,6 +608,25 @@ On all other servers, change that option to <span class="notranslate">`slave`</s
 Default: <span class="notranslate">`single`</span> – should be used when lve-stats stores data to a single database.
 
 ## OptimumCache
+
+* [Installation](/deprecated/#installation)
+  * [Requirements](/deprecated/#requirements)
+  * {Installation](/deprecated/#installation-2)
+* [Using without ploop](/deprecated/#using-without-ploop)
+* [Marking directories](/deprecated/#marking-directories)
+* [OptimumCache configuration file](/deprecated/#optimumcache-configuration-file)
+* [Command-line interface}(/deprecated/#command-line-interface)
+* [cloudlinux-collect: collect system load statistics](/deprecated/#cloudlinux-collect-collect-system-load-statistics)
+  * [cloudlinux-collectl: quick start](/deprecated/#cloudlinux-collectl-quick-start)
+  * [Install](/deprecated/#install)
+  * [Measure web site response time](/deprecated/#measure-web-site-response-time)
+  * [To watch what is being collected](/deprecated/#to-watch-what-is-being-collected)
+  * [Statistics being collected in details](/deprecated/#statistics-being-collected-in-details)
+  * [Statistics manual configuration](deprecated/#statistics-manual-configuration)
+  * [Running statistics daemon: collectl-cloudlinux](/deprecated/#running-statistics-daemon-collectl-cloudlinux)
+  * [Analyzing the results](/deprecated/#analyzing-the-results)
+* [Uninstall OptimumCache](deprecated/#uninstall-optimumcache)
+* [Troubleshooting](/deprecated/#troubleshooting)  
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED.
