@@ -64,7 +64,7 @@ module.exports = {
     translationSource: 'docs.cloudlinux.com',
     defaultURL: "/home/",
     redirectionMapping: urls,
-    sidebarDepth: 2,
+    sidebarDepth: 1,
     logo: "/logo.svg",
     logoShort: "/logo-short.svg",
 
