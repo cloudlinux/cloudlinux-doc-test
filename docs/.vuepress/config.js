@@ -93,6 +93,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                   "/introduction/",
+                  "/test/",
                   "/cloudlinux_installation/",
                   "/control_panel_integration/",
                   "/limits/",
