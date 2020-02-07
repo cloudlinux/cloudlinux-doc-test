@@ -1,11 +1,5 @@
-## test L2
+# test L1
 
-some text
+[Link to L2-1](./l2-test1.md)
 
-### test L3
-
-some other text
-
-#### test L4
-
-yet another text
+[Link to L2-2](./l2-test2.md)
