@@ -64,7 +64,7 @@ module.exports = {
     translationSource: 'docs.cloudlinux.com',
     defaultURL: "/home/",
     redirectionMapping: urls,
-    sidebarDepth: 1,
+    sidebarDepth: 3,
     logo: "/logo.svg",
     logoShort: "/logo-short.svg",
 
@@ -93,7 +93,6 @@ module.exports = {
                 collapsable: false,
                 children: [
                   "/introduction/",
-                  "/test/",
                   "/cloudlinux_installation/",
                   "/control_panel_integration/",
                   "/limits/",
