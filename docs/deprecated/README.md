@@ -1,4 +1,4 @@
-﻿# Deprecated
+﻿# Deprecated<sup>Beta</sup>
 
 
 * [Git for cPanel](/deprecated/#git-for-cpanel)
