@@ -110,6 +110,7 @@ module.exports = {
                   "/limits/",
                   "/command-line_tools/",
                   "/lve_manager/",
+                  "/x-ray/",
                   "/cloudlinux_os_components/",
                   "/cloudlinux_os_kernel/",
                   "/for_cloudlinux_partners/",

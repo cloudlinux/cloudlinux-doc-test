@@ -1,8 +1,6 @@
 # X-Ray (BETA)
 
-[[TOC]]
-
-:::tip Note
+:::warning Note
 Please note that X-Ray is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products).
 :::
 
