@@ -1,4 +1,19 @@
-# CloudLinux OS+
+# CloudLinux OS+ (BETA)
+
+* [X-Ray](/cloudlinux-os-plus/#x-ray)
+  * [Description](/cloudlinux-os-plus/#description)
+  * [Installation](/cloudlinux-os-plus/#installation)
+  * [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
+  * [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
+  * [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
+  * [FAQ](/cloudlinux-os-plus/#faq)
+* [Centralized Monitoring](/cloudlinux-os-plus/#centralized-monitoring)
+  * [Description](/cloudlinux-os-plus/#description-2)
+  * [Installation](/cloudlinux-os-plus/#installation-2)
+  * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
+  * [FAQ](/cloudlinux-os-plus/#faq-2)
+  * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
+
 
 <div class="notranslate">
 
@@ -545,7 +560,7 @@ For the CloudLinux Plus clients we provide a monitoring solution that allows you
 
 We collect a constant number of metrics for the client’s end server, and for users we process LVE statistics.
 
-#### Disclaimer
+#### Server overhead
 
 :::warning Warning
 <span class="notranslate">Centralized Monitoring</span> tool might produce an additional load for the client’s end server.
@@ -576,7 +591,7 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
 3. Register CloudLinux+ servers or use the existing servers.
 4. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
 5. You can find the list of servers in the <span class="notranslate">Centralized Monitoring</span> UI: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or you can find the list of servers in your CLN account: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring). Servers will have the <span class="notranslate">`N/A`</span> status.
-6. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.10-1 or higher:
+6. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
 
 <div class="notranslate">
 
@@ -628,7 +643,7 @@ cat /var/log/clplus_sender.log
 ```
 </div>
 
-10. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) where the <span class="notranslate">_cl_plus_sender_</span> service works.
+10. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
 11. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
 
 <div class="notranslate">
