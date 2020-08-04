@@ -618,7 +618,7 @@ yum update/install lve-uitls --enablerepo=cloudlinux-updates-testing
     ```
     </div>
 
-    **Production**
+    **Production (not available yet)** 
 
     Within an hour the <span class="notranslate">`cl-end-server-tools`</span> package will be installed on your server and the collecting and sending statistics daemon will be turned on.
 
@@ -767,10 +767,10 @@ In each cell there are current usage/limit values for the basic LVE limits:
 * MySQL CPU
 * MySQL IO
 
-In the hint, there is a number of faults for each limit. The values in the columns are underlined (it is red if load-to-limit ratio >=90  and it is yellow if load-to-limit ratio >= 50). For the current implementation, the only sort by the load-to-limit ratio is available.
+In the hint, there is a number of faults for each limit. The values in the columns are underlined (it is red if load-to-limit ratio >=90%  and it is yellow if load-to-limit ratio >= 50%). For the current implementation, the only sort by the load-to-limit ratio is available.
 By default, there is a descending sort by the CPU usage column.
 
-When sorting by a column, the lines with the load-to-limit ratio >=90 for this column will have the red background color, and lines with the load-to-limit ratio >=50 for this column will have the yellow background color.
+When sorting by a column, the lines with the load-to-limit ratio >=90% for this column will have the red background color, and lines with the load-to-limit ratio >=50% for this column will have the yellow background color.
 
 :::tip Note
 The users with unlimited resources (∞) will be at the bottom of the table. 
@@ -778,7 +778,7 @@ The users with unlimited resources (∞) will be at the bottom of the table.
 
 #### Users
 
-This page contains all users for the all server of the client and their LVE statistics for the last minute. You can select the number of users on this page and search by user’s data. The values in the columns are the load-to-limit ratio.    
+This page contains all users for the all server of the client and their LVE statistics for the last minute. You can select the number of users on this page and search by user’s data.
 
 The description of this page is the same as [*The most loaded server users for the last minute*](/cloudlinux-os-plus/#the-most-loaded-server-users-for-the-last-minute) of the top 5 loaded users.
 
