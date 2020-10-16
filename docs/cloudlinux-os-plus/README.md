@@ -688,83 +688,36 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
 :::
 
 :::warning Warning!
-Centralized Monitoring beta can be started only in NON-RESELLER CLN accounts.
+Centralized Monitoring can be started only in NON-RESELLER CLN accounts.
 :::
 
-:::tip Note
-Skip the first and second steps and start from the third step if you are already an X-Ray beta tester.
-:::
-
-1. Send a request to become the <span class="notranslate">Centralized Monitoring</span> beta tester here: [https://cln.cloudlinux.com/console/dashboard/products](https://cln.cloudlinux.com/console/dashboard/products)
-2. Wait for the approval from the manager.
-3. Register CloudLinux+ servers or use the existing servers.
-4. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
-5. You can find the list of servers in the <span class="notranslate">Centralized Monitoring</span> UI: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or you can find the list of servers in your CLN account: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring). Servers will have the <span class="notranslate">`N/A`</span> status.
-6. Update/install the <span class="notranslate">`rhn-client-tools`</span> package version 2.0.2-31.cl7 for CloudLinux 7, version  1.1.15-3.el6 for CloudLinux 6, version 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2 for CloudLinux 8, and  <span class="notranslate">`rhn-check`</span> and  <span class="notranslate">`rhn-setup`</span> packages:
-
-<div class="notranslate">
-
-```
-yum update/install rhn-client-tools rhn-check rhn-setup
-rhn_check
-```
-</div>
-
-7. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
-
-<div class="notranslate">
-
-```
-yum update/install lve-utils --enablerepo=cloudlinux-updates-testing
-```
-</div>
-
-8.  **Beta**
-
-    Set up your server to send statistics. Run this command
-
-    <div class="notranslate">
-
+1. Make sure you have a CloudLinux OS+ subscription.
+2. Make sure you have installed the **lve-utils** package version 4.2.20-2 or later. You can install or update it with the following commands:
+    * installation
     ```
-    /usr/share/cloudlinux/cl_plus/manage_clplus enable
+    yum install lve-utils
     ```
-    </div>
-
-    to install the <span class="notranslate">`cl-end-server-tools`</span> package and start service collecting and sending statistics to the central database. Then, check that the <span class="notranslate">`cl-end-server-tools`</span> package is installed successfully:
-
-    <div class="notranslate">
-
+    * update
     ```
-    rpm -q cl-end-server-tools
+    yum update lve-utils
     ```
-    </div>
-
-    **Production (not available yet)** 
-
-    Within an hour the <span class="notranslate">`cl-end-server-tools`</span> package will be installed on your server and the collecting and sending statistics daemon will be turned on.
-
-9. Check the status of service by running this command:
-
-<div class="notranslate">
-
-```
-service cl_plus_sender status
-```
-</div>
-
-
-10. Check that all collectors are initiated:
-
-<div class="notranslate">
-
-```
-cat /var/log/clplus_sender.log
-```
-</div>
-
-11. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
-12. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
-
+3. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
+4. Activate statistics collection on all your servers via the Centralized Monitoring UI ([https://cm.cloudlinux.com](https://cm.cloudlinux.com)) or via the CLN UI [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring).
+    ![](/images/CMInstallationProd.png)
+5. Within 5 hours from the activation, statistics collection and sending to the central server will be set up automatically: all required packages and components will be installed. For new, just registered servers, statistics collection and sending will be set up automatically within 5 hours.
+6. For instant set up of a registered server without the automatic setup, run the following commands:
+    ```
+    # rhn_check	
+    # /usr/share/cloudlinux/cl_plus/manage_clplus enable
+    ```
+    **Note**: If the `rhn_check` command is not found, run the following command:
+    ```
+    # yum install/update rhn-check rhn-setup
+    ```
+7. After 5 hours (or after the manual setup), check that statistics for all registered servers is collected via [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers). And check that user statistics on the servers is collected via [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users).
+    :::tip Note
+    User statistics will be available only for users that were loaded starting from connecting the server to the Centralized Monitoring.
+    :::
 
 ### Centralized Monitoring user interface
 
@@ -967,15 +920,16 @@ No, you don't need, just [follow the <span class="notranslate">Centralized Monit
 
 1. Check that your server is registered by key or by IP license of the CloudLinux+ account, i.e., it should be seen in the list of servers in your CLN account here: [https://cln.cloudlinux.com/console/auth/login](https://cln.cloudlinux.com/console/auth/login)
 2. Check that the following required packages are installed on the end server:
-* <span class="notranslate">`cl-end-server-tools`</span> >= 1.0.1-1
-* <span class="notranslate">`cl-node-exporter`</span> >= 1.1.0-1
+* <span class="notranslate">`cl-end-server-tools`</span> >= 1.0.7-1
+* <span class="notranslate">`cl-node-exporter`</span> >= 1.1.0-2
 * <span class="notranslate">`rhn-client-tools`</span>
     * CloudLinux 6 >= 1.1.15-3.el6.cloudlinux.26
     * CloudLinux 7 >= 2.0.2-31.el7.clouldinux
     * CloudLinux 8 >= 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2
-* <span class="notranslate">`lve-stats`</span> >= 3.0.6-1
-* <span class="notranslate">`lve-utils`</span> >= 4.2.11-1
-* <span class="notranslate">`alt-python27-cllib`</span> >= 2.1.8-1
+* <span class="notranslate">`lve-stats`</span> >= 3.0.7-2
+* <span class="notranslate">`lve-utils`</span> >= 4.2.20-1
+* <span class="notranslate">`alt-python27-cllib`</span> >= 2.1.13-1
+* `lvemanager` >= 6.2.10-1
 3. Check that service collecting and sending statistics is running:
 
 <div class="notranslate">
