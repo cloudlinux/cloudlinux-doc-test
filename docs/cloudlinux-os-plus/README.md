@@ -1,4 +1,4 @@
-# CloudLinux OS+ (BETA)
+# CloudLinux OS+
 
 * [X-Ray](/cloudlinux-os-plus/#x-ray)
   * [Description](/cloudlinux-os-plus/#description)
@@ -15,11 +15,9 @@
   * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
 
-<div class="notranslate">
 
-## X-Ray <Badge text="beta" type="warning"/>
+## X-Ray
 
-</div>
 
 * [Description](/cloudlinux-os-plus/#description)
 * [Installation](/cloudlinux-os-plus/#installation)
@@ -35,7 +33,7 @@ Please note that <span class="notranslate">X-Ray</span> is a new experimental to
 :::
 
 :::warning Warning!
-<span class="notranslate">X-Ray</span> beta can be started only in NON-RESELLER CLN accounts.
+<span class="notranslate">X-Ray</span> can be started only in NON-RESELLER CLN accounts.
 :::
 
 :::warning Warning!
@@ -46,24 +44,31 @@ Please note that <span class="notranslate">X-Ray</span> is a new experimental to
 
 <span class="notranslate">X-Ray</span> can gather and visualize information about top N slowest system functions, external requests, software modules and database queries of the client’s website.
 
-First release of <span class="notranslate">X-Ray</span> is offered for cPanel administrators and support to find the cause of website performance issues.
-
-<span class="notranslate">X-Ray</span> can monitor websites that were developed on cPanel hosts and use PHP (see [PHP version list](/cloudlinux-os-plus/#list-of-supported-php-versions)) or WordPress.
-
 ### Installation
 
-1. Make sure you are an approved X-Ray beta-tester (only non-reseller accounts apply)
+1. Make sure you have CloudLinux OS+ subscription (only non-reseller accounts apply)
 
-2. Make sure you have installed **LVE Manager version 6.2 or later**. You can install it with the following command:
+2. Make sure you have installed **LVE Manager version 6.2 or later**. You can install or update it with the following commands:
+   * installation
+
+   <div class="notranslate">
+
+    ```
+    # yum install lvemanager
+    ```
+    </div>
+
+    * update
    
    <div class="notranslate">
 
     ```
-    # yum install lvemanager --enablerepo=cloudlinux-updates-testing
+    # yum update lvemanager
     ```
     </div>
+3. X-Ray will be activated on all your servers during 4 hours. You will see the X-Ray tab in the LVE Manager UI.
 
-3. Run the following command:
+4. For instant activation, run the following command:
 
    <div class="notranslate">
 
@@ -77,11 +82,11 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
     <div class="notranslate">
 
     ```
-    # yum install rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+    # yum install rhn-check rhn-setup
     ```
     </div>
 
-4. Then install the <span class="notranslate">`alt-php-xray`</span> package
+5. Then install the <span class="notranslate">`alt-php-xray`</span> package
 
     * Via user interface
         * Go to the <span class="notranslate">_X-Ray_</span> tab.
@@ -94,17 +99,55 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
     <div class="notranslate">
 
     ```
-    # yum install lvemanager alt-php-xray --enablerepo=cloudlinux-updates-testing
+    # yum install lvemanager alt-php-xray
     ```
     </div>
 
-5. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
+6. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
 
 ![](/images/XRayStartTracing.png)
 
 ### How to manage X-Ray
 
-#### Create a new tracing task
+X-Ray provides two options for monitoring domain requests speed: Tracing task and Continuous task.
+
+:::warning Warning
+To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
+```
+yum update lvemanager alt-php-xray
+```
+::: 
+
+* **Tracing task** is a task created manually for a specific URL to collect server requests. The task will end either after a specified number of requests to the URL or after a specified time (maximum after two days). It is not possible here to automatically email a report but it is possible to export the report in PDF and send to a user.
+
+* **Continuous task** is a task that initiates a daily hourly tracing requests for a specified domain and email a monitoring report. Continuous task can't stop automatically, you need to stop it manually.
+
+In fact, continuous task allows to automatically create a tracing task for each new day, with the ability to get a report for the past day.
+
+#### Tracing tasks tab
+
+The *Tracing tasks* tab contains a list of all tracing tasks created both manually and automatically via continuous tasks.
+
+![](/images/XRayTracingTaskCreated.png)
+
+The *Created* column shows how a task was created – automatically (by continuous task) or manually.
+
+#### Continuous tracing tab
+
+:::warning Warning
+To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
+```
+yum update lvemanager alt-php-xray
+```
+::: 
+  
+The *Continuous tracing* tab contains a list of continuous tasks for which tracing tasks will be created automatically for a new day for a specific domain.
+
+![](/images/XRayContinuousTasksList.png)
+
+### Managing tracing task
+
+#### Creating a new tracing task
 
 1. Go to the <span class="notranslate">_X-Ray_</span> tab
 2. Click the <span class="notranslate">_Start tracing_</span> button to create a new task
@@ -119,7 +162,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
     ![](/images/XRayAdvanced.png)
 
-#### Advanced settings
+**Advanced settings**
 
 * <span class="notranslate">**Client’s IP**</span>: it is an IPv4 address of a machine to trace. For example, if you have a production website that processes requests from different IP addresses and you do not want to add these requests to the tracing task. So, you can set a specific IP address and <span class="notranslate">X-Ray</span> will analyze requests only from this specific IP address.
 Record for
@@ -130,9 +173,11 @@ After creating, the task appears in the list of tracing tasks.
 
 ![](/images/XRayTrcingTaskList.png)
 
-#### View tracing tasks list
+#### Viewing tracing tasks list
 
 ![](/images/XRayTrcingTaskList1.png)
+
+Tasks created *Manually* are simply tracing tasks.
 
 #### Tracing status
 
@@ -143,23 +188,7 @@ A tracing task can have the following statuses:
 * <span class="notranslate">**On hold**</span> – the same URL already exists in the lists. Task processing will not start automatically. Administrator should start it manually.
 * <span class="notranslate">**Completed**</span> – period of time is finished or number of requests is reached.
 
-#### Stop tracing task
-
-Click ![](/images/XRayStop.png) to stop the tracing task.
-
-![](/images/XRayStopped.png)
-
-The tracing task status will be changed to <span class="notranslate">**Stopped**</span>. Data will not be collected anymore but you can see already collected information or continue tracing later by clicking ![](/images/XRayStart.png).
-
-#### Delete tracing task 
-
-Click ![](/images/XRayDelete.png) to delete the tracing task.
-
-:::warning Warning!
-When you have deleted a tracing task, all collected data will be unavailable.
-:::
-
-#### View collected requests for tracing task
+#### Collected requests for tracing task
 
 :::warning Warning!
 Collected requests are available in the UI for two weeks.
@@ -228,6 +257,101 @@ The <span class="notranslate">_System functions_</span> section displays the fol
 * <span class="notranslate">**Function**</span> – the executed function
 * <span class="notranslate">**File**</span> – the file and the line of the executed request
 * <span class="notranslate">**Duration**</span> – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
+
+#### Stopping tracing task
+
+Click ![](/images/XRayStop.png) to stop the tracing task.
+
+![](/images/XRayStopped.png)
+
+The tracing task status will be changed to <span class="notranslate">**Stopped**</span>. Data will not be collected anymore but you can see already collected information or continue tracing later by clicking ![](/images/XRayStart.png).
+
+#### Deleting tracing task 
+
+Click ![](/images/XRayDelete.png) to delete the tracing task.
+
+:::warning Warning!
+When you have deleted a tracing task, all collected data will be unavailable.
+:::
+
+### Managing continuous tasks
+
+#### Creating a new continuous task
+
+1. Click the *Create continuous tracing*  button 
+
+![](/images/XRayCreateContinuousTaskBtn.png)
+
+2. Specify URL in the *Domain* field and email in the *Email for reports* field and click the *Create* button.
+
+![](/images/XRayCreateContinuousTaskForm.png)
+
+3. You can see a new task in the *Continuous tracing* tab in the X-Ray UI.
+
+![](/images/XRayContinuousTracingTab.png)
+
+4. If you stop a continuous tracing task, a new task for the next 24 hours will not be created. The task for the current day will be finished at midnight and the report will be emailed.
+
+5. If you delete a continuous tracing task, the task for the current day will be finished at midnight and the report will be emailed.
+
+#### Viewing continuous tasks list
+
+You can find a list of continuous tracing tasks in the _Continuous tracing_ tab.
+
+![](/images/XRayContinuousTracingTasksList.png)
+
+You can find automatically created tasks in the _Tracing tasks_ tab marked as _Automatically_ in the _Created_ column.
+
+![](/images/XRayContinuousTracingTasksListCreated.png)
+
+The [statuses for automatically created tasks](/cloudlinux-os-plus/#tracing-status) are the same as for tracing task.
+
+To view detailed info about an automatically created task, click ![](/images/XRayView1.png). You will get requests grouped by hour.
+
+![](/images/XRayContinuousTracingTasksListGrouped.png)
+
+Click to a group to open a list of the requests.
+
+![](/images/XRayContinuousTracingTasksRequestsList.png)
+
+The following data is collected for each request:
+
+* Software modules/plugins by execution time (only for WordPress plugins)
+* Database queries by execution time
+* External requests by execution time
+* Other system functions by execution time
+
+#### Stopping automatic tracing task
+
+Stopping automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
+
+To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+
+
+#### Deleting automatic tracing task
+
+Deleting automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
+
+To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+
+
+#### Continuous task daily report
+
+1. Users get daily reports on their emails. An example of a report is shown below:
+
+    ![](/images/XRayContinuousTaskDaylyReportExample.png)
+
+2. Click the link in the email to show the detailed report:
+
+    ![](/images/XRayContinuousTaskDaylyReportCollectedRequests.png)
+
+3. You can view requests grouped by hour:
+
+    ![](/images/XRayContinuousTaskDaylyReportByHourRequests.png)
+
+4. You can also view the detailed information about request:
+
+    ![](/images/XRayContinuousTaskDaylyReportRequestDetails.png)
 
 ### X-Ray client
 
@@ -537,11 +661,9 @@ All of the examples below are correct:
 
 You can use any of them with a prefix `www.` and it is also correct.
 
-<div class="notranslate">
 
-## Centralized Monitoring <Badge text="beta" type="warning"/>
+## Centralized Monitoring
 
-</div>
 
 * [Description](/cloudlinux-os-plus/#description-2)
 * [Installation](/cloudlinux-os-plus/#installation-2)
@@ -551,6 +673,7 @@ You can use any of them with a prefix `www.` and it is also correct.
 
 ### Description
 
+
 <span class="notranslate">Centralized Monitoring</span> is a tool that allows hosting administrators to monitor load for all their servers and users.
 
 <span class="notranslate">Centralized Monitoring</span> allows you to:
@@ -558,47 +681,45 @@ You can use any of them with a prefix `www.` and it is also correct.
 * View system metrics for all clients’ end servers
 * View the LVE statistics per user for all clients’ end servers
 
-#### Server overhead
-
-:::warning Warning
-<span class="notranslate">Centralized Monitoring</span> tool might produce an additional load for the client’s end server.
-:::
-
-All metrics collected on the centralized database are available to view/analyze within one month. 
-
-Collectors on the client’s end server that send statistics to the centralized database (`cm.cloudlinux.com`) might cause some additional load.
-
-The load for the server with 250 users:
-
-* Idle CPU = 3.5 %
-* Peak CPU = 10.5 %
-* Idle MEM = 50 Мb
-* Peak MEM = 70 Мb
-* Network traffic ~ 9  Mb/hour | 216  Mb/day | 6.3  Gb/month
+### Installation
 
 :::tip Note
 Make sure that `cm.cloudlinux.com` is available on your end server.
 :::
 
+:::warning Warning!
+Centralized Monitoring beta can be started only in NON-RESELLER CLN accounts.
+:::
 
-
-### Installation
+:::tip Note
+Skip the first and second steps and start from the third step if you are already an X-Ray beta tester.
+:::
 
 1. Send a request to become the <span class="notranslate">Centralized Monitoring</span> beta tester here: [https://cln.cloudlinux.com/console/dashboard/products](https://cln.cloudlinux.com/console/dashboard/products)
 2. Wait for the approval from the manager.
 3. Register CloudLinux+ servers or use the existing servers.
 4. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
 5. You can find the list of servers in the <span class="notranslate">Centralized Monitoring</span> UI: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or you can find the list of servers in your CLN account: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring). Servers will have the <span class="notranslate">`N/A`</span> status.
-6. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
+6. Update/install the <span class="notranslate">`rhn-client-tools`</span> package version 2.0.2-31.cl7 for CloudLinux 7, version  1.1.15-3.el6 for CloudLinux 6, version 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2 for CloudLinux 8, and  <span class="notranslate">`rhn-check`</span> and  <span class="notranslate">`rhn-setup`</span> packages:
 
 <div class="notranslate">
 
 ```
-yum update/install lve-uitls --enablerepo=cloudlinux-updates-testing
+yum update/install rhn-client-tools rhn-check rhn-setup
+rhn_check
 ```
 </div>
 
-7.  **Beta**
+7. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
+
+<div class="notranslate">
+
+```
+yum update/install lve-utils --enablerepo=cloudlinux-updates-testing
+```
+</div>
+
+8.  **Beta**
 
     Set up your server to send statistics. Run this command
 
@@ -622,7 +743,7 @@ yum update/install lve-uitls --enablerepo=cloudlinux-updates-testing
 
     Within an hour the <span class="notranslate">`cl-end-server-tools`</span> package will be installed on your server and the collecting and sending statistics daemon will be turned on.
 
-8. Check the status of service by running this command:
+9. Check the status of service by running this command:
 
 <div class="notranslate">
 
@@ -632,7 +753,7 @@ service cl_plus_sender status
 </div>
 
 
-9. Check that all collectors are initiated:
+10. Check that all collectors are initiated:
 
 <div class="notranslate">
 
@@ -641,16 +762,12 @@ cat /var/log/clplus_sender.log
 ```
 </div>
 
-10. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
-11. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
+11. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
+12. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
 
-<div class="notranslate">
 
 ### Centralized Monitoring user interface
 
-</div>
-
-<div class="notranslate">
 
 You can access <span class="notranslate">Centralized Monitoring</span> in your [CLN account](https://cln.cloudlinux.com/).
 Click <span class="notranslate">C-Monitoring</span> in the left menu.
@@ -659,7 +776,6 @@ Click <span class="notranslate">C-Monitoring</span> in the left menu.
 
 #### Servers
 
-</div>
 
 This page contains the list of all clients’ end servers. The server appears in the list after finishing [Installation](/cloudlinux-os-plus/#installation-2). By default, there is a descending sort by CPU usage.
 
@@ -741,8 +857,13 @@ All charts are auto-refreshed and there is an ability to select the period for m
 
 #### Apache connections (number)/Number of requests per minute/Max connections
 
+
 :::warning Note
 In the current version, we collect these metrics for the cPanel end servers only. We are planning to add other panels support soon.
+:::
+
+:::warning Note
+In the current version, we collect these metrics only for Apache (NOT for LiteSpeed, Nginx, etc.). The charts will be empty for LiteSpeed, Nginx, etc..
 :::
 
 #### MySQL queries
@@ -834,6 +955,12 @@ The user load chart contains three lines:
   
 Limit and current load are drawing regarding the left vertical axis, the count of faults is drawing regarding the right vertical axis. You can focus on a particular line by clicking a required legend.
 
+#### Do I need to submit a request to be a Centralized Monitoring beta tester if I'm already an X-Ray beta tester?
+
+No, you don't need, just [follow the <span class="notranslate">Centralized Monitoring</span> instruction](/cloudlinux-os-plus/#installation-2) starting from the third step.
+
+
+
 ### Troubleshooting
 
 #### I can't see a server statistics
@@ -878,6 +1005,26 @@ You can view the events log on the client's server here:
 ```
 </div>
 
-<Disqus/>
+#### Can I get monitoring metrics from LiteSpeed, Nginx or other (Not Apache) web server?
 
+No, you can not. We will announce in our [blog](https://blog.cloudlinux.com/) when we implement this.
 
+Starting from `cl-end-server-tools` v.1.0.6-1, the statistics collection daemon allows to log data sent to pushgateway to its log `/var/log/clplus_sender.log`.
+
+To start logging, run the following command: 
+
+```
+touch /var/lve/cmt_debug_logging
+```
+
+To stop logging, run the following command: 
+
+```
+rm -f /var/lve/cmt_debug_logging
+```
+
+You don't need to restart the daemon after starting/stopping logging. The presence of a control file is evaluated "on the fly".
+
+:::warning Warning
+Use this logging with caution because when it is enabled, the size of the daemon log `/var/log/clplus_sender.log` will increase each minute minimum on 3-4 KB. The actual increase size depends on the number of active users' processes on a server.
+:::
