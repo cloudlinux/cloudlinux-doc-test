@@ -11,6 +11,7 @@
   * [Description](/cloudlinux-os-plus/#description-2)
   * [Installation](/cloudlinux-os-plus/#installation-2)
   * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
+  * [Alert Manager](/cloudlinux-os-plus/#alert-manager)
   * [FAQ](/cloudlinux-os-plus/#faq-2)
   * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
@@ -676,6 +677,7 @@ Required packages:
 * [Description](/cloudlinux-os-plus/#description-2)
 * [Installation](/cloudlinux-os-plus/#installation-2)
 * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
+* [Alert Manager](/cloudlinux-os-plus/#alert-manager)
 * [FAQ](/cloudlinux-os-plus/#faq-2)
 * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
@@ -865,6 +867,154 @@ This page contains all users for the all server of the client and their LVE stat
 The description of this page is the same as [*The most loaded server users for the last minute*](/cloudlinux-os-plus/#the-most-loaded-server-users-for-the-last-minute) of the top 5 loaded users.
 
 ![](/images/CMUsers.png)
+
+### Alert Manager
+
+Alert Manager allows you to create a server or user alert for selected metrics and email the triggered events.
+
+#### Alert Manager page
+
+![](/images/CMAlertManager1.png)
+
+The Alert Manager page contains a table with the following:
+
+* **Alert name** - a unique alert name
+* **Tracking metric** - a name of a server/user metric which will trigger the alert notification
+* **# of servers** - number of servers on which the metric will be tracked
+  * click ![](/images/CMAlertManager2.png) to view a list of servers host names
+* **# of users** - number of users for which the metric will be tracked
+  * click ![](/images/CMAlertManager2.png) to view a list of users names
+* **Value** - a condition for the alert rule which will be applied to the tracking metrics
+* **Email** - email to send the triggered events notifications
+* **Type** - a type of the alert rule
+* **# of triggered events** - the number of events from the time, when alert rule was created
+  * ![](/images/CMAlertManager3.png) the event is still firing
+* **Time  of the last trigger** - the time of last triggered event, it is the time in your browser time zone
+* **Actions** - click ![](/images/CMAlertManager4.png) to edit and ![](/images/CMAlertManager5.png) to delete the alert rule
+
+**Color Codes**
+
+* **Red** color means that the event with the condition "more than" is still firing.
+* **Green** color means that the event with the condition "less than" is still firing.
+
+#### Creating an alert
+
+To create a new alert, click the _Create alert_ button.
+
+![](/images/CMAlertManager6.png)
+
+Next, fill out the opened popup.
+
+![](/images/CMAlertManager7.png)
+
+* **Name of alert** - a unique alert name
+* **Alert type** - an admin can create a **user** or a **server** alert. [What is the difference between them?](/cloudlinux-os-plus/#difference-between-the-server-alert-and-the-user-alert)
+* **Select user/server** - admin will see such dropdown depending on a [case of alert creating](/cloudlinux-os-plus/#cases-of-alert-creating)
+* **Notify me** - the condition of the alert trigger
+* **Duration** - how much time the condition should be actual to trigger the notification
+* **Notify me on email** - the email to send notifications
+
+#### Editing an alert
+
+An admin can edit the alert rule and change the following fields:
+* Alert name
+* Value of alert rule condition
+* Time duration
+* Email for notifications
+
+#### Difference between the server alert and the user alert
+
+The **server alert** is used to track the state of the  whole server, it does not track user state on the server.
+The **server alert** tracks the next list of metrics:
+
+1. Context switches
+2. System load (1m)
+3. System load (5m)
+4. System load (15m)
+5. CPU Basic (total)
+6. CPU Basic (system)
+7. CPU Basic (user)
+8. CPU Basic (iowait)
+9. CPU Basic (steal)
+10. Network Traffic Basic (`eht0_receive`)
+11. Network Traffic Basic (`eht0_transmit`)
+12. Network Traffic Basic (`ehtN_receive`)
+13. Network Traffic Basic (`ehtN_transmit`)
+14. Disk Space Used Basic (`mountpoint: <0>`)
+15. Disk Space Used Basic (`mountpoint: <1>`)
+16. Disk Space Used Basic (`mountpoint: <N>`)
+17. Memory Basic (available)
+18. Memory Basic (used)
+19. Time spent Doing I/Os
+20. Disk IOps Writes Completed
+21. Disk IOps Reads Completed
+22. Disk Read Data
+23. Disk Write Data
+24. Disk Read Time
+25. Disk Write Time
+26. Apache connections
+27. Number of requests per minute
+28. MySQL queries
+29. Hardware Temperature (`chip<0>`)
+30. Hardware Temperature (`sensor<0>`)
+31. Hardware Temperature (`chip<N>`)
+32. Hardware Temperature (`sensor<N>`)
+33. Open File Description
+
+During creating a server alert an admin should select the type of metrics as the first step. The list of servers will be collected according to the availability of these metrics on the server.
+
+For example, for now, we do not collect Apache metrics for non-cPanel servers, so you will get only cPanel servers as a list of servers for these metrics.
+
+We're planning to implement support for other panels/web servers in the next releases.
+
+:::tip Small limitation
+We collect the server list according to having their statistics in our database (this behavior will be changed in the next releases).
+:::
+
+For example, if server state is N/A or idle more than 24 hours, it will not be visible in the list for the alert.
+
+The **user alert** tracks the next list of LVE metrics:
+
+1. CPU Usage (current usage)
+2. CPU Usage (faults)
+3. Entry Processes (current usage)
+4. Entry Processes (faults)
+5. Physical Memory Usage (current usage)
+6. Physical Memory Usage (faults)
+7. IOPS (current usage)
+8. IOPS (faults)
+9. IO Usage (current usage)
+10. IO Usage (faults)
+11. Number of Processes (current usage)
+12. Number of Processes (faults)
+13. MySQL CPU (current usage)
+14. MySQL CPU (faults)
+15. MySQL IO (current usage)
+
+:::tip Small limitation
+We collect the server list according to having their statistics in our database (this behavior will be changed in the next releases).
+:::
+
+For example, if the user state is N/A or idle more than 24 hours, it will not be visible in the list for the alert.
+
+#### Cases of alert creating
+
+* Creating a server alert for the selected metrics for one server
+* Creating a server alert for the selected metrics for all servers (the default value)
+  
+In this two cases, you will not see the dropdown for selecting users because the metrics will track the server state. 
+
+* Creating a user alert for one user, so admin can select a server and a user.
+* Creating a user alert for all users on several servers/all servers (in this case admin can't select users - all users will be selected automatically)
+
+#### Alert notifications
+
+![](/images/CMAlertManager8.png)
+
+* **Alert name** - the link to the alert page
+* **Firing target** - the link to the server details page
+
+
 
 ### FAQ
 
