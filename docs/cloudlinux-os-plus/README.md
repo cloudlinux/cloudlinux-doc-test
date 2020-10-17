@@ -661,6 +661,14 @@ All of the examples below are correct:
 
 You can use any of them with a prefix `www.` and it is also correct.
 
+#### What packages are required for X-Ray?
+
+Required packages:
+
+* `lvemanager` >= 6.2.10-1
+* `alt-php-xray` >= 0.2-1
+
+
 
 ## Centralized Monitoring
 
