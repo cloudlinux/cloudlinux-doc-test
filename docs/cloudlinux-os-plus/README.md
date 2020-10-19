@@ -883,6 +883,16 @@ The values like this ![](/images/CMvalue.png) means that the resource is unlimit
 
 Metrics data of _Idle users_ is not used in the sorting, so such users always will be at the end of the list.  The sorting can be done for only one metric.
 
+#### Charts for Users metrics 
+
+:::warning Note
+We store the metrics data for one month only.
+:::
+
+On the user details page, the admin can find the charts for all LVE limits.
+
+![](/images/CMUsersCharts.png)
+
 
 ### Alert Manager
 
