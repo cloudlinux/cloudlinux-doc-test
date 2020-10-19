@@ -866,7 +866,19 @@ This page contains all users for the all server of the client and their LVE stat
 
 The description of this page is the same as [*The most loaded server users for the last minute*](/cloudlinux-os-plus/#the-most-loaded-server-users-for-the-last-minute) of the top 5 loaded users.
 
+
 ![](/images/CMUsers.png)
+
+User’s metrics data can be sorted by the load-to-limit ratio and by the absolute value.
+
+The absolute value is used to analyse the load produced by unlimited users.
+
+The value of the load-to-limit ratio is convenient to use in the analysis of how many resources the users consume and whether they need to change the limits.
+
+The values like this ![](/images/CMvalue.png) means that the resource is unlimited and 500.2 MB is the current usage of it.
+
+Metrics data of _Idle users_ is not used in the sorting, so such users always will be at the end of the list.  The sorting can be done for only one metric.
+
 
 ### Alert Manager
 
