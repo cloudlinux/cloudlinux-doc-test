@@ -29,12 +29,8 @@
 
 ### Description
 
-:::warning Note
-Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the <span class="notranslate">X-Ray</span> tool after receiving the CLN manager approval.
-:::
-
 :::warning Warning!
-<span class="notranslate">X-Ray</span> can be started only in NON-RESELLER CLN accounts.
+<span class="notranslate">X-Ray</span> is available only in NON-RESELLER CLN accounts.
 :::
 
 :::warning Warning!
@@ -698,7 +694,7 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
 :::
 
 :::warning Warning!
-Centralized Monitoring can be started only in NON-RESELLER CLN accounts.
+Centralized Monitoring is available only in NON-RESELLER CLN accounts.
 :::
 
 1. Make sure you have a CloudLinux OS+ subscription.
@@ -1097,11 +1093,6 @@ The user load chart contains three lines:
   
 Limit and current load are drawing regarding the left vertical axis, the count of faults is drawing regarding the right vertical axis. You can focus on a particular line by clicking a required legend.
 
-#### Do I need to submit a request to be a Centralized Monitoring beta tester if I'm already an X-Ray beta tester?
-
-No, you don't need, just [follow the <span class="notranslate">Centralized Monitoring</span> instruction](/cloudlinux-os-plus/#installation-2) starting from the third step.
-
-
 
 ### Troubleshooting
 
@@ -1150,7 +1141,34 @@ You can view the events log on the client's server here:
 
 #### Can I get monitoring metrics from LiteSpeed, Nginx or other (Not Apache) web server?
 
-No, you can not. We will announce in our [blog](https://blog.cloudlinux.com/) when we implement this.
+Starting from end-server-tools-1.0.7, it supports collecting and sending statistics from the Apache and LiteSpeed web servers.
+
+LiteSpeed is supported on cPanel and DirectAdmin control panels.
+
+Each minute the statistics collection daemon checks which web server is started. If LiteSpeed is started, the daemon will collect data from it, otherwise, it checks if Apache is started.
+
+When the daemon detects that the server is changed, it writes the following line into the statistics collection daemon log `/var/log/clplus_sender.log`:
+
+```
+2020-10-09 17:25:31,462: (CL+_sender_daemon) [INFO] Apache/Litespeed collector: Using Apache
+```
+or
+
+```
+2020-10-09 18:13:03,897: (CL+_sender_daemon) [INFO] Apache/Litespeed collector: Using Litespeed
+```
+
+If the daemon can't detect either Apache or LiteSpeed, it writes to the log the following:
+
+```
+2020-10-09 17:33:38,399: (CL+_sender_daemon) [INFO] Apache/Litespeed collector: Apache or Litespeed stopped or absent, collector will not work
+```
+
+The statistics collection daemon reacts to the server changing automatically, no need to restart it.
+
+:::warning Warning
+Please note that the daemon checks the server type once in a minute, so the data sent on a minute of switching can be unreliable.
+:::
 
 #### Logging data sent to pushgateway to the statistics collection daemon log
 
