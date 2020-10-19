@@ -1121,6 +1121,8 @@ You can view the events log on the client's server here:
 
 No, you can not. We will announce in our [blog](https://blog.cloudlinux.com/) when we implement this.
 
+#### Logging data sent to pushgateway to the statistics collection daemon log
+
 Starting from `cl-end-server-tools` v.1.0.6-1, the statistics collection daemon allows to log data sent to pushgateway to its log `/var/log/clplus_sender.log`.
 
 To start logging, run the following command: 
