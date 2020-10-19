@@ -715,7 +715,7 @@ Centralized Monitoring can be started only in NON-RESELLER CLN accounts.
 4. Activate statistics collection on all your servers via the Centralized Monitoring UI ([https://cm.cloudlinux.com](https://cm.cloudlinux.com)) or via the CLN UI [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring).
     ![](/images/CMInstallationProd.png)
 5. Within 5 hours from the activation, statistics collection and sending to the central server will be set up automatically: all required packages and components will be installed. For new, just registered servers, statistics collection and sending will be set up automatically within 5 hours.
-6. For instant set up of a registered server without the automatic setup, run the following commands:
+6. For instant set up of a registered server without the automatic setup, run the following commands for all servers:
     ```
     # rhn_check	
     # /usr/share/cloudlinux/cl_plus/manage_clplus enable
