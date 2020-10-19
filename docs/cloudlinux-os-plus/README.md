@@ -927,11 +927,11 @@ The Alert Manager page contains a table with the following:
 
 To create a new alert, click the _Create alert_ button.
 
-![](/images/CMAlertManager6.png)
+![](/images/CMAlertManager7.png)
 
 Next, fill out the opened popup.
 
-![](/images/CMAlertManager7.png)
+![](/images/CMAlertManager6.png)
 
 * **Name of alert** - a unique alert name
 * **Alert type** - an admin can create a **user** or a **server** alert. [What is the difference between them?](/cloudlinux-os-plus/#difference-between-the-server-alert-and-the-user-alert)
@@ -1032,6 +1032,11 @@ In this two cases, you will not see the dropdown for selecting users because the
 
 * Creating a user alert for one user, so admin can select a server and a user.
 * Creating a user alert for all users on several servers/all servers (in this case admin can't select users - all users will be selected automatically)
+
+#### What is the Firing state of the alert?
+
+This is the state of an alert that has been active for longer than the configured threshold duration.
+
 
 #### Alert notifications
 
