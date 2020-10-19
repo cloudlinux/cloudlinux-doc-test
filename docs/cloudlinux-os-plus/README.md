@@ -768,7 +768,11 @@ All charts are auto-refreshed and there is an ability to select the period for m
 
 ![](/images/CMUPdates.png)
 
-#### Charts
+:::warning Note
+We store the metrics data for one month only.
+:::
+
+#### Charts for server metrics
 
 #### Visualization of the most popular server states
 
