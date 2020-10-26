@@ -1,8 +1,9 @@
 # User interface (LVE Manager)
 
-<div class="notranslate">
-
-</div>
+* [CloudLinux installation wizard](/lve_manager/#cloudlinux-installation-wizard)
+* [LVE Manager](/lve_manager/#lve-manager)
+* [inodes](/limits/#inodes)
+* [Control panel integration guide](/lve_manager/#control-panel-integration-guide)
 
 <span class="notranslate">LVE Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
 
@@ -15,9 +16,22 @@ $ yum install lvemanager
 ```
 </div>
 
+## CloudLinux installation wizard
+
 <div class="notranslate">
 
-## CloudLinux installation wizard
+* [Overview](/lve_manager/#overview)
+* [Set up](/lve_manager/#set-up)
+* [CloudLinux components](/lve_manager/#cloudlinux-components)
+  * [CageFS](/lve_manager/#cagefs)
+  * [LSAPI](/lve_manager/#lsapi)
+  * [MySQL Governor](/lve_manager/#mysql-governor)
+  * [Node.js Selector](/lve_manager/#node-js-selector)
+  * [Ruby Selector](/lve_manager/#ruby-selector)
+  * [Python Selector](/lve_manager/#python-selector)
+  * [PHP Selector](/lve_manager/#php-selector)
+* [Installation process and possible errors](/lve_manager/#installation-process-and-possible-errors)
+  * [Wizard fatal error](/lve_manager/#wizard-fatal-error)
 
 #### Overview
 
@@ -45,7 +59,7 @@ Click <span class="notranslate">_Finish and Install_</span> to complete installa
 You can find a complete description of the CloudLinux components below.
 
 #### CloudLinux components
-
+</div>
 <div class="notranslate">
 
 #### **CageFS**
@@ -188,6 +202,8 @@ You can contact our support team for further assistance anytime by [submitting a
 
 ## LVE Manager
 
+* [Notifications color codes](/lve_manager/#notifications-color-codes)
+
 <span class="notranslate">cPanel LVE Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
 
 Administrator credentials allow controlling limits for host users.
@@ -203,22 +219,39 @@ Log in as administrator to get access to the following functionality:
 * <span class="notranslate">Options</span> tab - allows setting LVE Faults email notifications for users;
 * <span class="notranslate">Packages</span> allows managing packages limits;
 * <span class="notranslate">PHP Selector</span> tab.
-* ImunifyAV allows to get access to a brand new malware scanner installed with LVE Manager. Click ImunifyAV on the main menu to go to ImunifyAV interface and use the next-generation, automated security solution that automatically scans the file system for malware injection and quarantines infected files.
 
 For more details, please go to the [ImunifyAV documentation](https://docs.imunifyav.com/).
 
-:::tip Note
-Available starting from LVE Manager Beta version 4.0-26.8.
-:::
-
 <div class="notranslate">
 
-### Dashboard
+#### Notifications color codes <sup><Badge text="LVE Manager 5.3.7-1+"/></sup>
+
+In the LVE Manager UI we use the following color codes for notifications:
+
+* ![](/images/pic_warning.png) warning
+* ![](/images/pic_error.png) error
+* ![](/images/pic_info.png) information
+* ![](/images/pic_success.png) success
+
+The following actions are available in the action notifications (error, success)
+ * follow a link
+ * copy a command
+ * copy a whole traceback
+
+The following actions are available in the system notifications (information, warning):
+* follow a link
+* copy a command
+* copy a whole message
+* mark a notification as “Read”
+* snooze a notification
+
 
 </div>
 
+### Dashboard
+
 :::tip Note
-Available starting from LVE Manager Beta version 4.0-26.8
+Available starting from LVE Manager 4.0-26.8
 :::
 
 CloudLinux dashboard provides a quick overview of statistics and all administrative information for server administrators.
@@ -249,7 +282,9 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
   * <span class="notranslate">Applications</span> — number of installed/all applications for the account.
 * <span class="notranslate">[PHP Selector](/lve_manager/#php-selector-2)</span> block displays the following data:
   * <span class="notranslate">Default version</span> — the default version of PHP binaries.
-  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.
+  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.<br>
+  PHP Selector (cPanel) has malfunctions warnings about [the most common issues](/lve_manager/#errors).
+  ![](/images/PHPSelectorDashboardMalfunction.png)
 * <span class="notranslate">[Python Selector](/lve_manager/#python-selector-2)</span> block displays the following data:
   * <span class="notranslate">Python Selector</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span> — displays a current status of the Python Selector.
   
@@ -257,7 +292,7 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
 
     * Click <span class="notranslate">_Install_</span> to install <span class="notranslate">Python Selector</span>, you will be redirected to <span class="notranslate">LVE Manager | Options | Python Selector</span>.
   * <span class="notranslate">Applications</span> —  number of installed/all applications for the account.
-* [Reseller Limits](/lve_manager/#reseller-limits) block displays the following data:
+* [Reseller Limits](/lve_manager/#reseller-interface) block displays the following data:
   * <span class="notranslate">Reseller Limits</span> status (<span class="notranslate">Enabled/Disabled</span>). To manage <span class="notranslate">Reseller Limits</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Users</span> tab.
   * Reseller’s accounts with Reseller Limits/all —  the number of Reseller accounts with Reseller Limits enabled versus the total number of Reseller accounts.
   * Reseller’s End Users with enabled Reseller Limits/all — the number of end users with Reseller Limits enabled versus all End Users that belong to all resellers.
@@ -292,8 +327,6 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
 
 ### Current usage
 
-</div>
-
 Choose <span class="notranslate">_Current usage_</span> tab to monitor users resource usage at the moment displayed in the table.
 
 <span class="notranslate">Current usage</span> table provides the information on the usage of <span class="notranslate"> Speed, memory, IO, IOPS, Number of Processes</span>, and <span class="notranslate"> Entry Processes</span>.
@@ -306,84 +339,151 @@ To expand the list of users click on the number above and in the dropdown choose
 
 ![](/images/man_01_zoom73.png)
 
-<div class="notranslate">
+The list of users can be filtered by <span class="notranslate">_Username_</span> and <span class="notranslate">_Domain_</span>.
+
+Hoster can **view** all types of users:
+* <span class="notranslate">End users</span>
+* <span class="notranslate">Resellers</span>
+* <span class="notranslate">Reseller’s end users</span>
+* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>.
+
+But hoster can only **manage**:
+* <span class="notranslate">End users</span>
+* <span class="notranslate">Resellers</span>
+* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>
+
+To manage Reseller’s end users hoster should login as a reseller.
 
 ### Users
 
-</div>
+* [Actions](/lve_manager/#actions)
+* [Group actions for users with enabled CageFS](/lve_manager/#group-actions-for-users-with-enabled-cagefs)
 
-Choose <span class="notranslate"> Users</span> tab to view the list of all users of the system and manage their limits.
+Choose <span class="notranslate">_Users_</span> tab to view the list of all users in the system and manage their limits.
 
-Click <span class="notranslate">_Filter by_</span> to apply filters. The following filters available in the dropdown:
+![](/images/userstabhoster_zoom70.png)
 
-* <span class="notranslate"> Username</span>
-* <span class="notranslate"> Domain</span>
-* <span class="notranslate"> LVE ID</span>
+:::tip Note
+A hoster can view the list of resellers’ end users and their limits, but can not manage resellers’ end users limits (if those are set by reseller).
+:::
 
-![](/images/man_02_zoom79.png)
+* Tick <span class="notranslate">_Show users with CageFS enabled_</span> to show users with CageFS file system enabled.
+* Tick <span class="notranslate">_Show only ignored users_</span> to show users with ignored <span class="notranslate">MySQL Governor</span>.
 
-Actions column – click on a pencil icon in <span class="notranslate"> Actions</span> column to edit a proper user limits.
+The following filters are available:
+* <span class="notranslate">Manage by</span>
+  * <span class="notranslate">End users</span>
+  * <span class="notranslate">Resellers</span>
+  * <span class="notranslate">Reseller's end users</span>
+  * <span class="notranslate">Reseller's end users (no Reseller limit)</span>
+* <span class="notranslate">Show only</span>
+  * <span class="notranslate">Ignored users</span> - show users with ignored MySQL Governor.
+  * <span class="notranslate">Users with CageFS enabled</span>
 
-Set proper LVE values:
-* <span class="notranslate">SPEED</span>
-* <span class="notranslate">PMEM</span>
-* <span class="notranslate">VMEM</span>
-* <span class="notranslate">EP</span>
-* <span class="notranslate">IO</span>
-* <span class="notranslate">IOPS</span>
-* <span class="notranslate">NPROC</span>
-* <span class="notranslate">INODES</span>
+Also, you can search user by his <span class="notranslate">Username</span>, <span class="notranslate">domain</span> or <span class="notranslate">LVE ID</span> in the <span class="notranslate">_Search_</span> field.
 
-![](/images/man_03_zoom86.png)
-![](/images/man_04_zoom86.png)
+#### Actions
 
-Click <span class="notranslate"> _Save_ </span> to apply changes or <span class="notranslate"> _Cancel_ </span> to close the window.
+Click pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
 
-<div class="notranslate">
+* Enable/disable <span class="notranslate">CageFS</span>
+* <span class="notranslate">**Reset**</span> - to reset limits to default values
+* Apply <span class="notranslate">**Do not limit**</span> to set the limits to unlimited;
+* Setting the limits values:
+  * <span class="notranslate"> SPEED </span>
+  * <span class="notranslate"> SPEED MYSQL </span>
+  * <span class="notranslate"> VMEM </span>
+  * <span class="notranslate"> PMEM </span> 
+  * <span class="notranslate"> IO </span>
+  * <span class="notranslate"> MySQL IO </span>
+  * <span class="notranslate"> IOPS </span>
+  * <span class="notranslate"> EP </span>
+  * <span class="notranslate"> NPROC </span>
+  * <span class="notranslate"> INODES </span> (hard and soft) (for <span class="notranslate">end users</span> and <span class="notranslate">resellers’ end users (with no Reseller Limits)</span>, if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings).
+
+Click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the pop-up.
+
+![](/images/actionshoster.png)
+
+Click on <span class="notranslate">_History_</span> symbol to view the history of a particular user resource usage. Choose time frame to view the history for a particular time period.
+
+![](/images/historyhoster.jpg)
+
+#### Group actions for users with enabled CageFS
+
+:::warning Note
+If CageFS is disabled, group actions are not available. See how you can enable CageFS:
+* [Managing users](/cloudlinux_os_components/#managing-users)
+* [CageFS CLI](/command-line_tools/#cagefs)
+* via cPanel CageFS User Manager plugin.
+:::
+
+* **View users with enabled CageFS**
+  
+  To view users with enabled CageFS, click <span class="notranslate">_Show only >> Users with CageFS enabled_</span>
+  ![](/images/CageFSEnabledUsers.png)
+
+* **Disable CageFS for several users**
+
+  To disable CageFS for several users, do the following.
+
+  * Select a particular user or select all users
+  * Click <span class="notranslate">_CageFS_ >> _Disable_</span>.
+
+  ![](/images/GroupDisableCageFS.png)
 
 ### Statistics
 
-</div>
+Choose <span class="notranslate">_Statistics_</span> tab to view end users, resellers and resellers’ end users limits usage statistics.
 
-Choose <span class="notranslate">Statistics</span> tab to view hosts users resource usage statistics.
+The following parameters can be displayed in the statistics table:
 
-The following parameters are displayed in the statistics table:
-
-* <span class="notranslate"> CPU </span> usage per user;
-* <span class="notranslate"> PMEM </span> usage per user;
+* <span class="notranslate"> SPEED </span> usage per user;
+* <span class="notranslate"> IO </span> usage per user;
+* <span class="notranslate"> EP </span> usage per user;
 * <span class="notranslate"> VMEM </span> usage per user;
-* <span class="notranslate"> IO </span> (in Kb/sec per user).
+* <span class="notranslate"> PMEM </span> usage per user;
+* <span class="notranslate"> NPROC </span> usage per user;
+* <span class="notranslate"> IOPS </span> usage per user;
+* <span class="notranslate"> MySQL </span> usage per user.
 
-<span class="notranslate"> Statistics </span> table can be filtered by:
+Click <span class="notranslate">_Show_</span> and select columns from the drop-down to set which parameters should be displayed in the table.
 
-* <span class="notranslate"> Timeframe </span> - to view the statistics for a proper period;
-* <span class="notranslate"> Limit ID </span> - to view a proper limit type usage only;
+Statistics table can be filtered by:
+
+* <span class="notranslate"> Timeframe </span> - to view the statistics for a particular period;
+* <span class="notranslate"> Limit </span> - to view a particular limit type usage only;
 * <span class="notranslate"> Top LVEs </span> - to view top used limits only;
-* <span class="notranslate"> LVE approaching limit </span> - to view the limits that are approaching maximum allocated value;
+* <span class="notranslate"> LVE approaching limit </span> - to view the limits that are approaching maximum provided value;
 * <span class="notranslate"> Fault LVE </span> - the limits that have reached the maximum value.
 
-![](/images/man_05_zoom92.png)
+Click <span class="notranslate">_Manage_</span> to choose type of users to be displayed - <span class="notranslate">End users, Resellers, Resellers’ end users</span> or <span class="notranslate">Resellers’ end users (no Reseller limit)</span> by ticking checkbox in the drop-down.
 
-<div class="notranslate">
+![](/images/statisticstabhoster_zoom70.png)
+
+Click chart symbol in the <span class="notranslate">_View_</span> column to view the detailed resource usage history for a particular account. Use timeframe drop-down to view the history for a particular period of time.
+
+![](/images/history_charts_zoom70.png)
 
 ### Options
-
-</div>
 
 The following sections are available to set the required options:
 
 * <span class="notranslate">[LVE Faults Email Notifications](/lve_manager/#lve-faults-email-notifications)</span> - allows to set the required type of notification
-* [Faults to include](/lve_manager/#faults-to-include) - allows to include required limits to the notifications
-* [Minimum number of Faults to notify](/lve_manager/#minimum-number-of-faults-to-notify) - allows to set a number of faults required for the notification to be sent for hoster, reseller, and user
-* [Inode limits](/lve_manager/#inode-limits) - allows to manage inode limits
-* [User interface settings](/lve_manager/#user-interface-settings) - allows to manage user interface settings
-* [CageFS](/lve_manager/#cagefs-2) - allows to manage CageFS settings
-* [Node.js](/lve_manager/#node-js) - allows to enable/disable and manage Node.js Selector
+* <span class="notranslate">[Faults to include](/lve_manager/#faults-to-include)</span> - allows to include required limits to the notifications
+* <span class="notranslate">[Minimum number of Faults to notify](/lve_manager/#minimum-number-of-faults-to-notify)</span> - allows to set a number of faults required for the notification to be sent for hoster, reseller, and user
+* <span class="notranslate">[Inode limits](/lve_manager/#inode-limits)</span> - allows to manage inode limits
+* <span class="notranslate">[User interface settings](/lve_manager/#user-interface-settings)</span> - allows to manage user interface settings
+* <span class="notranslate">[MySQL Governor settings](/lve_manager/#mysql-governor-settings)</span> - allows to manage MySQL Governor settings (if MySQL Governor is installed)
+* <span class="notranslate">[CageFS](/lve_manager/#cagefs-2)</span> - allows to manage CageFS settings
+* <span class="notranslate">[Node.js](/lve_manager/#node-js)</span> - allows to enable/disable and manage Node.js Selector
 * <span class="notranslate">[Python Selector](/lve_manager/#python-selector-section)</span> - allows to enable/disable and manage Python Selector
 
 ![](/images/options-general.png)
 
 #### LVE Faults Email Notifications
+
+A hoster can set email notifications for panel administrator, reseller customer, and resellers’ customers in cases of limits faults. Choose <span class="notranslate">_Options_</span> tab to manage LVE Faults email notifications.
 
 ![](/images/lve-faults-email-notifications.png)
 
@@ -435,8 +535,72 @@ Allows to reset inode limits and show/hide end-user inode usage.
 Allows to manage user interface settings:
 
 * **<span class="notranslate">Hide LVE end user usage statistic</span>** - a user will not be able to see his usage statistic in his web interface
-* **<span class="notranslate">Hide PHP extension selection</span>** - a user will not be able to select PHP extensions in his web interface
 * **<span class="notranslate">Hide Ruby App in web-interface</span>** - a user will not be able to see Ruby Selector in his web interface
+
+#### MySQL Governor settings
+
+![](/images/mysql-governor-settings.png)
+
+Allows to manage MySQL Governor settings.
+
+<span class="notranslate">**MySQL Governor Mode of operation**</span>
+
+* <span class="notranslate">**Off**</span> - monitor Only – not throttle customer's queries, only monitor MySQL usage.
+* <span class="notranslate">**Single**</span> - single restricted LVE for all restricted customers – all queries for all restricted customers  well be sharing the same LVE.
+* <span class="notranslate">**Abusers**</span> - use LVE for a user to restrict queries (default mode) –  if a user goes over the limits, all his queries will execute inside his LVE.
+* <span class="notranslate">**All**</span> - always run queries inside user's LVE – limits are applied to both PHP & MySQL queries at the same time.
+
+<span class="notranslate">**MySQL Governor restrict type mode**</span>
+
+* <span class="notranslate">Period</span> – allows to restrict users for a specified time period
+* <span class="notranslate">Limit</span> (default mode) – allows to restrict/automatically unrestrict users that hit limits/don't hit limits during 'unlimit=time'
+
+<span class="notranslate">**Unlimit users automatically in**</span>
+
+Allows to unlimit users automatically if they don't hit the limits during the specified number of seconds/minutes/hours/days.
+
+<span class="notranslate">**Restricted time periods**</span>
+
+User restriction time period for different levels of restriction and the timeout to apply a higher restriction level.
+
+* <span class="notranslate">Level1</span>
+* <span class="notranslate">Level2</span>
+* <span class="notranslate">Level3</span>
+* <span class="notranslate">Level4</span>
+* <span class="notranslate">Timeout</span>
+
+<span class="notranslate">**User maximum connections**</span>
+
+The number of simultaneous connections of a restricted user (in the LVE mode).
+
+<span class="notranslate">**Path to script**</span>
+
+To be triggered when account is restricted.
+
+<span class="notranslate">**MySQL Governor restrict-log file URL and format**</span>
+
+* <span class="notranslate">URL</span> – where the log file is placed in the file system
+* <span class="notranslate">Format</span> – log file format: <span class="notranslate">short</span>, <span class="notranslate">medium</span>, <span class="notranslate">long</span>, <span class="notranslate">very long</span>
+
+<span class="notranslate">**MySQL Governor error-log file URL and logging level**</span>
+
+* <span class="notranslate">URL</span> – where the log file is placed in the file system
+* <span class="notranslate">Level</span> – logging level: error, debug
+
+<span class="notranslate">**Kill slow SELECT queries**</span>
+
+* <span class="notranslate">Kill slow queries</span> – stop running slow select queries
+* <span class="notranslate">URL</span> – log file URL, where killed queries will be saved 
+* <span class="notranslate">Timeout</span> – number of seconds while slow request can be finished, otherwise, it will be canceled
+
+<span class="notranslate">**Gather data for detailed statistics**</span>
+
+Tick if yes.
+
+<span class="notranslate">**Log restricted user's queries**</span>
+
+Tick if yes.
+
 
 #### CageFS
 
@@ -472,62 +636,173 @@ See more:
 
 When you've done with settings, click <span class="notranslate">**Save Changes**</span> to apply changes.
 
-<div class="notranslate">
-
 ### Packages
-
-</div>
 
 <span class="notranslate"> Packages</span> tab allows setting the limits for as many users as you need by editing packages of proper limits. Each account belonging to a proper package adheres to those limits.
 
+:::tip Note
+Limits from the package will not be applied if the package’s owner differs from the owner of the account you’re trying to apply limits to. Default limits will be applied instead.
+:::
+
 Choose <span class="notranslate">_Packages_</span> tab to view and modify:
 
-* limits for hosts user’s packages (Created by Admin);
-* limits for reseller’s packages (Created by Admin).
+* limits for user packages (created by hoster);
+* limits for reseller packages (created by hoster);
+* limits for resellers’ end users packages if reseller limits are not set for that reseller (hoster access allows identifying a particular reseller’s end user belonging to a particular reseller (created by reseller)).
+  
+![](/images/packageshostertab_zoom70.png)
 
-![](/images/man_06_zoom82.png)
-
-To modify package limits click on a pencil icon in <span class="notranslate">Action</span> column in a proper package row. The following limits for this package are available for setting:
+To modify package limits click on a pencil symbol in <span class="notranslate">_Actions_</span> column in a particular package row. The following limits for this package are available for setting:
 
 * <span class="notranslate"> SPEED</span> in percent (%);
 * <span class="notranslate"> Virtual memory (VMEM)</span> (can be set as unlimited by setting 0);
 * <span class="notranslate"> Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> I/O limits (IO)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> IOPS</span> limits;
 * <span class="notranslate"> Concurrent connections (EP)</span>;
 * <span class="notranslate"> Number of processes (NPROC)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> IOPS</span> limits;
-* <span class="notranslate"> I/O limits (IO)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> INODES soft</span>;
-* <span class="notranslate"> INODES hard</span>.
+* <span class="notranslate"> INODES (hard and soft)</span> (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings.)
 
 When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
 
-<div class="notranslate">
-
 ### PHP Selector
 
-</div>
+* [Selector tab](/lve_manager/#selector-tab)
+* [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)<sup> LVE Manager 6.0.1-2</sup>
+  * [PHP Selector troubleshooting (cPanel)](/lve_manager/#php-selector-troubleshooting)<sup> LVE Manager 6.0.1-2</sup>
+* [PHP Selector diagnostic tool and notifications](/lve_manager/#php-selector-diagnostic-tool-and-notifications)<sup> LVE Manager 6.0.1-2</sup>
+
+#### Selector tab
 
 <span class="notranslate"> Selector</span> tab allows controlling <span class="notranslate">PHP Selector</span> settings.
 
-In <span class="notranslate">_Selector is_</span> section choose <span class="notranslate">`Enabled`</span> or <span class="notranslate">`Disabled`</span> from the dropdown list to enable or disable <span class="notranslate">PHP Selector</span>.
-
-In <span class="notranslate">_Default PHP version_</span> choose a proper PHP version or <span class="notranslate"> Native</span> from dropdown list to apply.
-
-In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
+* In <span class="notranslate">_Selector is_</span> section choose <span class="notranslate">`Enabled`</span> or <span class="notranslate">`Disabled`</span> from the dropdown list to enable or disable <span class="notranslate">PHP Selector</span>.
+* In <span class="notranslate">_Default PHP version_</span> choose a proper PHP version or <span class="notranslate"> Native</span> from dropdown list to apply.
+* In <span class="notranslate">_Hide php extensions for end-user_</span> you can enable/disable the ability for end-user to select PHP extensions in his web interface.
+* In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
 
 Choose default modules from the list for a proper PHP version or for native.
 
-![](/images/lveman_092.jpg)
-![](/images/lveman_093.jpg)
+![](/images/php_selector.png)
 
 :::tip Note
 You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
 :::
 
+####  Selector tab additional features <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
+
+Go to cPanel admin interface → LVE manager → Selector
+
+![](/images/NewSelector.png)
+
+<span class="notranslate">_Selector_</span> tab has two sub tabs: <span class="notranslate">_Main settings_</span> and <span class="notranslate">_Domains_</span>.
+
+* <span class="notranslate">_Main settings_</span> sub tab allows to config general settings for PHP Selector
+  * <span class="notranslate">_Selector is_</span>: allows to enable/disable PHP Selector
+  * <span class="notranslate">_Default PHP version_</span>: allows to set PHP version by default
+  * <span class="notranslate">_Hide PHP extensions for end-user_</span>: allows to hide PHP extensions
+  * <span class="notranslate">_Hide "My domains" page for end-user_</span>: allows to disable such tab for end-user
+  * <span class="notranslate">_Supported versions_</span>: allows to select supported PHP versions 
+* <span class="notranslate">_Domains_</span> sub tab contains the list of User-Domain pairs to visualize which PHP Selector is used by a domain
+
+![](/images/Domains.png)
+
+Admin can filter the list:
+
+![](/images/SelectorFilters.png)
+
+If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <span class="notranslate">_Action_</span> table, the PHP version for a domain in MultiPHP Selector is changed to the system default version and <span class="notranslate">`php-fpm`</span> is disabled. Users' websites will use the version set in CloudLinux PHP Selector (user interface). Group operation also can be used.
+
+![](/images/UsePHPSelector.png)
+
+#### PHP Selector troubleshooting <Badge text="cPanel"/> <Badge text="LVE Manager 6.0.1-2" />
+
+
+You can see the following errors in the <span class="notranslate">_Domains_</span> tab.
+
+1. <span class="notranslate">PHP Selector cannot be activated for this domain. Initialize CageFS in the Options tab first</span>.
+
+![](/images/Error1.png)
+
+**Solution**
+
+Initialize CageFS in the Options tab (see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users)).
+
+![](/images/CageFSInit.png)
+
+2. <span class="notranslate">PHP Selector cannot be activated for this domain. Enable CageFS for this user in the Users tab first</span>.
+
+![](/images/Error2.png)
+
+**Solution**
+
+Enable CageFS in the Users tab (see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users)).
+
+![](/images/CageFSEnable.png)
+
+* You can enable CageFS for one user by individual slider (for lve 1001 in the picture above)
+* You can enable CageFS for a group of user by the CageFS button (for lve 1002, 1003 in the picture above)
+
+3. Some PHP related issues need to be resolved in order to enable domain management. Find the list of PHP related issues that prevent domain management above.
+
+![](/images/Error3.png)
+
+**Solution**
+
+If you cannot see Diagnostic tool notifications, you can restart it. Then you can fix the issues using [these instructions](/lve_manager/#php-selector-diagnostic-tool-and-notifications).
+
+#### PHP Selector diagnostic tool and notifications <Badge text="LVE Manager 6.0.1-2" />
+
+The diagnostic tool allows to catch some issues. You can start diagnostic by clicking <span class="notranslate">_Run diagnostic_</span> button.
+
+![](/images/RunDiagnostic.png)
+
+The most popular errors and solutions:
+
+1. Your PHP Handler does not support CLoudLinux PHP Selector
+
+![](/images/Issue1.png)
+   
+**Solution**: install `mod_suexec` (see instructions [here](/cloudlinux_os_components/#installation-5)) and then run the following command:
+
+<div class="notranslate">
+
+```
+cagefsctl --force-update
+```
+</div>
+
+2. Incorrect config file format
+
+![](/images/Issue2.png)
+       
+**Solution**: correct the file format via SSH.
+
+3. Some domains have neither PHP version selected in MultiPHP Manager no system default version or have `php-fpm` enabled.
+
+![](/images/Issue3.png)
+
+**Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
+
+4. MultiPHP system default version is not ea-php
+
+![](/images/Issue4.png)
+
+**Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
+
+In the LVE Manager v.6.0.6-1 the diagnostic tool can not catch problems with CageFS. See [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users.
+
+
+
 
 ### Python Selector
 
-#### Hoster
+* [How to enable/disable Python Selector](/lve_manager/#how-to-enable-disable-python-selector)
+* [How to manage Python Selector](/lve_manager/#how-to-manage-python-selector)
+* [Enable and disable particular Python version](/lve_manager/#enable-and-disable-particular-python-version)
+* [Install and delete particular Python version](/lve_manager/#install-and-delete-particular-python-version)
+* [Make a particular Python version as a default](/lve_manager/#make-a-particular-python-version-as-a-default)
+* [Applications column](/lve_manager/#applications-column)
 
 Hoster interface allows to enable and disable Python Selector and manage individual Python versions.
 
@@ -556,7 +831,7 @@ If you disable Python, all users won't be able to manage their applications
 ![](/images/PythonEnableDisable.png)
 
 ::: tip Note
-Python Selector icon in end user interface is absent when Python is disabled.
+Python Selector icon in end user interface is hidden when Python is disabled.
 :::
 
 ![](/images/PythonEndUserIcon.png)
@@ -565,7 +840,7 @@ Python Selector icon in end user interface is absent when Python is disabled.
 
 In the list of installed Python versions you can enable and disable, install and delete, and set a particular Python version as a default.
  
-#### **Enable and disable particular Python version**
+#### Enable and disable particular Python version
  
 To enable particular Python version do the following:
 
@@ -579,7 +854,7 @@ To disable particular Python version do the following:
 * Move an enabled slider in the <span class="notranslate">Enabled</span> column for a particular Python version.
 * In the confirmation popup click <span class="notranslate">_Agree_</span> to save changes or <span class="notranslate">_Cancel_</span> to close popup.
  
-#### **Install and delete particular Python version**
+#### Install and delete particular Python version
  
 To install particular Python version do the following:
 
@@ -600,7 +875,7 @@ It is impossible:
 
 ![](/images/PythonInstall.png)
 
-#### **Make a particular Python version as a default**
+#### Make a particular Python version as a default
 
 :::tip Note
 You can set a particular Python version as a default version in the CloudLinux [installation wizard](/lve_manager/#cloudlinux-installation-wizard) during the first installation.
@@ -617,7 +892,7 @@ It is impossible to make disabled Python version as a default version
 
 ![](/images/PythonChangeDefaultVersion.png)
 
-#### **Applications column**
+#### Applications column
  
 To view and operate with the list of domains with Python versions click a number in the <span class="notranslate">_Applications_</span> column for a particular Python version. A section with a list of Domains for particular Python version will be displayed.
 
@@ -640,127 +915,23 @@ All packages of the application(s) will be re-installed.
 You can also use [Python Selector CLI](/command-line_tools/#hoster)
 :::
 
-
-#### End User
-
-:::tip Note
-Python Selector icon in end user interface is absent when Python is disabled
-:::
-
-![](/images/PythonEndUserIcon.png)
-
-End User interface allows end users to setup and manage Python for their web applications.
-
-Go to <span class="notranslate">cPanel → Software Section → Setup Python App</span>.
- 
-Web Applications page is displayed.
-
-![](/images/PythonEUWebApp.png)
-
-There are several columns in the list:
-
-* <span class="notranslate">App URI</span> — application URI including the domain.
-* <span class="notranslate">App Root Directory</span> — application root directory relative to user's home.
-* <span class="notranslate">Status — started/stopped</span> — displays if an application is running or not and version of the application.
-* <span class="notranslate">Actions</span> — allows to migrate, start, restart, stop, edit, and remove a particular application.
-
-#### How to manage an application
-
-#### **Create application**
-
-1. Click <span class="notranslate">_Create Application_</span> to create an application. The Create Application tab opens.
-
-    ![](/images/PythonCreateApp.png)
-
-2. Specify the following:
-    * <span class="notranslate">Python version</span> — select from the dropdown (required);
-    * <span class="notranslate">Application root</span> — physical address to your application on a server that corresponds with its URI (required);
-    * <span class="notranslate">Application URL</span> —  HTTP/HTTPS link to your application (optional);
-    * <span class="notranslate">Application startup file</span> — the file where WSGI callable object is located. It is required for application to run. Default is <span class="notranslate">`passenger_wsgi.py`</span>;
-    * Application Entry point — WSGI callable object for your application (optional). Default is <span class="notranslate">`application`</span>;
-3. Optionally, add environment variable. To do so, click <span class="notranslate">_Add Variable_</span> and specify variable name and value, then click the <span class="notranslate">_Done_</span> or <span class="notranslate">_Cancel_</span> to close an adding form.
-
-To delete or edit environment variable, click <span class="notranslate">_Bin_</span> or <span class="notranslate">_Pencil_</span> for the required variable.
-
-![](/images/PythonEnvVar.png)
-
-**Start application**
- 
-To start a stopped application do the following:
-
-* Click <span class="notranslate">_Start_</span> in the <span class="notranslate">_Actions_</span> column in a stopped application row.
-* When an action is completed a <span class="notranslate">_Start_</span> changes to <span class="notranslate">_Stop_</span>.
- 
-**Stop application**
- 
-To stop a started application do the following:
-
-* Click <span class="notranslate">_Stop_</span> icon in the <span class="notranslate">_Actions_</span> column in a started application row.
-* When an action is completed a <span class="notranslate">_Stop_</span> changes to <span class="notranslate">_Start_</span>.
-
-![](/images/PythonStartStopApp.png)
-
-**Restart application**
- 
-To restart a started application do the following:
-
-* Click <span class="notranslate">_Restart_</span> in the <span class="notranslate">_Actions_</span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
- 
-**Remove application**
- 
-To remove application do the following:
-
-* Click <span class="notranslate">_Bin_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row.
-* In the confirmation popup click <span class="notranslate">_Agree_</span> to start removing or <span class="notranslate">_Cancel_</span> to close the popup.
-* When an action is completed an application will be removed from the <span class="notranslate">_Web Applications_</span> table and a confirmation popup will be displayed.
-
-![](/images/PythonRestartRemove.png)
-
-**Edit application**
- 
-To edit application do the following:
-
-* Click the <span class="notranslate">_Pencil_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row. A particular application tab opens.
-
-![](/images/PythonSelectorEditApp.png)
-
-The following actions are available:
-
-* Restart application — click <span class="notranslate">_Restart_</span>.
-* Stop application — click <span class="notranslate">_Stop App_</span>.
-* Remove application — click <span class="notranslate">_Destroy_</span> and confirm the action in a popup.
-* Change Python version — choose Python version from a dropdown.
-* Change Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
-* Change Application URL — specify in a field an HTTP/HTTPS link to the application.
-* Open Application URL — click the <span class="notranslate">_Open_</span>.
-* Change Application startup file — specify as <span class="notranslate">`NAME.py`</span> file.
-* Change Application Entry point — specify WSGI callable object for your application.
-* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector](/command-line_tools/#new-python-selector) utility).
-* Run pip install command — click <span class="notranslate">_Run pip install_</span> to install the package(s) described in the configuration file.
-* Add Configuration files — click <span class="notranslate">_Add_</span> and specify all required information.
-* Edit available configuration file — click <span class="notranslate">_Edit_</span>, the file opens in a new popup.
-* Remove available configuration file from the list — click <span class="notranslate">_Remove_</span> and confirm the action or click <span class="notranslate">_Cancel_</span> to close the popup.
-* Add Environment variables — click <span class="notranslate">_Add Variable_</span> and specify a name and a value.
-  
-Click <span class="notranslate">_Save_</span> to save all changes or <span class="notranslate">_Cancel_</span> to close the tab.
-
-**Migrate application**
-
-For details see [How to migrate an application to the new Python Selector](/cloudlinux_os_components/#how-to-migrate-an-application-to-the-new-python-selector)
-
-
-:::tip Note
-You can also use [Python Selector CLI](/command-line_tools/#end-user)
-:::
+See also: [Python Selector client plugin](/lve_manager/#python-selector-client-plugin)
 
 
 ### Node.js Selector
 
-#### Hoster
+* [How to enable/disable Node.js](/lve_manager/#how-to-enable-disable-node-js)
+* [How to manage Node.js](/lve_manager/#how-to-manage-node-js)
+* [Enable and disable particular Node.js version](/lve_manager/#enable-and-disable-particular-node-js-version)
+* [Install and delete particular Node.js version](/lve_manager/#install-and-delete-particular-node-js-version)
+* [Make a particular Node.js version as a default](/lve_manager/#make-a-particular-node-js-version-as-a-default)
+* [Applications column](/lve_manager/#applications-column-2)
+* [Application error log](/lve_manager/#application-error-log)
+
 
 Hoster interface allows to enable and disable Node.js, and manage individual Node.js versions.
 
-Go to <span class="notranslate"> _LVE Manager → Options Tab → Node.js Section_ </span> . A list of installed Node.js versions is displayed. There are several columns in the list.
+Go to <span class="notranslate"> _LVE Manager → Options Tab → Node.js Section_ </span>. A list of installed Node.js versions is displayed. There are several columns in the list.
 
 * <span class="notranslate"> Version </span> — displays Node.js version.
 * <span class="notranslate"> Path </span> — Node.js package location.
@@ -772,10 +943,10 @@ To display all changes immediately click <span class="notranslate"> _Refresh_ </
 
 ![](/images/nodejsgeneral_zoom70.png)
 
-**How to enable/disable Node.js**
+#### How to enable/disable Node.js
 
-* To enable Node.js move the slider to <span class="notranslate"> _Enable_ </span> .
-* To disable Node.js move the slider back to <span class="notranslate"> _Disable_ </span> . 
+* To enable Node.js move the slider to <span class="notranslate">_Enable_</span>.
+* To disable Node.js move the slider back to <span class="notranslate">_Disable_</span>. 
 
 ::: tip Note
 If you disable Node.js, its version for all your applications will not be changed, but you can not add a new application to this version.
@@ -784,16 +955,16 @@ If you disable Node.js, its version for all your applications will not be change
 ![](/images/nodejsslider_zoom70.png)
 
 ::: tip Note
-<span class="notranslate">Node.js Selector</span> icon in end user interface is absent when Node.js is disabled.
+<span class="notranslate">Node.js Selector</span> icon in end user interface is hidden when Node.js is disabled.
 :::
 
 ![](/images/nodejsselectorlogo_zoom70.png)
 
-**How to manage Node.js**
+#### How to manage Node.js
 
 The list of installed Node.js versions allows to enable and disable, install and delete, and set a particular Node.js version as a default.
 
-**Enable and disable particular Node.js version**
+#### Enable and disable particular Node.js version
 
 To enable particular Node.js version do the following:
 * Move a disabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
@@ -805,7 +976,7 @@ To disable particular Node.js version do the following:
 * Move an enabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
 * In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
 
-**Install and delete particular Node.js version**
+#### Install and delete particular Node.js version
 
 To install particular Node.js version do the following:
 * Click <span class="notranslate"> _Install_ </span> button in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
@@ -816,14 +987,16 @@ To delete particular Node.js version do the following:
 * In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start uninstall process.
 * Or just close a pop-up without any changes.
 
-**Note that it is impossible**:  
+::: warning Note
+It is impossible:  
 * to remove default Node.js version;
 * to remove version with applications;
 * to install or remove version if another installation/uninstall process is running.
+:::
 
 ![](/images/nodejsconfirmation_zoom70.png)
 
-**Make a particular Node.js version as a default**
+#### Make a particular Node.js version as a default
 
 To make a particular Node.js version as a default do the following:
 * Click <span class="notranslate"> _Double-Tick_ </span> icon in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
@@ -836,7 +1009,7 @@ It is impossible to make a disabled version default.
 
 ![](/images/nodejsmakedefault_zoom70.png)
 
-**Applications column**
+#### Applications column
 
 To view and operate with the list of domains with Node.js versions click on a number in the <span class="notranslate"> _Applications_ </span> column for a particular Node.js version. A section with a list of Domains for particular Node.js version will be displayed.
 
@@ -859,83 +1032,11 @@ All packages of the application(s) will be re-installed.
 You can also use [Node.js Selector CLI](/command-line_tools/#hoster-2)
 :::
 
+See also: [Node.js Selector client plugin](/lve_manager/#node-js-selector-client-plugin)
 
-#### End User
+#### Application error log
 
-:::tip Note
-<span class="notranslate"> Node.js Selector </span> icon in end user interface is absent when Node.js is disabled.
-:::
-
-![](/images/nodejslogoenduser_zoom70.png)
-
-End User interface allows end users to setup and manage Node.js for their web applications.  
-Go to <span class="notranslate"> _cPanel → Software Section → Select Node.js Version_ </span> .
-
-<span class="notranslate"> _Web Applications_ </span> page is displayed.
-
-![](/images/nodejsusermain_zoom70.png)
-
-There are several columns in the list.
-* <span class="notranslate"> App URI </span> — application URI including the domain.
-* <span class="notranslate"> App Root Directory </span> —  application root directory relative to user's home.
-* <span class="notranslate"> Mode </span> — can be production or development.
-* <span class="notranslate"> Status </span> — started/stopped — displays if an application is running or not and version of application.
-* <span class="notranslate"> Actions </span> — allows to start, restart, stop, edit, and remove a particular application.
-
-**How to manage application**
-
-**Start application**
-
-To start a stopped application do the following:
-* Click <span class="notranslate"> _Start_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a stopped application row.
-* When an action is completed a <span class="notranslate"> _Start_ </span> icon changes to <span class="notranslate"> _Stop_ </span> icon.
-
-**Stop application**
-
-To stop a started application do the following:
-* Click <span class="notranslate"> _Stop_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row.
-* When an action is completed a <span class="notranslate"> _Stop_ </span> icon changes to <span class="notranslate"> _Start_ </span> icon.
-
-![](/images/nodejsuseruistartstop_zoom70.png)
-
-**Restart application**
-
-To restart started application do the following:
-* Click <span class="notranslate"> _Restart_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
-
-**Remove application**
-
-To remove application do the following:
-* Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row.
-* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start removing or <span class="notranslate"> _Cancel_ </span> to close pop-up.
-* When an action is completed an application will be removed from the <span class="notranslate"> _Web Applications_ </span> table and a confirmation pop-up will be displayed.
-
-![](/images/nodejsuseruirestartremove_zoom70.png)
-
-**Edit application**
-
-To edit application do the following:
-* Click <span class="notranslate"> _Pencil_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A particular application tab opens.
-
-![](/images/Node.js-Selector-edit-app.png)
-
-The following actions are available:
-* Restart application — click <span class="notranslate"> _Restart_ </span> button.
-* Stop Node.js — click <span class="notranslate"> _Stop Node.js_ </span> button.
-* Run JavaScript script — click <span class="notranslate"> _Run JS Script_ </span> button to run a command specified in the <span class="notranslate"> Scripts </span> section of the <span class="notranslate"> package.json </span> file. Specify the name of the script to run plus any parameters then click <span class="notranslate"> Ok </span> .
-* Remove application — click <span class="notranslate"> _Delete_ </span> button and confirm the action in a pop-up.
-* Change Node.js version — choose Node.js version from a drop-down.
-* Change Application mode — choose application mode from a drop-down. Available modes are <span class="notranslate"> _Production_ </span> and <span class="notranslate"> _Development_ </span> .
-* Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
-* Application URL — specify in a field an HTTP/HTTPS link to the application.
-* Application startup file — specify as <span class="notranslate"> NAME.js file </span>.
-* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Node.js applications via UI (or using [cloudlinux-selector](/command-line_tools/#node-js-selector) utility).
-* Run <span class="notranslate"> npm install command </span> — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
-* Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
-
-**Application error log**
-
-Since <span class="notranslate"> alt-mod-passenger </span> version 5.3.7-3 we have included support for the PassengerAppLogFile directive.
+Since <span class="notranslate">alt-mod-passenger</span> version 5.3.7-3 we have included support for the PassengerAppLogFile directive.
 <div class="notranslate">
 
 ``` 
@@ -945,250 +1046,83 @@ Context: virtual host, htaccess
 ```
 </div>
  
-By default, <span class="notranslate"> Passenger </span> log messages are all written to the Passenger log file. With this option, you can have the app specific messages logged to a different file in addition. In <span class="notranslate"> alt-mod-passenger </span>, you can use it in the context of a virtual host or in the htaccess file.
+By default, <span class="notranslate">Passenger</span> log messages are all written to the Passenger log file. With this option, you can have the app specific messages logged to a different file in addition. In <span class="notranslate"> alt-mod-passenger </span>, you can use it in the context of a virtual host or in the htaccess file.
 
-See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
+See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 
-:::tip Note
-You can also use [Node.js Selector CLI](/command-line_tools/#end-user-2)
-:::
+### Website monitoring tool and Slow Site analyzer
 
-### Reseller limits
+* [Website monitoring tab](/lve_manager/#website-monitoring-tab)
+* [Main](/lve_manager/#main)
+* [PHP Site analyzer](/lve_manager/#php-site-analyzer)
+* [Settings](/lve_manager/#settings)
+* [Email notifications](/lve_manager/#email-notifications)
 
-#### Hoster interface
+**Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics.
 
-Hoster interface allows to monitor and manage limits for hosters’ end users, resellers and resellers’ end users, and also manage packages and monitor statistics.
+**Slow Site analyzer** is a new tool that generates daily reports for the server administrator with information about the top N slow PHP-based domains and URLs.
+ 
+**Installation**
 
-Hoster credentials allow to control limits for hosters’ end users and resellers. To control reseller end user limits Hoster has to log in as Reseller.
+Update the `lvemanager` package to version 6.3.0-1 and higher and you'll get the `alt-php-ssa` and the `cl-web-monitoring-tool` packages as a dependency.
 
-Log in as Hoster to get access to the following functionality.
+**Uninstall**
 
-* <span class="notranslate">[Current Usage](/lve_manager/#current-usage-2)</span> tab allows to monitor users and resellers resource usage at the moment.
-* <span class="notranslate">[Users](/lve_manager/#users-2)</span> tab with the list of all users and resellers allows viewing and managing all the users and resellers limits.
-* <span class="notranslate">[Statistics](/lve_manager/#statistics-2)</span> tab displays the statistics of resource usage for particular timeframe or particular user.
-* <span class="notranslate">[Options](/lve_manager/#options-2)</span> tab allows to set LVE faults email notifications for hoster, users, and resellers.
-* <span class="notranslate">[Packages](/lve_manager/#packages-2)</span> tab allows to manage resellers packages limits;
-* <span class="notranslate">[Selector](/lve_manager/#selector)</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
+To uninstall the tool, run the following commands:
 
-<div class="notranslate">
+```
+yum downgrade lvemanager --enablerepo=cloudlinux-updates-testing
+yum erase alt-php-ssa cl-web-monitoring-tool
+```
 
-#### Current Usage
+#### Website monitoring tab
 
-</div>
+The configuration of the Website monitoring tool and the Slow Site analyzer can be done in the LVE Manager -> Website monitoring tab.
 
-Choose <span class="notranslate">Current Usage</span> tab to monitor users, resellers and resellers’ end users resource usage at the moment displayed in the table.
+There are Main, PHP Site analyzer, and Settings subtabs.
 
-<span class="notranslate">Current Usage</span> table provides information on usage of the following:
-* <span class="notranslate"> SPEED (All</span> and MySQL)
-* <span class="notranslate"> memory (MEM)</span>
-* data throughput (<span class="notranslate">IO) (All</span> and MySQL)
-* read/write operations per second (<span class="notranslate">IOPS</span>)
-* number of processes (<span class="notranslate">PNO</span>)
-* entry processes (<span class="notranslate">EP</span>)
+#### Main
 
-Resource usage values are being refreshed every 10 seconds by default which is set in <span class="notranslate">_Auto-refresh_</span> field. You can set <span class="notranslate">_Auto-refresh time_</span> by choosing a value from the drop-down.
+This subtab views the latest report (for the previous day) of the Website monitoring tool.
 
-You can refresh the table manually by clicking <span class="notranslate">_Refresh now_</span> or you can freeze the values by clicking <span class="notranslate">_pause_</span>. Usage values will not change until the next manual refresh. To unfreeze click <span class="notranslate">_unpause_</span>. The countdown will continue.
+![](/images/WebsiteMonitoringMain.png)
 
-Tick <span class="notranslate">_Hide MySQL usage_</span> to hide the information on MySQL usage.
+Here, the slowest websites are the sites that respond slowly to the simple cURL request like this `curl http://domain.com`.
 
-The list of users can be filtered by <span class="notranslate">_Username_</span> and <span class="notranslate">_Domain_</span>.
+#### PHP Site analyzer
 
-Hoster can **view** all types of users:
-* <span class="notranslate">End users</span>
-* <span class="notranslate">Resellers</span>
-* <span class="notranslate">Reseller’s end users</span>
-* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>.
+![](/images/WebsiteMonitoringPHPSiteAnalyzer.png)
 
-But hoster can only **manage**:
-* <span class="notranslate">End users</span>
-* <span class="notranslate">Resellers</span>
-* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>
+This is an example of a report from the Slow Site analyzer. The report shows the number of slow requests per domain and its URLs and the average duration of each slow URL.
 
-To manage Reseller’s end users hoster should login as a reseller.
+#### Settings
 
-In the drop-down <span class="notranslate">_Show top_</span> you can choose the number of user to be displayed on the page.
+Here, an admin can config the Website monitoring and the PHP Site analyzer.
 
-![](/images/currentusagetabhoster_zoom60.png)
+To enable or disable **Website monitoring**, use the following slider.
 
-<div class="notranslate">
+![](/images/WebsiteMonitoringSlider.png)
 
-#### Users
+* **Number of domains for report** – this number (N) will be used to select the top N domains from the list of all domains, sorted by a response duration (Slowest websites list). And this number also will be used to select the top N domains from the list of all domains, sorted by the number of errors (Websites with most errors list).
+* **Send request period** -  is a period in seconds between requests to the same domain.
+* **Domain response timeout** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behaviour as the `HTTP 408` error.
+* **Concurrent requests limit** - how many concurrent requests can be done by the Website Monitoring tool.
 
-</div>
+To enable or disable the **Slow site analyzer**, use the following slider.
 
-Choose <span class="notranslate">_Users_</span> tab to view the list of all users and manage their limits.
+![](/images/WebsiteMonitoringSlider1.png)
 
-To filter the list by user type click <span class="notranslate">_Manage_</span> and in the drop-down choose:
+* **Top slow domains** - this number (N) will be used to select the top N domains from the list of all domains, marked as slow.
+* **Top slow URLs** - this number (N) will be used to select the top N URLs for each domain, marked as slow.
+* **Request duration** - the duration of a request in seconds. 
+* **Request number & Time** - how many requests with a certain request duration should be done in time to mark the domain as a slow one.
 
-* <span class="notranslate">End users</span> - to manage hosts end users only.
-* <span class="notranslate">Resellers</span> - to manage resellers only.
-* <span class="notranslate">Reseller’s end users</span> - to manage resellers’ end users only.
-* <span class="notranslate">Reseller’s end users (no Reseller limits)</span> - to manage resellers’ end users that do not have limits specified by reseller (these limits are specified by the hoster).
 
-To filter the list by <span class="notranslate">_Username_, _Domain_, _LveID_</span> click <span class="notranslate">_Filter by_</span> and choose the value in the drop-down.
+#### Email notifications
 
-:::tip Note
-A hoster can view the list of resellers’ end users and their limits, but can not manage resellers’ end users limits (if those are set by reseller).
-:::
 
-A hoster can view the limits of all types of users and manage the limits for hosters’ end users and resellers’ end users (only those with Reseller Limits disabled).
-* Tick <span class="notranslate">_Show users with CageFS enabled_</span> to show users with CageFS file system enabled.
-* Tick <span class="notranslate">_Show only ignored users_</span> to show users with ignored <span class="notranslate">MySQL Governor</span>.
 
-![](/images/userstabhoster_zoom70.png)
-
-<div class="notrnslate">
-
-#### Actions
-
-</div>
-
-Click pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
-
-* Enable/disable <span class="notranslate">CageFS</span>
-* <span class="notranslate">**Reset**</span> - to reset limits to default values
-* Apply <span class="notranslate">**Do not limit**</span> to set the limits to unlimited;
-* Setting the limits values:
-  * <span class="notranslate"> SPEED </span>
-  * <span class="notranslate"> SPEED MYSQL </span>
-  * <span class="notranslate"> VMEM </span>
-  * <span class="notranslate"> PMEM </span> 
-  * <span class="notranslate"> IO </span>
-  * <span class="notranslate"> MySQL IO </span>
-  * <span class="notranslate"> IOPS </span>
-  * <span class="notranslate"> EP </span>
-  * <span class="notranslate"> NPROC </span>
-  * <span class="notranslate"> INODES </span> (hard and soft) (for <span class="notranslate">end users</span> and <span class="notranslate">resellers’ end users (with no Reseller Limits)</span>, if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings).
-
-Click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the pop-up.
-
-![](/images/actionshoster.png)
-
-Click on <span class="notranslate">_History_</span> symbol to view the history of a particular user resource usage. Choose time frame to view the history for a particular time period.
-
-![](/images/historyhoster.jpg)
-
-<div class="notranslate">
-
-#### Statistics
-
-</div>
-
-Choose <span class="notranslate">_Statistics_</span> tab to view end users, resellers and resellers’ end users limits usage statistics.
-
-The following parameters can be displayed in the statistics table:
-
-* <span class="notranslate"> SPEED </span> usage per user;
-* <span class="notranslate"> IO </span> usage per user;
-* <span class="notranslate"> EP </span> usage per user;
-* <span class="notranslate"> VMEM </span> usage per user;
-* <span class="notranslate"> PMEM </span> usage per user;
-* <span class="notranslate"> NPROC </span> usage per user;
-* <span class="notranslate"> IOPS </span> usage per user;
-* <span class="notranslate"> MySQL </span> usage per user.
-
-Click <span class="notranslate">_Show_</span> and select columns from the drop-down to set which parameters should be displayed in the table.
-
-Statistics table can be filtered by:
-
-* <span class="notranslate"> Timeframe </span> - to view the statistics for a particular period;
-* <span class="notranslate"> Limit </span> - to view a particular limit type usage only;
-* <span class="notranslate"> Top LVEs </span> - to view top used limits only;
-* <span class="notranslate"> LVE approaching limit </span> - to view the limits that are approaching maximum provided value;
-* <span class="notranslate"> Fault LVE </span> - the limits that have reached the maximum value.
-
-Click <span class="notranslate">_Manage_</span> to choose type of users to be displayed - <span class="notranslate">End users, Resellers, Resellers’ end users</span> or <span class="notranslate">Resellers’ end users (no Reseller limit)</span> by ticking checkbox in the drop-down.
-
-![](/images/statisticstabhoster_zoom70.png)
-
-Click chart symbol in the <span class="notranslate">_View_</span> column to view the detailed resource usage history for a particular account. Use timeframe drop-down to view the history for a particular period of time.
-
-![](/images/history_charts_zoom70.png)
-
-<div class="notranslate">
-
-#### Options
-
-</div>
-
-A hoster can set email notifications for panel administrator, reseller customer, and resellers’ customers in cases of limits faults. Choose <span class="notranslate">_Options_</span> tab to manage LVE Faults email notifications.
-
-In <span class="notranslate">_LVE Faults Email Notifications_</span> section tick the required checkboxes to set a type of notification.
-
-* <span class="notranslate"> _Notify Panel Administrator_ </span> - notify hoster when his end users have exceeded minimum number of faults set for particular limits.
-* <span class="notranslate"> _Notify Reseller_ </span> - notify reseller when his end users have exceeded minimum number of faults set for particular limits.
-* <span class="notranslate"> _Notify Customers_ </span> - notify hosters’ end users when they have exceeded limits.
-* <span class="notranslate"> _Notify Reseller's customers_ </span> - notify resellers’ end users when they have exceeded limits.
-
-![](/images/optionstabemailnotifhoster.png)
-
-In <span class="notranslate">_Faults to include_</span> section tick the checkboxes to include required limits to the notifications.
-Set the frequency of email notifications sending in <span class="notranslate">_Notify …. every.. days/hours/minutes/seconds_</span> section.
-
-![](/images/optionshosterfaultstoinclude.png)
-
-In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter the number of faults required for the notification to be sent for <span class="notranslate">_Panel Admin & Reseller_</span> and <span class="notranslate">_User_</span>.
-
-![](/images/optionstabhosterminimumftn.png)
-
-* In <span class="notranslate">_Inodes limits_</span> section you can reset inode limits to default values and tick <span class="notranslate">_Show end-user inode usage_</span>.
-* In <span class="notranslate">_User interface settings_</span> section tick the required checkboxes to apply user interface settings.
-* In <span class="notranslate">_MySQL Governor settings_</span> section you can customize <span class="notranslate"> MySQL Governor</span>.
-
-![](/images/optionstabhosterinodes.png)
-
-<div class="notranslate">
-
-#### Packages
-
-</div>
-
-<span class="notranslate">_Packages_</span> tab allows to set the limits for as many users as you need by editing packages of the limits. Each account belonging to a particular package adheres to those limits.
-
-Choose <span class="notranslate">_Packages_</span> tab to view and modify:
-
-* limits for user packages (created by hoster);
-* limits for reseller packages (created by hoster);
-* limits for resellers’ end users packages if reseller limits are not set for that reseller (hoster access allows identifying a particular reseller’s end user belonging to a particular reseller (created by reseller)).
-  
-![](/images/packageshostertab_zoom70.png)
-
-To modify package limits click on a pencil symbol in <span class="notranslate">_Actions_</span> column in a particular package row. The following limits for this package are available for setting:
-
-* <span class="notranslate"> SPEED</span> in percent (%);
-* <span class="notranslate"> Virtual memory (VMEM)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> I/O limits (IO)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> IOPS</span> limits;
-* <span class="notranslate"> Concurrent connections (EP)</span>;
-* <span class="notranslate"> Number of processes (NPROC)</span> (can be set as unlimited by setting 0);
-* <span class="notranslate"> INODES (hard and soft)</span> (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings.)
-
-When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
-
-<div class="notranslate">
-
-#### Selector
-
-</div>
-
-<span class="notranslate">_Selector_</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
-
-* In <span class="notranslate">_Selector is_</span> choose <span class="notranslate">_Enabled_</span> or <span class="notranslate">_Disabled_</span> from the drop-down to enable or disable <span class="notranslate">PHP Selector</span>.
-
-* In <span class="notranslate">_Default PHP version_</span> choose PHP version or <span class="notranslate">_Native_</span> from the drop-down to apply.
-
-* In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
-
-Choose default modules from the list for a particular version of PHP or for <span class="notranslate">native</span>.
-
-![](/images/selector01_zoom70.png)
-
-![](/images/selector02_zoom70.png)
-
-
-#### Reseller Interface
+### Reseller interface
 
 Reseller interface is designed to manage limits for resellers’ end users, to monitor statistics and the history of resource usage and to modify reseller’s end user packages limits.
 
@@ -1363,7 +1297,116 @@ Click pencil icon in a package row to set the following limits for a package:
 When limits are set click <span class="notranslate">_Save_</span> to apply changes.
 
 
-### Client plugins
+
+
+### LVE plugins branding
+
+:::tip Note
+Requires <span class="notranslate">LVE Manager</span> 2.0-33+
+:::
+
+It is possible to apply branding to the LVE Plugins in cPanel end users’ interface. To brand the cPanel end users'  interface please do the following:
+
+* Create a script that will patch <span class="notranslate">LVE Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
+
+* Locate this script in <span class="notranslate">`/usr/share/l.v.e-manager/branding_script`</span>;
+
+* Make this script executable by running the command:
+
+<div class="notranslate">
+
+```
+chmod a+x /usr/share/l.v.e-manager/branding_script
+```
+</div>
+
+When done, the branding script will be executed while every update of <span class="notranslate">lvemanager</span> package and all branding changes will be applied in the end user’s interface.
+
+:::tip Note
+Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
+:::
+
+
+### User message for PHP version
+
+Since version 1.0-4 <span class="notranslate">LVE Manager</span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate">`/opt/alt/phpXX/name_modifier`</span> with a message that you want to be shown to a user.
+
+For example, if you need to add the following message <span class="notranslate">`Don't use this PHP version`</span> to PHP version 4.4, you should create the following file:
+
+<div class="notranslate">
+
+```
+/opt/alt/php44/name_modifier:
+
+echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
+```
+</div>
+
+As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
+
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_admin.png)|
+| Figure 1.1 cPanel LVE Manager (administrator)| 
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_admin.png)|
+| Figure 1.2 DirectAdmin LVE Manager (administrator)| 
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_user.png)|
+| Figure 2.1 cPanel LVE Manager (user)|
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_user.png)|
+| Figure 2.2 DirectAdmin LVE Manager (user)| 
+
+:::tip Note
+*For cPanel and DirectAdmin only.
+:::
+
+## Client plugins
+
+* [Resource Usage client plugin](/lve_manager/#resource-usage-client-plugin)
+* [Dashboard](/lve_manager/#dashboard-2)
+* [Current Usage](/lve_manager/#current-usage-3)
+* [Current Usage table](/lve_manager/#current-usage-table)
+* [Filters](/lve_manager/#filters)
+* [Charts](/lve_manager/#charts)
+* [Usage](/lve_manager/#usage)
+* [Snapshot](/lve_manager/#snapshot)
+* [Server processes snapshots](/lve_manager/#server-processes-snapshots)
+* [Process list](/lve_manager/#process-list)
+* [Database queries (cPanel only)](/lve_manager/#database-queries-cpanel-only)
+* [HTTP queries](/lve_manager/#http-queries)
+* [Python Selector client plugin](/lve_manager/#python-selector-client-plugin)
+* [How to manage an application](/lve_manager/#how-to-manage-an-application)
+* [Create application](/lve_manager/#create-application)
+* [Start application](/lve_manager/#start-application)
+* [Stop application](/lve_manager/#stop-application)
+* [Restart application](/lve_manager/#restart-application)
+* [Remove application](/lve_manager/#remove-application)
+* [Edit application](/lve_manager/#edit-application)
+* [Migrate application](/lve_manager/#migrate-application)
+* [Node.js Selector client plugin](/lve_manager/#node-js-selector-client-plugin)
+* [How to manage application](/lve_manager/#how-to-manage-application)
+* [Start application](/lve_manager/#start-application-2)
+* [Stop application](/lve_manager/#stop-application-2)
+* [Restart application](/lve_manager/#restart-application-2)
+* [Remove application](/lve_manager/#remove-application-2)
+* [Edit application](/lve_manager/#edit-application-2)
+* [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
+* [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
+* [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab) <sup>LVE Manager 6.0.1-2</sup>
+* [LVE Manager options](/lve_manager/#lve-manager-options)
+* [Changing settings manually](/lve_manager/#changing-settings-manually)
+* [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
 
 #### Resource Usage client plugin
 
@@ -1398,11 +1441,16 @@ Go to the <span class="notranslate">_Current Usage_</span> tab to see the detail
 
 ![](/images/RU-current-usage.png)
 
+:::tip Note
+It's possible to add the <span class="notranslate">`normalized_user_cpu = N`</span> value to the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> file. So you can see for example CPU Usage X/200 (%) in the scenario where a user's LVE CPU limit is 200%. If the value is equal to `Y`, CPU Usage cannot get greater than 100%.
+:::
+
+
 #### Current Usage table
 
 The <span class="notranslate">_Current Usage_</span> table displays resource usage.
 
-:::warning Note
+:::warning Warning
 **<span class="notranslate">Inodes</span>** usage is displayed if it is enabled and **<span class="notranslate">Inodes</span>** limits are set for the user. cPanel only.
 :::
 
@@ -1518,7 +1566,276 @@ Displays information on HTTP queries in the selected snapshot.
 
 ![](/images/RU-HTTP-queries.png)
 
-### LVE Manager options
+
+#### Python Selector client plugin
+
+:::tip Note
+Python Selector icon in end user interface is hidden when Python is disabled
+:::
+
+![](/images/PythonEndUserIcon.png)
+
+End User interface allows end users to setup and manage Python for their web applications.
+
+Go to <span class="notranslate">cPanel → Software Section → Setup Python App</span>.
+ 
+Web Applications page is displayed.
+
+![](/images/PythonEUWebApp.png)
+
+There are several columns in the list:
+
+* <span class="notranslate">App URI</span> — application URI including the domain.
+* <span class="notranslate">App Root Directory</span> — application root directory relative to user's home.
+* <span class="notranslate">Status — started/stopped</span> — displays if an application is running or not and version of the application.
+* <span class="notranslate">Actions</span> — allows to migrate, start, restart, stop, edit, and remove a particular application.
+
+#### How to manage an application
+
+#### Create application
+
+1. Click <span class="notranslate">_Create Application_</span> to create an application. The Create Application tab opens.
+
+    ![](/images/PythonCreateApp1.png)
+
+2. Specify the following:
+    * <span class="notranslate">Python version</span> — select from the dropdown (required);
+    * <span class="notranslate">Application root</span> — physical address to your application on a server that corresponds with its URI (required);
+    * <span class="notranslate">Application URL</span> —  HTTP/HTTPS link to your application (optional);
+    * <span class="notranslate">Application startup file</span> — the file where WSGI callable object is located. It is required for application to run. Default is <span class="notranslate">`passenger_wsgi.py`</span>;
+    * Application Entry point — WSGI callable object for your application (optional). Default is <span class="notranslate">`application`</span>;
+    * <span class="notranslate">Passenger log file</span> — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector utility](/command-line_tools/#new-python-selector)).
+3. Optionally, add environment variable. To do so, click <span class="notranslate">_Add Variable_</span> and specify variable name and value, then click the <span class="notranslate">_Done_</span> or <span class="notranslate">_Cancel_</span> to close an adding form.
+
+To delete or edit environment variable, click <span class="notranslate">_Bin_</span> or <span class="notranslate">_Pencil_</span> for the required variable.
+
+![](/images/PythonEnvVar.png)
+
+#### Start application
+ 
+To start a stopped application do the following:
+
+* Click <span class="notranslate">_Start_</span> in the <span class="notranslate">_Actions_</span> column in a stopped application row.
+* When an action is completed a <span class="notranslate">_Start_</span> changes to <span class="notranslate">_Stop_</span>.
+ 
+#### Stop application
+ 
+To stop a started application do the following:
+
+* Click <span class="notranslate">_Stop_</span> icon in the <span class="notranslate">_Actions_</span> column in a started application row.
+* When an action is completed a <span class="notranslate">_Stop_</span> changes to <span class="notranslate">_Start_</span>.
+
+![](/images/PythonStartStopApp.png)
+
+#### Restart application
+ 
+To restart a started application do the following:
+
+* Click <span class="notranslate">_Restart_</span> in the <span class="notranslate">_Actions_</span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
+ 
+#### Remove application
+ 
+To remove application do the following:
+
+* Click <span class="notranslate">_Bin_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row.
+* In the confirmation popup click <span class="notranslate">_Agree_</span> to start removing or <span class="notranslate">_Cancel_</span> to close the popup.
+* When an action is completed an application will be removed from the <span class="notranslate">_Web Applications_</span> table and a confirmation popup will be displayed.
+
+![](/images/PythonRestartRemove.png)
+
+#### Edit application
+ 
+To edit application do the following:
+
+* Click the <span class="notranslate">_Pencil_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row. A particular application tab opens.
+
+![](/images/PythonSelectorEditApp.png)
+
+The following actions are available:
+
+* Restart application — click <span class="notranslate">_Restart_</span>.
+* Stop application — click <span class="notranslate">_Stop App_</span>.
+* Remove application — click <span class="notranslate">_Destroy_</span> and confirm the action in a popup.
+* Change Python version — choose Python version from a dropdown.
+* Change Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
+* Change Application URL — specify in a field an HTTP/HTTPS link to the application.
+* Open Application URL — click the <span class="notranslate">_Open_</span>.
+* Change Application startup file — specify as <span class="notranslate">`NAME.py`</span> file.
+* Change Application Entry point — specify WSGI callable object for your application.
+* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector](/command-line_tools/#new-python-selector) utility).
+* Run pip install command — click <span class="notranslate">_Run pip install_</span> to install the package(s) described in the configuration file.
+* Add Configuration files — click <span class="notranslate">_Add_</span> and specify all required information.
+* Edit available configuration file — click <span class="notranslate">_Edit_</span>, the file opens in a new popup.
+* Remove available configuration file from the list — click <span class="notranslate">_Remove_</span> and confirm the action or click <span class="notranslate">_Cancel_</span> to close the popup.
+* Add Environment variables — click <span class="notranslate">_Add Variable_</span> and specify a name and a value.
+  
+Click <span class="notranslate">_Save_</span> to save all changes or <span class="notranslate">_Cancel_</span> to close the tab.
+
+#### Migrate application
+
+For details see [How to migrate an application to the new Python Selector](/cloudlinux_os_components/#how-to-migrate-an-application-to-the-new-python-selector)
+
+
+:::tip Note
+You can also use [Python Selector CLI](/command-line_tools/#end-user)
+:::
+
+#### Node.js Selector client plugin
+
+:::tip Note
+<span class="notranslate">Node.js Selector</span> icon in end user interface is hidden when Node.js is disabled.
+:::
+
+![](/images/Node.jsClientPlugin.png)
+
+End User interface allows end users to setup and manage Node.js for their web applications.  
+Go to <span class="notranslate">_cPanel → Software Section → Setup Node.js App_</span>.
+
+<span class="notranslate">_Web Applications_</span> page is displayed.
+
+![](/images/nodejsusermain_zoom70.png)
+
+There are several columns in the list.
+* <span class="notranslate"> App URI </span> — application URI including the domain.
+* <span class="notranslate"> App Root Directory </span> — application root directory relative to user's home.
+* <span class="notranslate"> Mode </span> — can be production or development.
+* <span class="notranslate"> Status </span> — started/stopped — displays if an application is running or not and version of application.
+* <span class="notranslate"> Actions </span> — allows to start, restart, stop, edit, and remove a particular application.
+
+#### How to manage application
+
+#### Start application
+
+To start a stopped application do the following:
+* Click <span class="notranslate"> _Start_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a stopped application row.
+* When an action is completed a <span class="notranslate"> _Start_ </span> icon changes to <span class="notranslate"> _Stop_ </span> icon.
+
+#### Stop application
+
+To stop a started application do the following:
+* Click <span class="notranslate"> _Stop_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row.
+* When an action is completed a <span class="notranslate"> _Stop_ </span> icon changes to <span class="notranslate"> _Start_ </span> icon.
+
+![](/images/nodejsuseruistartstop_zoom70.png)
+
+#### Restart application
+
+To restart started application do the following:
+* Click <span class="notranslate"> _Restart_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
+
+#### Remove application
+
+To remove application do the following:
+* Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row.
+* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start removing or <span class="notranslate"> _Cancel_ </span> to close pop-up.
+* When an action is completed an application will be removed from the <span class="notranslate"> _Web Applications_ </span> table and a confirmation pop-up will be displayed.
+
+![](/images/nodejsuseruirestartremove_zoom70.png)
+
+#### Edit application
+
+To edit application do the following:
+* Click <span class="notranslate"> _Pencil_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A particular application tab opens.
+
+![](/images/Node.js-Selector-edit-app.png)
+
+The following actions are available:
+* Restart application — click <span class="notranslate"> _Restart_ </span> button.
+* Stop Node.js — click <span class="notranslate"> _Stop Node.js_ </span> button.
+* Run JavaScript script — click <span class="notranslate"> _Run JS Script_ </span> button to run a command specified in the <span class="notranslate"> Scripts </span> section of the <span class="notranslate"> package.json </span> file. Specify the name of the script to run plus any parameters then click <span class="notranslate"> Ok </span> .
+* Remove application — click <span class="notranslate"> _Delete_ </span> button and confirm the action in a pop-up.
+* Change Node.js version — choose Node.js version from a drop-down.
+* Change Application mode — choose application mode from a drop-down. Available modes are <span class="notranslate"> _Production_ </span> and <span class="notranslate"> _Development_ </span> .
+* Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
+* Application URL — specify in a field an HTTP/HTTPS link to the application.
+* Application startup file — specify as <span class="notranslate"> NAME.js file </span>.
+* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Node.js applications via UI (or using [cloudlinux-selector](/command-line_tools/#node-js-selector) utility).
+* Run <span class="notranslate"> npm install command </span> — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
+* Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
+
+:::tip Note
+You can also use [Node.js Selector CLI](/command-line_tools/#end-user-2)
+:::
+
+#### Ruby Selector client plugin
+
+End user interface allows end users to setup and manage Ruby for their web applications.
+
+Go to <span class="notranslate">_cPanel → Software Section → Setup Ruby App_</span>.
+
+![](/images/RubyClientPluginStart.png)
+
+Setup Ruby application page is displayed.
+
+![](/images/RubyClientPlugin1.png)
+
+Here you can do the following:
+
+* Setup a new application.
+* View/edit/restart/remove the existing application.
+
+#### PHP Selector client plugin
+
+End user interface allows end users to select and manage PHP extensions and options for the particular PHP version.
+
+Go to <span class="notranslate">_cPanel → Software Section → Select PHP Version_</span>.
+
+![](/images/PHPSelectorClientPlugin.png)
+
+PHP Extensions page opens.
+
+![](/images/php_selector_customer.png)
+
+Here you can choose extensions for the particular PHP version, the current PHP version and reset to default.
+
+To manage PHP options, click <span class="notranslate">_Switch to PHP options_</span>.
+
+![](/images/php_selector_options.png)
+
+All changes are saved automatically.
+
+* <span class="notranslate">`allow_url_fopen`</span>. Allows PHP file functions to retrieve data from remote locations over FTP or HTTP. This option is a great security risk, thus do not turn it on without necessity.
+* <span class="notranslate">`display_errors`</span>. Determines whether errors should be printed to the screen as part of the output or if they should not be shown to a user.
+* <span class="notranslate">`error_reporting`</span>. The error reporting level.
+* <span class="notranslate">`file_uploads`</span>. Allows uploading files over HTTP.
+* <span class="notranslate">`include_path`</span>. The list of directories where scripts look for files (similar to system's PATH variable). To separate directories, use a colon (`:`) For example: <span class="notranslate">`.:/dir/inc:/usr/lib/php`</span>
+* <span class="notranslate">`log_errors`</span>. Tells whether to log errors. By default, errors are logged in the server's error log. Use the error_log directive to specify the path to your own log file.
+* <span class="notranslate">`mail.force_extra_parameters`</span>. Additional parameters for the mail() function used to send mail. For example, to use your custom Sendmail configuration: <span class="notranslate">`-C /dir/conf.cf`</span>
+* <span class="notranslate">`max_execution_time`</span>. The maximum time in seconds a script is allowed to run before it is terminated.
+* <span class="notranslate">`max_input_time`</span>. The maximum time in seconds a script is allowed to parse input data.
+* <span class="notranslate">`memory_limit`</span>. The maximum amount of memory in bytes a script is allowed to allocate. Set the value to -1 to have no memory limit (not recommended). Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
+* <span class="notranslate">`open_basedir`</span>. The list of directories used to limit the files that can be opened by PHP. If the file is outside the specified directories, PHP scripts will refuse to open it. To separate directories, use a colon. For example: <span class="notranslate">`/dir/upload:/usr/tmp`</span>.
+* <span class="notranslate">`post_max_size`</span>. The maximum size in bytes of data that can be posted with the POST method. Typically, should be larger than <span class="notranslate">`upload_max_filesize`</span> and smaller than <span class="notranslate">`memory_limit`</span>. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 16M.
+* <span class="notranslate">`session.save_path`</span>. The directory where PHP writes session data (files). For example: <span class="notranslate">`/dir/tmp`</span>
+* <span class="notranslate">`short_open_tag`</span>. Allows the short form of the PHP open tag.
+* <span class="notranslate">`upload_max_filesize`</span>. The maximum size in bytes of an uploaded file. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
+
+#### PHP Selector. My Domains tab <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
+
+The <span class="notranslate">_My Domains_</span> tab contains a list of user’s domains to visualize which PHP Selector is used by domain.
+
+![](/images/MyDomainsTab.png)
+
+A user can configure a domain to use CloudLinux <span class="notranslate">PHP Selector</span>.
+
+1. Click <span class="notranslate">_Use PHP Selector_</span>
+  
+![](/images/UsePHPSelector1.png)
+
+2. Set a version in <span class="notranslate">PHP Selector</span>
+
+![](/images/SetVersion.png)
+
+:::tip Note
+If `php-fpm` is enabled for a domain the only administrator can set it to <span class="notranslate">_disable_</span>.
+:::
+
+
+
+
+
+
+#### LVE Manager options
 
 You can change LVE Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change LVE Manager settings for them in the config file.
 
@@ -1564,207 +1881,11 @@ After modifying the config files directly, you should execute the following comm
 ```
 </div>
 
-### LVE plugins branding
 
-:::tip Note
-Requires <span class="notranslate">LVE Manager</span> 2.0-33+
-:::
+## cPanel LVE Extension
 
-It is possible to apply branding to the LVE Plugins in cPanel end users’ interface. To brand the cPanel end users'  interface please do the following:
-
-* Create a script that will patch <span class="notranslate">LVE Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
-
-* Locate this script in <span class="notranslate">`/usr/share/l.v.e-manager/branding_script`</span>;
-
-* Make this script executable by running the command:
-
-<div class="notranslate">
-
-```
-chmod a+x /usr/share/l.v.e-manager/branding_script
-```
-</div>
-
-When done, the branding script will be executed while every update of <span class="notranslate">lvemanager</span> package and all branding changes will be applied in the end user’s interface.
-
-:::tip Note
-Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
-:::
-
-
-### User message for PHP version
-
-Since version 1.0-4 <span class="notranslate">LVE Manager</span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate">`/opt/alt/phpXX/name_modifier`</span> with a message that you want to be shown to a user.
-
-For example, if you need to add the following message <span class="notranslate">`Don't use this PHP version`</span> to PHP version 4.4, you should create the following file:
-
-<div class="notranslate">
-
-```
-/opt/alt/php44/name_modifier:
-
-echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
-```
-</div>
-
-As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
-
-| |
-|:---:|
-|![](/images/PHP_version_message_cPanel_admin.png)|
-| Figure 1.1 cPanel LVE Manager (administrator)| 
-
-
-| |
-|:---:|
-|![](/images/PHP_version_message_DirectAdmin_admin.png)|
-| Figure 1.2 DirectAdmin LVE Manager (administrator)| 
-
-
-| |
-|:---:|
-|![](/images/PHP_version_message_cPanel_user.png)|
-| Figure 2.1 cPanel LVE Manager (user)|
-
-
-| |
-|:---:|
-|![](/images/PHP_version_message_DirectAdmin_user.png)|
-| Figure 2.2 DirectAdmin LVE Manager (user)| 
-
-:::tip Note
-*For cPanel and DirectAdmin only.
-:::
-
-
-## inodes
-
-
-:::tip Note
-Supported on cPanel, Plesk, and DirectAdmin control panels
-:::
-
-<span class="notranslate"> LVE Manager inodes </span> limits extension allows setting <span class="notranslate"> inode </span> limits for the customers. An <span class="notranslate"> inode </span> is a data structure on a file system used to keep information about a file or a folder. The number of <span class="notranslate"> inodes </span> indicates the number of files and folders an account has. <span class="notranslate"> inodes </span> limits work on the level of <span class="notranslate"> disk quota </span> , and will be enabled on <span class="notranslate"> /home </span> partition only.
-
-<span class="notranslate"> LVE Manager </span> allows to set <span class="notranslate"> soft </span> and <span class="notranslate"> hard IO </span> limit.
-
-* <span class="notranslate"> Hard </span> limit prevents a user from writing data to disk.
-
-* <span class="notranslate"> Soft </span> limit can be exceeded for a period of time. The grace period can be set using: <span class="notranslate"> edquota -t </span> .
-
-* You can set <span class="notranslate"> inodes </span> limits using <span class="notranslate"> LVE Manager </span> , the same way you would set any other LVE Limits:
-
-::: tip Note
-We do not collect statistical information on the inodes like we do for other LVE limits.
-:::
-
-![](/images/inodes_zoom70.png)
-
-
-The limits can be set on the level of individual account or package:
-
-![](/images/inodespackages_zoom70.png)
-
-
-Sometimes <span class="notranslate">disk quota</span> breaks, so do <span class="notranslate"> inodes </span> limits. You can reset them through the <span class="notranslate">_Options_</span> tab of <span class="notranslate">LVE Manager</span>:
-
-![](/images/inodelimitsoptions_zoom70.png)
-
-The same can be achieved using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
-
-End users can monitor their inodes usage through cPanel only (not available on Plesk and DirectAdmin):
-
-![](/images/inodescpanel.png)
-
-End user can also see the usage inside resource usage menu.
-
-## Control panel integration guide
-
-Here you will find the instructions and common techniques used to integrate your software with CloudLinux.
-
-
-### Detecting and working with CloudLinux
-
-
-Detecting if system is running CloudLinux/CloudLinux kernel:
-
-
-<div class="notranslate">
-
-```
-$ uname -r|grep lve 
-```
-</div>
-
-If you get an output, it means the system is running CloudLinux kernel. CloudLinux kernels have lve in its name, like: <span class="notranslate"> 2.6.32-458.18.1.lve1.2.44.el6.x86_64 </span>
-
-Alternatively you can check for the presence of <span class="notranslate">`/proc/lve/list`</span> file.
-
-Check if CageFS is enabled (as <span class="notranslate"> root </span> ):
-
-<div class="notranslate">
-
-```
-$ /usr/sbin/cagefsctl --cagefs-status
-```
-</div>
-
-Check if CageFS is enabled for a particular user (as <span class="notranslate">`root`</span> ):
-
-<div class="notranslate">
-
-```
-$ /usr/sbin/cagefsctl --user-status _USER_NAME_
-```
-</div>
-
-Check if you are inside CageFS:
-
-Check for the presence of <span class="notranslate">`/var/.cagefs/.cagefs.token`</span> file - if present, it means that you are inside CageFS.
-
-### Displaying CPU, memory & IO limits
-
-
-Most control panels choose to display CloudLinux usage & limits to end customers. To simplify that, we lve-stats exports a file that can be easily read and processed by a control panel to display the necessary information.
-
-The information is located in the <span class="notranslate">/var/lve/info </span> file. This information is updated every 5 minutes, and contains default limits (first line), as well as usage and limits for all customers. If a customer is not present in the file, it means that customer is not active (no scripts were executed recently for the customer), and a customer has default limits (so you can display no usage, and default limits in the control panel for that customer.
-
-The data is stored in a form of one line per customer, with coma separated values.
-
-| | |
-|-|-|
-|0 | user id|
-|1 | <span class="notranslate"> entry processes </span>|
-|2 | <span class="notranslate"> entry processes </span> limit|
-|3 | <span class="notranslate"> CPU </span>|
-|4 | <span class="notranslate"> CPU </span> limit|
-|5 | <span class="notranslate"> Virtual Memory </span>|
-|6 | <span class="notranslate"> Virtual Memory </span> Limit|
-|7 | Number of <span class="notranslate">  virtual memory </span> faults|
-|8 | Number of <span class="notranslate"> entry processes </span> faults|
-|9 | <span class="notranslate"> Physical Memory </span> Limit|
-|10 | <span class="notranslate"> Physical Memory </span>|
-|11 | Number of <span class="notranslate"> Physical memory </span> faults|
-|12 | <span class="notranslate"> Number of processes </span> limit|
-|13 | <span class="notranslate"> Number of processes </span>|
-|14 | <span class="notranslate"> Number of processes </span> fault|
-|15 | Reserved|
-|16 | <span class="notranslate"> IO </span> Usage|
-|17 | <span class="notranslate"> IO </span> Limit|
-
-With LVE version 4 (CloudLinux lve0.x) only the first 9 parameters are available. You can check the the version by reading the first byte of <span class="notranslate">/proc/lve/list. </span>
-
-In the version 6 all 15 parameters should be available.
-
-There are only 2 LVE versions currently used in production. Future versions might add more fields, but will not alter order of existing fields.
-
-Memory is defined in 4KB pages (so, 1024 would mean 1024 4KB pages, or 4MB).
-
-<span class="notranslate"> IO </span> is defined as KB/s.
-
-<span class="notranslate"> CPU </span> is defined as % of total number of cores on a server.
-
-### cPanel LVE Extension
+* [Add Package Extension](/lve_manager/#add-package-extension)
+* [Edit Package Extensions](/lve_manager/#edit-package-extensions)
 
 :::tip Note
 <span class="notranslate">LVE Manager</span> 1.0-9.8+
@@ -1772,7 +1893,7 @@ Memory is defined in 4KB pages (so, 1024 would mean 1024 4KB pages, or 4MB).
 
 <span class="notranslate"> cPanel LVE Extension </span> allows to control LVE limits for packages via cPanel hosting packages control interface and via <span class="notranslate"> cPanel WHM API </span> . It simplifies integration with existing billing systems for cPanel (like WHMCS for example).
 
-#### **Add Package Extension**
+#### Add Package Extension
 
 To add LVE Settings to standard cPanel package, go to <span class="notranslate">_Packages_</span> | <span class="notranslate">_Add a Package_</span>.
 
@@ -1806,7 +1927,7 @@ Your changes to <span class="notranslate">_LVE Settings_</span> will appear in t
 
 Click <span class="notranslate">_Add_</span> to apply your changes.
 
-#### **Edit Package Extensions**
+#### Edit Package Extensions
 
 You can edit limits in any convenient for you way - in <span class="notranslate">_Edit a Package_</span> section, in the  <span class="notranslate">LVE Manager </span> or even via WHM API.
 
@@ -1826,82 +1947,6 @@ To edit package extensions, go to <span class="notranslate">LVE Manager</span> |
 
 To learn how to work with package extensions limits using WHM API, please read the official cPanel documentation: [https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes](https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes)
 
+#### Control panel integration guide
 
-### Package integration
-
-**[lve-utils 1.4+]**
-
-CloudLinux can automatically detect the most popular control panels, like cPanel - and allows to set different limits for users in different packages. It simplifies management as you don't have to choose between one limit that fits all your customers on the server, or individual limits for the customers.
-
-If you have a custom made control panel, with your own 'package' implementation, you can still use CloudLinux framework to manage limits for your packages.
-
-To do that, you would need:
-
-Implement script that would map users to packages.
-
-Configure lvectl to use your script.
-
-**Implementing script**
-
-A script can be written in any language, and it has to be executable.
-
-It should accept the following arguments:
-
---list-all                        prints [userid package] pairs
-
-Output should look like a list of space separate pairs of user Linux IDs and package names.
-
-<div class="notranslate">
-
-```
-100 package1
-101 package1
-102 package2
-103 package3
-```
-</div>
-
-<span class="notranslate">--userid=id prints package for a user specified </span>
-
-Output should contain package name, like:
-
-<div class="notranslate">
-
-```
-package1
-```
-</div>
-
-<span class="notranslate">--package="package"    prints users for a package specified. </span>
-
-Output should look like a list of user Linux IDs.
-
-<div class="notranslate">
-
-```
-100
-101
-```
-</div>
-
-<span class="notranslate">--list-packages prints the list of packages </span>
-
-Output contains a list of names of packages, like:
-
-<div class="notranslate">
-
-```
-package1
-package2
-package3
-```
-</div>
-
-**Configuring lvectl to use your custom script**
-
-Edit <span class="notranslate">/etc/sysconfig/cloudlinux </span> file.
-
-Edit or modify parameter <span class="notranslate">`CUSTOM_GETPACKAGE_SCRIPT`</span>, and set it to point to your script, like: <span class="notranslate">`CUSTOM_GETPACKAGE_SCRIPT=/absolute/path/to/your/script`</span>
-
-
-For the script example please check the following article: [https://cloudlinux.zendesk.com/hc/en-us/articles/115004529105-Integrating-LVE-limits-with-packages-for-unsupported-control-panels](https://cloudlinux.zendesk.com/hc/en-us/articles/115004529105-Integrating-LVE-limits-with-packages-for-unsupported-control-panels).
+[Here](/control_panel_integration/) you will find the instructions and common techniques used to integrate your software with CloudLinux.
