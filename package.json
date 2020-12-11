@@ -2,7 +2,7 @@
   "scripts": {
     "docs:debug": "node $NODE_DEBUG_OPTION node_modules/.bin/vuepress dev docs",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs && echo 'User-agent: *\\nDisallow: /' > docs/.vuepress/dist/robots.txt"
   },
   "dependencies": {
     "vue": "~2.5.16",
