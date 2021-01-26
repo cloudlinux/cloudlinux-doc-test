@@ -1054,32 +1054,40 @@ See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 
 * [Website monitoring tab](/lve_manager/#website-monitoring-tab)
 * [Main](/lve_manager/#main)
-* [PHP Site analyzer](/lve_manager/#php-site-analyzer)
+* [PHP Slow Site analyzer](/lve_manager/#php-slow-site-analyzer)
 * [Settings](/lve_manager/#settings)
+* [What is the density threshold?](/lve_manager/#what-is-the-density-threshold)
 * [Email notifications](/lve_manager/#email-notifications)
+* [The cloudlinux-ssa-manager utility](/lve_manager/#the-cloudlinux-ssa-manager-utility)
+* [FAQ](/lve_manager/#faq)
 
-**Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics.
+**Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
 
-**Slow Site analyzer** is a new tool that generates daily reports for the server administrator with information about the top N slow PHP-based domains and URLs.
+**PHP Slow Site analyzer** is a new tool that generates daily reports for the server administrator with information about the top N slow PHP-based domains and URLs. Slow Site analyzer tracks all PHP-based requests and selects slow ones by certain rules.   
+
+:::tip Note
+Slow Site analyzer is not available for CloudLinux 6.
+:::
  
 **Installation**
 
-Update the `lvemanager` package to version 6.3.0-1 and higher and you'll get the `alt-php-ssa` and the `cl-web-monitoring-tool` packages as a dependency.
-
-**Uninstall**
-
-To uninstall the tool, run the following commands:
+To install the tool, run the following command:
 
 ```
-yum downgrade lvemanager --enablerepo=cloudlinux-updates-testing
-yum erase alt-php-ssa cl-web-monitoring-tool
+yum update lvemanager
 ```
+
+:::warning Warning
+For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed. This possibility will be added in the future releases.
+
+You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/lve_manager/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
+:::
 
 #### Website monitoring tab
 
-The configuration of the Website monitoring tool and the Slow Site analyzer can be done in the LVE Manager -> Website monitoring tab.
+You can configure the Website monitoring tool and Slow Site analyzer and view the daily reports in the LVE Manager -> Website monitoring tab.
 
-There are Main, PHP Site analyzer, and Settings subtabs.
+There are Main, PHP Site analyzer, and Settings subtabs here.
 
 #### Main
 
@@ -1087,40 +1095,162 @@ This subtab views the latest report (for the previous day) of the Website monito
 
 ![](/images/WebsiteMonitoringMain.png)
 
-Here, the slowest websites are the sites that respond slowly to the simple cURL request like this `curl http://domain.com`.
+Remember that report is created every 24 hours and all changes in configuration (the _Settings_ tab) or in the list of domains will be applied for the next 24 hours (from midnight).
 
-#### PHP Site analyzer
+* **Total number of requests** - requests that were sent to all domains, existing on the servers
+* **Successful requests** - the number of requests for all domains with ![](/images/Code200.png)
+* **Requests with errors** - the number of requests for all domains which status code is not 200
+* **Not started requests due to short check interval** - this metric is used to adjust configuration. If it is not equal 0, an admin should increase the value of Requests sending interval, because the tool does not fit into this interval to send requests to all domains.
+* **Slowest websites in 24h and Websites with most errors in 24h** - in these sections you can find the number of domains that was exposed here.
+
+  ![](/images/TopSlow.png)
+
+
+#### PHP Slow Site analyzer
+
+:::tip Note
+The Slow Site analyzer is not available for CloudLinux 6.
+:::
 
 ![](/images/WebsiteMonitoringPHPSiteAnalyzer.png)
 
 This is an example of a report from the Slow Site analyzer. The report shows the number of slow requests per domain and its URLs and the average duration of each slow URL.
 
+You can find the explanation of the **Slow requests density in period** [here](/lve_manager/#what-is-the-density-threshold).
+
+
 #### Settings
 
-Here, an admin can config the Website monitoring and the PHP Site analyzer.
+Here, an admin can configure the Website monitoring and the PHP Site analyzer.
+
+:::tip Note
+All settings which was changed after starting Website monitoring and Slow site analyzer will be applied for the next 24h (from midnight).
+:::
 
 To enable or disable **Website monitoring**, use the following slider.
 
 ![](/images/WebsiteMonitoringSlider.png)
 
-* **Number of domains for report** – this number (N) will be used to select the top N domains from the list of all domains, sorted by a response duration (Slowest websites list). And this number also will be used to select the top N domains from the list of all domains, sorted by the number of errors (Websites with most errors list).
-* **Send request period** -  is a period in seconds between requests to the same domain.
+* **Top N slow websites to show** - this number (N) will be used to select the top N domains from the list of all domains, sorted by response duration (Slowest websites list). And this number also will be used to select the top N domains from the list of all domains, sorted by amount of errors (Websites with most errors list).
+* **Requests sending interval** - this is a period in minutes between requests to the same domain.
 * **Domain response timeout** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behaviour as the `HTTP 408` error.
 * **Concurrent requests limit** - how many concurrent requests can be done by the Website Monitoring tool.
 
 To enable or disable the **Slow site analyzer**, use the following slider.
 
+:::tip Note
+Slow Site analyzer is not available for CloudLinux 6.
+:::
+
 ![](/images/WebsiteMonitoringSlider1.png)
 
-* **Top slow domains** - this number (N) will be used to select the top N domains from the list of all domains, marked as slow.
+* **Top N slow websites to show** - this number (N) will be used to select the top N domains from the list of all domains, marked as slow.
 * **Top slow URLs** - this number (N) will be used to select the top N URLs for each domain, marked as slow.
-* **Request duration** - the duration of a request in seconds. 
-* **Request number & Time** - how many requests with a certain request duration should be done in time to mark the domain as a slow one.
+* **Slow request duration** - the duration of a request in seconds. 
+* **Slow requests number & Analysis time** - how many requests with a certain request duration should be done in time to mark the domain as a slow one.
+* **Slow requests density threshold** can be in the interval [0..1], by default it is 0.8. The **density threshold** can be disabled. And the **Domains and URLs Ignore List** can be specified.
 
+#### What is the density threshold?
+
+We try to find the most interesting requests for the optimisation from all number of requests to domains during 24 hours. The _Density threshold_ parameter helps to find the most visited URLs and the most popular requests. 
+
+A density threshold is a numerical measure of some type of correlation, meaning the power of the statistical relationship between slow requests and all requests to the domain. If this parameter is enabled then the resulting table will contain slow requests that have exceeded the specified threshold. Requests with the highest density are usually the most distributed per day and are considered valuable to users, thus interesting for optimization.
+
+Slow requests that represent bursts of activity and are weakly related to all activity per domain typically have a low density and will be weeded out.
 
 #### Email notifications
 
+Email notifications are created by the Web monitoring tools. 
 
+**Example of the Web monitoring tools report**.
+
+![](/images/EmailNotifications.png)
+
+**Example of the PHP Slow site analyzer report**.
+
+![](/images/SlowSiteAnalyzerEmailNotifications.png)
+
+#### The cloudlinux-ssa-manager utility
+
+The `cloudlinux-ssa-manager` utility allows to manage Slow Site analyzer via CLI.
+
+**Usage**
+
+```
+# /usr/sbin/cloudlinux-ssa-manager [command][--optional arguments]
+```
+
+**Optional arguments**:
+
+| | |
+|-|-|
+|`-h`, `--help`|show help message and exit|
+
+**Commands**:
+
+| | |
+|-|-|
+|`set-config`|set the SSA configuration|
+|`get-config`|get the SSA configuration|
+|`get-ssa-status`|get a current status of SSA|
+|`enable-ssa`|enable SSA|
+|`disable-ssa`|disable SSA|
+|`get-report`|get the latest report|
+
+You can use the `-h`, `--help` option with commands to get a full list of available optional arguments for each command.
+
+Example of the `# /usr/sbin/cloudlinux-ssa-manager set-config --help` command output:
+
+```
+# /usr/sbin/cloudlinux-ssa-manager set-config --help
+usage: cloudlinux-ssa-manager set-config [-h]
+                                         [--domains-number DOMAINS_NUMBER]
+                                         [--urls-number URLS_NUMBER]
+                                         [--requests-duration REQUESTS_DURATION]
+                                         [--request-number REQUEST_NUMBER]
+                                         [--time TIME]
+                                         [--correlation CORRELATION]
+                                         [--correlation-coefficient CORRELATION_COEFFICIENT]
+                                         [--ignore-list IGNORE_LIST]
+optional arguments:
+  -h, --help            show this help message and exit
+  --domains-number DOMAINS_NUMBER
+                        Size of TOP list for slow domains
+  --urls-number URLS_NUMBER
+                        Size of TOP list for slow urls
+  --requests-duration REQUESTS_DURATION
+                        The threshold value of request duration in seconds
+  --request-number REQUEST_NUMBER
+                        The threshold value of slow requests number in the
+                        period of time to mark URL as a slow one
+  --time TIME           Period of time in hours required to analyze these
+                        requests
+  --correlation CORRELATION
+                        Flag to enable or disable correlation
+  --correlation-coefficient CORRELATION_COEFFICIENT
+                        The threshold value of correlation coefficient
+  --ignore-list IGNORE_LIST
+                        List of URLs or domains that should not be included in
+                        the daily report
+```
+
+#### FAQ
+
+Q: Does this feature consume a lot server resources for collecting website and PHP data? If I enable it can this slow down the server?
+
+A: The load depends on the number of websites and the Website monitoring tool settings. Basically, the Website monitoring should not create a significant load and you can keep it always on.
+
+---
+
+Q: Can I change the default value to 10, for example for the "Top N slow websites to show" setting?
+
+A: This number is simply the number of the slowest responding sites. All sites are sampled during the day. When generating a report, all sites' responses are sorted by response time from highest to lowest, and to make the report readable, only the first N sites are taken. You can specify N as all existing sites or only the 5 slowest. This number does not affect the server load, it only affects the report that will be visible in the UI or emailed to the administrator.
+
+---
+
+Q: What would you recommend: to enable the Website monitoring tool for some days and then disable or I can keep it always turned on?
+
+A: The load depends on the number of websites and the Website monitoring tool settings. Basically, the Website monitoring tool should not create a significant load and you can keep it always on.
 
 ### Reseller interface
 
@@ -1135,7 +1265,9 @@ Log in under a particular reseller credentials to have access to the following f
 * <span class="notranslate"> [Options](/lve_manager/#options-tab)</span> tab allows to set LVE Faults email notifications.
 * <span class="notranslate"> [Packages](/lve_manager/#packages-tab)</span> tab allows to manage reseller’s end user packages limits.
 
-Please note that reseller can manage all his end users via Reseller Interface. Reseller cannot manage <span class="notranslate"> INODE </span> or <span class="notranslate"> MYSQL </span> limits, neither his own nor for his users.
+:::warning
+Reseller can manage all his end users via Reseller Interface. Reseller cannot manage <span class="notranslate"> INODE </span> or <span class="notranslate"> MYSQL </span> limits, neither his own nor for his users.
+:::
 
 <div class="notranslate">
 
@@ -1157,7 +1289,9 @@ You can refresh the table manually by clicking <span class="notranslate">_Refres
 
 Usage values will not change until the next manual refresh. To unfreeze click on <span class="notranslate">_unpause_</span> button. The countdown will continue.
 
+:::warning
 Reseller cannot manage <span class="notranslate">INODE</span> or MYSQL limits. Neither his own, nor for his users.
+:::
 
 The bottom line star in the table displays the total reseller resource usage. It means, that all the usage of resellers’ end users and of his own is displayed as a summary for each parameter.
 
