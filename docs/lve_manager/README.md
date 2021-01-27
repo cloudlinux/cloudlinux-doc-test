@@ -1177,7 +1177,7 @@ The `cloudlinux-ssa-manager` utility allows to manage Slow Site analyzer via CLI
 **Usage**
 
 ```
-# /usr/sbin/cloudlinux-ssa-manager [command][--optional arguments]
+# /usr/sbin/cloudlinux-ssa-manager [command] [--optional arguments]
 ```
 
 **Optional arguments**:
@@ -1199,7 +1199,7 @@ The `cloudlinux-ssa-manager` utility allows to manage Slow Site analyzer via CLI
 
 You can use the `-h`, `--help` option with commands to get a full list of available optional arguments for each command.
 
-Example of the `# /usr/sbin/cloudlinux-ssa-manager set-config --help` command output:
+Example of the `/usr/sbin/cloudlinux-ssa-manager set-config --help` command output:
 
 ```
 # /usr/sbin/cloudlinux-ssa-manager set-config --help
