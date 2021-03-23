@@ -104,17 +104,17 @@ module.exports = {
                 title: "Content",
                 collapsable: false,
                 children: [
-                  "/introduction/",
-                  "/cloudlinux_installation/",
-                  "/control_panel_integration/",
-                  "/limits/",
-                  "/command-line_tools/",
-                  "/lve_manager/",
-                  "/cloudlinux-os-plus/",
-                  "/cloudlinux_os_components/",
-                  "/cloudlinux_os_kernel/",
-                  "/for_cloudlinux_partners/",
-                  "/deprecated/"
+                  "/single/introduction/",
+                  "/single/installation/",
+                 // "/control_panel_integration/",
+                 // "/limits/",
+                  "/single/command-line_tools/",
+                  "/single/manager/",
+                  "/single/plus/"
+                 // "/cloudlinux_os_components/",
+                 // "/cloudlinux_os_kernel/",
+                 // "/for_cloudlinux_partners/",
+                 // "/deprecated/"
                 ]
               }
             ],
