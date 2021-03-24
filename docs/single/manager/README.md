@@ -1,24 +1,12 @@
-# User interface (LVE Manager)
+# CloudLinux Manager
 
 [[toc]]
 
-<span class="notranslate">LVE Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
-
-<span class="notranslate">LVE Manager</span> is installed by default on most servers. If it is missing you can always install it by running:
-
-<div class="notranslate">
-
-```
-$ yum install lvemanager
-```
-</div>
-
-
-## LVE Manager
+<span class="notranslate">CloudLinux Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor all CloudLinux OS Single features.
 
 * [Notifications color codes](/lve_manager/#notifications-color-codes)
 
-<span class="notranslate">cPanel LVE Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
+<span class="notranslate">cPanel CloudLinux Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
 
 Administrator credentials allow controlling limits for host users.
 
@@ -38,9 +26,9 @@ For more details, please go to the [ImunifyAV documentation](https://docs.imunif
 
 <div class="notranslate">
 
-#### Notifications color codes <sup><Badge text="LVE Manager 5.3.7-1+"/></sup>
+#### Notifications color codes <sup><Badge text="CloudLinux Manager 5.3.7-1+"/></sup>
 
-In the LVE Manager UI we use the following color codes for notifications:
+In the CloudLinux Manager UI we use the following color codes for notifications:
 
 * ![](/images/pic_warning.png) warning
 * ![](/images/pic_error.png) error
@@ -62,47 +50,19 @@ The following actions are available in the system notifications (information, wa
 
 </div>
 
-
-
-### Website monitoring tool and Slow Site analyzer
-
-* [Website monitoring tab](/lve_manager/#website-monitoring-tab)
-* [Main](/lve_manager/#main)
-* [PHP Slow Site analyzer](/lve_manager/#php-slow-site-analyzer)
-* [Settings](/lve_manager/#settings)
-* [What is the density threshold?](/lve_manager/#what-is-the-density-threshold)
-* [Email notifications](/lve_manager/#email-notifications)
-* [The cloudlinux-ssa-manager CLI utility](/command-line_tools/#the-cloudlinux-ssa-manager-utility)
-* [The wmt-api CLI utility](/command-line_tools/#the-wmt-api-utility)
-* [FAQ](/lve_manager/#faq)
+## Website monitoring tool
 
 **Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
 
-**PHP Slow Site analyzer** is a new tool that generates daily reports for the server administrator with information about the top N slow PHP-based domains and URLs. Slow Site analyzer tracks all PHP-based requests and selects slow ones by certain rules.   
+You can configure the Website monitoring tool and Slow Site analyzer and view the daily reports in the CloudLinux Manager -> Website monitoring tab.
 
-:::tip Note
-Slow Site analyzer is not available for CloudLinux 6.
-:::
- 
-**Installation**
-
-To install the tool, run the following command:
-
-```
-yum update lvemanager
-```
+There are Main, PHP Site analyzer, and Settings subtabs here.
 
 :::warning Warning
 For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed. This possibility will be added in the future releases.
 
 You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/lve_manager/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
 :::
-
-#### Website monitoring tab
-
-You can configure the Website monitoring tool and Slow Site analyzer and view the daily reports in the LVE Manager -> Website monitoring tab.
-
-There are Main, PHP Site analyzer, and Settings subtabs here.
 
 #### Main
 
@@ -121,7 +81,7 @@ Remember that report is created every 24 hours and all changes in configuration 
   ![](/images/TopSlow.png)
 
 
-#### PHP Slow Site analyzer
+## PHP Slow Site analyzer
 
 :::tip Note
 The Slow Site analyzer is not available for CloudLinux 6.
@@ -205,34 +165,6 @@ Q: What would you recommend: to enable the Website monitoring tool for some days
 A: The load depends on the number of websites and the Website monitoring tool settings. Basically, the Website monitoring tool should not create a significant load and you can keep it always on.
 
 
-### LVE plugins branding
-
-:::tip Note
-Requires <span class="notranslate">LVE Manager</span> 2.0-33+
-:::
-
-It is possible to apply branding to the LVE Plugins in cPanel end users’ interface. To brand the cPanel end users'  interface please do the following:
-
-* Create a script that will patch <span class="notranslate">LVE Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
-
-* Locate this script in <span class="notranslate">`/usr/share/l.v.e-manager/branding_script`</span>;
-
-* Make this script executable by running the command:
-
-<div class="notranslate">
-
-```
-chmod a+x /usr/share/l.v.e-manager/branding_script
-```
-</div>
-
-When done, the branding script will be executed while every update of <span class="notranslate">lvemanager</span> package and all branding changes will be applied in the end user’s interface.
-
-:::tip Note
-Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
-:::
-
-
 ## X-Ray
 
 * [Description](/cloudlinux-os-plus/#description)
@@ -256,7 +188,7 @@ Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span cla
 
 1. Make sure you have CloudLinux OS+ subscription (only non-reseller accounts apply)
 
-2. Make sure you have installed **LVE Manager version 6.2 or later**. You can install or update it with the following commands:
+2. Make sure you have installed **CloudLinux Manager version 6.2 or later**. You can install or update it with the following commands:
    * installation
 
    <div class="notranslate">
@@ -274,7 +206,7 @@ Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span cla
     # yum update lvemanager
     ```
     </div>
-3. X-Ray will be activated on all your servers during 4 hours. You will see the X-Ray tab in the LVE Manager UI.
+3. X-Ray will be activated on all your servers during 4 hours. You will see the X-Ray tab in the CloudLinux Manager UI.
 
 4. For instant activation, run the following command:
 
@@ -320,7 +252,7 @@ Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span cla
 X-Ray provides two options for monitoring domain requests speed: Tracing task and Continuous task.
 
 :::warning Warning
-To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
+To use Continuous task, update your CloudLinux Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
 ```
 yum update lvemanager alt-php-xray
 ```
@@ -343,7 +275,7 @@ The *Created* column shows how a task was created – automatically (by continuo
 #### Continuous tracing tab
 
 :::warning Warning
-To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
+To use Continuous task, update your CloudLinux Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
 ```
 yum update lvemanager alt-php-xray
 ```
@@ -575,7 +507,7 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 ### End-user X-Ray plugin <Badge text="Beta"/>
 
 :::warning Warning
-To use the end-user X-Ray plugin, update your LVE Manager and X-Ray packages to the `lvemanager-6.3.9-1` and `alt-php-xray-0.3-1` by running the following command:
+To use the end-user X-Ray plugin, update your CloudLinux Manager and X-Ray packages to the `lvemanager-6.3.9-1` and `alt-php-xray-0.3-1` by running the following command:
 ```
 # yum update lvemanager alt-php-xray --enablerepo=cloudlinux-updates-testing
 ```
@@ -583,9 +515,9 @@ To use the end-user X-Ray plugin, update your LVE Manager and X-Ray packages to 
 
 #### How to enable/disable the end-user X-Ray plugin
 
-You can hide or show the end-user X-Ray plugin icon by ticking or unticking the proper checkbox in the LVE Manager.
+You can hide or show the end-user X-Ray plugin icon by ticking or unticking the proper checkbox in the CloudLinux Manager.
 
-Go to _LVE Manager → Options Tab → User interface settings_.
+Go to _CloudLinux Manager → Options Tab → User interface settings_.
 
 ![](/images/HideXRayAppCheckbox.png)
 

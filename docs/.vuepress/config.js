@@ -108,8 +108,8 @@ module.exports = {
                   "/single/installation/",
                  // "/control_panel_integration/",
                  // "/limits/",
-                  "/single/command-line_tools/",
                   "/single/manager/",
+                  "/single/command-line_tools/",
                  // "/single/plus/"
                  // "/cloudlinux_os_components/",
                  // "/cloudlinux_os_kernel/",
