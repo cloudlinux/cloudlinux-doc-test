@@ -4,51 +4,12 @@
 
 <span class="notranslate">CloudLinux Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor all CloudLinux OS Single features.
 
-* [Notifications color codes](/lve_manager/#notifications-color-codes)
-
-<span class="notranslate">cPanel CloudLinux Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
-
-Administrator credentials allow controlling limits for host users.
-
 ![](/images/lvemanagermainmenu_zoom80.png)
 
 Log in as administrator to get access to the following functionality:
 
-* <span class="notranslate">Dashboard</span> provides a quick overview of statistics and all administrative information for server administrators.
-* <span class="notranslate">Current usage</span> tab - allows monitoring users resource usage at the moment;
-* <span class="notranslate">Users</span> tab with the list of all users allows viewing and managing all the users limits;
-* <span class="notranslate">Statistics</span> tab displays the statistics of resource usage for proper timeframe or proper users;
-* <span class="notranslate">Options</span> tab - allows setting LVE Faults email notifications for users;
-* <span class="notranslate">Packages</span> allows managing packages limits;
-* <span class="notranslate">PHP Selector</span> tab.
-
-For more details, please go to the [ImunifyAV documentation](https://docs.imunifyav.com/).
-
-<div class="notranslate">
-
-#### Notifications color codes <sup><Badge text="CloudLinux Manager 5.3.7-1+"/></sup>
-
-In the CloudLinux Manager UI we use the following color codes for notifications:
-
-* ![](/images/pic_warning.png) warning
-* ![](/images/pic_error.png) error
-* ![](/images/pic_info.png) information
-* ![](/images/pic_success.png) success
-
-The following actions are available in the action notifications (error, success)
- * follow a link
- * copy a command
- * copy a whole traceback
-
-The following actions are available in the system notifications (information, warning):
-* follow a link
-* copy a command
-* copy a whole message
-* mark a notification as “Read”
-* snooze a notification
-
-
-</div>
+* <span class="notranslate">Website Monitoring</span> provides access to Website Monitoring and PHP Slow Site Analyzer.
+* <span class="notranslate">X-Ray</span> tab - provides access to X-Ray;
 
 ## Website monitoring tool
 
@@ -61,7 +22,7 @@ There are Main, PHP Site analyzer, and Settings subtabs here.
 :::warning Warning
 For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed. This possibility will be added in the future releases.
 
-You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/lve_manager/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
+You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
 :::
 
 #### Main
@@ -82,10 +43,6 @@ Remember that report is created every 24 hours and all changes in configuration 
 
 
 ## PHP Slow Site analyzer
-
-:::tip Note
-The Slow Site analyzer is not available for CloudLinux 6.
-:::
 
 ![](/images/WebsiteMonitoringPHPSiteAnalyzer.png)
 
@@ -112,10 +69,6 @@ To enable or disable **Website monitoring**, use the following slider.
 * **Concurrent requests limit** - how many concurrent requests can be done by the Website Monitoring tool.
 
 To enable or disable the **Slow site analyzer**, use the following slider.
-
-:::tip Note
-Slow Site analyzer is not available for CloudLinux 6.
-:::
 
 ![](/images/WebsiteMonitoringSlider1.png)
 
@@ -167,18 +120,13 @@ A: The load depends on the number of websites and the Website monitoring tool se
 
 ## X-Ray
 
-* [Description](/cloudlinux-os-plus/#description)
-* [Installation](/cloudlinux-os-plus/#installation)
-* [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
-* [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
-* [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
-* [FAQ](/cloudlinux-os-plus/#faq)
+* [Description](#description)
+* [Installation](#installation)
+* [How to manage <span class="notranslate">X-Ray</span>](#how-to-manage-x-ray)
+* [<span class="notranslate">X-Ray</span> client](#x-ray-client)
+* [<span class="notranslate">X-Ray</span> service](#x-ray-agent)
 
 ### Description
-
-:::warning Warning!
-<span class="notranslate">X-Ray</span> is available out of the box for cPanel, Plesk, and DirectAdmin. For other control panels you should implement integration as described [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
-:::
 
 <span class="notranslate">X-Ray</span> is a tool developed for website performance monitoring and performance issues detection.
 
@@ -186,29 +134,7 @@ A: The load depends on the number of websites and the Website monitoring tool se
 
 ### Installation
 
-1. Make sure you have CloudLinux OS+ subscription (only non-reseller accounts apply)
-
-2. Make sure you have installed **CloudLinux Manager version 6.2 or later**. You can install or update it with the following commands:
-   * installation
-
-   <div class="notranslate">
-
-    ```
-    # yum install lvemanager
-    ```
-    </div>
-
-    * update
-   
-   <div class="notranslate">
-
-    ```
-    # yum update lvemanager
-    ```
-    </div>
-3. X-Ray will be activated on all your servers during 4 hours. You will see the X-Ray tab in the CloudLinux Manager UI.
-
-4. For instant activation, run the following command:
+1. For instant X-Ray activation, run the following command:
 
    <div class="notranslate">
 
@@ -226,7 +152,7 @@ A: The load depends on the number of websites and the Website monitoring tool se
     ```
     </div>
 
-5. Then install the <span class="notranslate">`alt-php-xray`</span> package
+2. Then install the <span class="notranslate">`alt-php-xray`</span> package
 
     * Via user interface
         * Go to the <span class="notranslate">_X-Ray_</span> tab.
@@ -243,20 +169,13 @@ A: The load depends on the number of websites and the Website monitoring tool se
     ```
     </div>
 
-6. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
+3. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
 
 ![](/images/XRayStartTracing.png)
 
 ### How to manage X-Ray
 
 X-Ray provides two options for monitoring domain requests speed: Tracing task and Continuous task.
-
-:::warning Warning
-To use Continuous task, update your CloudLinux Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
-```
-yum update lvemanager alt-php-xray
-```
-::: 
 
 * **Tracing task** is a task created manually for a specific URL to collect server requests. The task will end either after a specified number of requests to the URL or after a specified time (maximum after two days). It is not possible here to automatically email a report but it is possible to export the report in PDF and send to a user.
 
@@ -273,13 +192,6 @@ The *Tracing tasks* tab contains a list of all tracing tasks created both manual
 The *Created* column shows how a task was created – automatically (by continuous task) or manually.
 
 #### Continuous tracing tab
-
-:::warning Warning
-To use Continuous task, update your CloudLinux Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
-```
-yum update lvemanager alt-php-xray
-```
-::: 
   
 The *Continuous tracing* tab contains a list of continuous tasks for which tracing tasks will be created automatically for a new day for a specific domain.
 
@@ -504,65 +416,6 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 
     ![](/images/XRayContinuousTaskDaylyReportRequestDetails.png)
 
-### End-user X-Ray plugin <Badge text="Beta"/>
-
-:::warning Warning
-To use the end-user X-Ray plugin, update your CloudLinux Manager and X-Ray packages to the `lvemanager-6.3.9-1` and `alt-php-xray-0.3-1` by running the following command:
-```
-# yum update lvemanager alt-php-xray --enablerepo=cloudlinux-updates-testing
-```
-:::
-
-#### How to enable/disable the end-user X-Ray plugin
-
-You can hide or show the end-user X-Ray plugin icon by ticking or unticking the proper checkbox in the CloudLinux Manager.
-
-Go to _CloudLinux Manager → Options Tab → User interface settings_.
-
-![](/images/HideXRayAppCheckbox.png)
-
-:::tip Note
-The X-Ray plugin icon in the end-user interface is hidden when the checkbox is ticked.
-:::
-
-![](/images/XRayAppUIIcon.png)
-
-#### How to manage the end-user X-Ray plugin
-
-The web interface of the end-user X-Ray plugin is almost the same as the X-Ray administrator interface.
-
-![](/images/XRayEndUserUI.png)
-
-But there are some differences and they are described further.
-
-* End-users can create tasks only for their domains from the drop-down list:
-    ![](/images/XRayEndUserUIStart.png)
-* To specify URL or wildcard, end-users should use the input field next to the domain:
-    ![](/images/XRayEndUserUiSpecifyURL.png)
-
-You can read about all other basic interface elements and managing tracing tasks in the [Managing tracing task section](/cloudlinux-os-plus/#managing-tracing-task).
-
-:::warning Note
-Tracing tasks created by an end-user will also be displayed in the administrator interface and administrators can manage the end-user's tasks the same way as they manage their own. At the same time, tasks created by the administrator or other end-users will not be displayed in the UI of the current user.
-:::
-
-#### End-user X-Ray plugin limitations
-
-* The end-user X-Ray plugin does not support creating continuous tasks.
-* The end-user has a limit of tracing tasks running at a time. Before starting the next task, the end-user should wait for the completion of the previous ones or forcefully stop the running ones. Otherwise, the user will get the next error:
-    
-    ![](/images/XRayEndUserUIError.png)
-    :::warning Note
-    The current limit is one tracing task per user. 
-    :::
-* The administrator and the end-user can’t run the tracing task for the same Domain/URL at the same time. Once, the administrator started a specific tracing task, the end-user will not be able to duplicate it. And the same is true for the administrators – they will just see the running task for the specific domain and see the notification that they're trying to create a tracing task with a duplicated URL.
-* If continuous tracing is enabled for the domain, the end-user will not be able to create a new task for this domain because the same rule works - it will be a duplicate of the existing tracing tasks. The next warning will appear:
-    
-    ![](/images/XRayEndUserUIWarning.png)
-
-    To solve this, the existing running tasks for the same Domain/URL should be stopped or completed. You can find more details about this in the [FAQ](/cloudlinux-os-plus/#what-should-i-do-if-i-see-the-warning-task-is-duplicated-by-url).
-
-
 ### X-Ray automated throttling detection
 
 The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU during the HTTP request execution. 
@@ -595,9 +448,6 @@ The list of currently supported PHP versions:
 |**ALT PHP**:|**EA PHP**:|**Plesk PHP**|**DirectAdmin PHP**|**Other panels PHP**|
 | <ul><li>alt-php54</li><li>alt-php55</li><li>alt-php56</li><li>alt-php70</li><li>alt-php71</li><li>alt-php72</li><li>alt-php73</li><li>alt-php74</li></ul>|<ul><li>ea-php54</li><li>ea-php55</li><li>ea-php56</li><li>ea-php70</li><li>ea-php71</li><li>ea-php72</li><li>ea-php73</li><li>ea-php74</li></ul>|<ul><li>php54</li><li>php55</li><li>php56</li><li>php70</li><li>php71</li><li>php72</li><li>php73</li><li>php74</li></ul>|<ul><li>php54</li><li>php55</li><li>php56</li><li>php70</li><li>php71</li><li>php72</li><li>php73</li><li>php74</li></ul>|<ul><li>54</li><li>55</li><li>56</li><li>70</li><li>71</li><li>72</li><li>73</li><li>74</li></ul>|
 
-:::warning Warning!
-<span class="notranslate">[php-zts](/cloudlinux_os_components/#how-to-configure-alt-php72-zts-to-use-with-php-selector)</span> and [custom PHPs, rolled in selector](/cloudlinux_os_components/#roll-your-own-php), are not supported
-:::
 
 #### Functions that X-Ray client can hook
 
@@ -894,10 +744,4 @@ All of the examples below are correct:
 
 You can use any of them with a prefix `www.` and it is also correct.
 
-#### What packages are required for X-Ray?
-
-Required packages:
-
-* `lvemanager` >= 6.2.10-1
-* `alt-php-xray` >= 0.2-1
 
