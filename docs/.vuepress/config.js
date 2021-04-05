@@ -109,7 +109,7 @@ module.exports = {
                  // "/control_panel_integration/",
                  // "/limits/",
                   "/single/manager/",
-                  "/single/command-line_tools/",
+                 // "/single/command-line_tools/",
                  // "/single/plus/"
                  // "/cloudlinux_os_components/",
                  // "/cloudlinux_os_kernel/",

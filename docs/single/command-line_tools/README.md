@@ -9,104 +9,11 @@ The list of the commands (CLI) you can use to manage CloudLinux OS components.
 
 ### The cloudlinux-ssa-manager utility
 
-The `cloudlinux-ssa-manager` utility allows to manage Slow Site analyzer via CLI.
 
-**Usage**
-
-```
-# /usr/sbin/cloudlinux-ssa-manager [command] [--optional arguments]
-```
-
-**Optional arguments**:
-
-| | |
-|-|-|
-|`-h`, `--help`|show help message and exit|
-
-**Commands**:
-
-| | |
-|-|-|
-|`set-config`|set the SSA configuration|
-|`get-config`|get the SSA configuration|
-|`get-ssa-status`|get a current status of SSA|
-|`enable-ssa`|enable SSA|
-|`disable-ssa`|disable SSA|
-|`get-report`|get the latest report|
-
-You can use the `-h`, `--help` option with commands to get a full list of available optional arguments for each command.
-
-Example of the `/usr/sbin/cloudlinux-ssa-manager set-config --help` command output:
-
-```
-# /usr/sbin/cloudlinux-ssa-manager set-config --help
-usage: cloudlinux-ssa-manager set-config [-h]
-                                         [--domains-number DOMAINS_NUMBER]
-                                         [--urls-number URLS_NUMBER]
-                                         [--requests-duration REQUESTS_DURATION]
-                                         [--request-number REQUEST_NUMBER]
-                                         [--time TIME]
-                                         [--correlation CORRELATION]
-                                         [--correlation-coefficient CORRELATION_COEFFICIENT]
-                                         [--ignore-list IGNORE_LIST]
-optional arguments:
-  -h, --help            show this help message and exit
-  --domains-number DOMAINS_NUMBER
-                        Size of TOP list for slow domains
-  --urls-number URLS_NUMBER
-                        Size of TOP list for slow urls
-  --requests-duration REQUESTS_DURATION
-                        The threshold value of request duration in seconds
-  --request-number REQUEST_NUMBER
-                        The threshold value of slow requests number in the
-                        period of time to mark URL as a slow one
-  --time TIME           Period of time in hours required to analyze these
-                        requests
-  --correlation CORRELATION
-                        Flag to enable or disable correlation
-  --correlation-coefficient CORRELATION_COEFFICIENT
-                        The threshold value of correlation coefficient
-  --ignore-list IGNORE_LIST
-                        List of URLs or domains that should not be included in
-                        the daily report
-```
 
 ### The wmt-api utility
 
-The `wmt-api` utility allows to manage Website Monitoring tool via CLI.
 
-**Usage**
-
-```
-# /usr/share/web-monitoring-tool/wmtbin/wmt-api [command] [--optional arguments]
-```
-
-**Optional arguments**:
-
-| | |
-|-|-|
-|`-h`, `--help`|show help message and exit|
-
-**Commands**:
-
-| | |
-|-|-|
-|`config-change`|set the WMT configuration using the JSON string that follows|
-|`config-get`|get the WMT configuration as JSON|
-|`email-get`|get WMT email from the config file|
-|`report-generate`|Generate a report JSON file|
-|`send-clickhouse`|Send the summary report to ClickHouse|
-|`start`|Start the WMT system|
-|`status`|Check the status of the WMT system|
-|`stop`|Stop the WMT system|
-
-Example of the `/usr/share/web-monitoring-tool/wmtbin/wmt-api` command usage:
-
-```
-# /usr/share/web-monitoring-tool/wmtbin/wmt-api -config-change "{\"ping_connections\":8,\"report_top\":5,\"report_email\":\"user@example.com\"}"
-```
-
-This way you can set all or only certain parameters.
 
 ## Other CLI tools
 
